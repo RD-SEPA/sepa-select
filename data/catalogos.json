@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "actualizado": "2026-08-22",
+  "catalogos": [
+    {
+      "id": "001",
+      "nombre": "CIIADO 2026",
+      "fecha": "2026-08-22",
+      "cabana": "Múltiples cabañas",
+      "expositor": "CIIADO",
+      "email": "",
+      "puntaje": 2,
+      "tipo": "permanente",
+      "esNovedad": false,
+      "novedad": "",
+      "acceso": "abierto",
+      "totalToros": 26,
+      "aptos": 23,
+      "archivo": "toros_001.json",
+      "fuente": "manual",
+      "cargado_por": "Ricardo",
+      "fecha_carga": "2026-08-22",
+      "ultimo_ingreso": "2026-08-22"
+    }
+  ]
+}
