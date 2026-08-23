@@ -596,36 +596,67 @@ tr:hover td{background:var(--verde-claro);cursor:pointer}
 
 <script>
 // ═══════════════════════════════════════════════
-// DATOS
+// DATOS — cargados dinámicamente via fetch
 // ═══════════════════════════════════════════════
-const TOROS=[
-  {nombre:"Fortunato",pelaje:"Negro",raza:"Angus Negro",nacimiento:"14/06/2023",pesoActual:900,rp:"1075",origen:"Mayacó",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-0.5,prec:0.43,pct:30},WW:{dep:-0.2,prec:0.41,pct:95},PF:{dep:3.4,prec:0.23,pct:90},Alt:{dep:0.7,prec:0.31,pct:90},Leche:{dep:-2.1,prec:0.31,pct:90},AOB:{dep:1.3,prec:0.19,pct:50},CE:{dep:0.9,prec:0.24,pct:70},LG:{dep:-0.7,prec:0.35,pct:30},EGD:{dep:0.38,prec:0.2,pct:25},EGC:{dep:0.5,prec:0.21,pct:40},GI:{dep:0.02,prec:0.22,pct:40},Cortes:{dep:-0.2,prec:0.19,pct:55}}},
-  {nombre:"Baqueano",pelaje:"Negro",raza:"Angus Negro",nacimiento:"05/06/2020",pesoActual:930,rp:"833",origen:"Doble Hache",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-0.6,prec:0.4,pct:35},WW:{dep:15.6,prec:0.45,pct:4},PF:{dep:51,prec:0.36,pct:1},Alt:{dep:0.7,prec:0.54,pct:85},Leche:{dep:1.4,prec:0.3,pct:45},AOB:{dep:2.6,prec:0.36,pct:25},CE:{dep:1.9,prec:0.49,pct:10},LG:{dep:-0.5,prec:0.21,pct:50},EGD:{dep:0.45,prec:0.37,pct:20},EGC:{dep:0.54,prec:0.39,pct:55},GI:{dep:-0.01,prec:0.36,pct:50},Cortes:{dep:-0.5,prec:0.36,pct:75}}},
-  {nombre:"Eros",pelaje:"Negro",raza:"Angus Negro",nacimiento:"01/03/2023",pesoActual:930,rp:"2299",origen:"La Cassina",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-0.5,prec:0.38,pct:30},WW:{dep:3.6,prec:0.37,pct:75},PF:{dep:22.1,prec:0.32,pct:50},Alt:{dep:0.8,prec:0.52,pct:90},Leche:{dep:2.4,prec:0.29,pct:30},AOB:{dep:0.8,prec:0.28,pct:65},CE:{dep:1,prec:0.45,pct:60},LG:{dep:-0.4,prec:0.36,pct:45},EGD:{dep:0.2,prec:0.29,pct:50},EGC:{dep:0.52,prec:0.3,pct:40},GI:{dep:-0.06,prec:0.33,pct:85},Cortes:{dep:-0.4,prec:0.28,pct:70}}},
-  {nombre:"Quijote",pelaje:"Negro",raza:"Angus Negro",nacimiento:"04/04/2020",pesoActual:950,rp:"638",origen:"La Huella",semenApto:"SI",fenotipo:0,deps:{PN:{dep:0,prec:0.41,pct:60},WW:{dep:6.1,prec:0.41,pct:55},PF:{dep:19.9,prec:0.34,pct:60},Alt:{dep:0.9,prec:0.57,pct:80},Leche:{dep:-2.4,prec:0.3,pct:90},AOB:{dep:1.3,prec:0.39,pct:55},CE:{dep:1.5,prec:0.52,pct:30},LG:{dep:-0.1,prec:0.15,pct:70},EGD:{dep:-0.08,prec:0.38,pct:90},EGC:{dep:0.03,prec:0.41,pct:85},GI:{dep:-0.13,prec:0.4,pct:100},Cortes:{dep:0.4,prec:0.4,pct:25}}},
-  {nombre:"Azafrán",pelaje:"Negro",raza:"Angus Negro",nacimiento:"22/06/2021",pesoActual:910,rp:"919",origen:"Doble Hache",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-0.5,prec:0.42,pct:30},WW:{dep:4.8,prec:0.43,pct:60},PF:{dep:24.8,prec:0.39,pct:30},Alt:{dep:0.8,prec:0.37,pct:90},Leche:{dep:3.5,prec:0.39,pct:15},AOB:{dep:2.9,prec:0.27,pct:15},CE:{dep:1.3,prec:0.29,pct:35},LG:{dep:0.3,prec:0.39,pct:85},EGD:{dep:0.58,prec:0.27,pct:10},EGC:{dep:0.89,prec:0.29,pct:10},GI:{dep:-0.12,prec:0.27,pct:100},Cortes:{dep:-0.5,prec:0.27,pct:75}}},
-  {nombre:"Sancho Panza",pelaje:"Negro",raza:"Angus Negro",nacimiento:"10/04/2020",pesoActual:890,rp:"636",origen:"La Huella",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-0.3,prec:0.41,pct:40},WW:{dep:7.1,prec:0.41,pct:45},PF:{dep:22.1,prec:0.31,pct:50},Alt:{dep:1.2,prec:0.48,pct:70},Leche:{dep:0.9,prec:0.26,pct:55},AOB:{dep:1.8,prec:0.34,pct:45},CE:{dep:1.5,prec:0.43,pct:25},LG:{dep:0.2,prec:0.14,pct:80},EGD:{dep:0.09,prec:0.34,pct:70},EGC:{dep:-0.08,prec:0.36,pct:95},GI:{dep:-0.11,prec:0.34,pct:100},Cortes:{dep:0.4,prec:0.34,pct:20}}},
-  {nombre:"Celta",pelaje:"Negro",raza:"Angus Negro",nacimiento:"12/06/2019",pesoActual:910,rp:"C099",origen:"El Hinojo de Bru",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-1.8,prec:0.36,pct:10},WW:{dep:-3,prec:0.32,pct:100},PF:{dep:27,prec:0.23,pct:35},Alt:{dep:0.1,prec:0.32,pct:95},Leche:{dep:3.2,prec:0.18,pct:25},AOB:{dep:-2.3,prec:0.25,pct:100},CE:{dep:0.5,prec:0.3,pct:90},LG:{dep:-0.3,prec:0.25,pct:55},EGD:{dep:0.15,prec:0.26,pct:60},EGC:{dep:0.3,prec:0.28,pct:65},GI:{dep:0.01,prec:0.26,pct:40},Cortes:{dep:-0.7,prec:0.25,pct:80}}},
-  {nombre:"Sayo",pelaje:"Negro",raza:"Angus Negro",nacimiento:"12/12/2021",pesoActual:790,rp:"D351",origen:"El Hinojo de Bru",semenApto:"SI",fenotipo:0,deps:{PN:{dep:null,prec:null,pct:null},WW:{dep:null,prec:null,pct:null},PF:{dep:null,prec:null,pct:null},Alt:{dep:null,prec:null,pct:null},Leche:{dep:null,prec:null,pct:null},AOB:{dep:null,prec:null,pct:null},CE:{dep:null,prec:null,pct:null},LG:{dep:null,prec:null,pct:null},EGD:{dep:null,prec:null,pct:null},EGC:{dep:null,prec:null,pct:null},GI:{dep:null,prec:null,pct:null},Cortes:{dep:null,prec:null,pct:null}}},
-  {nombre:"Pionero",pelaje:"Negro",raza:"Angus Negro",nacimiento:"31/08/2022",pesoActual:860,rp:"107",origen:"Niquel Huitru",semenApto:"SI",fenotipo:0,deps:{PN:{dep:null,prec:null,pct:null},WW:{dep:null,prec:null,pct:null},PF:{dep:null,prec:null,pct:null},Alt:{dep:null,prec:null,pct:null},Leche:{dep:null,prec:null,pct:null},AOB:{dep:null,prec:null,pct:null},CE:{dep:null,prec:null,pct:null},LG:{dep:null,prec:null,pct:null},EGD:{dep:null,prec:null,pct:null},EGC:{dep:null,prec:null,pct:null},GI:{dep:null,prec:null,pct:null},Cortes:{dep:null,prec:null,pct:null}}},
-  {nombre:"Práctico",pelaje:"Negro",raza:"Angus Negro",nacimiento:"09/06/2020",pesoActual:870,rp:"376",origen:"El Yerua",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-1.7,prec:0.51,pct:10},WW:{dep:-1.2,prec:0.53,pct:100},PF:{dep:14,prec:0.47,pct:75},Alt:{dep:0.1,prec:0.72,pct:95},Leche:{dep:-0.6,prec:0.42,pct:70},AOB:{dep:1.1,prec:0.4,pct:100},CE:{dep:0.8,prec:0.63,pct:80},LG:{dep:-1.2,prec:0.19,pct:25},EGD:{dep:0.71,prec:0.38,pct:10},EGC:{dep:1.06,prec:0.41,pct:10},GI:{dep:-0.05,prec:0.4,pct:80},Cortes:{dep:-1.3,prec:0.4,pct:100}}},
-  {nombre:"Malcolm",pelaje:"Negro",raza:"Angus Negro",nacimiento:"17/08/2023",pesoActual:780,rp:"1999",origen:"La Esencia",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-1,prec:0.23,pct:15},WW:{dep:4.2,prec:0.21,pct:65},PF:{dep:12.7,prec:0.16,pct:65},Alt:{dep:null,prec:null,pct:null},Leche:{dep:1.2,prec:0.08,pct:45},AOB:{dep:-0.6,prec:0.25,pct:95},CE:{dep:0.4,prec:0.28,pct:95},LG:{dep:-0.3,prec:0.17,pct:55},EGD:{dep:0.21,prec:0.26,pct:50},EGC:{dep:0.36,prec:0.29,pct:55},GI:{dep:0.08,prec:0.26,pct:10},Cortes:{dep:-0.7,prec:0.25,pct:85}}},
-  {nombre:"Dustyn",pelaje:"Negro",raza:"Angus Negro",nacimiento:"22/08/2023",pesoActual:720,rp:"2314",origen:"La Cassina",semenApto:"SI",fenotipo:0,deps:{PN:{dep:0.2,prec:0.44,pct:65},WW:{dep:1.7,prec:0.44,pct:90},PF:{dep:-12.4,prec:0.37,pct:100},Alt:{dep:-0.5,prec:0.53,pct:100},Leche:{dep:-3.1,prec:0.3,pct:95},AOB:{dep:-0.04,prec:0.39,pct:95},CE:{dep:0.9,prec:0.46,pct:70},LG:{dep:-1,prec:0.23,pct:15},EGD:{dep:0.24,prec:0.39,pct:45},EGC:{dep:0.2,prec:0.42,pct:70},GI:{dep:0.01,prec:0.4,pct:45},Cortes:{dep:-0.3,prec:0.39,pct:60}}},
-  {nombre:"Bonifacio",pelaje:"Negro",raza:"Angus Negro",nacimiento:"11/09/2022",pesoActual:840,rp:"2192",origen:"La Cassina",semenApto:"SI",fenotipo:0,deps:{PN:{dep:0.4,prec:0.46,pct:75},WW:{dep:11.6,prec:0.45,pct:10},PF:{dep:31.2,prec:0.36,pct:25},Alt:{dep:1.9,prec:0.65,pct:45},Leche:{dep:0,prec:0.33,pct:65},AOB:{dep:1.2,prec:0.17,pct:55},CE:{dep:1.7,prec:0.58,pct:10},LG:{dep:-0.3,prec:0.36,pct:50},EGD:{dep:0.58,prec:0.18,pct:15},EGC:{dep:0.36,prec:0.19,pct:55},GI:{dep:0.05,prec:0.17,pct:25},Cortes:{dep:-0.66,prec:0.17,pct:80}}},
-  {nombre:"Jerarca",pelaje:"Negro",raza:"Angus Negro",nacimiento:"23/08/2020",pesoActual:910,rp:"1117",origen:"La Esencia",semenApto:"SI",fenotipo:0,deps:{PN:{dep:0.5,prec:0.52,pct:80},WW:{dep:14.5,prec:0.53,pct:3},PF:{dep:30.4,prec:0.46,pct:30},Alt:{dep:1.3,prec:0.35,pct:75},Leche:{dep:5.2,prec:0.4,pct:5},AOB:{dep:3.9,prec:0.49,pct:4},CE:{dep:1.1,prec:0.65,pct:50},LG:{dep:0.1,prec:0.43,pct:75},EGD:{dep:0.16,prec:0.47,pct:55},EGC:{dep:0,prec:0.49,pct:90},GI:{dep:-0.13,prec:0.5,pct:100},Cortes:{dep:0.6,prec:0.49,pct:10}}},
-  {nombre:"Decreto",pelaje:"Negro",raza:"Angus Negro",nacimiento:"15/03/2016",pesoActual:890,rp:"SI651D",origen:"Ohlde Cattle Co",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-0.6,prec:0.69,pct:25},WW:{dep:2.4,prec:0.62,pct:80},PF:{dep:10.2,prec:0.47,pct:85},Alt:{dep:1.2,prec:0.68,pct:80},Leche:{dep:0.3,prec:0.26,pct:65},AOB:{dep:1.2,prec:0.43,pct:55},CE:{dep:0.7,prec:0.63,pct:85},LG:{dep:-0.2,prec:0.49,pct:55},EGD:{dep:0.54,prec:0.44,pct:15},EGC:{dep:0.81,prec:0.46,pct:15},GI:{dep:-0.03,prec:0.5,pct:70},Cortes:{dep:-0.7,prec:0.43,pct:85}}},
-  {nombre:"Coleman Doc",pelaje:"Negro",raza:"Angus Negro",nacimiento:"09/07/2012",pesoActual:1070,rp:"SI2261",origen:"Coleman Angus",semenApto:"SI",fenotipo:0,deps:{PN:{dep:0,prec:0.55,pct:50},WW:{dep:10.3,prec:0.53,pct:15},PF:{dep:38.2,prec:0.34,pct:15},Alt:{dep:2.2,prec:0.56,pct:35},Leche:{dep:2.6,prec:0.15,pct:30},AOB:{dep:0.1,prec:0.1,pct:80},CE:{dep:1,prec:0.52,pct:60},LG:{dep:-1,prec:0.17,pct:15},EGD:{dep:0.06,prec:0.1,pct:75},EGC:{dep:0.15,prec:0.1,pct:80},GI:{dep:-0.05,prec:0.11,pct:85},Cortes:{dep:0,prec:0.1,pct:40}}},
-  {nombre:"Kyoto",pelaje:"Colorado",raza:"Angus Colorado",nacimiento:"27/08/2021",pesoActual:840,rp:"1385",origen:"La Esencia",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-1.5,prec:0.4,pct:5},WW:{dep:8.7,prec:0.27,pct:30},PF:{dep:30.9,prec:0.21,pct:40},Alt:{dep:1.6,prec:0.22,pct:60},Leche:{dep:0.8,prec:0.22,pct:55},AOB:{dep:3.5,prec:0.18,pct:10},CE:{dep:1.1,prec:0.42,pct:50},LG:{dep:0,prec:0.2,pct:70},EGD:{dep:0.09,prec:0.19,pct:65},EGC:{dep:0.18,prec:0.2,pct:78},GI:{dep:-0.06,prec:0.35,pct:85},Cortes:{dep:0.5,prec:0.19,pct:15}}},
-  {nombre:"Demoledor",pelaje:"Colorado",raza:"Angus Colorado",nacimiento:"04/05/2021",pesoActual:870,rp:"463",origen:"El Yerua",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-0.7,prec:0.49,pct:30},WW:{dep:3.1,prec:0.53,pct:80},PF:{dep:18.1,prec:0.46,pct:65},Alt:{dep:0.9,prec:0.67,pct:80},Leche:{dep:3.8,prec:0.37,pct:20},AOB:{dep:3.4,prec:0.42,pct:15},CE:{dep:1.2,prec:0.59,pct:55},LG:{dep:2.5,prec:0.42,pct:100},EGD:{dep:-0.21,prec:0.4,pct:95},EGC:{dep:0.08,prec:0.41,pct:85},GI:{dep:0.01,prec:0.42,pct:40},Cortes:{dep:0.9,prec:0.42,pct:10}}},
-  {nombre:"Botija",pelaje:"Colorado",raza:"Angus Colorado",nacimiento:"21/07/2020",pesoActual:910,rp:"1025",origen:"La Esencia",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-1,prec:0.53,pct:20},WW:{dep:10.6,prec:0.54,pct:20},PF:{dep:51,prec:0.46,pct:1},Alt:{dep:1.5,prec:0.31,pct:60},Leche:{dep:2.9,prec:0.41,pct:30},AOB:{dep:3,prec:0.48,pct:20},CE:{dep:1.3,prec:0.64,pct:45},LG:{dep:-0.5,prec:0.42,pct:50},EGD:{dep:0.61,prec:0.47,pct:10},EGC:{dep:0.73,prec:0.49,pct:25},GI:{dep:-0.03,prec:0.49,pct:70},Cortes:{dep:-0.7,prec:0.49,pct:80}}},
-  {nombre:"Hércules",pelaje:"Colorado",raza:"Angus Colorado",nacimiento:"25/07/2018",pesoActual:970,rp:"633",origen:"La Esencia",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-1.1,prec:0.39,pct:10},WW:{dep:4.8,prec:0.39,pct:55},PF:{dep:13.4,prec:0.35,pct:50},Alt:{dep:0.7,prec:0.22,pct:90},Leche:{dep:4.5,prec:0.31,pct:5},AOB:{dep:2.8,prec:0.34,pct:10},CE:{dep:0.4,prec:0.44,pct:95},LG:{dep:-0.5,prec:0.32,pct:30},EGD:{dep:0.03,prec:0.34,pct:70},EGC:{dep:0.37,prec:0.36,pct:40},GI:{dep:0.05,prec:0.35,pct:15},Cortes:{dep:0.4,prec:0.35,pct:15}}},
-  {nombre:"Serafín",pelaje:"Colorado",raza:"Angus Colorado",nacimiento:"15/08/2023",pesoActual:780,rp:"G382",origen:"Casamu",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-1.7,prec:0.42,pct:3},WW:{dep:2.8,prec:0.4,pct:80},PF:{dep:16.7,prec:0.34,pct:65},Alt:{dep:1,prec:0.23,pct:85},Leche:{dep:5,prec:0.28,pct:10},AOB:{dep:2.4,prec:0.38,pct:25},CE:{dep:1.4,prec:0.41,pct:25},LG:{dep:0.4,prec:0.2,pct:90},EGD:{dep:0.66,prec:0.39,pct:10},EGC:{dep:0.3,prec:0.41,pct:60},GI:{dep:0.03,prec:0.39,pct:35},Cortes:{dep:-0.1,prec:0.38,pct:45}}},
-  {nombre:"Fanfarrón",pelaje:"Colorado",raza:"Angus Colorado",nacimiento:"10/09/2023",pesoActual:720,rp:"733",origen:"El Yerua",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-0.9,prec:0.25,pct:15},WW:{dep:-3.3,prec:0.24,pct:100},PF:{dep:-1.4,prec:0.19,pct:95},Alt:{dep:null,prec:null,pct:null},Leche:{dep:1.4,prec:0.13,pct:45},AOB:{dep:-1.1,prec:0.25,pct:100},CE:{dep:1,prec:0.31,pct:60},LG:{dep:-1.3,prec:0.17,pct:10},EGD:{dep:0.91,prec:0.26,pct:1},EGC:{dep:1.44,prec:0.28,pct:1},GI:{dep:0,prec:0.25,pct:50},Cortes:{dep:-2,prec:0.25,pct:100}}},
-  {nombre:"Maniático",pelaje:"Colorado",raza:"Angus Colorado",nacimiento:"20/07/2023",pesoActual:810,rp:"1847",origen:"La Esencia",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-1.7,prec:0.28,pct:3},WW:{dep:3.7,prec:0.24,pct:75},PF:{dep:16.4,prec:0.2,pct:65},Alt:{dep:null,prec:null,pct:null},Leche:{dep:1,prec:0.16,pct:50},AOB:{dep:1.9,prec:0.27,pct:35},CE:{dep:1,prec:0.3,pct:60},LG:{dep:-0.7,prec:0.24,pct:30},EGD:{dep:0.26,prec:0.28,pct:40},EGC:{dep:0.32,prec:0.3,pct:60},GI:{dep:-0.1,prec:0.28,pct:95},Cortes:{dep:0.1,prec:0.27,pct:30}}},
-  {nombre:"Cane",pelaje:"Colorado",raza:"Angus Colorado",nacimiento:"04/04/2017",pesoActual:920,rp:"173",origen:"El Yerua",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-1.1,prec:0.63,pct:15},WW:{dep:0.6,prec:0.5,pct:95},PF:{dep:7.1,prec:0.41,pct:90},Alt:{dep:0.1,prec:0.8,pct:95},Leche:{dep:4.8,prec:0.33,pct:10},AOB:{dep:-1.8,prec:0.52,pct:100},CE:{dep:0.8,prec:0.76,pct:85},LG:{dep:0.4,prec:0.29,pct:85},EGD:{dep:0.27,prec:0.53,pct:45},EGC:{dep:0.33,prec:0.54,pct:65},GI:{dep:0.02,prec:0.52,pct:35},Cortes:{dep:-0.8,prec:0.52,pct:90}}},
-  {nombre:"Kundo",pelaje:"Colorado",raza:"Angus Colorado",nacimiento:"24/07/2021",pesoActual:830,rp:"1281",origen:"La Esencia",semenApto:"SI",fenotipo:0,deps:{PN:{dep:-1.7,prec:0.46,pct:3},WW:{dep:4.2,prec:0.46,pct:60},PF:{dep:20.6,prec:0.4,pct:40},Alt:{dep:1.1,prec:0.3,pct:85},Leche:{dep:3.8,prec:0.37,pct:15},AOB:{dep:2.1,prec:0.4,pct:20},CE:{dep:0.8,prec:0.48,pct:80},LG:{dep:0.2,prec:0.41,pct:80},EGD:{dep:0.62,prec:0.4,pct:3},EGC:{dep:0.95,prec:0.42,pct:5},GI:{dep:0.01,prec:0.42,pct:35},Cortes:{dep:-1,prec:0.4,pct:100}}},
-  {nombre:"Forager",pelaje:"Colorado",raza:"Angus Colorado",nacimiento:"05/02/2017",pesoActual:0,rp:"57E",origen:"Calvo Family (RAAA)",semenApto:"SI",fenotipo:0,sistema:"RAAA",deps:{PN:{dep:-0.8,prec:0.81,pct:null},WW:{dep:null,prec:null,pct:null},PF:{dep:null,prec:null,pct:null},Alt:{dep:null,prec:null,pct:null},Leche:{dep:30,prec:0.51,pct:null},AOB:{dep:-0.04,prec:0.47,pct:null},CE:{dep:null,prec:null,pct:null},LG:{dep:null,prec:null,pct:null},EGD:{dep:0.01,prec:0.37,pct:null},EGC:{dep:null,prec:null,pct:null},GI:{dep:null,prec:null,pct:null},Cortes:{dep:null,prec:null,pct:null}}}
-];
+let TOROS = [];                  // se puebla al seleccionar catálogo
+let CATALOGOS_DISPONIBLES = [];  // se puebla al iniciar la app
+
+// ── CARGA INICIAL ──────────────────────────────
+async function iniciarApp() {
+  try {
+    const res = await fetch('/data/catalogos.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    CATALOGOS_DISPONIBLES = data.catalogos || [];
+  } catch(e) {
+    // Sin servidor (testing local): grilla vacía con opción de carga local
+    CATALOGOS_DISPONIBLES = [];
+    console.warn('catalogos.json no disponible:', e.message);
+  }
+}
+
+// ── CARGA DE TOROS AL SELECCIONAR CATÁLOGO ─────
+async function fetchToros(archivo) {
+  const res = await fetch('/data/' + archivo);
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const data = await res.json();
+  return Array.isArray(data) ? data : (data.toros || []);
+}
+
+// ── FALLBACK: carga desde archivo local ────────
+function cargarArchivoLocal(input) {
+  const file = input.files[0];
+  if (!file) return;
+  mostrarLoadingCat('Leyendo archivo local…');
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      const toros = Array.isArray(data) ? data : (data.toros || []);
+      const meta  = Array.isArray(data) ? {
+        id: 'local', nombre: file.name.replace('.json',''),
+        cabaña: 'Carga local', toros: toros.length,
+        fecha: new Date().toLocaleDateString('es-AR'),
+        tipo: 'temporal', puntaje: 0, esNovedad: false, acceso: 'libre',
+        archivo: file.name
+      } : (data.meta || { id:'local', nombre: file.name, cabaña:'Local',
+                          toros: toros.length, fecha:'—', tipo:'temporal',
+                          puntaje:0, esNovedad:false, acceso:'libre' });
+      TOROS = toros;
+      activarApp(meta);
+    } catch(err) {
+      ocultarLoadingCat();
+      alert('Error al leer el JSON: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function mostrarLoadingCat(msg) {
+  const g = document.getElementById('catalogos-grid');
+  if (g) g.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:32px;color:rgba(255,255,255,.7);font-size:.9rem">${msg||'Cargando…'}</div>`;
+}
+function ocultarLoadingCat() {} // ya reemplazó el contenido
 const CATEGORIAS=[
   {id:"terminal",  nombre:"1-Terminal",            pesos:{PN:-20,WW:40,PF:15,Alt:0, Leche:0, AOB:15,CE:10,LG:0},  desc:"Cría a faena: máximo peso al destete y músculo."},
   {id:"reposicion",nombre:"2-Reposición",           pesos:{PN:-20,WW:25,PF:-5,Alt:-15,Leche:20,AOB:5, CE:10,LG:0},  desc:"Hijas retenidas: leche, fertilidad, frame contenido."},
@@ -658,11 +689,7 @@ const DEP_INFO={
 const NOMS={PN:"Peso nacer",WW:"Peso destete",PF:"Peso final",Alt:"Altura",Leche:"Leche",AOB:"AOB",CE:"Circ. escrotal",LG:"Long. gest.",EGD:"Esp. gr. dorsal",EGC:"Esp. gr. cadera",GI:"% Gr. intram.",Cortes:"% Cortes"};
 const FRASES={PN:{p:"bajo PN",n:"PN alto"},WW:{p:"alto WW",n:"WW contenido"},PF:{p:"alto PF",n:"PF contenido"},Alt:{p:"frame grande",n:"frame compacto"},Leche:{p:"buena leche",n:"leche acotada"},AOB:{p:"buen AOB",n:"AOB acotado"},CE:{p:"alta CE",n:"CE acotada"},LG:{p:"gestación corta",n:"gestación larga"}};
 
-// ─── CATÁLOGOS ───
-const CATALOGOS_DISPONIBLES=[
-  {id:'ciiado2026',nombre:'Remate CIIADO 2026',cabaña:'Múltiples cabañas · Angus Negro y Colorado',
-   tipo:'temporal',puntaje:4,toros:26,fecha:'20/08/2026',esNovedad:false,acceso:'libre'}
-];
+// CATALOGOS_DISPONIBLES se carga en iniciarApp() desde /data/catalogos.json
 
 // ═══════════════════════════════════════════════
 // ESTADO v4
@@ -736,8 +763,24 @@ function seleccionarModo(modo){
 function showCatalogos(){
   const lic=document.getElementById('cat-ov-licencia-badge');
   lic.textContent=`${sepaState.licencia} · Modo ${sepaState.modo}`;
-  renderCatalogosDisponibles();
   document.getElementById('catalogos-overlay').classList.remove('hidden');
+  // Si ya tenemos catálogos en memoria, renderizar directo
+  if(CATALOGOS_DISPONIBLES.length){
+    renderCatalogosDisponibles();
+  } else {
+    // Intentar fetch
+    mostrarLoadingCat('Cargando catálogos disponibles…');
+    fetch('/data/catalogos.json')
+      .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(data=>{
+        CATALOGOS_DISPONIBLES = data.catalogos || [];
+        renderCatalogosDisponibles();
+      })
+      .catch(()=>{
+        // Sin servidor: mostrar opción de carga local
+        renderCatalogosDisponibles();
+      });
+  }
 }
 
 function renderCatalogosDisponibles(){
@@ -747,7 +790,7 @@ function renderCatalogosDisponibles(){
   const hint=document.getElementById('cat-ov-hint');
   hint.textContent=hasPrev?`Último ingreso: ${fechaPrev}`:'Primera sesión — seleccioná un catálogo para empezar.';
   const grid=document.getElementById('catalogos-grid');
-  grid.innerHTML=CATALOGOS_DISPONIBLES.map(cat=>{
+  let html = CATALOGOS_DISPONIBLES.map(cat=>{
     const tipoLabel=cat.tipo==='temporal'?'Remate temporal':'Stock permanente';
     const tipoClass=cat.tipo==='temporal'?'tipo-temporal':'tipo-permanente';
     const novBadge=(cat.esNovedad&&hasPrev)?'<div class="catalogo-novedad">● NUEVO</div>':'';
@@ -758,28 +801,52 @@ function renderCatalogosDisponibles(){
       </div>
       ${novBadge}
       <div class="catalogo-card-meta">
-        <div class="catalogo-meta-row">🐂 <strong>${cat.toros}</strong> toros · ${cat.cabaña}</div>
+        <div class="catalogo-meta-row">🐂 <strong>${cat.toros||cat.totalToros||'?'}</strong> toros · ${cat.cabaña||cat.cabana||''}</div>
         <div class="catalogo-meta-row">📅 Alta: <strong>${cat.fecha}</strong></div>
         <div class="catalogo-meta-row">🔓 Acceso <strong>${cat.acceso}</strong> · ⭐ ${cat.puntaje} pts</div>
       </div>
       <button class="btn-entrar-cat">Entrar →</button>
     </div>`;
   }).join('');
+  // Siempre mostrar opción de carga local (útil para testing)
+  html += `<div class="catalogo-card" style="border-style:dashed;opacity:.7">
+    <div class="catalogo-card-top"><div class="catalogo-card-nombre">📂 Cargar JSON local</div></div>
+    <div class="catalogo-card-meta"><div class="catalogo-meta-row">Para testing sin servidor</div></div>
+    <label class="btn-entrar-cat" style="cursor:pointer">
+      Seleccionar archivo
+      <input type="file" accept=".json" style="display:none" onchange="cargarArchivoLocal(this)">
+    </label>
+  </div>`;
+  grid.innerHTML = html;
 }
 
-function seleccionarCatalogo(id){
+async function seleccionarCatalogo(id){
   const cat=CATALOGOS_DISPONIBLES.find(c=>c.id===id);
   if(!cat) return;
-  sepaState.catalogoActivo=id;
-  localStorage.setItem('sepa_catalogo_activo',id);
-  localStorage.setItem('sepa_ultimo_ingreso',Date.now());
+  mostrarLoadingCat('Cargando ' + cat.nombre + '…');
+  try {
+    const archivo = cat.archivo || ('toros_' + cat.id + '.json');
+    TOROS = await fetchToros(archivo);
+    activarApp(cat);
+  } catch(err) {
+    const grid=document.getElementById('catalogos-grid');
+    if(grid) grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:32px;color:#ffb3b3">
+      Error al cargar el catálogo: ${err.message}<br><small>Revisá que /data/${cat.archivo} existe en el servidor.</small>
+    </div>`;
+  }
+}
+
+function activarApp(cat){
+  sepaState.catalogoActivo=cat.id||'local';
+  localStorage.setItem('sepa_catalogo_activo', cat.id||'local');
+  localStorage.setItem('sepa_ultimo_ingreso', Date.now());
   document.getElementById('catalogos-overlay').classList.add('hidden');
   document.getElementById('main-app').classList.remove('hidden');
-  // actualizar header
-  document.getElementById('header-sub').textContent=`${cat.nombre} · ${cat.toros} toros`;
+  document.getElementById('header-sub').textContent=`${cat.nombre} · ${cat.toros||cat.totalToros||TOROS.length} toros`;
   updateLicenciaBadge();
+  Object.keys(fenotipoData).forEach(k=>delete fenotipoData[k]);
   setScreen('global');
-  renderAll();
+  setCat('terminal');
 }
 
 function cambioCatalogo(){
@@ -1249,6 +1316,7 @@ function setCat(c){
   renderAll();
 }
 function renderAll(){
+  if(!TOROS.length) return; // sin datos, no renderizar
   const cat=CATEGORIAS.find(c=>c.id===currentCat);
   const rf=calcFactores(TOROS,currentCat);
   const rs=calcSinergico(TOROS,currentCat);
@@ -1256,7 +1324,8 @@ function renderAll(){
   if(currentScreen==='factores')renderFactores(rf,cat);
   if(currentScreen==='sinergico')renderSinergico(rs,cat);
 }
-// NO renderAll() en inicio — espera login + catálogo
+// Iniciar app al cargar la página
+window.addEventListener('DOMContentLoaded', iniciarApp);
 </script>
 </body>
 </html>
