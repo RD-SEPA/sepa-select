@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEPA-Select — Acceso</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  /* Si ya tiene acceso, saltea la pantalla */
+  try{ if(localStorage.getItem('sepa_acceso_landing')==='1'){ location.replace('index.html'); } }catch(e){}
+</script>
+<style>
+  :root{
+    --dark:#253a29; --dark2:#1e2f1f; --gold:#b8892b; --gold-mid:#d4a84a;
+    --white:#ffffff;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:linear-gradient(135deg,var(--dark2),var(--dark));
+    color:var(--white); min-height:100vh;
+    display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .box{ width:100%; max-width:380px; text-align:center }
+  .logo{ display:inline-flex; align-items:center; gap:10px; margin-bottom:2.5rem }
+  .logo-sepa{ font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--white); letter-spacing:-.02em; line-height:1 }
+  .logo-sep{ width:1px; height:20px; background:rgba(184,137,43,.45) }
+  .logo-sel{ font-size:13px; font-weight:500; color:var(--gold); letter-spacing:.09em; text-transform:uppercase }
+  h1{ font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:600; margin-bottom:.5rem; letter-spacing:-.01em }
+  p.sub{ font-size:.86rem; color:rgba(255,255,255,.6); margin-bottom:2rem; line-height:1.6 }
+  form{ display:flex; flex-direction:column; align-items:center; gap:1rem }
+  input[type=tel]{
+    width:170px; padding:.85rem 1rem; border-radius:10px;
+    border:2px solid rgba(255,255,255,.28); background:rgba(255,255,255,.12);
+    color:var(--white); font-size:1.4rem; font-weight:700; text-align:center;
+    letter-spacing:.35em; font-family:inherit; outline:none; transition:border-color .15s,background .15s;
+  }
+  input[type=tel]::placeholder{ letter-spacing:normal; font-size:.85rem; font-weight:400; opacity:.45 }
+  input[type=tel]:focus{ border-color:rgba(255,255,255,.7); background:rgba(255,255,255,.2) }
+  button{
+    background:var(--gold); color:var(--dark); border:none; cursor:pointer;
+    padding:.8rem 2.4rem; border-radius:999px; font-size:.95rem; font-weight:700;
+    font-family:inherit; transition:background .15s,transform .1s;
+  }
+  button:hover{ background:var(--gold-mid); transform:translateY(-1px) }
+  .err{ font-size:.8rem; color:#ffb3b3; min-height:1.2em }
+  .foot{ margin-top:2.5rem; font-size:.72rem; color:rgba(255,255,255,.32); line-height:1.9 }
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="logo">
+      <span class="logo-sepa">SEPA</span><span class="logo-sep"></span><span class="logo-sel">Select</span>
+    </div>
+    <h1>Acceso restringido</h1>
+    <p class="sub">SEPA-Select est&aacute; en desarrollo. Ingres&aacute; el c&oacute;digo de acceso para ver la plataforma.</p>
+    <form id="f" autocomplete="off">
+      <input type="tel" id="cod" inputmode="numeric" maxlength="6" placeholder="c&oacute;digo" aria-label="C&oacute;digo de acceso">
+      <div class="err" id="err"></div>
+      <button type="submit">Entrar &rarr;</button>
+    </form>
+    <div class="foot">
+      Exp. DNDA EX-2026-81106223-APN-DNDA#MJ<br>
+      &copy; Ing. Ricardo Emilio Delgado &middot; 2026
+    </div>
+  </div>
+<script>
+  var CODIGO_LANDING = '1547';
+  document.getElementById('f').addEventListener('submit', function(e){
+    e.preventDefault();
+    var v = (document.getElementById('cod').value || '').trim();
+    if(v === CODIGO_LANDING){
+      try{ localStorage.setItem('sepa_acceso_landing','1'); }catch(err){}
+      location.replace('index.html');
+    } else {
+      document.getElementById('err').textContent = 'Código incorrecto.';
+      document.getElementById('cod').value = '';
+      document.getElementById('cod').focus();
+    }
+  });
+</script>
+</body>
+</html>

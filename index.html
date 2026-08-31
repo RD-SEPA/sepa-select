@@ -3,1334 +3,840 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEPA-Select App3 · v4</title>
+<meta name="description" content="SEPA-Select: ranking genético de toros Angus orientado al comprador. Aplicá tus pesos de selección sobre las DEPs del catálogo por categoría de cría. Desarrollado por Ing. Ricardo Delgado.">
+<title>SEPA-Select — Ranking genético de toros Angus</title>
+<meta name="robots" content="noindex, nofollow">
+<script>
+  /* Bloqueo de acceso previo al lanzamiento — quitar este bloque para liberar al público */
+  try{ if(localStorage.getItem('sepa_acceso_landing')!=='1'){ location.replace('acceso.html'); } }catch(e){}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --verde-oscuro:#253a29;--verde-medio:#3c6b45;--verde-claro:#e9f0ea;
-  --oro:#b8892b;--oro-claro:#fdf3dc;--texto:#1a1a1a;--gris:#6b6b6b;
-  --borde:#ddd6c8;--superficie:#f8f6f1;--blanco:#ffffff;
-  --rojo:#c0392b;--rojo-claro:#fdf0ee;
+  --dark:#253a29; --dark2:#1e2f1f; --green:#3c6b45; --green-lt:#e9f0ea;
+  --gold:#b8892b; --gold-lt:#fdf3dc; --gold-mid:#d4a84a;
+  --cream:#f8f6f1; --cream-dk:#eeeae2; --white:#ffffff;
+  --text:#1a1a1a; --muted:#6b6b6b; --border:#ddd6c8;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie);color:var(--texto);font-size:14px;min-height:100vh}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--text);line-height:1.6}
 
-/* ── LOGIN ── */
-#login-overlay{position:fixed;inset:0;background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));z-index:400;display:flex;align-items:center;justify-content:center;padding:24px}
-#login-overlay.hidden{display:none!important}
-.login-box{max-width:400px;width:100%;text-align:center;color:white}
-.login-logo{font-size:2rem;font-weight:900;letter-spacing:-1px;margin-bottom:6px}
-.login-logo span{color:var(--oro)}
-.login-sub{font-size:.85rem;opacity:.7;margin-bottom:36px}
-.login-label{font-size:.82rem;opacity:.8;margin-bottom:10px;letter-spacing:.3px;text-transform:uppercase}
-.login-input-wrap{display:flex;justify-content:center;margin-bottom:6px}
-.login-input{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:white;padding:13px 20px;border-radius:12px;font-size:1.4rem;width:120px;text-align:center;letter-spacing:6px;font-weight:800;transition:all .15s}
-.login-input::placeholder{opacity:.4;letter-spacing:0;font-size:.85rem;font-weight:400}
-.login-input:focus{outline:none;border-color:rgba(255,255,255,.75);background:rgba(255,255,255,.22)}
-.login-error{font-size:.78rem;color:#ffb3b3;min-height:20px;margin-bottom:10px}
-.btn-login{background:white;color:var(--verde-oscuro);border:none;padding:12px 36px;border-radius:999px;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .15s;box-shadow:0 4px 16px rgba(0,0,0,.2)}
-.btn-login:hover{background:var(--verde-claro);transform:translateY(-1px)}
-.login-hint{font-size:.72rem;opacity:.5;margin-top:24px;line-height:1.5}
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;border-bottom:1px solid rgba(184,137,43,.2)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-sepa{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--white);letter-spacing:-.02em;line-height:1}
+.logo-sep{width:1px;height:18px;background:rgba(184,137,43,.4);flex-shrink:0}
+.logo-sel{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:var(--gold);letter-spacing:.09em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:1.75rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.875rem;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.btn-nav{background:var(--gold);color:var(--dark)!important;padding:.45rem 1.2rem;border-radius:6px;font-weight:600;font-size:.875rem!important}
+.btn-nav:hover{background:var(--gold-mid)!important}
 
-/* ── SELECTOR MODO ── */
-#selector-modo{position:fixed;inset:0;background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));z-index:380;display:flex;align-items:center;justify-content:center;padding:24px}
-#selector-modo.hidden{display:none!important}
-.selector-box{max-width:500px;width:100%;text-align:center;color:white}
-.selector-logo{font-size:1.1rem;font-weight:900;margin-bottom:6px}
-.selector-logo span{color:var(--oro)}
-.selector-title{font-size:1.15rem;font-weight:800;margin-bottom:6px}
-.selector-sub{font-size:.82rem;opacity:.72;margin-bottom:28px}
-.selector-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.selector-card{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);border-radius:14px;padding:22px 18px;cursor:pointer;transition:all .15s;text-align:left}
-.selector-card:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
-.selector-card.plus-card:hover{border-color:var(--oro);background:rgba(184,137,43,.2)}
-.selector-badge{font-size:.65rem;font-weight:800;padding:3px 9px;border-radius:8px;display:inline-block;margin-bottom:12px}
-.sb-base{background:rgba(255,255,255,.25);color:white}
-.sb-plus{background:var(--oro);color:white}
-.selector-card-title{font-weight:800;font-size:.95rem;margin-bottom:6px}
-.selector-card-desc{font-size:.76rem;opacity:.75;line-height:1.45}
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,var(--dark2),var(--dark));padding:80px 5% 100px;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;min-height:calc(100vh - 64px)}
+.hero-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
+.hero-eyebrow::before{content:'';display:inline-block;width:24px;height:2px;background:var(--gold)}
+.hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4.5vw,3.6rem);line-height:1.1;color:var(--white);letter-spacing:-.03em;margin-bottom:1.5rem}
+.hero-text h1 em{color:var(--gold);font-style:normal}
+.hero-text p{color:rgba(255,255,255,.72);font-size:1.05rem;line-height:1.75;margin-bottom:2.5rem;max-width:460px}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:var(--dark);padding:.875rem 2rem;border-radius:8px;font-weight:600;font-size:1rem;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .1s}
+.btn-primary:hover{background:var(--gold-mid);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:rgba(255,255,255,.8);padding:.875rem 2rem;border-radius:8px;font-weight:500;font-size:1rem;text-decoration:none;border:1px solid rgba(255,255,255,.25);transition:all .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.55);color:var(--white)}
 
-/* ── CATALOGOS ── */
-#catalogos-overlay{position:fixed;inset:0;background:var(--superficie);z-index:350;display:flex;flex-direction:column;overflow-y:auto}
-#catalogos-overlay.hidden{display:none!important}
-.cat-ov-header{background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));color:white;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.cat-ov-brand .cat-ov-logo{font-size:1.05rem;font-weight:900}
-.cat-ov-brand .cat-ov-logo span{color:var(--oro)}
-.cat-ov-brand .cat-ov-sub{font-size:.7rem;opacity:.6;margin-top:2px}
-.cat-ov-licencia{font-size:.7rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px}
-.cat-ov-body{flex:1;padding:24px;max-width:960px;margin:0 auto;width:100%}
-.cat-ov-title{font-size:1.1rem;font-weight:800;color:var(--verde-oscuro);margin-bottom:4px}
-.cat-ov-hint{font-size:.8rem;color:var(--gris);margin-bottom:22px}
-.catalogos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-.catalogo-card{background:var(--blanco);border:1px solid var(--borde);border-radius:12px;padding:16px;cursor:pointer;transition:all .15s}
-.catalogo-card:hover{border-color:var(--verde-medio);box-shadow:0 4px 16px rgba(60,107,69,.15);transform:translateY(-2px)}
-.catalogo-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px}
-.catalogo-card-nombre{font-weight:800;font-size:.9rem;color:var(--verde-oscuro);line-height:1.3;flex:1}
-.catalogo-tipo{font-size:.64rem;padding:2px 8px;border-radius:8px;font-weight:700;flex-shrink:0;margin-top:2px}
-.tipo-temporal{background:var(--oro-claro);color:#7a5a10;border:1px solid #e0c070}
-.tipo-permanente{background:var(--verde-claro);color:var(--verde-oscuro);border:1px solid #afd0b5}
-.catalogo-novedad{font-size:.64rem;background:var(--rojo);color:white;padding:2px 8px;border-radius:8px;font-weight:700;display:inline-block;margin-bottom:10px}
-.catalogo-card-meta{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-.catalogo-meta-row{font-size:.76rem;color:var(--gris);display:flex;gap:5px}
-.catalogo-meta-row strong{color:var(--texto)}
-.btn-entrar-cat{background:var(--verde-oscuro);color:white;border:none;padding:9px 0;border-radius:8px;font-size:.83rem;font-weight:700;cursor:pointer;width:100%;transition:all .15s}
-.btn-entrar-cat:hover{background:var(--verde-medio)}
-.cat-ov-footer{padding:14px 24px;text-align:center;font-size:.72rem;color:var(--gris);border-top:1px solid var(--borde)}
+/* ── DEMO WIDGET ── */
+.demo-wrap{background:rgba(255,255,255,.05);border:1px solid rgba(184,137,43,.25);border-radius:14px;padding:1.25rem}
+.demo-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;gap:.5rem;flex-wrap:wrap}
+.demo-label{font-size:.68rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em}
+.demo-meta{font-size:.68rem;background:rgba(184,137,43,.15);color:var(--gold);padding:.2rem .65rem;border-radius:20px}
+.demo-sliders{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1rem}
+.sl-row{display:flex;align-items:center;gap:.75rem}
+.sl-name{font-size:.72rem;color:rgba(255,255,255,.6);min-width:140px;line-height:1.3}
+.sl-name small{display:block;font-size:.62rem;opacity:.6}
+.sl-row input[type=range]{flex:1;-webkit-appearance:none;height:3px;background:rgba(255,255,255,.15);border-radius:2px;outline:none}
+.sl-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;background:var(--gold);border-radius:50%;cursor:pointer}
+.sl-val{font-size:.72rem;color:var(--gold);min-width:30px;text-align:right;font-family:monospace}
+.bull-list{display:flex;flex-direction:column;gap:.45rem}
+.bull-row{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.55rem .8rem;display:flex;align-items:center;gap:.65rem;transition:all .4s cubic-bezier(.4,0,.2,1)}
+.b-pos{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--gold);min-width:18px}
+.b-info{flex:1;min-width:0}
+.b-name{font-size:.76rem;font-weight:600;color:rgba(255,255,255,.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.b-deps{display:flex;gap:.35rem;margin-top:.15rem}
+.dep-chip{font-size:.62rem;padding:.1rem .35rem;border-radius:3px;font-family:monospace}
+.dep-ww{background:rgba(60,107,69,.5);color:#b0d8b4}
+.dep-ce{background:rgba(37,58,41,.7);color:#9ec4a6}
+.b-score{text-align:right;flex-shrink:0}
+.b-score-val{font-size:.85rem;font-weight:700;color:var(--white);font-family:monospace}
+.b-bar{height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:3px;width:52px}
+.b-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .4s ease}
+.demo-note{font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.75rem;text-align:center}
 
-/* ── PLUS GATE TOAST ── */
-#plus-gate{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--verde-oscuro);color:white;padding:13px 18px 13px 16px;border-radius:12px;display:flex;align-items:center;gap:10px;z-index:600;box-shadow:0 6px 28px rgba(0,0,0,.35);transition:opacity .25s,transform .25s;opacity:0;pointer-events:none;min-width:260px;max-width:90vw}
-#plus-gate.visible{opacity:1;pointer-events:auto}
-.pg-icon{font-size:1.1rem;flex-shrink:0}
-.pg-body{flex:1}
-.pg-title{font-weight:700;font-size:.85rem}
-.pg-sub{font-size:.72rem;opacity:.75;margin-top:1px}
-.pg-close{background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:1.2rem;padding:0;line-height:1;flex-shrink:0}
-.pg-close:hover{color:white}
+/* ── COMMON SECTION ── */
+section{padding:80px 5%}
+.container{max-width:1080px;margin:0 auto}
+.s-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(1.75rem,3vw,2.4rem);line-height:1.2;letter-spacing:-.02em;color:var(--text);margin-bottom:1.1rem}
+.s-sub{color:var(--muted);font-size:1rem;line-height:1.75;max-width:580px}
 
-/* ── MAIN APP (hidden until catalog selected) ── */
-#main-app.hidden{display:none!important}
+/* ── QUÉ ES ── */
+.ques-section{background:var(--white)}
+.ques-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.ques-points{display:flex;flex-direction:column;gap:1.25rem;margin-top:2rem}
+.ques-point{display:flex;gap:1rem;align-items:flex-start}
+.qp-icon{width:38px;height:38px;border-radius:8px;background:var(--green-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.95rem}
+.qp-text strong{display:block;font-size:.9rem;margin-bottom:.2rem;color:var(--dark)}
+.qp-text span{font-size:.85rem;color:var(--muted);line-height:1.5}
 
-/* ── INTRO ── */
-.intro{position:fixed;inset:0;background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));color:white;display:flex;align-items:center;justify-content:center;padding:24px;z-index:300}
-.intro.hidden{display:none!important}
-.intro-content{max-width:560px;text-align:center}
-.intro-logo{font-size:2rem;font-weight:900;letter-spacing:-1px;margin-bottom:6px}
-.intro-logo span{color:var(--oro)}
-.intro-sub{font-size:.95rem;opacity:.8;margin-bottom:24px}
-.intro-content h2{font-size:1.25rem;margin:0 0 16px;font-weight:700}
-.intro-parrafos p{font-size:.95rem;line-height:1.6;opacity:.93;margin-bottom:12px}
-.intro-metodos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
-.intro-metodo{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:14px 16px;text-align:left}
-.intro-metodo-titulo{font-weight:800;font-size:.9rem;margin-bottom:4px}
-.intro-metodo-desc{font-size:.78rem;opacity:.85;line-height:1.4}
-.intro-credito{font-size:.8rem;opacity:.6;margin-bottom:20px}
-.btn-entrar{background:white;color:var(--verde-oscuro);border:none;padding:13px 36px;border-radius:999px;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:all .15s}
-.btn-entrar:hover{background:var(--verde-claro);transform:translateY(-1px)}
+/* ── MÉTODOS ── */
+.metodos-section{background:var(--cream-dk)}
+.metodos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.metodo-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.75rem}
+.metodo-card.highlight{border-color:rgba(184,137,43,.35);background:#fffdf7}
+.metodo-badge{font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.3rem .75rem;border-radius:20px;display:inline-block;margin-bottom:1rem}
+.mb-rf{background:var(--green-lt);color:var(--dark)}
+.mb-oyp{background:var(--gold-lt);color:#7a5a10}
+.metodo-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--dark);margin-bottom:.75rem}
+.metodo-desc{font-size:.875rem;color:var(--muted);line-height:1.7;margin-bottom:1rem}
+.metodo-detail{font-size:.82rem;color:var(--dark);line-height:1.6;background:var(--cream);border-radius:6px;padding:.75rem 1rem}
+.metodo-detail strong{color:var(--dark)}
 
-/* ── HEADER ── */
-.app-header{background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));color:white;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.35)}
-.header-top{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 8px;border-bottom:1px solid rgba(255,255,255,.1);flex-wrap:wrap;gap:6px}
-.header-brand .header-title{font-size:1.05rem;font-weight:800;letter-spacing:.3px}
-.header-brand .header-sub{font-size:.7rem;color:rgba(255,255,255,.55);margin-top:1px}
-.header-comandos{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-.btn-header{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.85);padding:5px 10px;border-radius:999px;font-size:.75rem;cursor:pointer;white-space:nowrap;transition:all .15s}
-.btn-header:hover{background:rgba(255,255,255,.22);color:white}
-.btn-header.active{background:var(--oro);border-color:var(--oro);color:white}
-.btn-salir{border-color:rgba(220,80,80,.45)!important;color:rgba(255,190,190,.9)!important}
-.btn-salir:hover{background:rgba(192,57,43,.4)!important;border-color:rgba(192,57,43,.7)!important;color:white!important}
-.licencia-badge{font-size:.6rem;padding:1px 7px;border-radius:6px;font-weight:800;vertical-align:middle;margin-left:3px}
-.lb-base{background:rgba(255,255,255,.22);color:rgba(255,255,255,.9)}
-.lb-plus{background:var(--oro);color:white}
-.nav-tabs{display:flex;gap:4px;padding:8px 16px 0;flex-wrap:wrap}
-.nav-tab{padding:6px 13px;border-radius:20px 20px 0 0;border:1px solid rgba(255,255,255,.2);border-bottom:none;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);cursor:pointer;font-size:.78rem;font-weight:600;transition:all .15s;white-space:nowrap}
-.nav-tab:hover{background:rgba(255,255,255,.16);color:white}
-.nav-tab.active{background:var(--superficie);color:var(--verde-oscuro);border-color:var(--borde)}
-.cat-bar{background:rgba(0,0,0,.2);padding:7px 16px;display:flex;gap:5px;flex-wrap:wrap;align-items:center}
-.cat-label{font-size:.68rem;color:rgba(255,255,255,.55);font-weight:600;margin-right:3px}
-.cat-btn{padding:4px 11px;border-radius:12px;border:1px solid rgba(255,255,255,.25);background:transparent;color:rgba(255,255,255,.7);cursor:pointer;font-size:.74rem;font-weight:500;transition:all .15s}
-.cat-btn:hover{background:rgba(255,255,255,.1)}
-.cat-btn.active{background:var(--blanco);color:var(--verde-oscuro);border-color:var(--blanco);font-weight:700}
+/* ── CATEGORÍAS ── */
+.cats-section{background:var(--dark)}
+.cats-section .s-title{color:var(--white)}
+.cats-section .s-sub{color:rgba(255,255,255,.6)}
+.cats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
+.cat-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem}
+.cat-num{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:rgba(184,137,43,.4);line-height:1;margin-bottom:.75rem}
+.cat-name{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:.5rem}
+.cat-pesos{display:flex;flex-direction:column;gap:.3rem;margin-top:.75rem}
+.cp-row{display:flex;justify-content:space-between;font-size:.72rem;color:rgba(255,255,255,.5)}
+.cp-pos{color:#7ec88a;font-weight:600}
+.cp-neg{color:#e8908a;font-weight:600}
+.cat-desc{font-size:.78rem;color:rgba(255,255,255,.45);margin-top:.5rem;line-height:1.5}
 
-/* ── COMMAND PANELS ── */
-.cmd-panel{display:none;background:var(--blanco);border-bottom:2px solid var(--verde-claro);padding:20px;max-width:100%}
-.cmd-panel.open{display:block}
-.cmd-panel-inner{max-width:1100px;margin:0 auto}
-.cmd-panel h3{font-size:1rem;font-weight:800;color:var(--verde-oscuro);margin-bottom:12px}
-.cmd-panel h4{font-size:.88rem;font-weight:700;color:var(--verde-oscuro);margin:14px 0 6px}
-.cmd-panel p{font-size:.85rem;color:var(--gris);line-height:1.5;margin-bottom:8px}
-.cmd-metodos-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-@media(max-width:580px){.cmd-metodos-grid{grid-template-columns:1fr}}
-.cmd-metodo-card{background:var(--verde-claro);border-radius:8px;padding:12px 14px}
-.cmd-metodo-card h4{margin-top:0;color:var(--verde-oscuro)}
-.cmd-metodo-card p{margin-bottom:0;font-size:.8rem;color:var(--gris)}
-.export-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.btn-export{background:var(--verde-claro);border:1px solid var(--borde);color:var(--verde-oscuro);padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .15s}
-.btn-export:hover{background:var(--verde-medio);color:white;border-color:var(--verde-medio)}
-.pesos-tabla{width:100%;border-collapse:collapse;font-size:.8rem;margin-bottom:12px}
-.pesos-tabla th{background:var(--verde-claro);padding:6px 10px;text-align:left;font-size:.7rem;font-weight:700;color:var(--verde-oscuro);text-transform:uppercase}
-.pesos-tabla td{padding:6px 10px;border-bottom:1px solid var(--borde)}
-.pesos-tabla tr:last-child td{border-bottom:none}
-.peso-pos{color:var(--verde-medio);font-weight:700}
-.peso-neg{color:var(--rojo);font-weight:700}
-.peso-0{color:var(--gris)}
-.ayuda-acordeon{display:flex;flex-direction:column;gap:6px}
-.ayuda-item{border:1px solid var(--borde);border-radius:8px;overflow:hidden}
-.ayuda-item-head{padding:10px 14px;background:var(--superficie);cursor:pointer;font-weight:700;font-size:.85rem;color:var(--verde-oscuro);display:flex;justify-content:space-between;align-items:center}
-.ayuda-item-head:hover{background:var(--verde-claro)}
-.ayuda-item-body{display:none;padding:12px 14px;font-size:.82rem;color:var(--gris);line-height:1.55;border-top:1px solid var(--borde)}
-.ayuda-item-body.open{display:block}
-.config-reset-btn{background:var(--rojo-claro);border:1px solid #e0b0a8;color:var(--rojo);padding:8px 14px;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;margin-top:8px}
-.config-reset-btn:hover{background:var(--rojo);color:white}
+/* ── DEPs ── */
+.deps-section{background:var(--white)}
+.deps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
+.dep-card{background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:1.1rem}
+.dep-code{font-family:monospace;font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.4rem}
+.dep-full{font-size:.8rem;font-weight:600;color:var(--dark);margin-bottom:.3rem}
+.dep-unit{font-size:.72rem;color:var(--muted);margin-bottom:.5rem}
+.dep-dir{font-size:.7rem;font-weight:600;padding:.2rem .55rem;border-radius:4px;display:inline-block}
+.dir-pos{background:#e6f4ea;color:#1d6e3e}
+.dir-neg{background:#fce8e6;color:#c0392b}
+.dir-var{background:var(--cream-dk);color:var(--muted)}
 
-/* ── BUSCADOR ── */
-.buscador-bar{background:var(--superficie);border-bottom:1px solid var(--borde);padding:8px 16px;display:flex;align-items:center;gap:8px}
-.buscador-wrap{position:relative;flex:1;max-width:360px}
-#buscador{width:100%;padding:7px 12px;border:1px solid var(--borde);border-radius:8px;font-size:.88rem;font-family:inherit;background:var(--blanco)}
-#buscador:focus{outline:none;border-color:var(--verde-medio);box-shadow:0 0 0 2px rgba(60,107,69,.15)}
-.buscador-sugerencias{position:absolute;top:100%;left:0;right:0;background:var(--blanco);border:1px solid var(--borde);border-top:none;border-radius:0 0 8px 8px;max-height:260px;overflow-y:auto;z-index:50;box-shadow:0 6px 14px rgba(0,0,0,.12);display:none}
-.buscador-sugerencias.open{display:block}
-.sug-item{padding:9px 12px;cursor:pointer;font-size:.86rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f2f0ea}
-.sug-item:last-child{border-bottom:none}
-.sug-item:hover{background:var(--verde-claro)}
-.sug-nombre{font-weight:600}
-.sug-raza{color:var(--gris);font-size:.75rem}
-.buscador-hint{font-size:.75rem;color:var(--gris);flex:1}
+/* ── PLANES ── */
+.planes-section{background:var(--dark2)}
+.planes-section .s-title{color:var(--white)}
+.planes-section .s-sub{color:rgba(255,255,255,.58)}
+.planes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.plan-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:2rem}
+.plan-card.feat{background:rgba(184,137,43,.08);border-color:rgba(184,137,43,.38)}
+.plan-badge{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);background:rgba(184,137,43,.15);padding:.28rem .7rem;border-radius:20px;display:inline-block;margin-bottom:1.25rem}
+.plan-name{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:var(--white);margin-bottom:.4rem}
+.plan-price{font-size:2rem;font-weight:700;color:var(--white);margin-bottom:.2rem}
+.plan-price span{font-size:.95rem;font-weight:400;color:rgba(255,255,255,.45)}
+.plan-period{font-size:.82rem;color:rgba(255,255,255,.4);margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.plan-group-label{font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.5rem;margin-top:1rem}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.plan-features li{font-size:.87rem;color:rgba(255,255,255,.72);display:flex;gap:.75rem;align-items:flex-start;line-height:1.45}
+.plan-features li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;margin-top:.05em}
+.plan-features li.no::before{content:'—';color:rgba(255,255,255,.2)}
+.plan-features li.no{color:rgba(255,255,255,.28)}
+.btn-plan{display:block;text-align:center;padding:.85rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s}
+.btn-base{background:transparent;border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.78)}
+.btn-base:hover{border-color:rgba(255,255,255,.5);color:var(--white)}
+.btn-plus{background:var(--gold);color:var(--dark)}
+.btn-plus:hover{background:var(--gold-mid)}
+.planes-nota{text-align:center;margin-top:1.25rem;font-size:.75rem;color:rgba(255,255,255,.27)}
 
-/* ── SCREENS ── */
-.screen{display:none;padding:16px;max-width:1200px;margin:0 auto}
-.screen.active{display:block}
+/* ── FAQS ── */
+.faqs-section{background:var(--cream)}
+.faqs-layout{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start;margin-top:2.5rem}
+.faqs-intro .s-sub{margin-top:.75rem}
+.faq-grupos{display:flex;flex-direction:column;gap:1.75rem}
+.faq-grupo-label{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.faq-item{border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--white);margin-bottom:.4rem}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;cursor:pointer;font-size:.875rem;font-weight:600;color:var(--dark);gap:.75rem;transition:background .15s;line-height:1.4}
+.faq-q:hover{background:var(--green-lt)}
+.faq-q.open{background:var(--green-lt)}
+.faq-arrow{font-size:.75rem;color:var(--muted);transition:transform .2s;flex-shrink:0}
+.faq-q.open .faq-arrow{transform:rotate(180deg)}
+.faq-a{font-size:.845rem;color:var(--muted);line-height:1.7;padding:0 1.1rem;max-height:0;overflow:hidden;transition:max-height .28s ease,padding .2s}
+.faq-a.open{max-height:600px;padding:.9rem 1.1rem 1.1rem}
+.faq-a strong{color:var(--dark)}
+.faq-a code{font-family:monospace;font-size:.82rem;background:var(--cream-dk);padding:.1rem .35rem;border-radius:3px;color:var(--dark)}
 
-/* ── GLOBAL ── */
-.global-insight{background:var(--blanco);border:1px solid var(--borde);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:.82rem;color:var(--gris);display:flex;align-items:center;gap:8px}
-.insight-dot{width:10px;height:10px;border-radius:50%;background:var(--oro);flex-shrink:0}
-.global-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:680px){.global-grid{grid-template-columns:1fr}}
-.method-card{background:var(--blanco);border-radius:10px;border:1px solid var(--borde);overflow:hidden}
-.method-card-header{background:var(--verde-claro);padding:10px 14px;border-bottom:1px solid var(--borde)}
-.method-card-title{font-weight:800;color:var(--verde-oscuro);font-size:.88rem}
-.method-card-sub{font-size:.72rem;color:var(--gris)}
-.rank-list{list-style:none}
-.rank-item{display:flex;align-items:center;gap:9px;padding:9px 14px;border-bottom:1px solid var(--borde);cursor:pointer;transition:background .1s}
-.rank-item:hover{background:var(--verde-claro)}
-.rank-item:last-child{border-bottom:none}
-.rank-item.coincide{background:var(--oro-claro)}
-.rank-item.coincide:hover{background:#f7e9bc}
-.rank-pos{font-weight:800;color:var(--gris);width:22px;text-align:center;font-size:.82rem;flex-shrink:0}
-.rank-pos.top3{color:var(--verde-oscuro);font-size:1rem}
-.rank-nombre{font-weight:600;flex:1;font-size:.86rem}
-.rank-score-val{font-size:.78rem;color:var(--gris);font-variant-numeric:tabular-nums;flex-shrink:0}
-.rbc{font-size:.62rem;padding:1px 5px;border-radius:8px;font-weight:700;flex-shrink:0}
-.rbc-n{background:#1a1a1a;color:white}
-.rbc-c{background:#7a2e08;color:white}
-.coin-badge{font-size:.65rem;background:var(--oro);color:white;padding:1px 6px;border-radius:8px;font-weight:700;flex-shrink:0}
+/* ── REGISTRO ── */
+.reg-section{background:var(--white)}
+.reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.reg-form-wrap{background:var(--cream);border-radius:14px;padding:2rem;border:1px solid var(--border)}
+.form-group{margin-bottom:1.1rem}
+.form-group label{display:block;font-size:.83rem;font-weight:600;margin-bottom:.4rem;color:var(--dark)}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.7rem .9rem;border:1px solid var(--border);border-radius:7px;font-size:.9rem;font-family:inherit;color:var(--text);background:var(--white);transition:border-color .2s;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green);background:var(--white)}
+.form-group textarea{resize:vertical;min-height:72px}
+.form-submit{width:100%;padding:.85rem;background:var(--dark);color:var(--white);border:none;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s;font-family:inherit}
+.form-submit:hover{background:var(--green)}
+.form-note{font-size:.75rem;color:var(--muted);text-align:center;margin-top:.9rem}
+.reg-puntos{display:flex;flex-direction:column;gap:1.1rem;margin-top:1.75rem}
+.reg-punto{display:flex;gap:.9rem;align-items:flex-start}
+.rp-icon{width:34px;height:34px;border-radius:7px;background:var(--green-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem}
+.rp-text strong{display:block;font-size:.875rem;margin-bottom:.15rem;color:var(--dark)}
+.rp-text span{font-size:.82rem;color:var(--muted)}
 
-/* ── CONCORDANCIA ── */
-.concord-wrap{background:var(--blanco);border:1px solid var(--borde);border-radius:10px;overflow:hidden;margin-top:14px}
-.concord-head{background:var(--verde-claro);padding:10px 14px;border-bottom:1px solid var(--borde)}
-.concord-title{font-weight:800;color:var(--verde-oscuro);font-size:.85rem}
-.concord-sub{font-size:.72rem;color:var(--gris)}
-.concord-table{width:100%;border-collapse:collapse}
-.concord-table th{padding:7px 12px;font-size:.7rem;font-weight:700;color:var(--gris);text-transform:uppercase;background:var(--superficie);border-bottom:1px solid var(--borde)}
-.concord-table td{padding:8px 12px;border-bottom:1px solid var(--borde);font-size:.82rem}
-.concord-table tr:last-child td{border-bottom:none}
-.concord-table tr:hover td{background:var(--verde-claro);cursor:pointer}
-.concord-agree td{background:var(--oro-claro)}
-.delta-badge{font-size:.75rem;padding:2px 7px;border-radius:6px;font-weight:700}
-.du{background:var(--verde-claro);color:var(--verde-oscuro)}
-.dd{background:var(--rojo-claro);color:var(--rojo)}
-.de{background:var(--superficie);color:var(--gris)}
+/* ── FOOTER ── */
+footer{background:var(--dark);padding:3rem 5%;border-top:1px solid rgba(255,255,255,.06)}
+.footer-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1.5rem}
+.footer-logo{display:flex;align-items:center;gap:10px}
+.footer-tagline{font-size:.78rem;color:rgba(255,255,255,.32);margin-top:.4rem;line-height:1.5}
+.footer-right{font-size:.76rem;color:rgba(255,255,255,.35);text-align:right;line-height:1.8}
+.footer-right a{color:rgba(255,255,255,.35);text-decoration:none}
+.footer-right a:hover{color:var(--gold)}
+.footer-dnda{font-size:.68rem;color:rgba(255,255,255,.2);margin-top:.4rem}
 
-/* ── TABLES ── */
-.screen-section{margin-bottom:16px}
-.section-header{background:var(--verde-claro);border:1px solid var(--borde);border-radius:10px 10px 0 0;padding:12px 16px;border-bottom:none}
-.section-header h2{font-size:.95rem;font-weight:800;color:var(--verde-oscuro)}
-.section-header p{font-size:.75rem;color:var(--gris);margin-top:3px}
-.table-wrap{background:var(--blanco);border:1px solid var(--borde);border-radius:0 0 10px 10px;overflow:hidden;overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:500px}
-th{padding:8px 12px;text-align:left;font-size:.7rem;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.3px;background:var(--superficie);border-bottom:1px solid var(--borde)}
-th.num,td.num{text-align:right}
-td{padding:9px 12px;border-bottom:1px solid var(--borde);font-size:.83rem;vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--verde-claro);cursor:pointer}
-.td-pos{font-weight:800;color:var(--verde-oscuro);font-size:.95rem}
-.td-nombre{font-weight:700}
-.td-val{font-variant-numeric:tabular-nums;font-weight:600}
-.td-g{color:var(--verde-oscuro)}
-.td-f{color:var(--gris)}
-.td-total{color:var(--verde-oscuro);font-weight:800;font-size:.95rem}
-.td-score{color:var(--verde-medio);font-weight:800}
-.td-exp{font-size:.74rem;color:var(--gris);font-style:italic;max-width:220px}
-.mini-bar-track{width:80px;height:7px;background:var(--borde);border-radius:4px;overflow:hidden;display:inline-block}
-.mini-bar-fill{height:100%;border-radius:4px;background:var(--verde-medio)}
-.td-sin{display:flex;gap:3px;flex-wrap:wrap}
-.sin-chip{font-size:.63rem;padding:2px 5px;border-radius:6px;font-weight:700;white-space:nowrap;cursor:help}
-.sin-chip.arr{background:var(--verde-claro);color:var(--verde-oscuro);border:1px solid #afd0b5}
-.sin-chip.baj{background:var(--rojo-claro);color:var(--rojo);border:1px solid #f5c6c0}
-.sin-chip.nul{background:var(--superficie);color:var(--gris);border:1px solid var(--borde)}
-.nc-panel{background:var(--oro-claro);border:1px solid #e0c070;border-radius:8px;padding:12px 14px;margin-top:14px}
-.nc-panel-title{font-size:.8rem;font-weight:700;color:#7a5a10;margin-bottom:6px}
-.nc-list{list-style:none;display:flex;flex-direction:column;gap:4px}
-.nc-item{font-size:.78rem;color:var(--gris);display:flex;align-items:center;gap:6px}
-.nc-item::before{content:'·';color:var(--oro);font-weight:800;font-size:1rem}
-.nc-dep-tag{background:var(--oro);color:white;font-size:.63rem;padding:1px 6px;border-radius:6px;font-weight:700}
+/* ── SECCIÓN SALIDA REAL ── */
+.real-section{background:var(--dark2)}
+.real-section .s-title{color:var(--white)}
+.real-section .s-sub{color:rgba(255,255,255,.58)}
+.real-meta{font-size:.72rem;color:rgba(255,255,255,.28);margin-top:.6rem;font-family:monospace;letter-spacing:.02em}
+.cats-real-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
+.cat-real-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:1.2rem}
+.cat-real-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.cat-real-name{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:.3rem}
+.cat-real-desc{font-size:.72rem;color:rgba(255,255,255,.38);margin-bottom:.9rem;line-height:1.4;padding-bottom:.75rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.selecto-list{display:flex;flex-direction:column;gap:.4rem}
+.selecto-item{font-size:.78rem;font-weight:600;color:rgba(255,255,255,.85);display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
+.selecto-item::before{content:'★';color:var(--gold);font-size:.7rem;flex-shrink:0}
+.selecto-scores{font-size:.66rem;color:rgba(255,255,255,.3);font-family:monospace;white-space:nowrap}
+.real-note{font-size:.68rem;color:rgba(255,255,255,.22);margin-top:1.5rem;font-family:monospace;text-align:right}
+.multi-row{margin-top:2rem;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.07)}
+.multi-label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1rem}
+.multi-chips{display:flex;gap:.75rem;flex-wrap:wrap}
+.multi-chip{background:rgba(184,137,43,.1);border:1px solid rgba(184,137,43,.22);border-radius:8px;padding:.55rem .9rem}
+.mc-name{font-size:.84rem;font-weight:700;color:var(--gold);margin-bottom:.2rem}
+.mc-cats{font-size:.7rem;color:rgba(255,255,255,.38);line-height:1.5}
 
-/* ── MODAL ── */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;padding:20px;overflow-y:auto}
-.modal-overlay.open{display:flex;align-items:flex-start;justify-content:center}
-.modal-box{background:var(--blanco);border-radius:12px;max-width:640px;width:100%;overflow:hidden;margin:40px auto}
-.modal-head{background:var(--verde-oscuro);color:white;padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.modal-head-title{font-weight:800;font-size:1.05rem}
-.modal-head-sub{font-size:.74rem;color:rgba(255,255,255,.65);margin-top:2px}
-.modal-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:1.5rem;cursor:pointer;padding:0;line-height:1;flex-shrink:0}
-.modal-close:hover{color:white}
-.modal-body{padding:16px}
-.modal-section{margin-bottom:16px}
-.modal-section:last-child{margin-bottom:0}
-.modal-stitle{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--gris);margin-bottom:8px;border-bottom:1px solid var(--borde);padding-bottom:4px}
-.scores-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.score-box{background:var(--superficie);border-radius:8px;padding:10px 12px;text-align:center}
-.score-box-label{font-size:.7rem;color:var(--gris);margin-bottom:4px}
-.score-box-val{font-size:1.3rem;font-weight:800;color:var(--verde-oscuro)}
-.score-box.total-box{background:var(--verde-claro)}
-.score-box-sub{font-size:.68rem;color:var(--gris);margin-top:2px}
-.fen-editor{background:var(--superficie);border-radius:8px;padding:12px 14px;margin-top:8px}
-.fen-title{font-size:.78rem;font-weight:700;color:var(--verde-oscuro);margin-bottom:8px}
-.fen-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.fen-slider{flex:1;min-width:120px;accent-color:var(--verde-medio)}
-.fen-slider:disabled{opacity:.35;cursor:not-allowed}
-.fen-val{font-weight:800;color:var(--verde-oscuro);font-size:.95rem;min-width:40px;text-align:right}
-.fen-hint{font-size:.7rem;color:var(--gris);margin-top:4px}
-.fen-reset-btn{font-size:.72rem;background:none;border:1px solid var(--borde);border-radius:6px;padding:3px 8px;cursor:pointer;color:var(--gris)}
-.fen-reset-btn:hover{background:var(--borde)}
-.fen-locked-wrap{cursor:pointer;position:relative}
-.dep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:7px}
-.dep-item{background:var(--superficie);border-radius:6px;padding:7px 10px}
-.dep-label{font-size:.68rem;color:var(--gris)}
-.dep-val{font-weight:800;font-size:.9rem;color:var(--verde-oscuro)}
-.dep-val.null-dep{color:var(--gris);font-style:italic;font-weight:400;font-size:.78rem}
-.dep-prec{font-size:.65rem;color:var(--gris)}
-.radar-wrap{display:flex;justify-content:center;padding:8px 0}
-.radar-legend{display:flex;gap:12px;justify-content:center;margin-top:6px;flex-wrap:wrap}
-.rl-item{display:flex;align-items:center;gap:4px;font-size:.7rem;color:var(--gris)}
-.rl-swatch{width:14px;height:3px;border-radius:2px}
-.sinbar-container{display:flex;flex-direction:column;gap:6px}
-.sinbar-row{display:grid;grid-template-columns:90px 1fr 52px;align-items:center;gap:8px}
-.sinbar-label{font-size:.73rem;color:var(--gris);text-align:right;line-height:1.2}
-.sinbar-track{height:8px;background:var(--borde);border-radius:4px;position:relative;overflow:visible}
-.sinbar-mean{position:absolute;top:-4px;bottom:-4px;width:2px;background:#888;border-radius:1px;z-index:1}
-.sinbar-fill{position:absolute;top:0;height:100%;border-radius:4px}
-.sinbar-val{font-size:.73rem;font-weight:700;font-variant-numeric:tabular-nums}
-.sin-detail-table{width:100%;border-collapse:collapse;font-size:.8rem}
-.sin-detail-table th{background:var(--verde-claro);padding:6px 10px;text-align:left;font-size:.7rem;font-weight:700;color:var(--verde-oscuro);text-transform:uppercase}
-.sin-detail-table td{padding:7px 10px;border-bottom:1px solid var(--borde)}
-.sin-detail-table tr:last-child td{border-bottom:none}
-.sin-arr{color:var(--verde-medio);font-weight:700}
-.sin-baj{color:var(--rojo);font-weight:700}
-.sin-nc-txt{color:var(--gris);font-style:italic}
-.meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.meta-chip{font-size:.74rem;background:var(--superficie);border:1px solid var(--borde);border-radius:6px;padding:4px 8px;color:var(--gris)}
-.meta-chip span{font-weight:700;color:var(--texto)}
-
-/* ── CATALOGO SCREEN ── */
-.cat-section{background:var(--blanco);border:1px solid var(--borde);border-radius:10px;overflow:hidden;margin-bottom:16px}
-.cat-section-head{background:var(--verde-claro);padding:10px 16px;border-bottom:1px solid var(--borde)}
-.cat-section-head h3{font-size:.9rem;font-weight:800;color:var(--verde-oscuro)}
-.cat-section-head p{font-size:.74rem;color:var(--gris);margin-top:2px}
-.cat-section-body{padding:14px 16px}
-.dep-full-table{width:100%;border-collapse:collapse;font-size:.8rem}
-.dep-full-table th{padding:7px 10px;font-size:.7rem;font-weight:700;color:var(--gris);text-transform:uppercase;background:var(--superficie);border-bottom:1px solid var(--borde);text-align:left}
-.dep-full-table td{padding:8px 10px;border-bottom:1px solid var(--borde)}
-.dep-full-table tr:last-child td{border-bottom:none}
-.dep-full-table tr:hover td{background:var(--verde-claro)}
-.badge-yes{background:var(--verde-claro);color:var(--verde-oscuro);font-size:.68rem;padding:2px 7px;border-radius:8px;font-weight:700}
-.badge-no{background:var(--superficie);color:var(--gris);font-size:.68rem;padding:2px 7px;border-radius:8px;border:1px solid var(--borde)}
-.badge-nc{background:var(--rojo-claro);color:var(--rojo);font-size:.68rem;padding:2px 7px;border-radius:8px;font-weight:700}
-.toro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
-.toro-card{background:var(--superficie);border-radius:8px;padding:8px 10px;font-size:.78rem}
-.toro-card-nombre{font-weight:700;color:var(--verde-oscuro)}
-.toro-card-raza{font-size:.68rem;color:var(--gris)}
-.alert-box{background:var(--oro-claro);border:1px solid #e0c070;border-radius:8px;padding:10px 14px;font-size:.8rem;color:#7a5a10;margin-bottom:10px}
-
-/* ── PRINT ── */
-@media print{
-  .intro,.app-header,.buscador-bar,.cmd-panel,.modal-overlay,.app-footer{display:none!important}
-  .screen{display:block!important;padding:0}
-  body{background:white}
-  .screen-section{break-inside:avoid}
-  .section-header{background:none;border:1px solid #999;border-radius:0;padding:8px}
-  .section-header h2{color:black}
-  .table-wrap{border:1px solid #999;border-radius:0}
-  table{min-width:0}
-  th{background:#eee!important}
-  .print-header{display:block!important;text-align:center;margin-bottom:16px;font-size:.85rem;color:#555}
+/* ── RESPONSIVE ── */
+@media(max-width:920px){
+  .hero{grid-template-columns:1fr;padding:60px 5% 80px}
+  .demo-wrap{display:none}
+  .ques-grid,.metodos-grid,.planes-grid,.reg-grid{grid-template-columns:1fr;gap:2.5rem}
+  .cats-grid,.cats-real-grid{grid-template-columns:1fr 1fr;gap:.75rem}
+  .deps-grid{grid-template-columns:1fr 1fr}
+  .faqs-layout{grid-template-columns:1fr}
+  .nav-links{display:none}
 }
-.print-header{display:none}
-.app-footer{text-align:center;padding:24px 16px;font-size:.72rem;color:var(--gris);border-top:1px solid var(--borde);margin-top:8px}
-.hidden{display:none!important}
+@media(max-width:500px){
+  .cats-grid,.deps-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
-<!-- ══ LOGIN OVERLAY ══ -->
-<div id="login-overlay">
-  <div class="login-box">
-    <div class="login-logo">SEPA<span>-Select</span></div>
-    <div class="login-sub">Sistema de evaluación genética · App3</div>
-    <div class="login-label">Ingresá tu código de acceso</div>
-    <div class="login-input-wrap">
-      <input type="text" id="login-input" class="login-input" maxlength="1"
-        placeholder="—"
-        oninput="this.value=this.value.toUpperCase()"
-        onkeydown="if(event.key==='Enter')doLogin()">
-    </div>
-    <div class="login-error" id="login-error"></div>
-    <button class="btn-login" onclick="doLogin()">Ingresar →</button>
-    <div class="login-hint">Código B = acceso BASE · Código P = acceso PLUS</div>
-  <div style="margin-top:20px;font-size:.65rem;opacity:.35;color:white;line-height:1.6;">
-      Propiedad intelectual registrada<br>
-      Exp. DNDA EX-2026-81106223-APN-DNDA#MJ<br>
-      © Ing. Ricardo Emilio Delgado · 2026
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#" class="nav-logo"><span class="logo-sepa">SEPA</span><span class="logo-sep"></span><span class="logo-sel">Select</span></a>
+  <ul class="nav-links">
+    <li><a href="#metodos">Metodología</a></li>
+    <li><a href="#planes">Planes</a></li>
+    <li><a href="#faqs">Preguntas frecuentes</a></li>
+    <li><a href="#registro">Registrarse</a></li>
+    <li><a href="app.html" class="btn-nav">Acceder a la app →</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Evaluación genética · Toros Angus · ERA</div>
+    <h1>El ranking que construye<br><em>el comprador.</em></h1>
+    <p>SEPA-Select aplica tus pesos de selección sobre las DEPs del catálogo y ordena los animales por objetivo de cría. Cada posición es el resultado de tu fórmula, no la del vendedor.</p>
+    <div class="hero-ctas">
+      <a href="#registro" class="btn-primary">Solicitar acceso</a>
+      <a href="app.html" class="btn-ghost">Probar la app →</a>
     </div>
   </div>
-</div>
 
-<!-- ══ SELECTOR MODO (solo PLUS) ══ -->
-<div id="selector-modo" class="hidden">
-  <div class="selector-box">
-    <div class="selector-logo">SEPA<span>-Select</span></div>
-    <div class="selector-title">¿Cómo querés operar?</div>
-    <div class="selector-sub">Podés usar tu acceso PLUS en modo completo o explorar la experiencia BASE.</div>
-    <div class="selector-cards">
-      <div class="selector-card" onclick="seleccionarModo('BASE')">
-        <div class="selector-badge sb-base">BASE</div>
-        <div class="selector-card-title">Modo BASE</div>
-        <div class="selector-card-desc">Vista simplificada. Útil para compartir o presentar sin configuración avanzada.</div>
+  <div class="demo-wrap">
+    <div class="demo-head">
+      <span class="demo-label">Demo · RD_Factores</span>
+      <span class="demo-meta">Catálogo: CIIADO 2026 · Terminal</span>
+    </div>
+    <div class="demo-sliders">
+      <div class="sl-row">
+        <span class="sl-name">WW — Peso al destete <small>dirección favorable: positivo</small></span>
+        <input type="range" id="sl-ww" min="0" max="10" value="7">
+        <span class="sl-val" id="vl-ww">70%</span>
       </div>
-      <div class="selector-card plus-card" onclick="seleccionarModo('PLUS')">
-        <div class="selector-badge sb-plus">PLUS ★</div>
-        <div class="selector-card-title">Modo PLUS</div>
-        <div class="selector-card-desc">Acceso completo: configuración de pesos, fenotipo editable, análisis Sinérgico y exportación avanzada.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ CATALOGOS OVERLAY ══ -->
-<div id="catalogos-overlay" class="hidden">
-  <div class="cat-ov-header">
-    <div class="cat-ov-brand">
-      <div class="cat-ov-logo">SEPA<span style="color:var(--oro)">-Select</span></div>
-      <div class="cat-ov-sub">Seleccioná un catálogo para operar</div>
-    </div>
-    <div class="cat-ov-licencia" id="cat-ov-licencia-badge">—</div>
-  </div>
-  <div class="cat-ov-body">
-    <div class="cat-ov-title">Catálogos disponibles</div>
-    <div class="cat-ov-hint" id="cat-ov-hint">Elegí el catálogo con el que querés trabajar en esta sesión.</div>
-    <div class="catalogos-grid" id="catalogos-grid"></div>
-  </div>
-  <div class="cat-ov-footer">Producido por Ing. Ricardo Delgado · SEPA-Select · v4</div>
-</div>
-
-<!-- ══ PLUS GATE TOAST ══ -->
-<div id="plus-gate">
-  <div class="pg-icon">🔒</div>
-  <div class="pg-body">
-    <div class="pg-title">Solo disponible en Plus</div>
-    <div class="pg-sub" id="pg-sub"></div>
-  </div>
-  <button class="pg-close" onclick="hidePlusGate()">×</button>
-</div>
-
-<!-- ══ MAIN APP ══ -->
-<div id="main-app" class="hidden">
-
-<!-- INTRO (accesible desde header) -->
-<div id="intro" class="intro hidden">
-  <div class="intro-content">
-    <div class="intro-logo">SEPA<span>-Select</span></div>
-    <div class="intro-sub">Catálogo CIIADO 2026 · 26 Toros Angus</div>
-    <h2>El ranking de tus toros, con dos criterios a la vez.</h2>
-    <div class="intro-metodos">
-      <div class="intro-metodo">
-        <div class="intro-metodo-titulo">📊 RD_Factores</div>
-        <div class="intro-metodo-desc">DEPs ponderados por objetivo de cría + evaluación fenotípica. Ranking continuo por categoría.</div>
-      </div>
-      <div class="intro-metodo">
-        <div class="intro-metodo-titulo">🔗 RD_Sinérgico</div>
-        <div class="intro-metodo-desc">Sinergias entre pares de DEPs evaluadas vs el promedio poblacional de los 26 toros.</div>
+      <div class="sl-row">
+        <span class="sl-name">PN — Facilidad de parto <small>dirección favorable: negativo</small></span>
+        <input type="range" id="sl-pn" min="0" max="10" value="3">
+        <span class="sl-val" id="vl-pn">30%</span>
       </div>
     </div>
-    <p class="intro-credito">Producido por Ing. Ricardo Delgado · App3 · CIIADO 2026</p>
-    <button class="btn-entrar" onclick="cerrarIntro()">Cerrar ×</button>
+    <div class="bull-list" id="bull-list"></div>
+    <div class="demo-note">Modificá los pesos y el ranking se recalcula. Así opera SEPA-Select.</div>
   </div>
-</div>
+</section>
 
-<!-- HEADER -->
-<header class="app-header">
-  <div class="header-top">
-    <div class="header-brand">
-      <div class="header-title">SEPA-Select · App3 <span class="licencia-badge lb-base" id="licencia-badge">BASE</span></div>
-      <div class="header-sub" id="header-sub">CIIADO 2026 · Angus Negro y Colorado · 26 toros</div>
-    </div>
-    <div class="header-comandos">
-      <button class="btn-header" id="btn-intro" onclick="togglePanel('panel-intro')">ⓘ Introducción</button>
-      <button class="btn-header" id="btn-config" onclick="onClickConfig()">⚙ Configuración ▾</button>
-      <button class="btn-header" id="btn-export" onclick="togglePanel('panel-export')">⬇ Exportar ▾</button>
-      <button class="btn-header" id="btn-ayuda" onclick="togglePanel('panel-ayuda')">❓ Ayuda ▾</button>
-      <button class="btn-header" onclick="cambioCatalogo()">≡ Catálogos</button>
-      <button class="btn-header btn-salir" onclick="terminarSesion()">Salir</button>
-    </div>
-  </div>
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="setScreen('global')">Vista Global</button>
-    <button class="nav-tab" onclick="setScreen('factores')">RD_Factores</button>
-    <button class="nav-tab" onclick="setScreen('sinergico')">RD_Sinérgico</button>
-    <button class="nav-tab" onclick="setScreen('catalogo')">Catálogo</button>
-  </div>
-  <div class="cat-bar" id="cat-bar">
-    <span class="cat-label">CATEGORÍA:</span>
-    <button class="cat-btn active" onclick="setCat('terminal')">1-Terminal</button>
-    <button class="cat-btn" onclick="setCat('reposicion')">2-Reposición</button>
-    <button class="cat-btn" onclick="setCat('vaq15')">3-Vaquillona 15M</button>
-    <button class="cat-btn" onclick="setCat('torito')">4-Toro vaq 15M</button>
-  </div>
-</header>
-
-<!-- COMMAND PANELS -->
-<div id="panel-intro" class="cmd-panel">
-  <div class="cmd-panel-inner">
-    <h3>Introducción a SEPA-Select App3</h3>
-    <div class="cmd-metodos-grid">
-      <div class="cmd-metodo-card">
-        <h4>📊 RD_Factores</h4>
-        <p>Pondera 8 DEPs según el objetivo de cría (Terminal, Reposición, Entore 15M, Toro vaq 15M). Aplica z-scores poblacionales, descuento por precisión y normalización 0-100. Score final = G + F (fenotipo editable).</p>
+<!-- ══ QUÉ ES ══ -->
+<section class="ques-section">
+  <div class="container">
+    <div class="ques-grid">
+      <div>
+        <p class="s-eyebrow">El problema</p>
+        <h2 class="s-title">El catálogo presenta datos.<br>No da tu respuesta.</h2>
+        <p class="s-sub">Cada cabaña ordena y destaca las DEPs que favorecen a sus toros. El comprador necesita la fórmula opuesta: sus objetivos de cría aplicados a los datos del catálogo, no al revés.</p>
       </div>
-      <div class="cmd-metodo-card">
-        <h4>🔗 RD_Sinérgico</h4>
-        <p>Evalúa 8 sinergias calculables (pares/tríos de DEPs con dirección favorable definida) vs el promedio de los 26 toros. Score = suma de valores de sinergia activos en la categoría. 4 sinergias adicionales requieren MW/FRT (no disponibles en ERA).</p>
+      <div>
+        <div class="ques-points">
+          <div class="ques-point">
+            <div class="qp-icon">📊</div>
+            <div class="qp-text">
+              <strong>Las DEPs son datos crudos, no una decisión</strong>
+              <span>WW +42 no dice si ese toro es mejor para tu objetivos que uno con WW +35 y CE +5.8. SEPA-Select construye el score combinado con tus pesos.</span>
+            </div>
+          </div>
+          <div class="ques-point">
+            <div class="qp-icon">🔄</div>
+            <div class="qp-text">
+              <strong>Dos métodos complementarios de ranking</strong>
+              <span>RD_Factores pondera 8 DEPs por z-score con descuento por precisión ERA. RD_O&P evalúa 14 perfiles productivos predefinidos en 4 grupos. La concordancia entre ambos orienta la decisión final.</span>
+            </div>
+          </div>
+          <div class="ques-point">
+            <div class="qp-icon">📁</div>
+            <div class="qp-text">
+              <strong>Catálogos permanentes y de remate</strong>
+              <span>La plataforma aloja catálogos públicos (cabañas, remates) y privados. El usuario accede con password provisto por el publicador.</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <p>Ambos métodos son <strong>complementarios</strong>. La Vista Global muestra dónde coinciden y dónde divergen. Las divergencias son señales para analizar con más profundidad antes de comprar.</p>
-    <p style="color:var(--gris);font-size:.8rem">Producido por Ing. Ricardo Delgado · SEPA-Select · CIIADO 2026</p>
   </div>
-</div>
+</section>
 
-<div id="panel-config" class="cmd-panel">
-  <div class="cmd-panel-inner">
-    <h3>Configuración</h3>
-    <h4>Pesos por categoría (RD_Factores)</h4>
-    <div style="overflow-x:auto">
-      <table class="pesos-tabla" id="pesos-tabla"></table>
-    </div>
-    <h4>Fenotipo</h4>
-    <p>Cada toro tiene un fenotipo editable desde su ficha (clic en cualquier tabla). El valor se suma directamente al índice genético G.</p>
-    <button class="config-reset-btn" onclick="resetFenotipos()">↺ Resetear todos los fenotipos a 0</button>
-    <div id="config-fen-status" style="font-size:.78rem;color:var(--gris);margin-top:8px"></div>
-  </div>
-</div>
-
-<div id="panel-export" class="cmd-panel">
-  <div class="cmd-panel-inner">
-    <h3>Exportar</h3>
-    <p>Generá archivos con los resultados actuales de la categoría seleccionada.</p>
-    <div class="export-btns">
-      <button class="btn-export" onclick="exportarPDF()">🖨 Exportar / Imprimir PDF</button>
-      <button class="btn-export" onclick="onExportCSV('factores')">📄 CSV — RD_Factores</button>
-      <button class="btn-export" onclick="onExportCSV('sinergico')">📄 CSV — RD_Sinérgico</button>
-      <button class="btn-export" onclick="onExportCSV('ambos')">📄 CSV — Comparativo</button>
-    </div>
-    <p style="margin-top:12px;font-size:.78rem;color:var(--gris)">La exportación PDF abre la vista de impresión del navegador con la pantalla activa. Los CSV se descargan directamente.</p>
-  </div>
-</div>
-
-<div id="panel-ayuda" class="cmd-panel">
-  <div class="cmd-panel-inner">
-    <h3>Ayuda</h3>
-    <div class="ayuda-acordeon" id="ayuda-acordeon"></div>
-  </div>
-</div>
-
-<!-- BUSCADOR -->
-<div class="buscador-bar" id="buscador-bar">
-  <div class="buscador-wrap">
-    <input type="search" id="buscador" placeholder="Buscar toro por nombre…" autocomplete="off" oninput="onBuscador(this.value)" onblur="setTimeout(()=>closeSug(),150)">
-    <div class="buscador-sugerencias" id="buscador-sug"></div>
-  </div>
-  <span class="buscador-hint">Resultados en la categoría y pantalla activa · Clic para ver ficha</span>
-</div>
-
-<!-- SCREENS -->
-<div id="screen-global" class="screen active">
-  <div class="print-header" id="ph-global"></div>
-  <div id="global-insight" class="global-insight"><div class="insight-dot"></div><span id="insight-text">Calculando...</span></div>
-  <div class="global-grid">
-    <div class="method-card">
-      <div class="method-card-header"><div class="method-card-title">RD_Factores</div><div class="method-card-sub">DEPs ponderados · Score G + F</div></div>
-      <ul class="rank-list" id="global-list-f"></ul>
-    </div>
-    <div class="method-card">
-      <div class="method-card-header"><div class="method-card-title">RD_Sinérgico</div><div class="method-card-sub">Sinergias DEP · Suma vs promedio</div></div>
-      <ul class="rank-list" id="global-list-s"></ul>
+<!-- ══ MÉTODOS ══ -->
+<section id="metodos" class="metodos-section">
+  <div class="container">
+    <p class="s-eyebrow">Metodología de ranking</p>
+    <h2 class="s-title">Dos modelos, una decisión más informada</h2>
+    <p class="s-sub">SEPA-Select opera con dos métodos independientes y complementarios. La concordancia entre ambos — medida por el delta de posición — es parte del análisis.</p>
+    <div class="metodos-grid">
+      <div class="metodo-card">
+        <span class="metodo-badge mb-rf">RD_Factores</span>
+        <div class="metodo-title">Ponderación por objetivo de cría</div>
+        <p class="metodo-desc">Pondera las 8 DEPs del sistema ERA mediante z-scores poblacionales calculados sobre el catálogo activo. Aplica descuento por precisión ERA y normaliza el resultado a escala 0–100. Al score genético (G) se suma un ajuste fenotípico editable (F) disponible en PLUS.</p>
+        <div class="metodo-detail">
+          <strong>Score final = G + F</strong><br>
+          G: score genético ponderado · F: ajuste fenotípico (PLUS)<br>
+          Categorías: Terminal · Reposición · Vaq 15M · Toro para vaq 15M
+        </div>
+      </div>
+      <div class="metodo-card highlight">
+        <span class="metodo-badge mb-oyp">RD_O&P</span>
+        <div class="metodo-title">Evaluación por perfiles productivos</div>
+        <p class="metodo-desc">Evalúa al toro contra 14 perfiles productivos organizados en 4 grupos: Universales (U01–U03, activos para todas las categorías), Vaquillona 15M (V01–V04), Reposición (R01–R03) y Terminal (T01–T04). El score de cada perfil es la suma algebraica de sus DEPs requeridas, con signo según dirección favorable.</p>
+        <div class="metodo-detail">
+          <strong>14 perfiles oficiales (v5) · Ref. 8-20-01 a 8-20-14</strong><br>
+          Perfiles no calculables cuando falta alguna DEP requerida.<br>
+          Δ = diferencia de posición RF vs RD_O&P · Fondo dorado si Δ ≤ 2
+        </div>
+      </div>
     </div>
   </div>
-  <div class="concord-wrap">
-    <div class="concord-head"><div class="concord-title">Tabla de concordancia — Top 10 RD_Factores</div><div class="concord-sub">Posición en cada método y diferencia Δ. Fondo dorado = coinciden (|Δ| ≤ 2)</div></div>
-    <div style="overflow-x:auto"><table class="concord-table"><thead><tr><th>#RF</th><th>Toro</th><th>Score RF</th><th>#RS</th><th>Score RS</th><th>Δ</th></tr></thead><tbody id="concord-tbody"></tbody></table></div>
-  </div>
-</div>
+</section>
 
-<div id="screen-factores" class="screen">
-  <div class="print-header" id="ph-factores"></div>
-  <div class="screen-section">
-    <div class="section-header"><h2 id="fac-title">RD_Factores</h2><p id="fac-desc"></p></div>
-    <div class="table-wrap">
-      <table><thead><tr><th>#</th><th>Toro</th><th class="num">G</th><th class="num">F</th><th class="num">Total</th><th>Barra</th><th>Perfil DEP</th></tr></thead><tbody id="factores-tbody"></tbody></table>
+<!-- ══ CATEGORÍAS ══ -->
+<section class="cats-section">
+  <div class="container">
+    <p class="s-eyebrow" style="color:var(--gold)">Objetivos de cría</p>
+    <h2 class="s-title">Cuatro categorías, pesos distintos</h2>
+    <p class="s-sub">Cada categoría de cría tiene una matriz de pesos predefinida sobre las 8 DEPs del sistema. En PLUS, la configuración es editable.</p>
+    <div class="cats-grid">
+      <div class="cat-card">
+        <div class="cat-num">01</div>
+        <div class="cat-name">Terminal</div>
+        <div class="cat-desc">Cría a faena. Máximo peso al destete y músculo.</div>
+        <div class="cat-pesos">
+          <div class="cp-row"><span>WW</span><span class="cp-pos">+40</span></div>
+          <div class="cp-row"><span>AOB</span><span class="cp-pos">+15</span></div>
+          <div class="cp-row"><span>PF</span><span class="cp-pos">+15</span></div>
+          <div class="cp-row"><span>PN</span><span class="cp-neg">−20</span></div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-num">02</div>
+        <div class="cat-name">Reposición</div>
+        <div class="cat-desc">Hijas retenidas. Leche, fertilidad, frame contenido.</div>
+        <div class="cat-pesos">
+          <div class="cp-row"><span>Leche</span><span class="cp-pos">+20</span></div>
+          <div class="cp-row"><span>WW</span><span class="cp-pos">+25</span></div>
+          <div class="cp-row"><span>PN</span><span class="cp-neg">−20</span></div>
+          <div class="cp-row"><span>Alt</span><span class="cp-neg">−15</span></div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-num">03</div>
+        <div class="cat-name">Vaquillona 15M</div>
+        <div class="cat-desc">Entore precoz. Prioriza facilidad de parto.</div>
+        <div class="cat-pesos">
+          <div class="cp-row"><span>CE</span><span class="cp-pos">+10</span></div>
+          <div class="cp-row"><span>PN</span><span class="cp-neg">−50</span></div>
+          <div class="cp-row"><span>LG</span><span class="cp-neg">−15</span></div>
+          <div class="cp-row"><span>Alt</span><span class="cp-neg">−10</span></div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-num">04</div>
+        <div class="cat-name">Toro para Vaq 15M</div>
+        <div class="cat-desc">Toro reproductor para vaquillona de 15 meses.</div>
+        <div class="cat-pesos">
+          <div class="cp-row"><span>CE</span><span class="cp-pos">+20</span></div>
+          <div class="cp-row"><span>WW</span><span class="cp-pos">+20</span></div>
+          <div class="cp-row"><span>PN</span><span class="cp-neg">−35</span></div>
+          <div class="cp-row"><span>Alt</span><span class="cp-neg">−10</span></div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<div id="screen-sinergico" class="screen">
-  <div class="print-header" id="ph-sinergico"></div>
-  <div class="screen-section">
-    <div class="section-header"><h2 id="sin-title">RD_Sinérgico</h2><p id="sin-desc"></p></div>
-    <div class="table-wrap">
-      <table><thead><tr><th>#</th><th>Toro</th><th class="num">Score</th><th>Barra</th><th>Sinergias activas</th></tr></thead><tbody id="sinergico-tbody"></tbody></table>
+<!-- ══ DEPs ══ -->
+<section class="deps-section">
+  <div class="container">
+    <p class="s-eyebrow">DEPs consideradas</p>
+    <h2 class="s-title">El sistema opera sobre las DEPs del ERA</h2>
+    <p class="s-sub">RD_Factores pondera 8 DEPs del sistema ERA. RD_O&P puede requerir DEPs adicionales según el perfil. Los perfiles con DEPs faltantes quedan marcados como no calculables.</p>
+    <div class="deps-grid">
+      <div class="dep-card">
+        <div class="dep-code">PN</div>
+        <div class="dep-full">Peso al nacer</div>
+        <div class="dep-unit">kg</div>
+        <span class="dep-dir dir-neg">Favorable: negativo</span>
+      </div>
+      <div class="dep-card">
+        <div class="dep-code">WW</div>
+        <div class="dep-full">Peso al destete</div>
+        <div class="dep-unit">kg</div>
+        <span class="dep-dir dir-pos">Favorable: positivo</span>
+      </div>
+      <div class="dep-card">
+        <div class="dep-code">PF</div>
+        <div class="dep-full">Peso final / yearling</div>
+        <div class="dep-unit">kg</div>
+        <span class="dep-dir dir-pos">Favorable: positivo</span>
+      </div>
+      <div class="dep-card">
+        <div class="dep-code">Alt</div>
+        <div class="dep-full">Altura / frame</div>
+        <div class="dep-unit">cm</div>
+        <span class="dep-dir dir-var">Variable por categoría</span>
+      </div>
+      <div class="dep-card">
+        <div class="dep-code">Leche</div>
+        <div class="dep-full">Habilidad lechera</div>
+        <div class="dep-unit">kg</div>
+        <span class="dep-dir dir-pos">Favorable: positivo</span>
+      </div>
+      <div class="dep-card">
+        <div class="dep-code">AOB</div>
+        <div class="dep-full">Área ojo de bife / REA</div>
+        <div class="dep-unit">cm²</div>
+        <span class="dep-dir dir-pos">Favorable: positivo</span>
+      </div>
+      <div class="dep-card">
+        <div class="dep-code">CE</div>
+        <div class="dep-full">Circunferencia escrotal</div>
+        <div class="dep-unit">cm</div>
+        <span class="dep-dir dir-pos">Favorable: positivo</span>
+      </div>
+      <div class="dep-card">
+        <div class="dep-code">LG</div>
+        <div class="dep-full">Longitud de gestación</div>
+        <div class="dep-unit">días</div>
+        <span class="dep-dir dir-neg">Favorable: negativo</span>
+      </div>
     </div>
-    <div id="nc-panel" class="nc-panel hidden"></div>
   </div>
-</div>
+</section>
 
-<div id="screen-catalogo" class="screen">
-  <div class="cat-section"><div class="cat-section-head"><h3>DEPs disponibles en catálogo ERA</h3><p>12 caracteres por toro Angus</p></div><div class="cat-section-body"><table class="dep-full-table"><thead><tr><th>Código</th><th>Nombre</th><th>Dirección favorable</th><th>Modelo RF</th><th>Sinergias</th></tr></thead><tbody id="dep-table-body"></tbody></table></div></div>
-  <div class="cat-section"><div class="cat-section-head"><h3>DEPs NO disponibles en ERA</h3><p>Afectan 4 sinergias no calculables</p></div><div class="cat-section-body"><div class="alert-box">⚠ MW y FRT no pertenecen al sistema ERA (son genómicos i50KGA / otras razas). Las sinergias que los requieren muestran DEP no disponible.</div><table class="dep-full-table"><thead><tr><th>Código</th><th>Nombre</th><th>Sinergias afectadas</th><th>Estado</th></tr></thead><tbody><tr><td><strong>MW</strong></td><td>Mature Weight</td><td>Eficiente carn. · Maternal efic. · Longevidad · Vaca moderada</td><td><span class="badge-nc">No disponible</span></td></tr><tr><td><strong>FRT</strong></td><td>Fertility</td><td>Longevidad</td><td><span class="badge-nc">No disponible</span></td></tr></tbody></table></div></div>
-  <div class="cat-section"><div class="cat-section-head"><h3>Sinergias — calculables vs no calculables</h3></div><div class="cat-section-body" id="sin-catalogo-body"></div></div>
-  <div class="cat-section"><div class="cat-section-head"><h3>Notas</h3></div><div class="cat-section-body"><div class="alert-box" style="margin-bottom:10px">Sayo (D351) y Pionero (107): sin DEPs publicados en ERA. Participan en el remate pero no califican en los modelos cuantitativos.</div><div class="alert-box">Forager (57E): sistema RAAA (EE.UU.). Solo PN, Leche, AOB y EGD disponibles. La mayoría de sinergias no son calculables para este toro.</div></div></div>
-  <div class="cat-section"><div class="cat-section-head"><h3>Catálogo — 26 toros Angus</h3></div><div class="cat-section-body"><div class="toro-grid" id="toro-grid"></div></div></div>
-</div>
+<!-- ══ SALIDA REAL — CIIADO 2026 ══ -->
+<section class="real-section">
+  <div class="container">
+    <p class="s-eyebrow" style="color:var(--gold)">Ejemplo de salida real</p>
+    <h2 class="s-title">CIIADO 2026 · 26 toros · 4 categorías</h2>
+    <p class="s-sub">Resumen cross-categoría generado por SEPA-Select el 28/08/2026. <strong style="color:rgba(255,255,255,.75)">★ SELECTO</strong> indica que el toro figura en el top 5 simultáneo de ambos métodos para esa categoría.</p>
+    <div class="real-meta">App3 · v8 · RD_Factores con precisión ERA · 14 perfiles RD_O&P · Cabañas: Doble Hache · La Esencia · Casamu · La Cassina · El Yerua · La Huella · Coleman Angus · El Hinojo de Bru · Niquel Huitru · Mayacó</div>
 
-<footer class="app-footer">Producido por Ing. Ricardo Delgado · SEPA-Select · App3 · v4</footer>
+    <div class="cats-real-grid">
 
-<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
-  <div class="modal-box" onclick="event.stopPropagation()">
-    <div class="modal-head"><div><div class="modal-head-title" id="modal-title"></div><div class="modal-head-sub" id="modal-sub"></div></div><button class="modal-close" onclick="closeModal()">×</button></div>
-    <div class="modal-body" id="modal-body"></div>
+      <div class="cat-real-card">
+        <div class="cat-real-eyebrow">1 · Terminal</div>
+        <div class="cat-real-name">Cría a faena</div>
+        <div class="cat-real-desc">Máximo peso al destete y músculo · PN−20 · WW+40 · PF+15 · AOB+15 · CE+10</div>
+        <div class="selecto-list">
+          <div class="selecto-item">Baqueano <span class="selecto-scores">RF 100.0 · O&P 17.71</span></div>
+          <div class="selecto-item">Botija <span class="selecto-scores">RF 93.2 · O&P 13.04</span></div>
+          <div class="selecto-item">Jerarca <span class="selecto-scores">RF 78.4 · O&P 13.10</span></div>
+          <div class="selecto-item">Kyoto <span class="selecto-scores">RF 64.7 · O&P 11.47</span></div>
+          <div class="selecto-item">Bonifacio <span class="selecto-scores">RF 61.8 · O&P 7.20</span></div>
+        </div>
+      </div>
+
+      <div class="cat-real-card">
+        <div class="cat-real-eyebrow">2 · Reposición</div>
+        <div class="cat-real-name">Hijas retenidas</div>
+        <div class="cat-real-desc">Leche, fertilidad, frame contenido · PN−20 · WW+25 · Leche+20 · CE+10 · Alt−15</div>
+        <div class="selecto-list">
+          <div class="selecto-item">Baqueano <span class="selecto-scores">RF 100.0 · O&P 11.44</span></div>
+          <div class="selecto-item">Serafín <span class="selecto-scores">RF 71.2 · O&P 5.00</span></div>
+          <div class="selecto-item">Botija <span class="selecto-scores">RF 68.6 · O&P 5.13</span></div>
+          <div class="selecto-item">Jerarca <span class="selecto-scores">RF 60.6 · O&P 9.28</span></div>
+        </div>
+      </div>
+
+      <div class="cat-real-card">
+        <div class="cat-real-eyebrow">3 · Vaquillona 15M</div>
+        <div class="cat-real-name">Entore precoz</div>
+        <div class="cat-real-desc">Prioriza facilidad de parto · PN−50 · LG−15 · CE+10 · Leche+10 · WW+5</div>
+        <div class="selecto-list">
+          <div class="selecto-item">Serafín <span class="selecto-scores">RF 78.3 · O&P 6.02</span></div>
+        </div>
+        <div style="margin-top:.75rem;font-size:.72rem;color:rgba(255,255,255,.3);line-height:1.5">1 SELECTO. La divergencia entre RD_Factores (prioriza PN bajo) y RD_O&P (perfiles V01–V04) reduce la intersección.</div>
+      </div>
+
+      <div class="cat-real-card">
+        <div class="cat-real-eyebrow">4 · Toro para Vaq 15M</div>
+        <div class="cat-real-name">Reproductor precoz</div>
+        <div class="cat-real-desc">Toro para vaquillona de 15 meses · PN−35 · CE+20 · WW+20 · AOB+10 · LG−5</div>
+        <div class="selecto-list">
+          <div class="selecto-item">Baqueano <span class="selecto-scores">RF 100.0 · O&P 16.82</span></div>
+          <div class="selecto-item">Botija <span class="selecto-scores">RF 80.0 · O&P 9.74</span></div>
+          <div class="selecto-item">Serafín <span class="selecto-scores">RF 72.6 · O&P 6.02</span></div>
+          <div class="selecto-item">Kyoto <span class="selecto-scores">RF 64.6 · O&P 7.94</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="multi-row">
+      <div class="multi-label">Toros destacados en múltiples categorías</div>
+      <div class="multi-chips">
+        <div class="multi-chip">
+          <div class="mc-name">★ Baqueano — Doble Hache</div>
+          <div class="mc-cats">Terminal · Reposición · Toro Vaq 15M · 3 categorías</div>
+        </div>
+        <div class="multi-chip">
+          <div class="mc-name">★ Botija — La Esencia</div>
+          <div class="mc-cats">Terminal · Reposición · Toro Vaq 15M · 3 categorías</div>
+        </div>
+        <div class="multi-chip">
+          <div class="mc-name">★ Serafín — Casamu</div>
+          <div class="mc-cats">Reposición · Vaquillona 15M · Toro Vaq 15M · 3 categorías</div>
+        </div>
+        <div class="multi-chip">
+          <div class="mc-name">★ Jerarca — La Esencia</div>
+          <div class="mc-cats">Terminal · Reposición · 2 categorías</div>
+        </div>
+        <div class="multi-chip">
+          <div class="mc-name">★ Kyoto — La Esencia</div>
+          <div class="mc-cats">Terminal · Toro Vaq 15M · 2 categorías</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="real-note">RF = RD_Factores (score G normalizado 0–100) · O&P = RD_O&P (suma algebraica DEPs) · ERA Argentina 2026</div>
   </div>
-</div>
+</section>
 
-</div><!-- /main-app -->
+<!-- ══ PLANES ══ -->
+<section id="planes" class="planes-section">
+  <div class="container">
+    <p class="s-eyebrow">Licencias</p>
+    <h2 class="s-title">BASE y PLUS</h2>
+    <p class="s-sub">BASE incluye el motor de ranking completo para la categoría Terminal y la Vista Global (SELECTO). PLUS habilita el acceso completo a todas las funcionalidades.</p>
+    <div class="planes-grid">
+      <div class="plan-card">
+        <span class="plan-badge">Sin cargo</span>
+        <div class="plan-name">BASE</div>
+        <div class="plan-price">$0 <span>/ año</span></div>
+        <div class="plan-period">Sin vencimiento · Sin tarjeta de crédito</div>
+        <div class="plan-group-label">Acceso</div>
+        <ul class="plan-features">
+          <li>2 catálogos activos simultáneos</li>
+          <li>Acceso a catálogos públicos y búsqueda por cabaña</li>
+          <li>Motor de ranking RD_Factores completo · Categoría Terminal</li>
+          <li>Vista Global SELECTO</li>
+          <li>Selector de precisión ERA (activar/desactivar)</li>
+          <li>Reports predefinidos · PDF estándar</li>
+          <li>Header y footer de reporte editables</li>
+        </ul>
+        <div class="plan-group-label">No incluido</div>
+        <ul class="plan-features">
+          <li class="no">Configuración de pesos por categoría</li>
+          <li class="no">Ajuste fenotípico (score F editable)</li>
+          <li class="no">Análisis RD_O&P con detalle de perfiles</li>
+          <li class="no">Exportación Excel y CSV</li>
+        </ul>
+        <a href="#registro" class="btn-plan btn-base">Solicitar acceso BASE</a>
+      </div>
+      <div class="plan-card feat">
+        <span class="plan-badge">Acceso completo</span>
+        <div class="plan-name">PLUS</div>
+        <div class="plan-price">200 KN <span>/ año</span></div>
+        <div class="plan-period">≈ USD 585 · 12 meses desde contratación · Renovación al precio original</div>
+        <div class="plan-group-label">Todo lo de BASE, más</div>
+        <ul class="plan-features">
+          <li>5 catálogos activos simultáneos</li>
+          <li>Todas las categorías de cría desbloqueadas</li>
+          <li>Configuración de pesos por categoría (PLUS edita la matriz)</li>
+          <li>Ajuste fenotípico F editable por toro (score G + F)</li>
+          <li>Análisis RD_O&P: 14 perfiles · detalle de concordancia · Δ</li>
+          <li>Exportación Excel y CSV con configuración personalizada</li>
+          <li>Reports configurables a medida · gráficos en el informe</li>
+          <li>Acceso a catálogos privados (con password del publicador)</li>
+        </ul>
+        <a href="#registro" class="btn-plan btn-plus">Solicitar acceso PLUS</a>
+      </div>
+    </div>
+    <p class="planes-nota">KN = Kilo de novillo. Precio de referencia del mercado ganadero argentino. Actualizable periódicamente según variación del indicador.</p>
+  </div>
+</section>
+
+<!-- ══ FAQs ══ -->
+<section id="faqs" class="faqs-section">
+  <div class="container">
+    <div class="faqs-layout">
+      <div class="faqs-intro">
+        <p class="s-eyebrow">Preguntas frecuentes</p>
+        <h2 class="s-title">Cómo opera el sistema</h2>
+        <p class="s-sub">Aspectos técnicos sobre la metodología, los datos requeridos y las diferencias entre licencias.</p>
+      </div>
+      <div class="faq-grupos">
+
+        <div>
+          <div class="faq-grupo-label">Metodología</div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Cómo funciona el ranking RD_Factores?</span><span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Pondera las 8 DEPs del sistema ERA (<code>PN, WW, PF, Alt, Leche, AOB, CE, LG</code>) según los pesos definidos para la categoría de cría activa. La comparación se realiza por z-score sobre el catálogo activo (comparación interna entre los animales del catálogo). Aplica un descuento por precisión ERA configurable y normaliza el resultado a una escala 0–100 (score G). En PLUS, al score G se suma un ajuste fenotípico F editable por toro. <strong>Score final = G + F.</strong></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué evalúa el método RD_O&P?</span><span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Evalúa al toro contra 14 perfiles productivos predefinidos, organizados en 4 grupos: <strong>U Universales</strong> (U01–U03, activos para todas las categorías), <strong>V Vaquillona 15M</strong> (V01–V04), <strong>R Reposición</strong> (R01–R03) y <strong>T Terminal</strong> (T01–T04). El score de cada perfil es la suma algebraica de sus DEPs requeridas con signo según la dirección favorable. Si falta algún DEP requerido, el perfil queda marcado como no calculable con indicación de la DEP faltante. El delta de posición (Δ) entre RD_Factores y RD_O&P es parte del análisis.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué significa el delta Δ en la tabla de concordancia?</span><span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Δ es la diferencia entre la posición del toro en RD_Factores y en RD_O&P. <strong>Δ = posición_RF − posición_RD_O&P.</strong> Si un toro está en #3 en RF y en #7 en RD_O&P, Δ = +4. Fondo dorado indica concordancia alta (Δ ≤ 2 puestos). Un Δ elevado sugiere que los dos métodos valoran al animal de manera distinta, lo que es información útil para la decisión.</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="faq-grupo-label">Datos y catálogos</div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Los toros deben estar evaluados en ERA?</span><span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Para que el motor de ranking opere en modo completo, el catálogo debe incluir las DEPs del sistema ERA. Los catálogos sin precisiones ERA (por ejemplo, genómica propia) pueden rankearse activando el <strong>modo sin precisión</strong> en Configuración, que opera por z-score ponderado directo sin descuento por confiabilidad. La pantalla muestra una nota aclaratoria cuando el modo está activo.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Puedo usar catálogos propios o de genómica?</span><span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Sí. La app acepta catálogos propios en formato JSON. Catálogos provenientes de genómica propia o de registros RAAA (SEPA-Select ha operado con Angus Colorado del sistema RAAA) pueden cargarse, aunque algunos perfiles de RD_O&P pueden quedar no calculables si faltan DEPs específicas. Los catálogos los carga Ing. Delgado en la plataforma; el publicador decide si el acceso es libre o por password.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué DEPs son indispensables para el ranking?</span><span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Para <strong>RD_Factores</strong>: las 8 DEPs del sistema (<code>PN, WW, PF, Alt, Leche, AOB, CE, LG</code>). Para <strong>RD_O&P</strong>: cada perfil requiere sus propias DEPs (p. ej., U01-Quebrador requiere <code>PN</code> y <code>WW</code>). Los perfiles que no encuentran sus DEPs requeridas quedan marcados como no calculables y no afectan el ranking general. RD_O&P también puede operar con <code>EGD, EGC, GI</code> y <code>% Cortes</code> si el catálogo los incluye.</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="faq-grupo-label">Plataforma y licencias</div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Necesito instalar algún programa?</span><span class="faq-arrow">▾</span></div>
+            <div class="faq-a">No. SEPA-Select opera como aplicación web desde el navegador. No requiere instalación. Funciona en computadora de escritorio, notebook y tablet. Acceso mediante código de licencia provisto al registrarse: <strong>Código B</strong> (acceso BASE) · <strong>Código P</strong> (acceso PLUS).</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué diferencias operativas hay entre BASE y PLUS?</span><span class="faq-arrow">▾</span></div>
+            <div class="faq-a"><strong>BASE</strong> incluye: motor de ranking RD_Factores completo para la categoría Terminal, Vista Global SELECTO, exploración de catálogo, selector de precisión ERA, reports predefinidos con header/footer editables, exportación PDF estándar. <strong>PLUS</strong> agrega: configuración de pesos por categoría, ajuste fenotípico F editable, análisis RD_O&P con detalle de perfiles y concordancia, las 4 categorías de cría desbloqueadas, exportación Excel y CSV, reports configurables a medida y gráficos incorporables al informe.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué ocurre al vencer la licencia PLUS sin renovar?</span><span class="faq-arrow">▾</span></div>
+            <div class="faq-a">La cuenta baja automáticamente a BASE. Mantiene todos los catálogos que tenía publicados (el límite de 2 catálogos aplica solo al registrarse, no como restricción operativa permanente). Mantiene acceso a los catálogos privados para los que tiene password. Pierde las funcionalidades exclusivas PLUS. La renovación se realiza al precio original contratado, no al precio vigente.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ REGISTRO ══ -->
+<section id="registro" class="reg-section">
+  <div class="container">
+    <div class="reg-grid">
+      <div>
+        <p class="s-eyebrow">Acceso anticipado</p>
+        <h2 class="s-title">Solicitar acceso a la plataforma</h2>
+        <p class="s-sub">SEPA-Select está en desarrollo activo. Completá el formulario y te enviamos el código de acceso cuando tu licencia esté habilitada.</p>
+        <div class="reg-puntos">
+          <div class="reg-punto">
+            <div class="rp-icon">🔓</div>
+            <div class="rp-text"><strong>BASE sin cargo</strong><span>Sin tarjeta de crédito. Sin vencimiento. El acceso BASE es gratuito de manera permanente.</span></div>
+          </div>
+          <div class="reg-punto">
+            <div class="rp-icon">📬</div>
+            <div class="rp-text"><strong>Confirmación en 24–48 horas</strong><span>Enviamos el código de acceso y la URL de la app por correo electrónico.</span></div>
+          </div>
+          <div class="reg-punto">
+            <div class="rp-icon">🛠</div>
+            <div class="rp-text"><strong>Soporte directo con el desarrollador</strong><span>Canal de consulta directo con Ing. Ricardo Delgado durante el período de acceso anticipado.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="reg-form-wrap">
+        <form id="reg-form">
+          <div class="form-group">
+            <label>Nombre y apellido</label>
+            <input type="text" name="nombre" placeholder="Ing. Juan García" required>
+          </div>
+          <div class="form-group">
+            <label>Correo electrónico</label>
+            <input type="email" name="email" placeholder="juan@establecimiento.com" required>
+          </div>
+          <div class="form-group">
+            <label>Perfil profesional</label>
+            <select name="perfil">
+              <option value="">Seleccioná</option>
+              <option>Ingeniero agrónomo</option>
+              <option>Médico veterinario</option>
+              <option>Productor ganadero</option>
+              <option>Técnico agropecuario</option>
+              <option>Cabaña / criador registrado</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Provincia</label>
+            <select name="provincia">
+              <option value="">Seleccioná tu provincia</option>
+              <option>Buenos Aires</option><option>Córdoba</option><option>Santa Fe</option>
+              <option>Entre Ríos</option><option>Corrientes</option><option>Salta</option>
+              <option>Neuquén</option><option>Río Negro</option><option>La Pampa</option>
+              <option>Santiago del Estero</option><option>Tucumán</option><option>Otra</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Licencia de interés</label>
+            <select name="licencia">
+              <option value="BASE">BASE — sin cargo</option>
+              <option value="PLUS">PLUS — 200 KN/año</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Contexto de uso (opcional)</label>
+            <textarea name="contexto" placeholder="Descripción del rodeo, categorías de interés, tipo de catálogos que opera..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Enviar solicitud →</button>
+          <p class="form-note">Los datos no se comparten con terceros. Contacto exclusivo con el equipo de desarrollo.</p>
+        </form>
+        <div id="form-ok" style="display:none;text-align:center;padding:2.5rem 0">
+          <div style="font-size:2rem;margin-bottom:1rem">✓</div>
+          <strong>Solicitud recibida.</strong>
+          <p style="font-size:.875rem;color:var(--muted);margin-top:.5rem">Recibirás el código de acceso en 24–48 horas hábiles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span class="logo-sepa">SEPA</span><span class="logo-sep"></span><span class="logo-sel">Select</span></div>
+      <div class="footer-tagline">Sistema de evaluación y ranking genético de toros Angus para el comprador.<br>Aplicación web · v8 · En desarrollo activo.</div>
+    </div>
+    <div class="footer-right">
+      <div>Ing. Ricardo Emilio Delgado · Bariloche, Argentina</div>
+      <div><a href="mailto:info@programa-sepa.com.ar">info@programa-sepa.com.ar</a></div>
+      <div>programa-sepa.com.ar · 2026</div>
+      <div class="footer-dnda">Exp. DNDA EX-2026-81106223-APN-DNDA#MJ</div>
+    </div>
+  </div>
+</footer>
 
 <script>
-// ═══════════════════════════════════════════════
-// DATOS — cargados dinámicamente via fetch
-// ═══════════════════════════════════════════════
-let TOROS = [];                  // se puebla al seleccionar catálogo
-let CATALOGOS_DISPONIBLES = [];  // se puebla al iniciar la app
-
-// ── CARGA INICIAL ──────────────────────────────
-async function iniciarApp() {
-  try {
-    const res = await fetch('/data/catalogos.json');
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    CATALOGOS_DISPONIBLES = data.catalogos || [];
-  } catch(e) {
-    // Sin servidor (testing local): grilla vacía con opción de carga local
-    CATALOGOS_DISPONIBLES = [];
-    console.warn('catalogos.json no disponible:', e.message);
-  }
-}
-
-// ── CARGA DE TOROS AL SELECCIONAR CATÁLOGO ─────
-async function fetchToros(archivo) {
-  const res = await fetch('/data/' + archivo);
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  const data = await res.json();
-  return Array.isArray(data) ? data : (data.toros || []);
-}
-
-// ── FALLBACK: carga desde archivo local ────────
-function cargarArchivoLocal(input) {
-  const file = input.files[0];
-  if (!file) return;
-  mostrarLoadingCat('Leyendo archivo local…');
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const data = JSON.parse(e.target.result);
-      const toros = Array.isArray(data) ? data : (data.toros || []);
-      const meta  = Array.isArray(data) ? {
-        id: 'local', nombre: file.name.replace('.json',''),
-        cabaña: 'Carga local', toros: toros.length,
-        fecha: new Date().toLocaleDateString('es-AR'),
-        tipo: 'temporal', puntaje: 0, esNovedad: false, acceso: 'libre',
-        archivo: file.name
-      } : (data.meta || { id:'local', nombre: file.name, cabaña:'Local',
-                          toros: toros.length, fecha:'—', tipo:'temporal',
-                          puntaje:0, esNovedad:false, acceso:'libre' });
-      TOROS = toros;
-      activarApp(meta);
-    } catch(err) {
-      ocultarLoadingCat();
-      alert('Error al leer el JSON: ' + err.message);
-    }
-  };
-  reader.readAsText(file);
-}
-
-function mostrarLoadingCat(msg) {
-  const g = document.getElementById('catalogos-grid');
-  if (g) g.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:32px;color:rgba(255,255,255,.7);font-size:.9rem">${msg||'Cargando…'}</div>`;
-}
-function ocultarLoadingCat() {} // ya reemplazó el contenido
-const CATEGORIAS=[
-  {id:"terminal",  nombre:"1-Terminal",            pesos:{PN:-20,WW:40,PF:15,Alt:0, Leche:0, AOB:15,CE:10,LG:0},  desc:"Cría a faena: máximo peso al destete y músculo."},
-  {id:"reposicion",nombre:"2-Reposición",           pesos:{PN:-20,WW:25,PF:-5,Alt:-15,Leche:20,AOB:5, CE:10,LG:0},  desc:"Hijas retenidas: leche, fertilidad, frame contenido."},
-  {id:"vaq15",    nombre:"3-Vaquillona entore 15M",pesos:{PN:-50,WW:5, PF:0, Alt:-10,Leche:10,AOB:0, CE:10,LG:-15},desc:"Entore precoz: prioriza facilidad de parto."},
-  {id:"torito",   nombre:"4-Toro para vaq 15M",    pesos:{PN:-35,WW:20,PF:0, Alt:-10,Leche:0, AOB:10,CE:20,LG:-5}, desc:"Toro reproductor para vaquillona de 15 meses."}
+/* ── RANKING DEMO — datos reales CIIADO 2026 ── */
+// WW dirección positiva · PN dirección negativa (PN bajo = mejor facilidad de parto)
+// El demo muestra el antagonismo clásico WW vs facilidad de parto en Angus
+const bulls=[
+  {name:"Baqueano",  WW:15.6, PN:-0.6},  // máximo WW, PN aceptable
+  {name:"Jerarca",   WW:14.5, PN: 0.5},  // alto WW, PN positivo (partos difíciles)
+  {name:"Kyoto",     WW: 8.7, PN:-1.5},  // WW medio, buen PN
+  {name:"Serafín",   WW: 2.8, PN:-1.7},  // WW bajo, mínimo PN
+  {name:"Práctico",  WW:-1.2, PN:-1.7},  // menor WW del catálogo, mínimo PN
 ];
-const CHARS=["PN","WW","PF","Alt","Leche","AOB","CE","LG"];
-const SINERGIAS=[
-  {id:"quebrador",        nombre:"Quebrador",      cats:["terminal","reposicion","vaq15","torito"],ok:true, desc:"Bajo PN + alto WW"},
-  {id:"moderado_potente", nombre:"Mod. potente",   cats:["terminal"],                               ok:true, desc:"Alto WW + alta Alt (frame Terminal)"},
-  {id:"compacto_carn",    nombre:"Compacto carn.", cats:["terminal","torito"],                      ok:true, desc:"Alto PF + alto AOB"},
-  {id:"doble_positivo",   nombre:"Doble positivo", cats:["terminal"],                               ok:true, desc:"Alto AOB + alta EGD (feedlot)"},
-  {id:"entore_base",      nombre:"Entore base",    cats:["reposicion","vaq15","torito"],            ok:true, desc:"Bajo PN + alta CE"},
-  {id:"entore_completo",  nombre:"Entore completo",cats:["reposicion","vaq15","torito"],            ok:true, desc:"LG corta + alta CE"},
-  {id:"torito_ideal",     nombre:"Torito ideal",   cats:["vaq15","torito"],                        ok:true, desc:"Bajo PN + alto WW + alta CE"},
-  {id:"fertil_carnicero", nombre:"Fértil carn.",   cats:["terminal","reposicion","torito"],         ok:true, desc:"Alta CE + alto AOB"},
-  {id:"eficiente_carn",   nombre:"Eficiente carn.",cats:["terminal"],                              ok:false,faltante:"MW"},
-  {id:"maternal_efic",    nombre:"Maternal efic.", cats:["reposicion"],                             ok:false,faltante:"MW"},
-  {id:"longevidad",       nombre:"Longevidad",     cats:["reposicion"],                             ok:false,faltante:"FRT/MW"},
-  {id:"vaca_moderada",    nombre:"Vaca moderada",  cats:["reposicion"],                             ok:false,faltante:"MW"}
-];
-const DEP_INFO={
-  PN:{nombre:"Peso al nacer",dir:"negativo",enM:true},WW:{nombre:"Peso al destete",dir:"positivo",enM:true},
-  PF:{nombre:"Peso final",dir:"positivo",enM:true},Alt:{nombre:"Altura",dir:"variable",enM:true},
-  Leche:{nombre:"Leche",dir:"positivo",enM:true},AOB:{nombre:"Área ojo de bife",dir:"positivo",enM:true},
-  CE:{nombre:"Circ. escrotal",dir:"positivo",enM:true},LG:{nombre:"Long. gestación",dir:"negativo",enM:true},
-  EGD:{nombre:"Esp. grasa dorsal",dir:"positivo",enM:false},EGC:{nombre:"Esp. grasa cadera",dir:"positivo",enM:false},
-  GI:{nombre:"% Grasa intramuscular",dir:"positivo",enM:false},Cortes:{nombre:"% Cortes minoristas",dir:"positivo",enM:false}
-};
-const NOMS={PN:"Peso nacer",WW:"Peso destete",PF:"Peso final",Alt:"Altura",Leche:"Leche",AOB:"AOB",CE:"Circ. escrotal",LG:"Long. gest.",EGD:"Esp. gr. dorsal",EGC:"Esp. gr. cadera",GI:"% Gr. intram.",Cortes:"% Cortes"};
-const FRASES={PN:{p:"bajo PN",n:"PN alto"},WW:{p:"alto WW",n:"WW contenido"},PF:{p:"alto PF",n:"PF contenido"},Alt:{p:"frame grande",n:"frame compacto"},Leche:{p:"buena leche",n:"leche acotada"},AOB:{p:"buen AOB",n:"AOB acotado"},CE:{p:"alta CE",n:"CE acotada"},LG:{p:"gestación corta",n:"gestación larga"}};
+// Normalización: WW positivo (mayor=mejor), PN negativo (menor=mejor → invertir)
+const WW_MIN=-1.2,WW_MAX=15.6,PN_MIN=-1.7,PN_MAX=0.5;
+const normPos=(v,mn,mx)=>(v-mn)/(mx-mn)*100;
+const normNeg=(v,mn,mx)=>(mx-v)/(mx-mn)*100; // invierte dirección
 
-// CATALOGOS_DISPONIBLES se carga en iniciarApp() desde /data/catalogos.json
-
-// ═══════════════════════════════════════════════
-// ESTADO v4
-// ═══════════════════════════════════════════════
-const sepaState={licencia:null,modo:null,catalogoActivo:null};
-const fenotipoData={};
-let currentScreen='global',currentCat='terminal';
-
-// ═══════════════════════════════════════════════
-// ACCESS CONTROL
-// ═══════════════════════════════════════════════
-function canAccess(feature){
-  if(sepaState.modo==='PLUS') return true;
-  // BASE rules
-  switch(feature){
-    case 'config':          return false;
-    case 'fenotipo_slider': return false;
-    case 'sinergico':       return false; // modal sinergico completo
-    case 'csv_export':      return false;
-    case 'cat_deep':        return currentCat==='terminal'; // solo Terminal
-    default:                return true;
-  }
+function calcScore(b,ww,pn){
+  const t=ww+pn||1;
+  return(normPos(b.WW,WW_MIN,WW_MAX)*ww + normNeg(b.PN,PN_MIN,PN_MAX)*pn)/t;
 }
-
-let pgTimer=null;
-function showPlusGate(msg){
-  const gate=document.getElementById('plus-gate');
-  document.getElementById('pg-sub').textContent=msg||'Pasá a Plus para acceder a esta función.';
-  gate.classList.add('visible');
-  clearTimeout(pgTimer);
-  pgTimer=setTimeout(hidePlusGate,3500);
-}
-function hidePlusGate(){
-  document.getElementById('plus-gate').classList.remove('visible');
-}
-
-// ═══════════════════════════════════════════════
-// LOGIN
-// ═══════════════════════════════════════════════
-function doLogin(){
-  const val=document.getElementById('login-input').value.trim().toUpperCase();
-  const err=document.getElementById('login-error');
-  if(val==='B'){
-    sepaState.licencia='BASE'; sepaState.modo='BASE';
-    localStorage.setItem('sepa_licencia','BASE');
-    localStorage.setItem('sepa_login_time',Date.now());
-    document.getElementById('login-overlay').classList.add('hidden');
-    showCatalogos();
-  } else if(val==='P'){
-    sepaState.licencia='PLUS';
-    localStorage.setItem('sepa_licencia','PLUS');
-    localStorage.setItem('sepa_login_time',Date.now());
-    document.getElementById('login-overlay').classList.add('hidden');
-    document.getElementById('selector-modo').classList.remove('hidden');
-  } else {
-    err.textContent='Código inválido. Usá B para BASE o P para PLUS.';
-    document.getElementById('login-input').value='';
-  }
-}
-
-function seleccionarModo(modo){
-  sepaState.modo=modo;
-  localStorage.setItem('sepa_modo_operacion',modo);
-  document.getElementById('selector-modo').classList.add('hidden');
-  showCatalogos();
-}
-
-// ═══════════════════════════════════════════════
-// CATÁLOGOS
-// ═══════════════════════════════════════════════
-function showCatalogos(){
-  const lic=document.getElementById('cat-ov-licencia-badge');
-  lic.textContent=`${sepaState.licencia} · Modo ${sepaState.modo}`;
-  document.getElementById('catalogos-overlay').classList.remove('hidden');
-  // Si ya tenemos catálogos en memoria, renderizar directo
-  if(CATALOGOS_DISPONIBLES.length){
-    renderCatalogosDisponibles();
-  } else {
-    // Intentar fetch
-    mostrarLoadingCat('Cargando catálogos disponibles…');
-    fetch('/data/catalogos.json')
-      .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-      .then(data=>{
-        CATALOGOS_DISPONIBLES = data.catalogos || [];
-        renderCatalogosDisponibles();
-      })
-      .catch(()=>{
-        // Sin servidor: mostrar opción de carga local
-        renderCatalogosDisponibles();
-      });
-  }
-}
-
-function renderCatalogosDisponibles(){
-  const hasPrev=!!localStorage.getItem('sepa_ultimo_ingreso');
-  const ul=localStorage.getItem('sepa_ultimo_ingreso');
-  const fechaPrev=ul?new Date(parseInt(ul)).toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'—';
-  const hint=document.getElementById('cat-ov-hint');
-  hint.textContent=hasPrev?`Último ingreso: ${fechaPrev}`:'Primera sesión — seleccioná un catálogo para empezar.';
-  const grid=document.getElementById('catalogos-grid');
-  let html = CATALOGOS_DISPONIBLES.map(cat=>{
-    const tipoLabel=cat.tipo==='temporal'?'Remate temporal':'Stock permanente';
-    const tipoClass=cat.tipo==='temporal'?'tipo-temporal':'tipo-permanente';
-    const novBadge=(cat.esNovedad&&hasPrev)?'<div class="catalogo-novedad">● NUEVO</div>':'';
-    return`<div class="catalogo-card" onclick="seleccionarCatalogo('${cat.id}')">
-      <div class="catalogo-card-top">
-        <div class="catalogo-card-nombre">${cat.nombre}</div>
-        <span class="catalogo-tipo ${tipoClass}">${tipoLabel}</span>
+function renderDemo(){
+  const ww=+document.getElementById('sl-ww').value;
+  const pn=+document.getElementById('sl-pn').value;
+  document.getElementById('vl-ww').textContent=(ww*10)+'%';
+  document.getElementById('vl-pn').textContent=(pn*10)+'%';
+  const sc=bulls.map(b=>({...b,score:calcScore(b,ww,pn)})).sort((a,b)=>b.score-a.score);
+  const mx=sc[0].score||1;
+  const pnFmt=v=>v>0?'+'+v.toFixed(1):v.toFixed(1);
+  document.getElementById('bull-list').innerHTML=sc.map((b,i)=>`
+    <div class="bull-row">
+      <div class="b-pos">${i+1}</div>
+      <div class="b-info">
+        <div class="b-name">${b.name}</div>
+        <div class="b-deps">
+          <span class="dep-chip dep-ww">WW ${pnFmt(b.WW)}</span>
+          <span class="dep-chip dep-ce">PN ${pnFmt(b.PN)}</span>
+        </div>
       </div>
-      ${novBadge}
-      <div class="catalogo-card-meta">
-        <div class="catalogo-meta-row">🐂 <strong>${cat.toros||cat.totalToros||'?'}</strong> toros · ${cat.cabaña||cat.cabana||''}</div>
-        <div class="catalogo-meta-row">📅 Alta: <strong>${cat.fecha}</strong></div>
-        <div class="catalogo-meta-row">🔓 Acceso <strong>${cat.acceso}</strong> · ⭐ ${cat.puntaje} pts</div>
+      <div class="b-score">
+        <div class="b-score-val">${b.score.toFixed(0)}</div>
+        <div class="b-bar"><div class="b-fill" style="width:${(b.score/mx*100).toFixed(0)}%"></div></div>
       </div>
-      <button class="btn-entrar-cat">Entrar →</button>
-    </div>`;
-  }).join('');
-  // Siempre mostrar opción de carga local (útil para testing)
-  html += `<div class="catalogo-card" style="border-style:dashed;opacity:.7">
-    <div class="catalogo-card-top"><div class="catalogo-card-nombre">📂 Cargar JSON local</div></div>
-    <div class="catalogo-card-meta"><div class="catalogo-meta-row">Para testing sin servidor</div></div>
-    <label class="btn-entrar-cat" style="cursor:pointer">
-      Seleccionar archivo
-      <input type="file" accept=".json" style="display:none" onchange="cargarArchivoLocal(this)">
-    </label>
-  </div>`;
-  grid.innerHTML = html;
-}
-
-async function seleccionarCatalogo(id){
-  const cat=CATALOGOS_DISPONIBLES.find(c=>c.id===id);
-  if(!cat) return;
-  mostrarLoadingCat('Cargando ' + cat.nombre + '…');
-  try {
-    const archivo = cat.archivo || ('toros_' + cat.id + '.json');
-    TOROS = await fetchToros(archivo);
-    activarApp(cat);
-  } catch(err) {
-    const grid=document.getElementById('catalogos-grid');
-    if(grid) grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:32px;color:#ffb3b3">
-      Error al cargar el catálogo: ${err.message}<br><small>Revisá que /data/${cat.archivo} existe en el servidor.</small>
-    </div>`;
-  }
-}
-
-function activarApp(cat){
-  sepaState.catalogoActivo=cat.id||'local';
-  localStorage.setItem('sepa_catalogo_activo', cat.id||'local');
-  localStorage.setItem('sepa_ultimo_ingreso', Date.now());
-  document.getElementById('catalogos-overlay').classList.add('hidden');
-  document.getElementById('main-app').classList.remove('hidden');
-  document.getElementById('header-sub').textContent=`${cat.nombre} · ${cat.toros||cat.totalToros||TOROS.length} toros`;
-  updateLicenciaBadge();
-  Object.keys(fenotipoData).forEach(k=>delete fenotipoData[k]);
-  setScreen('global');
-  setCat('terminal');
-}
-
-function cambioCatalogo(){
-  closeAllPanels();
-  document.getElementById('main-app').classList.add('hidden');
-  showCatalogos();
-}
-
-function terminarSesion(){
-  localStorage.setItem('sepa_ultimo_ingreso',Date.now());
-  localStorage.removeItem('sepa_modo_operacion');
-  localStorage.removeItem('sepa_catalogo_activo');
-  sepaState.licencia=null; sepaState.modo=null; sepaState.catalogoActivo=null;
-  document.getElementById('main-app').classList.add('hidden');
-  document.getElementById('catalogos-overlay').classList.add('hidden');
-  document.getElementById('selector-modo').classList.add('hidden');
-  document.getElementById('login-overlay').classList.remove('hidden');
-  document.getElementById('login-input').value='';
-  document.getElementById('login-error').textContent='';
-}
-
-function updateLicenciaBadge(){
-  const b=document.getElementById('licencia-badge');
-  if(!b) return;
-  b.className=`licencia-badge ${sepaState.modo==='PLUS'?'lb-plus':'lb-base'}`;
-  b.textContent=sepaState.modo||'';
-}
-
-// ═══════════════════════════════════════════════
-// HELPERS ORIGINALES
-// ═══════════════════════════════════════════════
-function getFen(n){return fenotipoData[n]!==undefined?fenotipoData[n]:0}
-function pelBadge(t){return`<span class="rbc ${t.pelaje==='Negro'?'rbc-n':'rbc-c'}">${t.pelaje==='Negro'?'N':'C'}</span>`}
-
-function cerrarIntro(){document.getElementById('intro').classList.add('hidden')}
-
-// ─── PANELS ───
-let openPanelId=null;
-function togglePanel(id){
-  const panel=document.getElementById(id);
-  const btnId='btn-'+id.replace('panel-','');
-  const btn=document.getElementById(btnId);
-  if(openPanelId&&openPanelId!==id){
-    document.getElementById(openPanelId).classList.remove('open');
-    const pb=document.getElementById('btn-'+openPanelId.replace('panel-',''));
-    if(pb)pb.classList.remove('active');
-  }
-  const isOpen=panel.classList.contains('open');
-  panel.classList.toggle('open',!isOpen);
-  if(btn)btn.classList.toggle('active',!isOpen);
-  openPanelId=isOpen?null:id;
-  if(!isOpen&&id==='panel-config')renderConfigPanel();
-  if(!isOpen&&id==='panel-ayuda')renderAyuda();
-}
-function closeAllPanels(){
-  if(openPanelId){
-    document.getElementById(openPanelId).classList.remove('open');
-    const b=document.getElementById('btn-'+openPanelId.replace('panel-',''));
-    if(b)b.classList.remove('active');
-    openPanelId=null;
-  }
-}
-
-// Config con gating
-function onClickConfig(){
-  if(!canAccess('config')){
-    showPlusGate('La configuración de pesos y categorías es exclusiva de Plus.');
-    return;
-  }
-  togglePanel('panel-config');
-}
-
-// ─── CONFIG PANEL ───
-function renderConfigPanel(){
-  const t=document.getElementById('pesos-tabla');
-  t.innerHTML=`<thead><tr><th>Categoría</th>${CHARS.map(c=>`<th style="text-align:center">${c}</th>`).join('')}</tr></thead><tbody>`+
-    CATEGORIAS.map(cat=>`<tr><td style="font-weight:700;color:var(--verde-oscuro)">${cat.nombre}</td>${CHARS.map(c=>{const p=cat.pesos[c];return`<td style="text-align:center"><span class="${p>0?'peso-pos':p<0?'peso-neg':'peso-0'}">${p>0?'+':''}${p}</span></td>`}).join('')}</tr>`).join('')+
-    '</tbody>';
-  const mod=Object.entries(fenotipoData).filter(([,v])=>v!==0);
-  document.getElementById('config-fen-status').textContent=mod.length?`Fenotipo modificado en ${mod.length} toro${mod.length>1?'s':''}: ${mod.map(([n,v])=>n+' ('+(v>0?'+':'')+v+')').join(', ')}.`:'Todos los fenotipos en 0.';
-}
-function resetFenotipos(){
-  Object.keys(fenotipoData).forEach(k=>delete fenotipoData[k]);
-  renderAll();renderConfigPanel();
-  document.getElementById('config-fen-status').textContent='Todos los fenotipos reseteados a 0.';
-}
-
-// ─── AYUDA ───
-const AYUDA_ITEMS=[
-  {titulo:"¿Cómo usar la app?",body:"Elegí la categoría de cría (barra superior) y la pantalla: Vista Global muestra ambos métodos en paralelo. RD_Factores y RD_Sinérgico muestran los rankings individuales. Hacé clic en cualquier toro para ver su ficha completa. En RD_Factores podés editar el fenotipo con el slider (Plus)."},
-  {titulo:"¿Qué es RD_Factores?",body:"Pondera 8 DEPs según el objetivo de cría usando z-scores poblacionales (comparación interna entre los 26 toros). Aplica descuento por precisión y normaliza el resultado a escala 0-100 (G). Al G se suma el fenotipo F que el usuario puede editar (Plus). Score final = G + F."},
-  {titulo:"¿Qué es RD_Sinérgico?",body:"Evalúa pares o tríos de DEPs que deben ser simultáneamente favorables (sinergias). El valor de cada sinergia es la suma algebraica de los DEPs con la dirección adecuada. Cada sinergia se compara con el promedio poblacional de los 26 toros. El score final es la suma de los valores de las sinergias activas en la categoría."},
-  {titulo:"¿Qué significa Δ en la tabla de concordancia?",body:"Es la diferencia entre la posición de un toro en RD_Factores (RF) y en RD_Sinérgico (RS). Δ = posición_RF − posición_RS. Si un toro está en #3 en RF y #7 en RS, Δ = +4. Fondo dorado indica que la diferencia es ≤ 2 puestos (alta concordancia)."},
-  {titulo:"Sinergias no calculables",body:"Las sinergias Eficiente carn., Maternal efic., Longevidad y Vaca moderada requieren MW (Mature Weight) y/o FRT (Fertility). Estos caracteres no son publicados por el sistema ERA."},
-  {titulo:"Notas sobre Forager, Sayo y Pionero",body:"Sayo y Pionero no tienen DEPs publicados en ERA — no califican en los modelos cuantitativos. Forager es un Angus Colorado del sistema RAAA (EE.UU.): solo tiene PN, Leche, AOB y EGD publicados."},
-  {titulo:"BASE vs PLUS",body:"BASE: Vista Global (Top 5), Catálogo, exploración completa en categoría Terminal. Plus: acceso completo — configuración de pesos, fenotipo editable, análisis Sinérgico con detalle, exportación CSV."},
-  {titulo:"Glosario de DEPs",body:"PN=Peso al nacer (kg, favorable: negativo) · WW=Peso al destete (kg) · PF=Peso final/yearling (kg) · Alt=Altura (cm) · Leche=habilidad lechera (kg) · AOB=Área ojo de bife (cm²) · CE=Circunferencia escrotal (cm) · LG=Longitud de gestación (días, favorable: negativo)"}
-];
-function renderAyuda(){
-  document.getElementById('ayuda-acordeon').innerHTML=AYUDA_ITEMS.map((item,i)=>`
-    <div class="ayuda-item">
-      <div class="ayuda-item-head" onclick="toggleAyudaItem(${i})"><span>${item.titulo}</span><span>▾</span></div>
-      <div class="ayuda-item-body" id="ayuda-body-${i}">${item.body}</div>
     </div>`).join('');
 }
-function toggleAyudaItem(i){document.getElementById('ayuda-body-'+i).classList.toggle('open')}
+document.getElementById('sl-ww').addEventListener('input',renderDemo);
+document.getElementById('sl-pn').addEventListener('input',renderDemo);
+renderDemo();
 
-// ─── BUSCADOR ───
-function onBuscador(q){
-  const sug=document.getElementById('buscador-sug');
-  if(!q.trim()){sug.classList.remove('open');return}
-  const matches=TOROS.filter(t=>t.nombre.toLowerCase().includes(q.toLowerCase())).slice(0,8);
-  if(!matches.length){sug.innerHTML='<div class="sug-item"><span class="sug-nombre" style="color:var(--gris)">Sin resultados</span></div>';sug.classList.add('open');return}
-  sug.innerHTML=matches.map(t=>`<div class="sug-item" onmousedown="selectToro('${t.nombre.replace(/'/g,"\\'")}')"><span class="sug-nombre">${pelBadge(t)} ${t.nombre}</span><span class="sug-raza">${t.raza}</span></div>`).join('');
-  sug.classList.add('open');
-}
-function selectToro(nombre){
-  document.getElementById('buscador').value='';
-  closeSug();
-  if(currentScreen==='sinergico') openModalSinergico(nombre);
-  else openModalFactores(nombre);
-}
-function closeSug(){document.getElementById('buscador-sug').classList.remove('open')}
-
-// ─── EXPORT ───
-function exportarPDF(){
-  const cat=CATEGORIAS.find(c=>c.id===currentCat);
-  const fecha=new Date().toLocaleDateString('es-AR');
-  document.querySelectorAll('.print-header').forEach(el=>el.textContent=`SEPA-Select App3 · CIIADO 2026 · ${cat.nombre} · ${fecha}`);
-  window.print();
-}
-function onExportCSV(modo){
-  if(!canAccess('csv_export')){
-    showPlusGate('La exportación CSV es exclusiva de Plus.');
-    return;
-  }
-  exportarCSV(modo);
-}
-function exportarCSV(modo){
-  const cat=CATEGORIAS.find(c=>c.id===currentCat);
-  let csv='',filename='';
-  if(modo==='factores'){
-    const rf=calcFactores(TOROS,currentCat);
-    csv="Pos,Toro,Pelaje,G,F,Total\n"+rf.filter(r=>r.apto).map((r,i)=>`${i+1},${r.toro.nombre},${r.toro.pelaje},${r.g.toFixed(1)},${getFen(r.toro.nombre)},${r.total.toFixed(1)}`).join('\n');
-    filename=`RDFactores_${currentCat}.csv`;
-  } else if(modo==='sinergico'){
-    const rs=calcSinergico(TOROS,currentCat);
-    csv="Pos,Toro,Pelaje,Score\n"+rs.scores.map((r,i)=>`${i+1},${r.toro.nombre},${r.toro.pelaje},${r.score.toFixed(3)}`).join('\n');
-    filename=`RDSinergico_${currentCat}.csv`;
-  } else {
-    const rf=calcFactores(TOROS,currentCat);const rs=calcSinergico(TOROS,currentCat);
-    const rsMap={};rs.scores.forEach((r,i)=>rsMap[r.toro.nombre]={rank:i+1,score:r.score});
-    csv="Toro,Pelaje,#RF,Score_RF,#RS,Score_RS,Delta\n"+rf.filter(r=>r.apto).map((r,i)=>{const rs2=rsMap[r.toro.nombre]||{rank:'—',score:'—'};return`${r.toro.nombre},${r.toro.pelaje},${i+1},${r.total.toFixed(1)},${rs2.rank},${typeof rs2.score==='number'?rs2.score.toFixed(3):'—'},${typeof rs2.rank==='number'?i+1-rs2.rank:'—'}`}).join('\n');
-    filename=`Comparativo_${currentCat}.csv`;
-  }
-  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();
+/* ── FAQs ── */
+function toggleFaq(el){
+  const a=el.nextElementSibling;
+  const isOpen=a.classList.contains('open');
+  document.querySelectorAll('.faq-a.open').forEach(x=>x.classList.remove('open'));
+  document.querySelectorAll('.faq-q.open').forEach(x=>x.classList.remove('open'));
+  if(!isOpen){a.classList.add('open');el.classList.add('open');}
 }
 
-// ═══════════════════════════════════════════════
-// MOTORES
-// ═══════════════════════════════════════════════
-function avg(v){const f=v.filter(x=>x!==null&&x!==undefined);return f.length?f.reduce((a,b)=>a+b,0)/f.length:0}
-function sd(v){const f=v.filter(x=>x!==null&&x!==undefined);if(!f.length)return 0;const m=avg(f);return Math.sqrt(f.reduce((a,b)=>a+(b-m)**2,0)/f.length)}
-function zsc(d,m,s){return(d===null||d===undefined)?0:s===0?0:(d-m)/s}
-
-function calcFactores(toros,catId){
-  const cat=CATEGORIAS.find(c=>c.id===catId);
-  const stats={};
-  for(const c of CHARS){const v=toros.map(t=>t.deps[c].dep);stats[c]={m:avg(v),s:sd(v)}}
-  const base=toros.map(t=>{
-    const nD=CHARS.filter(c=>t.deps[c].dep!==null&&t.deps[c].dep!==undefined).length;
-    const precs=Object.values(t.deps).map(d=>d.prec).filter(p=>p!==null&&p!==undefined);
-    const pm=precs.length?precs.reduce((a,b)=>a+b,0)/precs.length:0;
-    const z={};for(const c of CHARS)z[c]=zsc(t.deps[c].dep,stats[c].m,stats[c].s);
-    const raw=CHARS.reduce((acc,c)=>acc+z[c]*cat.pesos[c],0);
-    return{toro:t,nD,pm,z,adj:raw*pm};
-  });
-  const ap=base.filter(b=>b.nD>=6);
-  const mn=ap.length?Math.min(...ap.map(b=>b.adj)):0,mx=ap.length?Math.max(...ap.map(b=>b.adj)):0;
-  const res=base.map(b=>{
-    const apto=b.nD>=6;
-    const g=apto?(mx===mn?50:((b.adj-mn)/(mx-mn))*100):0;
-    const f=getFen(b.toro.nombre);
-    return{...b,g:parseFloat(g.toFixed(1)),f,total:parseFloat((g+f).toFixed(1)),apto};
-  });
-  res.sort((a,b)=>b.total-a.total);return res;
-}
-
-function gd(t,k){return t.deps[k]?t.deps[k].dep:null}
-function calcSin(t,sid){const g=k=>gd(t,k);
-  switch(sid){
-    case'quebrador':{const pn=g('PN'),ww=g('WW');if(pn===null||ww===null)return null;return -pn+ww}
-    case'moderado_potente':{const ww=g('WW'),alt=g('Alt');if(ww===null||alt===null)return null;return ww+alt}
-    case'compacto_carn':{const pf=g('PF'),aob=g('AOB');if(pf===null||aob===null)return null;return pf+aob}
-    case'doble_positivo':{const aob=g('AOB'),egd=g('EGD');if(aob===null||egd===null)return null;return aob+egd}
-    case'entore_base':{const pn=g('PN'),ce=g('CE');if(pn===null||ce===null)return null;return -pn+ce}
-    case'entore_completo':{const lg=g('LG'),ce=g('CE');if(lg===null||ce===null)return null;return -lg+ce}
-    case'torito_ideal':{const pn=g('PN'),ww=g('WW'),ce=g('CE');if(pn===null||ww===null||ce===null)return null;return -pn+ww+ce}
-    case'fertil_carnicero':{const ce=g('CE'),aob=g('AOB');if(ce===null||aob===null)return null;return ce+aob}
-    default:return null;
-  }
-}
-function calcSinergico(toros,catId){
-  const sins=SINERGIAS.filter(s=>s.ok&&s.cats.includes(catId));
-  const vals={};for(const t of toros){vals[t.nombre]={};for(const s of sins)vals[t.nombre][s.id]=calcSin(t,s.id)}
-  const means={};for(const s of sins){const vs=toros.map(t=>vals[t.nombre][s.id]).filter(v=>v!==null);means[s.id]=vs.length?vs.reduce((a,b)=>a+b,0)/vs.length:0}
-  const scores=toros.map(t=>{let sc=0;const det={};for(const s of sins){const v=vals[t.nombre][s.id];sc+=(v!==null?v:0);det[s.id]={val:v,mean:means[s.id]}}return{toro:t,score:parseFloat(sc.toFixed(3)),det,sins}});
-  scores.sort((a,b)=>b.score-a.score);return{scores,means,sins};
-}
-
-// ═══════════════════════════════════════════════
-// HELPERS VISUALES
-// ═══════════════════════════════════════════════
-function explicar(z,cat){
-  const cs=CHARS.filter(c=>cat.pesos[c]!==0).map(c=>({c,contrib:z[c]*cat.pesos[c],pos:z[c]>=0})).sort((a,b)=>b.contrib-a.contrib).slice(0,2).filter(x=>x.contrib>0);
-  if(!cs.length)return"Perfil parejo.";
-  return"Destaca: "+cs.map(x=>FRASES[x.c][x.pos?'p':'n']).join(' + ')+".";
-}
-function miniBar(val,max,color){return`<div class="mini-bar-track"><div class="mini-bar-fill" style="width:${max>0?Math.min(100,(val/max)*100).toFixed(0):0}%;${color?'background:'+color:''}"></div></div>`}
-
-function buildRadar(z,cat,size=230){
-  const N=CHARS.length,cx=size/2,cy=size/2,maxR=size/2-32,mz=2.5;
-  const ang=i=>(i/N)*2*Math.PI-Math.PI/2;
-  const pt=(r,a)=>({x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)});
-  let rings='';
-  [.25,.5,.75,1].forEach(f=>{const pts=CHARS.map((_,i)=>{const p=pt(maxR*f,ang(i));return`${p.x.toFixed(1)},${p.y.toFixed(1)}`}).join(' ');rings+=`<polygon points="${pts}" fill="none" stroke="${f===.5?'#999':'#e0e0e0'}" stroke-width="${f===.5?1:.5}"/>`});
-  let axes='';
-  CHARS.forEach((c,i)=>{const a=ang(i),e=pt(maxR,a),l=pt(maxR+20,a);const p=cat.pesos[c],col=p>0?'#3c6b45':p<0?'#c0392b':'#aaa';axes+=`<line x1="${cx}" y1="${cy}" x2="${e.x.toFixed(1)}" y2="${e.y.toFixed(1)}" stroke="#ddd" stroke-width=".8"/><text x="${l.x.toFixed(1)}" y="${l.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="${col}" font-weight="700">${c}</text>`});
-  const bullPts=CHARS.map((c,i)=>{const zc=Math.max(-mz,Math.min(mz,z[c]));const r=maxR*((zc+mz)/(2*mz));const p=pt(r,ang(i));return`${p.x.toFixed(1)},${p.y.toFixed(1)}`}).join(' ');
-  const avgPts=CHARS.map((_,i)=>{const p=pt(maxR*.5,ang(i));return`${p.x.toFixed(1)},${p.y.toFixed(1)}`}).join(' ');
-  return`<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" style="overflow:visible">${rings}<polygon points="${avgPts}" fill="rgba(150,150,150,.1)" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>${axes}<polygon points="${bullPts}" fill="rgba(60,107,69,.18)" stroke="#3c6b45" stroke-width="2"/><circle cx="${cx}" cy="${cy}" r="3" fill="#3c6b45"/></svg>`;
-}
-
-function buildSinBars(det,sins,means){
-  const allV=sins.map(s=>det[s.id].val).filter(v=>v!==null);
-  const allM=sins.map(s=>means[s.id]);
-  const all=[...allV,...allM];if(!all.length)return'<p style="font-size:.78rem;color:var(--gris)">Sin datos.</p>';
-  const lo=Math.min(...all),hi=Math.max(...all),span=hi-lo||1;
-  return'<div class="sinbar-container">'+sins.map(s=>{
-    const d=det[s.id],mean=means[s.id],mPct=((mean-lo)/span)*100;
-    if(d.val===null)return`<div class="sinbar-row"><span class="sinbar-label">${s.nombre}</span><div class="sinbar-track"><span style="font-size:.7rem;color:var(--gris);padding-left:4px">sin dato</span></div><span class="sinbar-val" style="color:var(--gris)">—</span></div>`;
-    const vPct=Math.max(0,Math.min(100,((d.val-lo)/span)*100));const ab=d.val>=mean;const col=ab?'var(--verde-medio)':'var(--rojo)';
-    return`<div class="sinbar-row"><span class="sinbar-label">${s.nombre}</span><div class="sinbar-track"><div class="sinbar-mean" style="left:${mPct.toFixed(1)}%"></div><div class="sinbar-fill" style="left:${Math.min(mPct,vPct).toFixed(1)}%;width:${Math.abs(vPct-mPct).toFixed(1)}%;background:${col}"></div></div><span class="sinbar-val" style="color:${col}">${d.val.toFixed(2)}</span></div>`;
-  }).join('')+'</div><div style="font-size:.68rem;color:var(--gris);margin-top:6px">Línea vertical = promedio · Verde = sobre promedio · Rojo = bajo promedio</div>';
-}
-
-// ═══════════════════════════════════════════════
-// RENDERS
-// ═══════════════════════════════════════════════
-function renderGlobal(rf,rs,cat){
-  const TOP=10,T5=5;
-  const top5F=new Set(rf.filter(r=>r.apto).slice(0,T5).map(r=>r.toro.nombre));
-  const top5S=new Set(rs.scores.slice(0,T5).map(r=>r.toro.nombre));
-  const coin=[...top5F].filter(n=>top5S.has(n));
-  document.getElementById('insight-text').innerHTML=`<strong style="color:var(--verde-oscuro)">${coin.length} toro${coin.length!==1?'s':''}</strong> en el top 5 de <strong style="color:var(--verde-oscuro)">ambos métodos</strong> para <strong>${cat.nombre}</strong>${coin.length?': <em>'+coin.join(', ')+'</em>':''}`;
-  const rsMap={};rs.scores.forEach((r,i)=>rsMap[r.toro.nombre]=i+1);
-  const aptosF=rf.filter(r=>r.apto);
-  // columna Factores
-  document.getElementById('global-list-f').innerHTML=aptosF.slice(0,TOP).map((r,i)=>{
-    const n=r.toro.nombre,pos=i+1;const coin2=top5F.has(n)&&top5S.has(n);
-    const sc=r.total.toFixed(1);
-    return`<li class="rank-item${coin2?' coincide':''}" onclick="onClickGlobalF('${n.replace(/'/g,"\\'")}')">
-      <span class="rank-pos${pos<=3?' top3':''}">${pos}</span>${pelBadge(r.toro)}
-      <span class="rank-nombre">${n}</span>
-      <span class="rank-score-val">${sc}</span>
-      ${coin2?'<span class="coin-badge">✓ TOP5</span>':''}
-    </li>`;
-  }).join('');
-  // columna Sinérgico
-  document.getElementById('global-list-s').innerHTML=rs.scores.slice(0,TOP).map((r,i)=>{
-    const n=r.toro.nombre,pos=i+1;const coin2=top5F.has(n)&&top5S.has(n);
-    const sc=r.score.toFixed(2);
-    return`<li class="rank-item${coin2?' coincide':''}" onclick="onClickGlobalS('${n.replace(/'/g,"\\'")}')">
-      <span class="rank-pos${pos<=3?' top3':''}">${pos}</span>${pelBadge(r.toro)}
-      <span class="rank-nombre">${n}</span>
-      <span class="rank-score-val">${sc}</span>
-      ${coin2?'<span class="coin-badge">✓ TOP5</span>':''}
-    </li>`;
-  }).join('');
-  // concordancia
-  document.getElementById('concord-tbody').innerHTML=aptosF.slice(0,TOP).map((r,i)=>{
-    const n=r.toro.nombre,rfR=i+1,rsR=rsMap[n]||'—';
-    const d=typeof rsR==='number'?rfR-rsR:null;
-    const dc=d===null?'de':d===0?'de':d>0?'du':'dd';
-    return`<tr class="${typeof d==='number'&&Math.abs(d)<=2?'concord-agree':''}" onclick="onClickGlobalF('${n.replace(/'/g,"\\'")}')">
-      <td class="td-pos">${rfR}</td><td>${pelBadge(r.toro)} <strong>${n}</strong></td>
-      <td class="num td-val td-g">${r.total.toFixed(1)}</td>
-      <td class="num td-pos">${rsR}</td>
-      <td class="num td-val td-score">${rs.scores.find(x=>x.toro.nombre===n)?.score.toFixed(2)||'—'}</td>
-      <td><span class="delta-badge ${dc}">${d===null?'—':d===0?'=':d>0?'▲+'+d:'▼'+d}</span></td>
-    </tr>`;
-  }).join('');
-}
-
-function onClickGlobalF(n){
-  if(!canAccess('cat_deep')){showPlusGate('La exploración detallada en esta categoría es exclusiva de Plus.');return;}
-  openModalFactores(n);
-}
-function onClickGlobalS(n){
-  if(!canAccess('sinergico')){showPlusGate('El análisis Sinérgico es exclusivo de Plus.');return;}
-  openModalSinergico(n);
-}
-
-function renderFactores(rf,cat){
-  document.getElementById('fac-title').textContent=`RD_Factores — ${cat.nombre}`;
-  document.getElementById('fac-desc').textContent=`${cat.desc} Score = G (0–100) + F. Clic en toro para ver ficha${canAccess('fenotipo_slider')?' y editar fenotipo':''}.`;
-  const ap=rf.filter(r=>r.apto),mx=ap.length?Math.max(...ap.map(r=>r.total)):100;
-  let pos=0;
-  document.getElementById('factores-tbody').innerHTML=rf.map(r=>{
-    if(r.apto)pos++;
-    return`<tr onclick="onClickToro('${r.toro.nombre.replace(/'/g,"\\'")}')">
-      <td class="td-pos">${r.apto?pos:'—'}</td>
-      <td class="td-nombre">${pelBadge(r.toro)} ${r.toro.nombre}</td>
-      <td class="num td-val td-g">${r.apto?r.g.toFixed(1):'—'}</td>
-      <td class="num td-val td-f">${getFen(r.toro.nombre)>=0?'+':''}${getFen(r.toro.nombre)}</td>
-      <td class="num td-val td-total">${r.apto?r.total.toFixed(1):'—'}</td>
-      <td>${r.apto?miniBar(r.total,mx):''}</td>
-      <td class="td-exp">${r.apto?explicar(r.z,cat):'Sin DEPs suficientes'}</td>
-    </tr>`;
-  }).join('');
-}
-
-function onClickToro(n){
-  if(!canAccess('cat_deep')){showPlusGate('La exploración detallada en esta categoría es exclusiva de Plus.');return;}
-  openModalFactores(n);
-}
-
-function renderSinergico(rs,cat){
-  document.getElementById('sin-title').textContent=`RD_Sinérgico — ${cat.nombre}`;
-  document.getElementById('sin-desc').textContent=`Sinergias activas: ${rs.sins.map(s=>s.nombre).join(', ')}.`;
-  const mx=rs.scores.length?Math.max(...rs.scores.map(r=>Math.abs(r.score)),1):1;
-  document.getElementById('sinergico-tbody').innerHTML=rs.scores.map((r,i)=>{
-    const chips=rs.sins.map(s=>{const d=r.det[s.id];if(d.val===null)return`<span class="sin-chip nul" title="${s.nombre}: sin dato">?</span>`;const ab=d.val>=d.mean;return`<span class="sin-chip ${ab?'arr':'baj'}" title="${s.nombre}: ${d.val.toFixed(2)} (prom ${d.mean.toFixed(2)})">${s.nombre.substring(0,7)}</span>`}).join('');
-    return`<tr onclick="onClickSin('${r.toro.nombre.replace(/'/g,"\\'")}')">
-      <td class="td-pos">${i+1}</td><td class="td-nombre">${pelBadge(r.toro)} ${r.toro.nombre}</td>
-      <td class="num td-val td-score">${r.score.toFixed(2)}</td>
-      <td>${miniBar(Math.max(0,r.score),mx,'var(--verde-medio)')}</td>
-      <td><div class="td-sin">${chips}</div></td>
-    </tr>`;
-  }).join('');
-  const nc=SINERGIAS.filter(s=>!s.ok&&s.cats.includes(currentCat));
-  const pan=document.getElementById('nc-panel');
-  if(nc.length){pan.innerHTML=`<div class="nc-panel-title">⚠ Sinergias no calculables — DEP no disponible en ERA</div><ul class="nc-list">${nc.map(s=>`<li class="nc-item"><strong>${s.nombre}</strong> <span class="nc-dep-tag">${s.faltante}</span></li>`).join('')}</ul>`;pan.classList.remove('hidden')}else pan.classList.add('hidden');
-}
-
-function onClickSin(n){
-  if(!canAccess('sinergico')){showPlusGate('El detalle Sinérgico por toro es exclusivo de Plus.');return;}
-  openModalSinergico(n);
-}
-
-function renderCatalogo(){
-  const sinPorDep={};SINERGIAS.filter(s=>s.ok).forEach(s=>{const deps={quebrador:['PN','WW'],moderado_potente:['WW','Alt'],compacto_carn:['PF','AOB'],doble_positivo:['AOB','EGD'],entore_base:['PN','CE'],entore_completo:['LG','CE'],torito_ideal:['PN','WW','CE'],fertil_carnicero:['CE','AOB']}[s.id]||[];deps.forEach(d=>{if(!sinPorDep[d])sinPorDep[d]=[];sinPorDep[d].push(s.nombre)})});
-  document.getElementById('dep-table-body').innerHTML=Object.entries(DEP_INFO).map(([k,v])=>`<tr><td><strong>${k}</strong></td><td>${v.nombre}</td><td style="font-size:.78rem">${v.dir==='variable'?'Variable (Term: +, Resto: −)':v.dir==='positivo'?'Positivo':'Negativo'}</td><td>${v.enM?'<span class="badge-yes">Sí</span>':'<span class="badge-no">No</span>'}</td><td style="font-size:.74rem;color:var(--gris)">${(sinPorDep[k]||[]).join(', ')||'—'}</td></tr>`).join('');
-  document.getElementById('sin-catalogo-body').innerHTML=`<table class="dep-full-table"><thead><tr><th>Sinergia</th><th>Descripción</th><th>Categorías</th><th>Estado</th></tr></thead><tbody>`+SINERGIAS.map(s=>`<tr><td><strong>${s.nombre}</strong></td><td style="font-size:.78rem">${s.desc||'Req. '+s.faltante}</td><td style="font-size:.74rem">${s.cats.join(', ')}</td><td>${s.ok?'<span class="badge-yes">Calculable</span>':'<span class="badge-nc">Sin '+s.faltante+'</span>'}</td></tr>`).join('')+'</tbody></table>';
-  document.getElementById('toro-grid').innerHTML=TOROS.map(t=>{const nD=CHARS.filter(c=>t.deps[c].dep!==null).length;return`<div class="toro-card"><div class="toro-card-nombre">${pelBadge(t)} ${t.nombre}</div><div class="toro-card-raza">${t.raza}</div><div class="toro-card-raza">RP: ${t.rp} · ${nD}/8 DEPs${t.sistema?' · '+t.sistema:''}</div></div>`}).join('');
-}
-
-// ═══════════════════════════════════════════════
-// MODALES
-// ═══════════════════════════════════════════════
-function openModalFactores(nombre){
-  const toro=TOROS.find(t=>t.nombre===nombre);
-  const cat=CATEGORIAS.find(c=>c.id===currentCat);
-  const rf=calcFactores(TOROS,currentCat);
-  const r=rf.find(x=>x.toro.nombre===nombre);
-  const fenVal=getFen(nombre);
-  const puedeSlider=canAccess('fenotipo_slider');
-  document.getElementById('modal-title').textContent=nombre;
-  document.getElementById('modal-sub').textContent=`${toro.raza} · RP: ${toro.rp} · ${toro.origen} · Nac: ${toro.nacimiento}`;
-  const safeN=nombre.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-
-  // Slider: visible siempre, funcional solo en Plus
-  const sliderHtml=puedeSlider
-    ?`<input type="range" class="fen-slider" min="-20" max="30" value="${fenVal}" step="1" oninput="updateFen('${safeN}',parseInt(this.value))">
-       <span class="fen-val" id="fen-disp">${fenVal>=0?'+':''}${fenVal}</span>
-       <button class="fen-reset-btn" onclick="updateFen('${safeN}',0);this.previousElementSibling.previousElementSibling.value=0">Reset</button>`
-    :`<div class="fen-locked-wrap" onclick="showPlusGate('El fenotipo editable es exclusivo de Plus.')">
-         <input type="range" class="fen-slider" min="-20" max="30" value="0" step="1" disabled>
-         <span class="fen-val" style="opacity:.4">+0</span>
-       </div>`;
-
-  let html=`<div class="modal-section"><div class="modal-stitle">Scores — ${cat.nombre}</div>
-    <div class="scores-row">
-      <div class="score-box"><div class="score-box-label">G (Genético)</div><div class="score-box-val" id="mg">${r.apto?r.g.toFixed(1):'—'}</div><div class="score-box-sub">0 – 100</div></div>
-      <div class="score-box"><div class="score-box-label">F (Fenotipo)</div><div class="score-box-val" id="mf">${fenVal>=0?'+':''}${fenVal}</div></div>
-      <div class="score-box total-box"><div class="score-box-label">TOTAL</div><div class="score-box-val" id="mt">${r.apto?r.total.toFixed(1):'—'}</div><div class="score-box-sub">G + F</div></div>
-    </div>
-    ${!r.apto?'<p style="margin-top:8px;font-size:.78rem;color:var(--rojo)">Sin DEPs suficientes (mín. 6 de 8).</p>':''}
-    <div class="fen-editor">
-      <div class="fen-title">Editar fenotipo (F)${!puedeSlider?' <span style="font-size:.65rem;color:var(--gris);font-weight:400">— Solo Plus</span>':''}</div>
-      <div class="fen-row">${sliderHtml}</div>
-      <div class="fen-hint">Rango −20 a +30. Suma directamente al índice genético.</div>
-    </div>
-  </div>`;
-
-  if(r.apto){
-    html+=`<div class="modal-section"><div class="modal-stitle">Perfil DEP — Radar (vs promedio)</div><div class="radar-wrap">${buildRadar(r.z,cat)}</div>
-      <div class="radar-legend"><div class="rl-item"><div class="rl-swatch" style="background:#3c6b45"></div>Este toro</div><div class="rl-item"><div class="rl-swatch" style="background:#bbb;border:1px dashed #bbb"></div>Promedio</div><div class="rl-item"><span style="color:#3c6b45;font-weight:700;font-size:.68rem">Verde</span>=peso+</div><div class="rl-item"><span style="color:#c0392b;font-weight:700;font-size:.68rem">Rojo</span>=peso−</div></div>
-    </div>`;
-  }
-
-  html+=`<div class="modal-section"><div class="modal-stitle">DEPs publicados</div><div class="dep-grid">`;
-  for(const k of Object.keys(NOMS)){const d=toro.deps[k];const v=d.dep;html+=`<div class="dep-item"><div class="dep-label">${NOMS[k]}</div><div class="dep-val ${v===null?'null-dep':''}">${v!==null?v:'sin dato'}</div>${d.prec!==null?`<div class="dep-prec">Prec: ${d.prec}${d.pct!==null?' · Pct: '+d.pct+'%':''}</div>`:''}</div>`}
-  html+=`</div></div><div class="modal-section"><div class="meta-row"><div class="meta-chip">Peso: <span>${toro.pesoActual>0?toro.pesoActual+' kg':'—'}</span></div><div class="meta-chip">Semen: <span>${toro.semenApto}</span></div><div class="meta-chip">Prec. media: <span>${r.pm.toFixed(2)}</span></div>${toro.sistema?`<div class="meta-chip">Sistema: <span>${toro.sistema}</span></div>`:''}</div></div>`;
-
-  document.getElementById('modal-body').innerHTML=html;
-  document.getElementById('modal-overlay').classList.add('open');
-}
-
-function updateFen(nombre,val){
-  if(!canAccess('fenotipo_slider')){showPlusGate('El fenotipo editable es exclusivo de Plus.');return;}
-  fenotipoData[nombre]=val;
-  const d=document.getElementById('fen-disp');if(d)d.textContent=(val>=0?'+':'')+val;
-  const rf=calcFactores(TOROS,currentCat);const r=rf.find(x=>x.toro.nombre===nombre);
-  if(r){const mg=document.getElementById('mg'),mf=document.getElementById('mf'),mt=document.getElementById('mt');if(mg)mg.textContent=r.apto?r.g.toFixed(1):'—';if(mf)mf.textContent=(val>=0?'+':'')+val;if(mt)mt.textContent=r.apto?r.total.toFixed(1):'—'}
-  renderAll();
-}
-
-function openModalSinergico(nombre){
-  if(!canAccess('sinergico')){
-    showPlusGate('El análisis Sinérgico es exclusivo de Plus.');
-    return;
-  }
-  const toro=TOROS.find(t=>t.nombre===nombre);
-  const cat=CATEGORIAS.find(c=>c.id===currentCat);
-  const rs=calcSinergico(TOROS,currentCat);
-  const r=rs.scores.find(x=>x.toro.nombre===nombre);
-  const rank=rs.scores.findIndex(x=>x.toro.nombre===nombre)+1;
-  document.getElementById('modal-title').textContent=nombre;
-  document.getElementById('modal-sub').textContent=`${toro.raza} · RP: ${toro.rp} · ${toro.origen}`;
-  let html=`<div class="modal-section"><div class="modal-stitle">Score RD_Sinérgico — ${cat.nombre}</div>
-    <div class="scores-row">
-      <div class="score-box total-box"><div class="score-box-label">Score total</div><div class="score-box-val">${r.score.toFixed(2)}</div></div>
-      <div class="score-box"><div class="score-box-label">Posición</div><div class="score-box-val">#${rank}</div><div class="score-box-sub">de 26</div></div>
-      <div class="score-box"><div class="score-box-label">Sinergias</div><div class="score-box-val">${rs.sins.length}</div><div class="score-box-sub">en cat.</div></div>
-    </div></div>`;
-  html+=`<div class="modal-section"><div class="modal-stitle">Valores vs promedio poblacional</div>${buildSinBars(r.det,rs.sins,rs.means)}</div>`;
-  html+=`<div class="modal-section"><div class="modal-stitle">Detalle numérico</div><table class="sin-detail-table"><thead><tr><th>Sinergia</th><th>Valor</th><th>Prom.</th><th>Δ</th></tr></thead><tbody>`;
-  for(const s of rs.sins){const d=r.det[s.id];const hv=d.val!==null;const ab=hv&&d.val>=d.mean;html+=`<tr><td title="${s.desc}">${s.nombre}</td><td class="${hv?(ab?'sin-arr':'sin-baj'):'sin-nc-txt'}">${hv?d.val.toFixed(2):'sin dato'}</td><td style="color:var(--gris)">${d.mean.toFixed(2)}</td><td class="${hv?(ab?'sin-arr':'sin-baj'):'sin-nc-txt'}">${hv?(ab?'▲+':'▼')+Math.abs(d.val-d.mean).toFixed(2):'—'}</td></tr>`}
-  html+=`</tbody></table></div>`;
-  const nc=SINERGIAS.filter(s=>!s.ok&&s.cats.includes(currentCat));
-  if(nc.length)html+=`<div class="modal-section"><div class="modal-stitle">No calculables en ${cat.nombre}</div><ul class="nc-list">${nc.map(s=>`<li class="nc-item">${s.nombre} <span class="nc-dep-tag">${s.faltante}</span></li>`).join('')}</ul></div>`;
-  document.getElementById('modal-body').innerHTML=html;
-  document.getElementById('modal-overlay').classList.add('open');
-}
-
-function closeModal(e){if(!e||e.target===document.getElementById('modal-overlay'))document.getElementById('modal-overlay').classList.remove('open')}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeAllPanels()}});
-
-// ═══════════════════════════════════════════════
-// ROUTER
-// ═══════════════════════════════════════════════
-function setScreen(s){
-  currentScreen=s;
-  document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));
-  document.getElementById('screen-'+s).classList.add('active');
-  ['global','factores','sinergico','catalogo'].forEach((id,i)=>document.querySelectorAll('.nav-tab')[i].classList.toggle('active',id===s));
-  document.getElementById('cat-bar').style.display=s==='catalogo'?'none':'flex';
-  document.getElementById('buscador-bar').style.display=s==='catalogo'?'none':'flex';
-  if(s==='catalogo')renderCatalogo();else renderAll();
-  closeAllPanels();
-}
-function setCat(c){
-  currentCat=c;
-  ['terminal','reposicion','vaq15','torito'].forEach((id,i)=>document.querySelectorAll('.cat-btn')[i].classList.toggle('active',id===c));
-  renderAll();
-}
-function renderAll(){
-  if(!TOROS.length) return; // sin datos, no renderizar
-  const cat=CATEGORIAS.find(c=>c.id===currentCat);
-  const rf=calcFactores(TOROS,currentCat);
-  const rs=calcSinergico(TOROS,currentCat);
-  if(currentScreen==='global')renderGlobal(rf,rs,cat);
-  if(currentScreen==='factores')renderFactores(rf,cat);
-  if(currentScreen==='sinergico')renderSinergico(rs,cat);
-}
-// Iniciar app al cargar la página
-window.addEventListener('DOMContentLoaded', iniciarApp);
+/* ── FORMULARIO ── */
+document.getElementById('reg-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  const d=new FormData(this);
+  const body=[...d.entries()].map(([k,v])=>`${k}: ${v}`).join('\n');
+  window.location.href=`mailto:info@programa-sepa.com.ar?subject=Solicitud de acceso SEPA-Select&body=${encodeURIComponent(body)}`;
+  this.style.display='none';
+  document.getElementById('form-ok').style.display='block';
+});
 </script>
 </body>
 </html>
