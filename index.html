@@ -10,6 +10,14 @@
   /* Bloqueo de acceso previo al lanzamiento — quitar este bloque para liberar al público */
   try{ if(localStorage.getItem('sepa_acceso_landing')!=='1'){ location.replace('acceso.html'); } }catch(e){}
 </script>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LHJ17S6W9C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LHJ17S6W9C');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">

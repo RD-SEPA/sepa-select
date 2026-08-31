@@ -12,6 +12,14 @@
   /* Si ya tiene acceso, saltea la pantalla */
   try{ if(localStorage.getItem('sepa_acceso_landing')==='1'){ location.replace('index.html'); } }catch(e){}
 </script>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LHJ17S6W9C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LHJ17S6W9C');
+</script>
 <style>
   :root{
     --dark:#253a29; --dark2:#1e2f1f; --gold:#b8892b; --gold-mid:#d4a84a;
