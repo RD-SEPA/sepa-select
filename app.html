@@ -999,12 +999,6 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <div id="codigo-x-msg" style="font-size:.75rem;color:#c0392b;min-height:16px;margin-bottom:10px"></div>
     </div>
 
-    <h4>RD_Factores — Modo de precisión</h4>
-    <p>Catálogos sin precisiones ERA (como Genómica propia) obtienen score neutro cuando la precisión está activa. Desactivar para rankear por z-score ponderado directo.</p>
-    <div style="display:flex;align-items:center;gap:12px;margin:8px 0 14px">
-      <button id="btn-precision" onclick="togglePrecision()" class="btn-export">✓ Con precisión (activo)</button>
-      <span id="precision-nota" style="font-size:.78rem;color:var(--gris);display:none">⚠ Modo sin precisión activo — ranking no pondera por confiabilidad de DEPs</span>
-    </div>
     <div id="config-plus-section" style="display:none">
       <h4>Pesos por categoría (RD_Factores) <span style="font-size:.65rem;background:var(--oro);color:white;padding:2px 7px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></h4>
       <div style="overflow-x:auto">
@@ -1745,7 +1739,6 @@ const FRASES={
 // ESTADO v4
 // ═══════════════════════════════════════════════
 const sepaState={licencia:null,modo:null,catalogoActivo:null};
-let usarPrecision=true; // OBS 1: selector Con/Sin precisión en RD_Factores
 const fenotipoData={};
 let currentScreen='global',currentCat='terminal';
 
@@ -2263,17 +2256,6 @@ function onClickConfig(){
 }
 
 // ─── CONFIG PANEL ───
-function togglePrecision(){
-  usarPrecision=!usarPrecision;
-  const btn=document.getElementById('btn-precision');
-  const nota=document.getElementById('precision-nota');
-  if(btn){btn.textContent=usarPrecision?'✓ Con precisión (activo)':'✗ Sin precisión (activo)';
-    btn.style.background=usarPrecision?'var(--verde-claro)':'var(--rojo-claro)';
-    btn.style.color=usarPrecision?'var(--verde-oscuro)':'var(--rojo)';
-    btn.style.borderColor=usarPrecision?'var(--borde)':'#e0b0a8';}
-  if(nota) nota.style.display=usarPrecision?'none':'inline';
-  renderAll();
-}
 function renderConfigPanel(){
   const t=document.getElementById('pesos-tabla');
   if(!t) return;
@@ -2458,19 +2440,16 @@ function calcFactores(toros,catId){
   const base=toros.map(t=>{
     const nD=CHARS.filter(c=>t.deps[c].dep!==null&&t.deps[c].dep!==undefined).length;
     const precs=Object.values(t.deps).map(d=>d.prec).filter(p=>p!==null&&p!==undefined);
-    const pm=precs.length?precs.reduce((a,b)=>a+b,0)/precs.length:1; // OBS1: si no hay precs, pm=1 en modo sin precisión
+    const pm=precs.length?precs.reduce((a,b)=>a+b,0)/precs.length:1; // solo informativo — la precisión vive en RD_Precisión, no interviene en el mérito
     const z={};for(const c of CHARS)z[c]=zsc(t.deps[c].dep,stats[c].m,stats[c].s);
     const raw=CHARS.reduce((acc,c)=>acc+z[c]*cat.pesos[c],0);
-    // OBS 1: Con precisión → adj=raw*pm | Sin precisión → adj=raw
-    // FIX genomica propia: si no hay precs, pm=1 (no 0) para que no de score neutro. El usuario puede desactivar precisión para ranking puro.
-    const pmCalc = precs.length ? precs.reduce((a,b)=>a+b,0)/precs.length : 1;
-    const adj = usarPrecision ? (raw * pmCalc) : raw;
+    const adj=raw;
     return{toro:t,nD,pm,z,adj};
   });
-  const ap=base.filter(b=>b.nD>=6);
+  const ap=base.filter(b=>b.nD>=1);
   const mn=ap.length?Math.min(...ap.map(b=>b.adj)):0,mx=ap.length?Math.max(...ap.map(b=>b.adj)):0;
   const res=base.map(b=>{
-    const apto=b.nD>=6;
+    const apto=b.nD>=1;
     const g=apto?(mx===mn?50:((b.adj-mn)/(mx-mn))*100):0;
     const f=getFen(b.toro.nombre);
     return{...b,g:parseFloat(g.toFixed(1)),f,total:parseFloat((g+f).toFixed(1)),apto};
@@ -2849,7 +2828,6 @@ function renderResumen(){
       <div class="resumen-stat"><div class="resumen-stat-val">${depsDisp.length}/8</div><div class="resumen-stat-lbl">Caract. del modelo con datos</div></div>
       <div class="resumen-stat"><div class="resumen-stat-val">${PERFILES_OYP.length - perfilesNC.length}</div><div class="resumen-stat-lbl">Perfiles O&amp;P activos</div></div>
       <div class="resumen-stat"><div class="resumen-stat-val">${tienePrecs?'Sí':'No'}</div><div class="resumen-stat-lbl">Precisiones ERA</div></div>
-      <div class="resumen-stat"><div class="resumen-stat-val">${usarPrecision?'Activa':'Inactiva'}</div><div class="resumen-stat-lbl">Ponderación prec.</div></div>
     </div>
     <div class="resumen-abstract-deps">
       El modelo RD_Factores pondera <strong>8 caracteres</strong> (de los 12 DEPs que puede traer un catálogo ERA).<br>
@@ -2925,8 +2903,7 @@ function renderGlobal(rf,rs,cat){
   const top5F=new Set(rf.filter(r=>r.apto).slice(0,T5).map(r=>r.toro.nombre));
   const top5S=new Set(rs.scores.filter(r=>!toroSinDeps(r.toro)).slice(0,T5).map(r=>r.toro.nombre));
   const coin=[...top5F].filter(n=>top5S.has(n));
-  const notaPrec=usarPrecision?'':' <span style="color:var(--rojo);font-size:.78rem">⚠ Sin precisión activo</span>';
-  document.getElementById('insight-text').innerHTML=`<strong style="color:var(--verde-oscuro)">${coin.length} toro${coin.length!==1?'s':''}</strong> en el top 5 de <strong style="color:var(--verde-oscuro)">ambos métodos</strong> para <strong>${cat.nombre}</strong>${coin.length?': <em>'+coin.map(n=>displayNombre(n)).join(', ')+'</em>':''}${notaPrec}`;
+  document.getElementById('insight-text').innerHTML=`<strong style="color:var(--verde-oscuro)">${coin.length} toro${coin.length!==1?'s':''}</strong> en el top 5 de <strong style="color:var(--verde-oscuro)">ambos métodos</strong> para <strong>${cat.nombre}</strong>${coin.length?': <em>'+coin.map(n=>displayNombre(n)).join(', ')+'</em>':''}`;
 
   // Radar comparativo V2 mejorado - selector libre de toros
   window._radarState = window._radarState || {seleccionados:[], cat:null};
@@ -3003,9 +2980,7 @@ function onClickGlobalS(n){
 
 function renderFactores(rf,cat){
   document.getElementById('fac-title').textContent=`RD_Factores — ${cat.nombre}`;
-  // OBS 1: nota aclaratoria cuando modo sin precisión está activo
-  const notaPrec=usarPrecision?'':' ⚠ Modo sin precisión activo — ranking no pondera por confiabilidad.';
-  document.getElementById('fac-desc').textContent=`${cat.desc} Score = SCF + F. Clic en toro para ver ficha${canAccess('fenotipo_slider')?' y editar fenotipo':''}.${notaPrec}`;
+  document.getElementById('fac-desc').textContent=`${cat.desc} Score = SCF + F. Clic en toro para ver ficha${canAccess('fenotipo_slider')?' y editar fenotipo':''}.`;
   const ap=rf.filter(r=>r.apto),mx=ap.length?Math.max(...ap.map(r=>r.total)):100;
   let pos=0;
   document.getElementById('factores-tbody').innerHTML=ap.map(r=>{
@@ -4144,11 +4119,11 @@ function getSelectos(catId) {
 }
 
 function calcBlancoZ(toros) {
-  // apto = mismo criterio que calcFactores: al menos 6 DEPs con valor
+  // apto = mismo criterio que calcFactores: al menos 1 DEP con valor
   const aptos = toros.filter(t => {
     if(!t.deps) return false;
     const nD = CHARS.filter(c => t.deps[c] && t.deps[c].dep !== null && t.deps[c].dep !== undefined).length;
-    return nD >= 6;
+    return nD >= 1;
   });
   console.log('[Blanco] calcBlancoZ: toros total=', toros.length, 'aptos=', aptos.length);
   if(!aptos.length) { console.log('[Blanco] no aptos found'); return {vistaToro:[], vistaOyP:[], stats:{}}; }
@@ -4625,10 +4600,10 @@ function infCalcF(toros,cat,st){
   const rows=toros.map(t=>{
     const nD=INF_CHARS.filter(c=>t.deps[c]&&t.deps[c].dep!=null).length;
     const pv=INF_CHARS.map(c=>t.deps[c]&&t.deps[c].prec!=null?t.deps[c].prec:null).filter(x=>x!=null);
-    const pm=pv.length?pv.reduce((a,b)=>a+b,0)/pv.length:1;
+    const pm=pv.length?pv.reduce((a,b)=>a+b,0)/pv.length:1; // solo informativo, igual que en calcFactores
     const z=infZOf(t,st);
     const raw=INF_CHARS.reduce((a,c)=>a+z[c]*(pesos[c]||0),0);
-    return {t,nD,adj:raw*pm,z,ok:nD>=6};
+    return {t,nD,adj:raw,z,ok:nD>=1};
   });
   const ap=rows.filter(r=>r.ok);
   const mn=ap.length?Math.min(...ap.map(r=>r.adj)):0;
