@@ -1,0 +1,3264 @@
+{
+ "meta": {
+  "id": "007",
+  "nombre": "las lilas",
+  "fecha": "2026-09-11",
+  "cabana": "las lilas",
+  "expositor": "las lilas",
+  "email": "lila@gmail.com",
+  "puntaje": 2,
+  "tipo": "temporal",
+  "esNovedad": true,
+  "novedad": "",
+  "acceso": "abierto",
+  "totalToros": 40,
+  "aptos": 40,
+  "archivo": "toros_007.json",
+  "fuente": "excel",
+  "cargado_por": "Ricardo",
+  "fecha_carga": "2026-09-11",
+  "ultimo_ingreso": "2026-09-11"
+ },
+ "toros": [
+  {
+   "nombre": "Apostado",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 2691 Centinela Jockey",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -3,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 11.6,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 33.3,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 5.5,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.2,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.3,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.03,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 0.2,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Arafat",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 1931 Líder Max",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.8,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 0.9,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 7.9,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.8,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.9,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.2,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.88,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.03,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 2.25,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Atalaya",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5409 Mirador Bolt",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.2,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9.3,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 43,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.9,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3.3,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.8,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.2,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.03,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 2.75,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Baigorria",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4353 Granadero Baron",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.3,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 7.2,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 29.9,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.8,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.8,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.28,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.06,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 4.4,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Bourbon",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas Bronc El Abra A596 -Fiv",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.4,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.2,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 26.3,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3.6,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.7,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.65,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.06,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 9.7,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Buen Mozo",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4601 Pinton Desafio",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.3,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 26.2,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 30,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -2.4,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.1,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.8,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.87,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.02,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 10.7,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Ebanista",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4181 Serrucho Gran Valor",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 7.2,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 22,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.1,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 6.3,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.88,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.02,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 2.5,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Emperador",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4867 Entrepeneur Manager",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.6,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.7,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 9.2,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3.5,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.6,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.5,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 1.06,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.06,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 6.85,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Hiram Walker",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 3251 Julian Predominant",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.5,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 1.7,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 22.6,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4.8,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.5,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.21,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 5.65,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Mackenzie",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4381 Arafat Lady Bud",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.8,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": -1.3,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": -2.9,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -3.6,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.9,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 1.15,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": -4.25,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Manager",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 3599 Gerente Julian",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 10.3,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 16.2,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.8,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -2.6,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.16,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 3.35,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Mangrullo",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5351 Mirador Blanco",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.5,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.5,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 35.7,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.6,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.2,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.8,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.16,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.06,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 8.85,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Max Stevenson",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Maximum 930C",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.4,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 4.1,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 25,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4.4,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.32,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 6.3,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Mozart",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4665 Classic Boy on Target",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.9,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 34.7,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3.2,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.2,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.7,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.84,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.08,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 7.65,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Patacón",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4673 Patton Euro",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 4.3,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 17.2,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -2.7,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.9,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.15,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": -0.55,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Patoruzu",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5195 Patton Ermitado",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.9,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 5.9,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 22.2,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.7,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.4,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.8,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.24,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 3.65,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Patton",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4199 Paxton N'ayMejor",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.9,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 3.9,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 8.7,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -3,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.96,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.08,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": -1.05,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Primogenito",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5065 Heredero E. Verde",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.1,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.1,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 34.1,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.8,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.3,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.05,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.02,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 6.85,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Pure Beef",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Duff Pure Beef 217",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 8,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 2.8,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 5.5,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.1,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 6.2,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.1,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 3,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 3.85,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Retobado",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5205 Bravo Duchess Rance",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.2,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": -1.9,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 0.3,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.8,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.3,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.42,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.1,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": -0.15,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Rudo",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4917 Broc El Abra A596",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.3,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.6,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 30.5,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.3,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.46,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.01,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 9.3,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Venerado",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5075 Tribute Pintón",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 19.8,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.4,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3.1,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.37,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.14,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 4.9,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Vigilante",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 3523 Apostado N.Worth",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": -0.5,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": -3.8,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -2.3,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.2,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.7,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.07,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.03,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": -2.55,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Zumbador",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 3183 Picaflor Boy on Target",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.9,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.9,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 28.8,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.2,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.8,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.62,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.01,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 5.65,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Burócrata",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas F160 Gobernante",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 5.7,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 28.8,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4.2,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.7,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.33,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.08,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 7.05,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Capo",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4569 Carloncho Pepino",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.7,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 28.2,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 34.4,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -2.8,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 4.6,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.15,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.1,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 11.3,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Corleone",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5261 Capo Don Antonio",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.2,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": -2,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 22.4,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -2.1,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.5,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.7,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.06,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": -3.1,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Fachero",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5181 Lindo Santana",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.3,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.4,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 27.6,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 7.7,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.6,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.27,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.03,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 11.9,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Fundador",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4861 First Down",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.3,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 4.6,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 17.3,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -2.4,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.22,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.1,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": -0.1,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Grato",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5197 Lindo Carloncho",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.5,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 1.3,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 5.3,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.4,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.2,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.2,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.04,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.02,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 3.05,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Lanin",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Casamu B348 Paiman Mul Pun",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.4,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.5,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 16.8,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -2.9,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3.1,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.8,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.37,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.01,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 0.35,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Mexicano",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 1405 Alamo Cooper Rob",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.6,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.9,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 24,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.5,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.8,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.5,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.05,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.03,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 4.6,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Mocovi",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5407 Toba Carloncho",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": -1.3,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 8,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.1,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.3,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.2,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.22,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.17,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": -0.75,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Principal",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4437 Esencial MaxMejor",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.3,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": -2,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": -3.7,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4.2,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.15,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 3.2,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Quee!",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 4399 QueVa! Nicanor",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.1,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 14.2,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -6.7,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.8,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.3,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.12,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": -3.65,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Red Blood",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Duff Red Blood 18114",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 5.1,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 21,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 7.6,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.2,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.4,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.29,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 0.1,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Red Label",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5031 Red Label Vital",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.6,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9.2,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 42.6,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.5,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.57,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.11,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 7.6,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Renovador",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 5013 Renow Sakic",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.1,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 11.8,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 43.9,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.4,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3.5,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.67,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.02,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 6.3,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Sobrador",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 1659 Sotein N'AyMejor T/E",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.6,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": -0.9,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": -5.8,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -3.3,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.9,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.1,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.07,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": -3.75,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  },
+  {
+   "nombre": "Vital",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": 0,
+   "rp": "",
+   "origen": "Las Lilas 3479 Esencial Sensation",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.4,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": 7.9,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": 38.6,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.9,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.5,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.8,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.85,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.1,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CM": {
+     "dep": 6.85,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "_apto": true
+  }
+ ]
+}
