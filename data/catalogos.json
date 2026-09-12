@@ -141,6 +141,26 @@
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-09-11",
    "ultimo_ingreso": "2026-09-11"
+  },
+  {
+   "id": "008",
+   "nombre": "LM de Feller",
+   "fecha": "2026-09-11",
+   "cabana": "LM de Feller",
+   "expositor": "LM de Feller",
+   "email": "",
+   "puntaje": 2,
+   "tipo": "permanente",
+   "esNovedad": true,
+   "novedad": "",
+   "acceso": "abierto",
+   "totalToros": 29,
+   "aptos": 27,
+   "archivo": "toros_008.json",
+   "fuente": "excel",
+   "cargado_por": "Ricardo",
+   "fecha_carga": "2026-09-11",
+   "ultimo_ingreso": "2026-09-11"
   }
  ]
 }
