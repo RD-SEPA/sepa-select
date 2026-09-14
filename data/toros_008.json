@@ -21,7 +21,7 @@
  },
  "toros": [
   {
-   "nombre": "145",
+   "nombre": "01(145)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2021-07-27",
@@ -162,7 +162,7 @@
    "_apto": true
   },
   {
-   "nombre": "314",
+   "nombre": "02(314)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2023-07-18",
@@ -303,7 +303,7 @@
    "_apto": true
   },
   {
-   "nombre": "567",
+   "nombre": "03(567)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-27",
@@ -444,7 +444,7 @@
    "_apto": true
   },
   {
-   "nombre": "572",
+   "nombre": "04(572)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-03",
@@ -585,7 +585,7 @@
    "_apto": true
   },
   {
-   "nombre": "622",
+   "nombre": "05(622)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-24",
@@ -726,7 +726,7 @@
    "_apto": true
   },
   {
-   "nombre": "502",
+   "nombre": "06(502)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-15",
@@ -867,7 +867,7 @@
    "_apto": true
   },
   {
-   "nombre": "507",
+   "nombre": "07(507)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-08",
@@ -1008,7 +1008,7 @@
    "_apto": true
   },
   {
-   "nombre": "508",
+   "nombre": "08(508)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-07-15",
@@ -1149,7 +1149,7 @@
    "_apto": true
   },
   {
-   "nombre": "599",
+   "nombre": "09(599)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-06-28",
@@ -1290,7 +1290,7 @@
    "_apto": false
   },
   {
-   "nombre": "610",
+   "nombre": "10(610)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-31",
@@ -1431,7 +1431,7 @@
    "_apto": false
   },
   {
-   "nombre": "684",
+   "nombre": "11(684)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-07-10",
@@ -1572,7 +1572,7 @@
    "_apto": true
   },
   {
-   "nombre": "545",
+   "nombre": "12(545)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-07-12",
@@ -1713,7 +1713,7 @@
    "_apto": true
   },
   {
-   "nombre": "608",
+   "nombre": "13(608)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-07",
@@ -1854,7 +1854,7 @@
    "_apto": true
   },
   {
-   "nombre": "686",
+   "nombre": "14(686)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-07-13",
@@ -1995,7 +1995,7 @@
    "_apto": true
   },
   {
-   "nombre": "510",
+   "nombre": "15(510)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-22",
@@ -2136,7 +2136,7 @@
    "_apto": true
   },
   {
-   "nombre": "561",
+   "nombre": "16(561)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-07-20",
@@ -2277,7 +2277,7 @@
    "_apto": true
   },
   {
-   "nombre": "630",
+   "nombre": "17(630)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-03",
@@ -2418,7 +2418,7 @@
    "_apto": true
   },
   {
-   "nombre": "518",
+   "nombre": "18(518)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-09-01",
@@ -2559,7 +2559,7 @@
    "_apto": true
   },
   {
-   "nombre": "557",
+   "nombre": "19(557)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-09",
@@ -2700,7 +2700,7 @@
    "_apto": true
   },
   {
-   "nombre": "573",
+   "nombre": "20(573)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-07-18",
@@ -2841,7 +2841,7 @@
    "_apto": true
   },
   {
-   "nombre": "505",
+   "nombre": "21(505)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-07-05",
@@ -2982,7 +2982,7 @@
    "_apto": true
   },
   {
-   "nombre": "536",
+   "nombre": "22(536)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-05",
@@ -3123,7 +3123,7 @@
    "_apto": true
   },
   {
-   "nombre": "558",
+   "nombre": "23(558)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-07-10",
@@ -3264,7 +3264,7 @@
    "_apto": true
   },
   {
-   "nombre": "650",
+   "nombre": "24(650)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-04",
@@ -3405,7 +3405,7 @@
    "_apto": true
   },
   {
-   "nombre": "661",
+   "nombre": "25(661)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-07-26",
@@ -3546,7 +3546,7 @@
    "_apto": true
   },
   {
-   "nombre": "694",
+   "nombre": "26(694)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-27",
@@ -3687,7 +3687,7 @@
    "_apto": true
   },
   {
-   "nombre": "501",
+   "nombre": "27(501)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-24",
@@ -3828,7 +3828,7 @@
    "_apto": true
   },
   {
-   "nombre": "611",
+   "nombre": "28(611)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-06-22",
@@ -3969,7 +3969,7 @@
    "_apto": true
   },
   {
-   "nombre": "660",
+   "nombre": "29(660)",
    "pelaje": "Negro",
    "raza": "Angus Negro",
    "nacimiento": "2024-08-22",
