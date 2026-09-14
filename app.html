@@ -5,8 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
   /* Bloqueo de acceso previo al lanzamiento — mismo candado que index.html.
-     Evita entrar directo a app.html sin pasar por la landing. Quitar para liberar al público. */
-  try{ if(localStorage.getItem('sepa_acceso_landing')!=='1'){ location.replace('acceso.html'); } }catch(e){}
+     Evita entrar directo a app.html sin pasar por la landing. Quitar para liberar al público.
+     No aplica en localhost ni en IPs de red local (pruebas locales vía PROBAR_v9.bat, incluye tablet en la misma WiFi) — ahí no existe acceso.html. */
+  try{
+    const _h=location.hostname;
+    const _esLocal=_h==='localhost'||_h==='127.0.0.1'||/^192\.168\.\d{1,3}\.\d{1,3}$/.test(_h)||/^10\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(_h)||/^172\.(1[6-9]|2\d|3[0-1])\.\d{1,3}\.\d{1,3}$/.test(_h);
+    if(!_esLocal && localStorage.getItem('sepa_acceso_landing')!=='1'){ location.replace('acceso.html'); }
+  }catch(e){}
 </script>
 <title>SEPA-Select App3 · v9</title>
 <style>
@@ -204,6 +209,16 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie)
 .cat-btn:hover{background:rgba(255,255,255,.14)}
 .cat-btn.active{background:var(--blanco);color:var(--verde-oscuro);border-color:var(--blanco);font-weight:700}
 .cat-btn-graficos{background:var(--oro)!important;color:white!important;border-color:var(--oro)!important;font-weight:700!important}
+
+/* ── árbol de navegación Rodeo → Categoría → Método ── */
+.tree-group-head{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:rgba(212,165,69,.85);padding:7px 4px 1px;margin-top:2px}
+.tree-cat{display:flex;flex-direction:column;gap:3px}
+.tree-methods{display:none;flex-direction:column;gap:3px;margin:2px 0 4px 10px;padding-left:8px;border-left:2px solid rgba(255,255,255,.14)}
+.tree-methods.open{display:flex}
+.tree-methods .nav-tab{padding:6px 10px;font-size:.74rem;font-weight:500}
+/* En Resumen (landing) ninguna categoría se ve "elegida" todavía, aunque currentCat conserve un valor por defecto */
+.cat-bar.landing-mode .cat-btn.active{background:rgba(255,255,255,.04);color:rgba(255,255,255,.72);border-color:rgba(255,255,255,.2);font-weight:500}
+.cat-bar.landing-mode .cat-btn[data-cat="rodeoGeneral"].active{background:transparent;color:#f0d9a8;border-color:var(--oro)!important}
 
 /* ── RADAR O&P — LAYOUT RESPONSIVO ── */
 .oyp-radar-3col{display:grid;grid-template-columns:190px minmax(260px,1fr) minmax(240px,auto);gap:14px;align-items:start}
@@ -763,7 +778,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
         <div onclick="infModo('toro')" style="background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">🐂</div>
           <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Informe Plus por Toro</div>
-          <div style="font-size:.73rem;opacity:.75;line-height:1.45">Seleccioná uno o más toros. DEPs, rankings en 4 categorías y perfiles O&amp;P.</div>
+          <div style="font-size:.73rem;opacity:.75;line-height:1.45">Seleccioná uno o más toros. DEPs, rankings en 5 categorías y perfiles O&amp;P.</div>
         </div>
       </div>
       <button onclick="cerrarInforme()" style="background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:8px 20px;border-radius:8px;font-size:.8rem;cursor:pointer">Cancelar</button>
@@ -972,21 +987,66 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <div class="app-body">
 <aside class="app-sidebar" id="app-sidebar">
   <button class="btn-sb-toggle" onclick="toggleSidebar()" id="btn-sb-toggle" title="Contraer / expandir menú">◀</button>
-  <nav class="sb-group">
-    <div class="sb-label">Vistas</div>
-    <button class="nav-tab active" data-screen="global" onclick="setScreen('global')">Vista Global</button>
-    <button class="nav-tab" data-screen="factores" onclick="setScreen('factores')">RD_Factores</button>
-    <button class="nav-tab" data-screen="oyp" id="nav-oyp-btn" onclick="setScreen('oyp')">RD_O&amp;P</button>
-    <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
-    <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">RD_Hallazgos</button>
-  </nav>
   <div class="sb-group cat-bar" id="cat-bar">
-    <span class="cat-label">Categoría</span>
-    <button class="cat-btn active" data-cat="terminal" onclick="setCat('terminal')">1-Terminal</button>
-    <button class="cat-btn" data-cat="reposicion" onclick="setCat('reposicion')">2-Reposición</button>
-    <button class="cat-btn" data-cat="vaq15" onclick="setCat('vaq15')">3-Vaquillona 15M</button>
-    <button class="cat-btn" data-cat="rodeoGeneral" onclick="setCat('rodeoGeneral')">4-Rodeo General</button>
-    <button class="cat-btn cat-btn-graficos" data-cat="graficos" id="btn-graficos" onclick="onClickGraficos()">Gráficos</button>
+    <span class="cat-label">Navegación</span>
+    <button class="nav-tab active" data-screen="global" onclick="setScreen('global')">&#9679; Resumen</button>
+
+    <div class="tree-cat" data-cat="rodeoGeneral">
+      <button class="cat-btn" data-cat="rodeoGeneral" onclick="navEntrarCategoria('rodeoGeneral')">&#9733; Rodeo General</button>
+      <div class="tree-methods" data-methods-for="rodeoGeneral">
+        <button class="nav-tab" data-screen="factores" onclick="irAMetodo('factores','rodeoGeneral')">RD_Factores</button>
+        <button class="nav-tab" data-screen="oyp" onclick="irAMetodo('oyp','rodeoGeneral')">RD_O&amp;P</button>
+        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
+        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
+        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">RD_Hallazgos</button>
+      </div>
+    </div>
+
+    <div class="tree-group-head">Rodeo 1 · Venta de cría</div>
+    <div class="tree-cat" data-cat="terminal">
+      <button class="cat-btn" data-cat="terminal" onclick="navEntrarCategoria('terminal')">#1.1_Terminal</button>
+      <div class="tree-methods" data-methods-for="terminal">
+        <button class="nav-tab" data-screen="factores" onclick="irAMetodo('factores','terminal')">RD_Factores</button>
+        <button class="nav-tab" data-screen="oyp" onclick="irAMetodo('oyp','terminal')">RD_O&amp;P</button>
+        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
+        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
+        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">RD_Hallazgos</button>
+      </div>
+    </div>
+    <div class="tree-cat" data-cat="hilton">
+      <button class="cat-btn" data-cat="hilton" onclick="navEntrarCategoria('hilton')">#1.2_Hilton</button>
+      <div class="tree-methods" data-methods-for="hilton">
+        <button class="nav-tab" data-screen="factores" onclick="irAMetodo('factores','hilton')">RD_Factores</button>
+        <button class="nav-tab" data-screen="oyp" onclick="irAMetodo('oyp','hilton')">RD_O&amp;P</button>
+        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
+        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
+        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">RD_Hallazgos</button>
+      </div>
+    </div>
+
+    <div class="tree-group-head">Rodeo 2 · Cría p/Reposición</div>
+    <div class="tree-cat" data-cat="reposicion">
+      <button class="cat-btn" data-cat="reposicion" onclick="navEntrarCategoria('reposicion')">#2.1_Reposición</button>
+      <div class="tree-methods" data-methods-for="reposicion">
+        <button class="nav-tab" data-screen="factores" onclick="irAMetodo('factores','reposicion')">RD_Factores</button>
+        <button class="nav-tab" data-screen="oyp" onclick="irAMetodo('oyp','reposicion')">RD_O&amp;P</button>
+        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
+        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
+        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">RD_Hallazgos</button>
+      </div>
+    </div>
+    <div class="tree-cat" data-cat="vaq15">
+      <button class="cat-btn" data-cat="vaq15" onclick="navEntrarCategoria('vaq15')">#2.2_Vaquillona 15M</button>
+      <div class="tree-methods" data-methods-for="vaq15">
+        <button class="nav-tab" data-screen="factores" onclick="irAMetodo('factores','vaq15')">RD_Factores</button>
+        <button class="nav-tab" data-screen="oyp" onclick="irAMetodo('oyp','vaq15')">RD_O&amp;P</button>
+        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
+        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
+        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">RD_Hallazgos</button>
+      </div>
+    </div>
+
+    <button class="cat-btn cat-btn-graficos" data-cat="graficos" id="btn-graficos" onclick="onClickGraficos()" style="margin-top:8px">Gráficos</button>
   </div>
   <div class="sb-group">
     <div class="sb-label">Herramientas</div>
@@ -1061,8 +1121,8 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <h4>Excel — Todas las categorías <span style="font-size:.65rem;background:var(--oro);color:white;padding:2px 7px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></h4>
     <p>Genera un archivo .xlsx con una hoja por método y categoría.</p>
     <div class="export-btns" style="margin-bottom:4px">
-      <button class="btn-export" onclick="onExportExcel('factores')">Excel — RD_Factores (4 categorías)</button>
-      <button class="btn-export" onclick="onExportExcel('oyp')">Excel — RD_O&amp;P (4 categorías)</button>
+      <button class="btn-export" onclick="onExportExcel('factores')">Excel — RD_Factores (5 categorías)</button>
+      <button class="btn-export" onclick="onExportExcel('oyp')">Excel — RD_O&amp;P (5 categorías)</button>
       <button class="btn-export" onclick="onExportExcel('completo')">Excel — Completo (todos los datos)</button>
     </div>
     <p style="margin-top:12px;font-size:.78rem;color:var(--gris)">PDF: abre vista de impresión del navegador. CSV y Excel: se descargan directamente.</p>
@@ -1104,29 +1164,44 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <div style="font-size:1.3rem;font-weight:800;color:white;letter-spacing:-.3px;margin-bottom:3px">SEPA<span style="color:var(--oro)">-Select</span></div>
     <div style="font-size:.72rem;color:rgba(255,255,255,.5);letter-spacing:.04em;margin-bottom:20px">Evaluación por DEPS · v8</div>
     <div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:10px">Seleccioná una categoría</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:480px;margin:0 auto 16px">
-      <div class="global-cat-card" id="gcard-terminal" onclick="setCat('terminal')">
-        <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.4);margin-bottom:3px">Categoría 1</div>
-        <div style="font-size:.88rem;font-weight:700;color:white">Terminal</div>
-        <div style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px;line-height:1.35">Progenie a faena · peso y rendimiento</div>
-      </div>
-      <div class="global-cat-card" id="gcard-reposicion" onclick="setCat('reposicion')">
-        <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.4);margin-bottom:3px">Categoría 2</div>
-        <div style="font-size:.88rem;font-weight:700;color:white">Reposición</div>
-        <div style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px;line-height:1.35">Vientres · habilidad materna y fertilidad</div>
-      </div>
-      <div class="global-cat-card" id="gcard-vaq15" onclick="setCat('vaq15')">
-        <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.4);margin-bottom:3px">Categoría 3</div>
-        <div style="font-size:.88rem;font-weight:700;color:white">Vaquillona 15M</div>
-        <div style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px;line-height:1.35">Entore joven · facilidad de parto</div>
-      </div>
-      <div class="global-cat-card" id="gcard-rodeoGeneral" onclick="setCat('rodeoGeneral')">
-        <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.4);margin-bottom:3px">Categoría 4</div>
-        <div style="font-size:.88rem;font-weight:700;color:white">Rodeo General</div>
+    <div style="max-width:480px;margin:0 auto 16px">
+      <div class="global-cat-card" id="gcard-rodeoGeneral" onclick="navEntrarCategoria('rodeoGeneral')" style="border:1px solid var(--oro);background:rgba(212,165,69,.1);margin-bottom:16px;text-align:left">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:3px">
+          <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--oro)">Rodeo General</div>
+          <span style="font-size:.58rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:var(--oro);color:var(--verde-oscuro);border-radius:20px;padding:2px 8px;white-space:nowrap">★ Gran Selecto</span>
+        </div>
+        <div style="font-size:.92rem;font-weight:800;color:white">El mejor del rodeo, sin objetivo específico</div>
         <div style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px;line-height:1.35">Todo terreno · buen ternero, hija sirve, parto cuidado</div>
       </div>
+
+      <div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--oro);text-align:left;margin-bottom:6px">Rodeo 1 · Venta de cría <span style="font-weight:400;color:rgba(255,255,255,.4);text-transform:none">— objetivo combinado terminal/faena</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+        <div class="global-cat-card" id="gcard-terminal" onclick="navEntrarCategoria('terminal')">
+          <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.4);margin-bottom:3px">Categoría 1 · #1.1_Terminal</div>
+          <div style="font-size:.88rem;font-weight:700;color:white">Terminal</div>
+          <div style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px;line-height:1.35">Progenie a faena · peso y rendimiento</div>
+        </div>
+        <div class="global-cat-card" id="gcard-hilton" onclick="navEntrarCategoria('hilton')">
+          <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.4);margin-bottom:3px">Categoría 5 · #1.2_Hilton</div>
+          <div style="font-size:.88rem;font-weight:700;color:white">Hilton</div>
+          <div style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px;line-height:1.35">Novillo pesado cuota Hilton · kilos y calidad de res</div>
+        </div>
+      </div>
+      <div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--oro);text-align:left;margin-bottom:6px">Rodeo 2 · Cría p/Reposición <span style="font-weight:400;color:rgba(255,255,255,.4);text-transform:none">— objetivo combinado maternal/reposición</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="global-cat-card" id="gcard-reposicion" onclick="navEntrarCategoria('reposicion')">
+          <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.4);margin-bottom:3px">Categoría 2 · #2.1_Reposición</div>
+          <div style="font-size:.88rem;font-weight:700;color:white">Reposición</div>
+          <div style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px;line-height:1.35">Vientres · habilidad materna y fertilidad</div>
+        </div>
+        <div class="global-cat-card" id="gcard-vaq15" onclick="navEntrarCategoria('vaq15')">
+          <div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.4);margin-bottom:3px">Categoría 3 · #2.2_Vaquillona 15M</div>
+          <div style="font-size:.88rem;font-weight:700;color:white">Vaquillona 15M</div>
+          <div style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px;line-height:1.35">Entore joven · facilidad de parto</div>
+        </div>
+      </div>
     </div>
-    <div style="font-size:.65rem;color:rgba(255,255,255,.25)">★ SELECTO = top 5 en RD_Factores y RD_O&amp;P simultáneamente</div>
+    <div style="font-size:.65rem;color:rgba(255,255,255,.25)">★ SELECTO = top 10 en RD_Factores y RD_O&amp;P simultáneamente</div>
   </div>
 
   <div id="global-insight" class="global-insight"><div class="insight-dot"></div><span id="insight-text">Calculando...</span></div>
@@ -1167,7 +1242,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
   </div>
   <div class="concord-wrap global-sub" data-sub="concordancia">
     <div style="background:var(--oro-claro,#fdf3dc);border:1px solid var(--oro,#b8860b);border-radius:10px;padding:11px 14px;margin-bottom:14px">
-      <div style="font-weight:800;color:#7a5a10;font-size:.82rem;margin-bottom:4px">★ SELECTO = top 5 en RD_Factores <u>y</u> en RD_O&amp;P a la vez</div>
+      <div style="font-weight:800;color:#7a5a10;font-size:.82rem;margin-bottom:4px">★ SELECTO = top 10 en RD_Factores <u>y</u> en RD_O&amp;P a la vez</div>
       <div style="font-size:.75rem;color:#6b5320;line-height:1.5">Los dos métodos miden cosas distintas: RD_Factores es un índice ponderado (encaje con el objetivo de la categoría); RD_O&amp;P cuenta cuántos perfiles funcionales satisface el toro. Un toro puede ser <strong>#1 en un método y no ser SELECTO</strong> — significa que los métodos no coinciden para él en esta categoría; conviene mirarlo con detalle.</div>
     </div>
     <div id="concord-top5"></div>
@@ -1182,8 +1257,8 @@ tr.sel-z:hover td{background:#d4ecda!important}
 
   <!-- Sub-pantalla RESUMEN: los 4 puntajes por categoría para cada toro -->
   <div class="screen-section metodo-sub" data-msub="resumen" id="factores-resumen">
-    <div class="section-header"><h2>RD_Factores — Puntaje por categoría</h2><p>Puntaje TOTAL (SCF + F) de cada toro en las 4 categorías. Elegí una categoría para ver el detalle completo.</p></div>
-    <div class="table-wrap" style="overflow-x:auto"><table class="metodo-matriz"><thead><tr><th>Toro</th><th class="num sortable" onclick="abrirDetalleCategoria('terminal')">1-Terminal</th><th class="num sortable" onclick="abrirDetalleCategoria('reposicion')">2-Reposición</th><th class="num sortable" onclick="abrirDetalleCategoria('vaq15')">3-Vaq. 15M</th><th class="num sortable th-rodeo" onclick="abrirDetalleCategoria('rodeoGeneral')">4-Rodeo General</th></tr></thead><tbody id="factores-matriz-tbody"></tbody></table></div>
+    <div class="section-header"><h2>RD_Factores — Puntaje por categoría</h2><p>Puntaje TOTAL (SCF + F) de cada toro en las 5 categorías. Elegí una categoría para ver el detalle completo.</p></div>
+    <div class="table-wrap" style="overflow-x:auto"><table class="metodo-matriz"><thead><tr><th>Toro</th><th class="num sortable th-rodeo" onclick="abrirDetalleCategoria('rodeoGeneral')">Rodeo General</th><th class="num sortable" onclick="abrirDetalleCategoria('terminal')">#1.1_Terminal</th><th class="num sortable" onclick="abrirDetalleCategoria('hilton')">#1.2_Hilton</th><th class="num sortable" onclick="abrirDetalleCategoria('reposicion')">#2.1_Reposición</th><th class="num sortable" onclick="abrirDetalleCategoria('vaq15')">#2.2_Vaq 15M</th></tr></thead><tbody id="factores-matriz-tbody"></tbody></table></div>
     <p class="metodo-matriz-hint">Clic en una celda o en el nombre de una categoría para abrir su ranking en detalle.</p>
   </div>
 
@@ -1202,8 +1277,8 @@ tr.sel-z:hover td{background:#d4ecda!important}
 
   <!-- Sub-pantalla RESUMEN: score O&P por categoría para cada toro -->
   <div class="screen-section metodo-sub" data-msub="resumen" id="oyp-resumen">
-    <div class="section-header"><h2>RD_O&amp;P — Puntaje por categoría</h2><p>Score Z acumulado de cada toro en las 4 categorías. Elegí una categoría para ver el detalle por perfil.</p></div>
-    <div class="table-wrap" style="overflow-x:auto"><table class="metodo-matriz"><thead><tr><th>Toro</th><th class="num sortable" onclick="abrirDetalleCategoria('terminal')">1-Terminal</th><th class="num sortable" onclick="abrirDetalleCategoria('reposicion')">2-Reposición</th><th class="num sortable" onclick="abrirDetalleCategoria('vaq15')">3-Vaq. 15M</th><th class="num sortable th-rodeo" onclick="abrirDetalleCategoria('rodeoGeneral')">4-Rodeo General</th></tr></thead><tbody id="oyp-matriz-tbody"></tbody></table></div>
+    <div class="section-header"><h2>RD_O&amp;P — Puntaje por categoría</h2><p>Score Z acumulado de cada toro en las 5 categorías. Elegí una categoría para ver el detalle por perfil.</p></div>
+    <div class="table-wrap" style="overflow-x:auto"><table class="metodo-matriz"><thead><tr><th>Toro</th><th class="num sortable th-rodeo" onclick="abrirDetalleCategoria('rodeoGeneral')">Rodeo General</th><th class="num sortable" onclick="abrirDetalleCategoria('terminal')">#1.1_Terminal</th><th class="num sortable" onclick="abrirDetalleCategoria('hilton')">#1.2_Hilton</th><th class="num sortable" onclick="abrirDetalleCategoria('reposicion')">#2.1_Reposición</th><th class="num sortable" onclick="abrirDetalleCategoria('vaq15')">#2.2_Vaq 15M</th></tr></thead><tbody id="oyp-matriz-tbody"></tbody></table></div>
     <p class="metodo-matriz-hint">Clic en una celda o en el nombre de una categoría para abrir su ranking en detalle.</p>
   </div>
 
@@ -1221,10 +1296,11 @@ tr.sel-z:hover td{background:#d4ecda!important}
         <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gris)">Catálogo de perfiles O&amp;P</span>
         <div style="display:flex;gap:6px;flex-wrap:wrap">
           <button class="btn-secundario cat-oyp-filtro active-filtro" onclick="filtrarCatalogoOyP('todas',this)">Todos</button>
+          <button class="btn-secundario cat-oyp-filtro" data-cat="rodeoGeneral" onclick="filtrarCatalogoOyP('rodeoGeneral',this)">Rodeo General</button>
           <button class="btn-secundario cat-oyp-filtro" onclick="filtrarCatalogoOyP('terminal',this)">Terminal</button>
+          <button class="btn-secundario cat-oyp-filtro" data-cat="hilton" onclick="filtrarCatalogoOyP('hilton',this)">Hilton</button>
           <button class="btn-secundario cat-oyp-filtro" onclick="filtrarCatalogoOyP('reposicion',this)">Reposición</button>
           <button class="btn-secundario cat-oyp-filtro" onclick="filtrarCatalogoOyP('vaq15',this)">Vaq 15M</button>
-          <button class="btn-secundario cat-oyp-filtro" data-cat="rodeoGeneral" onclick="filtrarCatalogoOyP('rodeoGeneral',this)">Rodeo General</button>
         </div>
       </div>
       <div id="catalogo-oyp-grid"></div>
@@ -1253,6 +1329,22 @@ tr.sel-z:hover td{background:#d4ecda!important}
   </div>
 </div>
 
+<div id="screen-selectos" class="screen">
+  <div class="print-header" id="ph-selectos"></div>
+  <div class="screen-section">
+    <div class="section-header"><h2>RD_Selectos — cuando los dos métodos coinciden</h2><p>Síntesis de RD_Factores y RD_O&amp;P. <strong>No es un tercer método de cálculo</strong>: es la intersección entre los dos.</p></div>
+    <div style="background:var(--superficie,#f6f5f1);border:1px solid var(--borde,#e5e0d5);border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:.82rem;line-height:1.55">
+      <div style="font-weight:800;color:var(--verde-oscuro,#253a29);margin-bottom:6px">Concepto</div>
+      <div style="margin-bottom:10px">RD_Factores pondera z-scores según el objetivo de la categoría. RD_O&amp;P cuenta perfiles funcionales satisfechos. Son <strong>lógicas independientes</strong> — no comparten fórmula ni supuestos. Cuando ambas ubican al mismo toro entre los mejores, la señal es más robusta que la de cualquiera de los dos métodos por separado.</div>
+      <div style="font-weight:800;color:var(--verde-oscuro,#253a29);margin-bottom:6px">Criterio</div>
+      <div style="margin-bottom:10px"><strong>★ SELECTO</strong> = un toro que aparece en el <strong>Top 10 de RD_Factores</strong> y en el <strong>Top 10 de RD_O&amp;P</strong>, en la misma categoría. Se calcula por separado en cada una de las 5 categorías — un toro puede ser SELECTO en una, en varias, o en ninguna.</div>
+      <div style="font-weight:800;color:var(--verde-oscuro,#253a29);margin-bottom:6px">Qué no significa</div>
+      <div>Ser #1 en un método no alcanza si el otro método no lo acompaña — los dos métodos pueden legítimamente no coincidir para un toro en una categoría puntual (ej. un toro de crecimiento fuerte en Terminal puede no ser SELECTO en Vaquillona 15M, donde domina la facilidad de parto). RD_Selectos no suma puntos ni cambia el mérito de RD_Factores o RD_O&amp;P.</div>
+    </div>
+    <div id="selectos-body"></div>
+  </div>
+</div>
+
 <div id="screen-confiabilidad" class="screen">
   <div class="print-header" id="ph-confiabilidad"></div>
   <div class="screen-section">
@@ -1278,10 +1370,15 @@ tr.sel-z:hover td{background:#d4ecda!important}
         <div style="background:var(--blanco);border:1px solid var(--borde);border-radius:10px;padding:12px">
           <div style="font-size:.7rem;color:var(--gris);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px">Categoría</div>
           <select id="graf-cat" onchange="grafCambiarCat()" style="width:100%;padding:8px 10px;border:1px solid var(--borde);border-radius:8px;font-size:.85rem">
-            <option value="terminal">1-Terminal</option>
-            <option value="reposicion">2-Reposición</option>
-            <option value="vaq15">3-Vaquillona 15M</option>
-            <option value="rodeoGeneral">4-Rodeo General</option>
+            <option value="rodeoGeneral">Rodeo General</option>
+            <optgroup label="Rodeo 1 · Venta de cría">
+              <option value="terminal">#1.1_Terminal</option>
+              <option value="hilton">#1.2_Hilton</option>
+            </optgroup>
+            <optgroup label="Rodeo 2 · Cría p/Reposición">
+              <option value="reposicion">#2.1_Reposición</option>
+              <option value="vaq15">#2.2_Vaquillona 15M</option>
+            </optgroup>
           </select>
         </div>
         <div style="background:var(--blanco);border:1px solid var(--borde);border-radius:10px;padding:12px">
@@ -1637,11 +1734,14 @@ function mostrarLoadingCat(msg) {
 }
 function ocultarLoadingCat() {} // ya reemplazó el contenido
 const CATEGORIAS=[
-  {id:"terminal",  nombre:"1-Terminal",            pesos:{PN:-20,WW:40,PF:15,Alt:0, Leche:0, AOB:15,CE:10,LG:0},  desc:"Cría a faena: máximo peso al destete y músculo."},
-  {id:"reposicion",nombre:"2-Reposición",           pesos:{PN:-20,WW:25,PF:-5,Alt:-15,Leche:20,AOB:5, CE:10,LG:0},  desc:"Hijas retenidas: leche, fertilidad, frame contenido."},
-  {id:"vaq15",    nombre:"3-Vaquillona entore 15M",pesos:{PN:-50,WW:5, PF:0, Alt:-10,Leche:10,AOB:0, CE:10,LG:-15},desc:"Entore precoz: prioriza facilidad de parto."},
-  {id:"rodeoGeneral",nombre:"4-Rodeo General",      pesos:{PN:-30,WW:25,PF:0, Alt:-8, Leche:12,AOB:10,CE:12,LG:-6}, desc:"El todo terreno. Buen ternero, hija que sirve y parto cuidado."}
+  {id:"rodeoGeneral",nombre:"Rodeo General",       pesos:{PN:-20,WW:25,PF:13,Alt:0, Leche:15,AOB:10,CE:12,LG:-5}, desc:"El mejor balance del catálogo. Buen ternero para venta (R1), hija que sirve como futura madre (R2) y parto sin complicaciones. Ideal para quien no quiere elegir un solo camino."},
+  {id:"terminal",  nombre:"#1.1_Terminal",         pesos:{PN:-20,WW:30,PF:25,Alt:0, Leche:5, AOB:10,CE:10,LG:0},  desc:"Apunta a lograr un ternero por vaca por año con manejo ganadero simplificado. Máxima eficiencia reproductiva, facilidad de manejo, crecimiento y rusticidad. El ternero se vende, no se guarda la hija."},
+  {id:"hilton",    nombre:"#1.2_Hilton",           pesos:{PN:-10,WW:20,PF:25,Alt:0, Leche:5, AOB:15,CE:5, LG:0,EGD:10,GI:10}, desc:"Busca un producto de mayor calidad frigorífica. Más kilos de res, rendimiento, marmoleo y conformación para cuota Hilton y mercados premium. Valor agregado en el gancho."},
+  {id:"reposicion",nombre:"#2.1_Reposición",       pesos:{PN:-25,WW:25,PF:5, Alt:-5, Leche:20,AOB:5, CE:10,LG:-5},  desc:"Selección para obtener terneras que serán futuras madres del rodeo. Énfasis en habilidad materna, fertilidad, ubre, docilidad y longevidad. Construye el vientre del futuro."},
+  {id:"vaq15",    nombre:"#2.2_Vaquillona 15M",    pesos:{PN:-35,WW:10,PF:0, Alt:-10,Leche:20,AOB:0, CE:10,LG:-15},desc:"Precocidad sexual extrema. Vaquillonas para entorar a los 15 meses. Facilidad de parto, bajo peso al nacer y rápida entrada en producción. Acorta el ciclo generacional."}
 ];
+// Rodeo 1 (Terminal+Hilton) y Rodeo 2 (Reposición+Vaquillona 15M) son solo encabezados de agrupación
+// en el sidebar/landing (texto hardcodeado ahí) — no son categorías con ranking propio.
 const APP_VERSION='v9';
 function catNombreActivo(){
   try{
@@ -1651,6 +1751,12 @@ function catNombreActivo(){
   return 'Catálogo';
 }
 const CHARS=["PN","WW","PF","Alt","Leche","AOB","CE","LG"];
+// SELECTO = intersección de los primeros N de RD_Factores y RD_O&P (antes 5, ahora 10 — ajuste 2026-09-14).
+const SELECTO_TOP_N=10;
+// Tope del z-score por DEP en RD_O&P (antes ±2, calibrado a ±1.5 con los 8 catálogos reales — ajuste 2026-09-14).
+// Con ±2 casi nadie llega a top score >80 (rara vez un toro es +2 SD en TODOS los DEPs de TODOS los perfiles a la vez).
+// ±1.5 preserva el orden del ranking (rescala linealmente) y sube el techo real ~3-5 pts sin inflar al toro promedio (mediana sigue en 50).
+const OYP_Z_CLAMP=1.5;
 // ═══════════════════════════════════════════════
 // PERFILES RD_O&P — 14 perfiles oficiales v5
 // Ref: 8-20-01 a 8-20-14 | SEPA v5 Oficial
@@ -1678,15 +1784,15 @@ const PERFILES_OYP=[
   // ── U Universales ──
   {id:"U01",codigo:"8-20-01",grupo:"U",nombre:"U01-Quebrador",       afinidad:"Antagónico",
    objetivo:"Destete sin distocia",
-   cats:["terminal","reposicion","vaq15","rodeoGeneral"],
+   cats:["terminal","reposicion","vaq15","rodeoGeneral","hilton"],
    deps_req:[{key:"PN",dir:-1},{key:"WW",dir:+1}]},
   {id:"U02",codigo:"8-20-02",grupo:"U",nombre:"U02-Equilibrio Total",afinidad:"Afín",
    objetivo:"Hace todo bien",
-   cats:["terminal","reposicion","vaq15","rodeoGeneral"],
+   cats:["terminal","reposicion","vaq15","rodeoGeneral","hilton"],
    deps_req:[{key:"WW",dir:+1},{key:"AOB",dir:+1}]},
   {id:"U03",codigo:"8-20-03",grupo:"U",nombre:"U03-Fertilidad Total",afinidad:"Afín",
    objetivo:"Preñez y re-preñez",
-   cats:["terminal","reposicion","vaq15","rodeoGeneral"],
+   cats:["terminal","reposicion","vaq15","rodeoGeneral","hilton"],
    deps_req:[{key:"CE",dir:+1},{key:"WW",dir:+1}]},
   // ── V Vaquillona 15M ──
   {id:"V01",codigo:"8-20-04",grupo:"V",nombre:"V01-Entore Base",     afinidad:"Antagónico",
@@ -1721,19 +1827,19 @@ const PERFILES_OYP=[
   // ── T Terminal ──
   {id:"T01",codigo:"8-20-11",grupo:"T",nombre:"T01-Compacto Carnicero",afinidad:"Afín",
    objetivo:"Novillo 500 que rinde",
-   cats:["terminal","rodeoGeneral"],
+   cats:["terminal","rodeoGeneral","hilton"],
    deps_req:[{key:"PF",dir:+1},{key:"AOB",dir:+1}]},
   {id:"T02",codigo:"8-20-12",grupo:"T",nombre:"T02-Rendimiento Gancho",afinidad:"Afín",
    objetivo:"Más kg de carne",
-   cats:["terminal"],
+   cats:["terminal","hilton"],
    deps_req:[{key:"AOB",dir:+1},{key:"Cortes",dir:+1}]},
   {id:"T03",codigo:"8-20-13",grupo:"T",nombre:"T03-Premium Angus",   afinidad:"Afín",
    objetivo:"Novillo cuota premium",
-   cats:["terminal"],
+   cats:["terminal","hilton"],
    deps_req:[{key:"AOB",dir:+1},{key:"GI",dir:+1}]},
   {id:"T04",codigo:"8-20-14",grupo:"T",nombre:"T04-Eficiencia Total",afinidad:"Afín",
    objetivo:"Come menos, engorda igual",
-   cats:["terminal"],
+   cats:["terminal","hilton"],
    deps_req:[{key:"WW",dir:+1},{key:"PF",dir:+1}]}
 ];
 
@@ -1742,7 +1848,8 @@ const CONFIG_OYP_DEFAULT={
   terminal:   ["U01","U02","U03","T01","T02","T03","T04"],
   reposicion: ["U01","U02","U03","R01","R02","R03"],
   vaq15:      ["U01","U02","U03","V01","V02","V03","V04"],
-  rodeoGeneral:["U01","U02","U03","R01","V01","T01"]
+  rodeoGeneral:["U01","U02","U03","R01","V01","T01"],
+  hilton:     ["U01","U02","U03","T01","T02","T03","T04"]
 };
 let configOyP=JSON.parse(JSON.stringify(CONFIG_OYP_DEFAULT));
 const DEP_INFO={
@@ -2080,7 +2187,7 @@ const FAQS=[
   ]},
   {bloque:"Exportar", items:[
     {q:"¿Qué formatos de exportación están disponibles?",
-     r:"<strong>PDF</strong>: impresión de la pantalla activa o del informe completo con todas las categorías. <strong>CSV</strong>: descarga de RD_Factores, RD_O&P o comparativo de la categoría activa. <strong>Excel</strong>: workbook con múltiples hojas — RD_Factores (4 categorías), RD_O&P con desglose por perfil (4 categorías) o completo con hoja resumen comparativa. CSV y Excel requieren licencia PLUS."},
+     r:"<strong>PDF</strong>: impresión de la pantalla activa o del informe completo con todas las categorías. <strong>CSV</strong>: descarga de RD_Factores, RD_O&P o comparativo de la categoría activa. <strong>Excel</strong>: workbook con múltiples hojas — RD_Factores (5 categorías), RD_O&P con desglose por perfil (5 categorías) o completo con hoja resumen comparativa. CSV y Excel requieren licencia PLUS."},
   ]},
 ];
 
@@ -2138,7 +2245,7 @@ function renderCatalogoOyP(filtro){
     "Antagónico":{bg:"#fdf0ee",color:"#7a1a10"},
     "Moderador":{bg:"#fdf3dc",color:"#7a5a10"},
   };
-  const CAT_LABELS={terminal:"Terminal",reposicion:"Reposición",vaq15:"Vaq 15M",rodeoGeneral:"Rodeo General"};
+  const CAT_LABELS={terminal:"Terminal",reposicion:"Reposición",vaq15:"Vaq 15M",rodeoGeneral:"Rodeo General",hilton:"Hilton"};
   let html="";
   for(const g of ["U","V","R","T"]){
     const items=PERFILES_OYP.filter(p=>p.grupo===g&&(filtro==="todas"||p.cats.includes(filtro)));
@@ -2295,8 +2402,10 @@ function onClickConfig(){
 function renderConfigPanel(){
   const t=document.getElementById('pesos-tabla');
   if(!t) return;
-  t.innerHTML=`<thead><tr><th>Categoría</th>${CHARS.map(c=>`<th style="text-align:center">${c}</th>`).join('')}</tr></thead><tbody>`+
-    CATEGORIAS.map(cat=>`<tr><td style="font-weight:700;color:var(--verde-oscuro)">${cat.nombre}</td>${CHARS.map(c=>{const p=cat.pesos[c];return`<td style="text-align:center"><span class="${p>0?'peso-pos':p<0?'peso-neg':'peso-0'}">${p>0?'+':''}${p}</span></td>`}).join('')}</tr>`).join('')+
+  const extraCols=[...new Set(CATEGORIAS.flatMap(c=>Object.keys(c.pesos)))].filter(c=>!CHARS.includes(c));
+  const cols=CHARS.concat(extraCols);
+  t.innerHTML=`<thead><tr><th>Categoría</th>${cols.map(c=>`<th style="text-align:center">${c}</th>`).join('')}</tr></thead><tbody>`+
+    CATEGORIAS.map(cat=>`<tr><td style="font-weight:700;color:var(--verde-oscuro)">${cat.nombre}</td>${cols.map(c=>{const p=cat.pesos[c]||0;return`<td style="text-align:center"><span class="${p>0?'peso-pos':p<0?'peso-neg':'peso-0'}">${p>0?'+':''}${p}</span></td>`}).join('')}</tr>`).join('')+
     '</tbody>';
   const mod=Object.entries(fenotipoData).filter(([,v])=>v!==0);
   const st=document.getElementById('config-fen-status');
@@ -2501,15 +2610,19 @@ function zsc(d,m,s){return(d===null||d===undefined)?0:s===0?0:(d-m)/s}
 
 function calcFactores(toros,catId){
   const cat=CATEGORIAS.find(c=>c.id===catId);
+  // DEPs adicionales fuera de los 8 del modelo base (ej. EGD/GI en Hilton/G1) — null-safe vía getDepVal, faltante = z 0
+  const extraKeys=Object.keys(cat.pesos).filter(k=>!CHARS.includes(k));
   const stats={};
   for(const c of CHARS){const v=toros.map(t=>t.deps[c].dep);stats[c]={m:avg(v),s:sd(v)}}
+  for(const c of extraKeys){const v=toros.map(t=>getDepVal(t,c));stats[c]={m:avg(v),s:sd(v)}}
   const base=toros.map(t=>{
     const nD=CHARS.filter(c=>t.deps[c].dep!==null&&t.deps[c].dep!==undefined).length;
     const precs=Object.values(t.deps).map(d=>d.prec).filter(p=>p!==null&&p!==undefined);
     const pm=precs.length?precs.reduce((a,b)=>a+b,0)/precs.length:null; // solo informativo — la precisión vive en RD_Confiabilidad, no interviene en el mérito
     const z={};for(const c of CHARS)z[c]=zsc(t.deps[c].dep,stats[c].m,stats[c].s);
+    for(const c of extraKeys)z[c]=zsc(getDepVal(t,c),stats[c].m,stats[c].s);
     // RD_Fact = mérito puro: z-score interno del catálogo × peso de la categoría. Sin descuento por precisión.
-    const adj=CHARS.reduce((acc,c)=>acc+z[c]*cat.pesos[c],0);
+    const adj=Object.keys(cat.pesos).reduce((acc,c)=>acc+z[c]*cat.pesos[c],0);
     return{toro:t,nD,pm,z,adj};
   });
   // Sin filtro de aptitud: entra todo toro con al menos 1 DEP del modelo (los de 0 ya los excluye toroSinDeps aguas arriba).
@@ -2538,8 +2651,8 @@ function getDepVal(toro,key){
 
 // Calcula un perfil para un toro
 // Retorna: {score0_10 (0-10 normalizado), zSum (suma z cruda), calculable, faltantes}
-// Normalización: cada DEP aporta dir×z_clamped ∈ [-2,+2]
-// Para N DEPs: zSum ∈ [-N×2, +N×2] → score0_10 = ((zSum + N×2) / (N×4)) × 10
+// Normalización: cada DEP aporta dir×z_clamped ∈ [-OYP_Z_CLAMP,+OYP_Z_CLAMP]
+// Para N DEPs: zSum ∈ [-N×C, +N×C] → score0_10 = ((zSum + N×C) / (N×2×C)) × 10
 function calcPerfilOyP(toro,perfil,stats){
   const d=perfil.deps_req;
   const faltantes=[];
@@ -2549,17 +2662,18 @@ function calcPerfilOyP(toro,perfil,stats){
   if(faltantes.length>0) return{score0_10:null,zSum:null,calculable:false,faltantes};
   let zSum=0;
   const N=d.length;
+  const C=OYP_Z_CLAMP;
   for(const req of d){
     const val=getDepVal(toro,req.key);
     const s=stats[req.key];
     if(!s){faltantes.push(req.key);continue;}
     const z=(val-s.m)/(s.s||1);
-    const zc=Math.max(-2,Math.min(2,z));
+    const zc=Math.max(-C,Math.min(C,z));
     zSum+=req.dir*zc;
   }
   if(faltantes.length>0) return{score0_10:null,zSum:null,calculable:false,faltantes};
-  // Mapeo [-N×2, +N×2] → [0, 10]
-  const score0_10=parseFloat(((zSum+N*2)/(N*4)*10).toFixed(3));
+  // Mapeo [-N×C, +N×C] → [0, 10]
+  const score0_10=parseFloat(((zSum+N*C)/(N*2*C)*10).toFixed(3));
   return{score0_10,zSum:parseFloat(zSum.toFixed(4)),calculable:true,faltantes:[]};
 }
 
@@ -2612,7 +2726,7 @@ function toroSinDeps(t){
 function torosConDeps(lista){ return (lista||[]).filter(t=>!toroSinDeps(t)); }
 
 function explicar(z,cat){
-  const cs=CHARS.filter(c=>cat.pesos[c]!==0).map(c=>({c,contrib:z[c]*cat.pesos[c],pos:z[c]>=0})).sort((a,b)=>b.contrib-a.contrib).slice(0,2).filter(x=>x.contrib>0);
+  const cs=Object.keys(cat.pesos).filter(c=>cat.pesos[c]!==0).map(c=>({c,contrib:z[c]*cat.pesos[c],pos:z[c]>=0})).sort((a,b)=>b.contrib-a.contrib).slice(0,2).filter(x=>x.contrib>0);
   if(!cs.length) return "Perfil parejo.";
   // usar frases largas si existen
   const frases=cs.map(x=>{
@@ -2700,10 +2814,10 @@ function renderRadarCanvas(){
 // Valor en cada eje: score O&P 0-100 del toro en esa categoría
 // ═══════════════════════════════════════════════
 const OYP_RADAR_CATS=[
+  {id:'rodeoGeneral',label:'Rodeo General'},
   {id:'terminal',   label:'Terminal'},
   {id:'reposicion', label:'Reposición'},
-  {id:'vaq15',      label:'Vaq 15M'},
-  {id:'rodeoGeneral',label:'Rodeo General'}
+  {id:'vaq15',      label:'Vaq 15M'}
 ];
 const OYP_RADAR_COLORES=["#2a78d6","#eb6834","#1baf7a","#eda100","#e87ba4","#008300"];
 window._oypRadarState={seleccionados:[]};
@@ -2908,7 +3022,7 @@ function renderResumen(){
   `;
 
   // ── Matriz ───────────────────────────────────
-  const TOP5=5;
+  const TOP5=SELECTO_TOP_N;
   const matriz=document.getElementById('resumen-matriz');
 
   // Headers
@@ -2955,7 +3069,7 @@ function renderResumen(){
       <div class="rm-selecto">
         ${selectos.length
           ? selectos.map(n=>`<div class="rm-selecto-item">★ ${displayNombre(n)}</div>`).join('')
-          : '<div class="rm-selecto-empty">Sin coincidencias top 5</div>'
+          : '<div class="rm-selecto-empty">Sin coincidencias top '+TOP5+'</div>'
         }
       </div>
     </div>`;
@@ -2972,13 +3086,13 @@ function _gvIconos(n,precMap,hallSet){
   return (dot||fl)?`<span style="display:inline-flex;gap:3px;align-items:center;margin-left:5px">${dot}${fl}</span>`:'';
 }
 function renderGlobal(rf,rs,cat){
-  const TOP=10,T5=5;
+  const TOP=10,T5=SELECTO_TOP_N;
   const _precMap={}; calcConfiabilidad(TOROS).lista.forEach(x=>_precMap[x.toro.nombre]=x);
   const _hallSet=new Set(calcHallazgos(TOROS,cat.id).items.map(x=>x.toro.nombre));
   const top5F=new Set(rf.filter(r=>r.apto).slice(0,T5).map(r=>r.toro.nombre));
   const top5S=new Set(rs.scores.filter(r=>!toroSinDeps(r.toro)).slice(0,T5).map(r=>r.toro.nombre));
   const coin=[...top5F].filter(n=>top5S.has(n));
-  document.getElementById('insight-text').innerHTML=`<strong style="color:var(--verde-oscuro)">${coin.length} toro${coin.length!==1?'s':''}</strong> en el top 5 de <strong style="color:var(--verde-oscuro)">ambos métodos</strong> para <strong>${cat.nombre}</strong>${coin.length?': <em>'+coin.map(n=>displayNombre(n)).join(', ')+'</em>':''}`;
+  document.getElementById('insight-text').innerHTML=`<strong style="color:var(--verde-oscuro)">${coin.length} toro${coin.length!==1?'s':''}</strong> en el top ${T5} de <strong style="color:var(--verde-oscuro)">ambos métodos</strong> para <strong>${cat.nombre}</strong>${coin.length?': <em>'+coin.map(n=>displayNombre(n)).join(', ')+'</em>':''}`;
 
   // Radar comparativo V2 mejorado - selector libre de toros
   window._radarState = window._radarState || {seleccionados:[], cat:null};
@@ -3029,11 +3143,11 @@ function renderGlobal(rf,rs,cat){
       ${coin2?'<span class="coin-badge">★ SELECTO</span>':''}
     </li>`;
   }).join('');
-  // Top 5 × Top 5 + SELECTO
+  // Top N × Top N + SELECTO
   const _c5=document.getElementById('concord-top5');
   if(_c5){
-    const t5f=aptosF.slice(0,5);
-    const t5s=rs.scores.filter(r=>!toroSinDeps(r.toro)).slice(0,5);
+    const t5f=aptosF.slice(0,T5);
+    const t5s=rs.scores.filter(r=>!toroSinDeps(r.toro)).slice(0,T5);
     const fila=(r,i,isF)=>{
       const n=r.toro.nombre;const es=top5F.has(n)&&top5S.has(n);
       const val=isF?r.total.toFixed(1):r.score.toFixed(1);
@@ -3045,10 +3159,10 @@ function renderGlobal(rf,rs,cat){
       </div>`;
     };
     _c5.innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
-      <div><div class="concord-title" style="margin-bottom:7px">RD_Factores — Top 5</div>${t5f.map((r,i)=>fila(r,i,true)).join('')||'<div style="font-size:.8rem;color:var(--gris)">Sin datos</div>'}</div>
-      <div><div class="concord-title" style="margin-bottom:7px">RD_O&amp;P — Top 5</div>${t5s.map((r,i)=>fila(r,i,false)).join('')||'<div style="font-size:.8rem;color:var(--gris)">Sin datos</div>'}</div>
+      <div><div class="concord-title" style="margin-bottom:7px">RD_Factores — Top ${T5}</div>${t5f.map((r,i)=>fila(r,i,true)).join('')||'<div style="font-size:.8rem;color:var(--gris)">Sin datos</div>'}</div>
+      <div><div class="concord-title" style="margin-bottom:7px">RD_O&amp;P — Top ${T5}</div>${t5s.map((r,i)=>fila(r,i,false)).join('')||'<div style="font-size:.8rem;color:var(--gris)">Sin datos</div>'}</div>
     </div>
-    <div style="font-size:.78rem;color:var(--verde-oscuro);font-weight:700;margin-bottom:16px">${coin.length?'★ SELECTO en '+cat.nombre+': '+coin.map(n=>displayNombre(n)).join(', '):'Sin SELECTOS en '+cat.nombre+' — los dos métodos no comparten ningún toro en el top 5.'}</div>`;
+    <div style="font-size:.78rem;color:var(--verde-oscuro);font-weight:700;margin-bottom:16px">${coin.length?'★ SELECTO en '+cat.nombre+': '+coin.map(n=>displayNombre(n)).join(', '):'Sin SELECTOS en '+cat.nombre+' — los dos métodos no comparten ningún toro en el top '+T5+'.'}</div>`;
   }
   // concordancia
   document.getElementById('concord-tbody').innerHTML=aptosF.slice(0,TOP).map((r,i)=>{
@@ -3125,7 +3239,7 @@ function showPerfilPanel(pid, event){
     </div>`;
   }).join("");
   const cats=p.cats.map(c=>{
-    const lbl={terminal:"Terminal",reposicion:"Reposición",vaq15:"Vaq 15M",rodeoGeneral:"Rodeo General"};
+    const lbl={terminal:"Terminal",reposicion:"Reposición",vaq15:"Vaq 15M",rodeoGeneral:"Rodeo General",hilton:"Hilton"};
     return`<span style="font-size:.65rem;background:var(--superficie);border:1px solid var(--borde);padding:1px 7px;border-radius:4px;color:var(--gris)">${lbl[c]||c}</span>`;
   }).join("");
   document.getElementById('oyp-perfil-contenido').innerHTML=`
@@ -3149,7 +3263,7 @@ function renderOyP(rs,cat){
   document.getElementById('oyp-desc').textContent=`Score 0–100 · ${rs.perfiles.length} perfiles activos · Chips: puntaje 0–10 por perfil · ? = DEP faltante en catálogo`;
 
   const scoresVis=rs.scores.filter(r=>!toroSinDeps(r.toro));
-  const top5Z=new Set(scoresVis.slice(0,5).map(r=>r.toro.nombre));
+  const top5Z=new Set(scoresVis.slice(0,SELECTO_TOP_N).map(r=>r.toro.nombre));
 
   // Perfiles NC globales (ningún toro puede calcularlos en este catálogo)
   const perfilesNC=rs.perfiles.filter(p=>!scoresVis.some(r=>r.det[p.id]&&r.det[p.id].calculable));
@@ -3161,7 +3275,7 @@ function renderOyP(rs,cat){
   });
 
   document.getElementById('oyp-legend').innerHTML=`
-    <span><span class="oyp-leg-dot" style="background:#fff8e1;border-color:#b8892b"></span>★ SELECTO (top 5)</span>
+    <span><span class="oyp-leg-dot" style="background:#fff8e1;border-color:#b8892b"></span>★ SELECTO (top ${SELECTO_TOP_N})</span>
     <span><span class="oyp-leg-dot" style="background:white"></span>Resto</span>
     ${perfilesNC.length?`<span style="color:#c0392b;font-size:.72rem">⚠ ${perfilesNC.length} perfil(es) no calculable(s) en este catálogo</span>`:''}`;
 
@@ -3279,8 +3393,8 @@ function openModalFactores(nombre){
           <th style="text-align:right;padding:4px 8px;color:var(--verde-oscuro)">Peso</th>
           <th style="text-align:right;padding:4px 8px;color:var(--verde-oscuro)">Ponderado</th>
         </tr></thead>
-        <tbody>${CHARS.map(c=>{
-          const dep=toro.deps[c];const v=dep.dep;const z=r.z[c];const p=cat.pesos[c];
+        <tbody>${Object.keys(cat.pesos).map(c=>{
+          const v=getDepVal(toro,c);const z=r.z[c];const p=cat.pesos[c];
           const pond=z*p;const isNull=v===null||v===undefined;
           const pc=pond>0?'#253a29':pond<0?'#7a1a10':'#888';
           return`<tr style="border-bottom:1px solid var(--borde)">
@@ -3387,7 +3501,7 @@ let navHistory=[];        // pila de {view, cat}
 let _navSuppress=false;
 let globalSub='ranking';  // sub-pantalla activa dentro de Vista Global
 const SUB_LABELS={ranking:'Ranking',graficos:'Gráficos',concordancia:'RD_Factores × RD_O&P'};
-const SCREEN_LABELS={resumen:'Resumen del catálogo',global:'Vista Global',factores:'RD_Factores',oyp:'RD_O&P',confiabilidad:'RD_Confiabilidad',hallazgos:'RD_Hallazgos',blanco:'Modos O&P',graficos:'Gráficos',catalogo:'Catálogo'};
+const SCREEN_LABELS={resumen:'Resumen del catálogo',global:'Vista Global',factores:'RD_Factores',oyp:'RD_O&P',selectos:'RD_Selectos',confiabilidad:'RD_Confiabilidad',hallazgos:'RD_Hallazgos',blanco:'Modos O&P',graficos:'Gráficos',catalogo:'Catálogo'};
 const metodoSub={factores:'resumen', oyp:'resumen'};  // 'resumen' (4 puntajes) | 'detalle'
 function currentView(){
   if(currentCat==='graficos') return 'graficos';
@@ -3407,14 +3521,19 @@ function viewLabel(v){
 // y en la sub-pantalla "resumen" (4 puntajes) de RD_Factores / RD_O&P.
 function updateCatBar(){
   const s=currentScreen;
-  const hideAll=(s==='catalogo'||s==='resumen');
+  // Puntajes por categoría (matriz cross-categoría) compara TODAS las categorías a la vez —
+  // no tiene sentido tener una sola categoría "activa" en el árbol mientras se ve esa matriz.
+  const matrixView=(s==='factores' && metodoSub.factores==='resumen')||(s==='oyp' && metodoSub.oyp==='resumen');
+  const hideAll=(s==='catalogo'||s==='resumen'||matrixView);
   const cb=document.getElementById('cat-bar');
-  if(cb) cb.style.display=hideAll?'none':'flex';
-  const hideCats = hideAll || s==='global'
-    || (s==='factores' && metodoSub.factores==='resumen')
-    || (s==='oyp' && metodoSub.oyp==='resumen');
-  document.querySelectorAll('#cat-bar .cat-btn:not(.cat-btn-graficos)').forEach(b=>{b.style.display=hideCats?'none':'';});
-  const l=document.querySelector('#cat-bar .cat-label'); if(l) l.style.display=hideCats?'none':'';
+  if(cb){ cb.style.display=hideAll?'none':'flex'; cb.classList.toggle('landing-mode', s==='global'); }
+  // Rodeo/Categoría quedan siempre visibles y elegibles; lo que se abre/cierra es
+  // el sub-menú de los 5 métodos bajo la categoría activa (jerarquía Rodeo→Categoría→Método).
+  // También se muestra en 'global' (Resumen) para la categoría activa — ajuste 2026-09-14 a pedido de RD.
+  const collapseMethods = hideAll;
+  document.querySelectorAll('.tree-methods').forEach(el=>{
+    el.classList.toggle('open', !collapseMethods && el.dataset.methodsFor===currentCat);
+  });
 }
 function setMetodoSub(screen, sub, noRecord){
   const _pv=currentView(), _pc=(currentCat==='graficos'?null:currentCat);
@@ -3441,7 +3560,7 @@ function irAMetodo(screen, catId){
 }
 function renderFactoresMatriz(){
   const tb=document.getElementById('factores-matriz-tbody'); if(!tb||!TOROS.length) return;
-  const cats=CATEGORIAS.slice(0,4);
+  const cats=CATEGORIAS;
   const porCat={}; cats.forEach(c=>{ porCat[c.id]={}; calcFactores(TOROS,c.id).forEach(r=>{ porCat[c.id][r.toro.nombre]={total:r.total,apto:r.apto}; }); });
   const toros=torosConDeps(TOROS).slice();
   toros.sort((a,b)=>{
@@ -3462,7 +3581,7 @@ function renderFactoresMatriz(){
 }
 function renderOyPMatriz(){
   const tb=document.getElementById('oyp-matriz-tbody'); if(!tb||!TOROS.length) return;
-  const cats=CATEGORIAS.slice(0,4);
+  const cats=CATEGORIAS;
   const porCat={}; cats.forEach(c=>{ porCat[c.id]={}; calcOyP(TOROS,c.id).scores.forEach(r=>{ porCat[c.id][r.toro.nombre]={score:r.score,nCalc:r.nCalc}; }); });
   const toros=torosConDeps(TOROS).slice();
   toros.sort((a,b)=>{
@@ -3621,7 +3740,18 @@ function setCat(c){
   document.querySelectorAll('.global-cat-card').forEach(card=>card.classList.remove('active'));
   const activeCard=document.getElementById('gcard-'+c);
   if(activeCard) activeCard.classList.add('active');
+  updateCatBar();
   renderAll();
+}
+// Entrar a una categoría (o Rodeo General) desde el árbol de navegación o el landing:
+// si veníamos del Resumen, entra directo al detalle de RD_Factores; si ya estábamos
+// dentro de un método, se queda en ese mismo método pero para la nueva categoría.
+function navEntrarCategoria(catId){
+  if(currentScreen==='global'){
+    irAMetodo('factores', catId); // entra directo al detalle (no al resumen cross-categoría)
+  } else {
+    setCat(catId);
+  }
 }
 // ═══════════════════════════════════════════════
 // RD_PRECISIÓN — capa de confiabilidad (orientativa · no rankea · no interviene en el mérito)
@@ -3644,6 +3774,52 @@ function precHeat(p){
   if(p==null) return 'background:#f2f2f0;color:#bbb';
   const l=Math.round(94-p*48);
   return `background:hsl(140,42%,${l}%);color:${p>0.5?'#fff':'#254'}`;
+}
+// RD_Selectos: intersección Top N RD_Factores ∩ Top N RD_O&P (N=SELECTO_TOP_N), calculada por separado en cada categoría.
+// No es un método de cálculo propio — solo cruza los resultados de calcFactores/calcOyP.
+function calcSelectos(toros){
+  const out={};
+  CATEGORIAS.forEach(cat=>{
+    const rf=calcFactores(toros,cat.id).filter(r=>r.apto).sort((a,b)=>b.total-a.total);
+    const rs=calcOyP(toros,cat.id);
+    const top5F=rf.slice(0,SELECTO_TOP_N);
+    const top5S=rs.scores.filter(r=>!toroSinDeps(r.toro)).slice(0,SELECTO_TOP_N);
+    const setF=new Set(top5F.map(r=>r.toro.nombre));
+    const setS=new Set(top5S.map(r=>r.toro.nombre));
+    const sel=top5F.map(r=>r.toro.nombre).filter(n=>setS.has(n));
+    out[cat.id]={cat,top5F,top5S,sel};
+  });
+  return out;
+}
+function renderSelectos(){
+  const cont=document.getElementById('selectos-body'); if(!cont) return;
+  const R=calcSelectos(TOROS);
+  const fila=(nombre,val,esSel)=>`<div onclick="onClickToro('${nombre.replace(/'/g,"\\'")}')" style="padding:2px 0;cursor:pointer;${esSel?'font-weight:800;color:#b8892b':''}" title="Clic para ver la ficha del toro">${esSel?'★ ':''}${displayNombre(nombre)} <span style="color:var(--gris)">${val}</span></div>`;
+  let html='<div style="overflow-x:auto"><table class="prec-tabla"><thead><tr><th style="text-align:left">Categoría</th><th style="text-align:left">📊 RD_Factores Top '+SELECTO_TOP_N+'</th><th style="text-align:left">🎯 RD_O&amp;P Top '+SELECTO_TOP_N+'</th><th style="text-align:left">★ Selecto</th></tr></thead><tbody>';
+  CATEGORIAS.forEach(cat=>{
+    const r=R[cat.id];
+    const lf=r.top5F.map(x=>fila(x.toro.nombre,x.total.toFixed(1),r.sel.includes(x.toro.nombre))).join('');
+    const lo=r.top5S.map(x=>fila(x.toro.nombre,x.score.toFixed(1),r.sel.includes(x.toro.nombre))).join('');
+    const ls=r.sel.length?r.sel.map(n=>`<span class="coin-badge" style="display:inline-block;margin:1px 3px 1px 0">★ ${displayNombre(n)}</span>`).join(''):'<span style="color:var(--gris);font-style:italic">Sin SELECTOS</span>';
+    html+=`<tr><td style="font-weight:700;color:var(--verde-oscuro,#253a29);vertical-align:top">${cat.nombre}<div style="font-size:.68rem;color:var(--gris);font-weight:400">${cat.desc}</div></td>
+      <td style="vertical-align:top">${lf}</td><td style="vertical-align:top">${lo}</td><td style="vertical-align:top">${ls}</td></tr>`;
+  });
+  html+='</tbody></table></div>';
+
+  const conteo={};
+  CATEGORIAS.forEach(cat=>{R[cat.id].sel.forEach(n=>{(conteo[n]=conteo[n]||[]).push(cat.nombre);});});
+  const multi=Object.entries(conteo).filter(e=>e[1].length>1);
+  html+='<div style="margin-top:18px;font-weight:800;color:var(--verde-oscuro,#253a29);font-size:.86rem;margin-bottom:8px">Toros SELECTO en más de una categoría</div>';
+  if(multi.length){
+    html+='<div style="display:flex;flex-wrap:wrap;gap:9px">'+multi.map(([n,cats])=>
+      `<div onclick="onClickToro('${n.replace(/'/g,"\\'")}')" style="cursor:pointer;background:var(--superficie,#f6f5f1);border:1px solid var(--borde,#e5e0d5);border-radius:8px;padding:9px 13px" title="Clic para ver la ficha del toro">
+        <div style="font-weight:800;color:var(--verde-oscuro,#253a29);font-size:.83rem;margin-bottom:4px">★ ${displayNombre(n)}</div>
+        ${cats.map(c=>`<div style="font-size:.72rem;color:#3c6b45">✓ ${c}</div>`).join('')}
+      </div>`).join('')+'</div>';
+  } else {
+    html+='<div style="color:var(--gris);font-style:italic;font-size:.8rem">Ningún toro es SELECTO en más de una categoría en este catálogo.</div>';
+  }
+  cont.innerHTML=html;
 }
 function calcConfiabilidad(toros){
   const pool=torosConDeps(toros);
@@ -3705,7 +3881,7 @@ function renderConfiabilidad(rf,cat){
   let filas='';
   CATEGORIAS.forEach(c=>{
     const rfc=calcFactores(TOROS,c.id).filter(r=>r.apto).slice(0,5);
-    const pesosOrden=CHARS.filter(k=>c.pesos[k]!==0).sort((a,b)=>Math.abs(c.pesos[b])-Math.abs(c.pesos[a])).slice(0,3);
+    const pesosOrden=Object.keys(c.pesos).filter(k=>c.pesos[k]!==0).sort((a,b)=>Math.abs(c.pesos[b])-Math.abs(c.pesos[a])).slice(0,3);
     rfc.forEach((r,i)=>{
       const px=pMap[r.toro.nombre];
       const det=px?pesosOrden.map(k=>({k,p:px.precByDep[k]})):[];
@@ -3840,6 +4016,7 @@ function renderAll(){
     if(currentScreen==='global')   renderGlobal(rf,rs,cat);
     if(currentScreen==='factores'){ if(metodoSub.factores==='detalle') renderFactores(rf,cat); else renderFactoresMatriz(); }
     if(currentScreen==='oyp'){ if(metodoSub.oyp==='detalle') renderOyP(rs,cat); else renderOyPMatriz(); }
+    if(currentScreen==='selectos') renderSelectos();
     if(currentScreen==='confiabilidad') renderConfiabilidad(rf,cat);
     if(currentScreen==='hallazgos') renderHallazgos(cat);
     if(currentScreen==='blanco')   renderBlanco();
@@ -4210,7 +4387,7 @@ function setBlancoVista(v) {
     const btns=document.getElementById('blanco-pol-btns');
     if(btns) btns.innerHTML=`
       <button onclick="blancoPolTodos('a')" class="btn-secundario" style="font-size:.7rem;padding:4px 8px">Todos</button>
-      <button onclick="blancoPolSelectos('a')" class="btn-secundario" style="font-size:.7rem;padding:4px 8px">★ Top 5</button>
+      <button onclick="blancoPolSelectos('a')" class="btn-secundario" style="font-size:.7rem;padding:4px 8px">★ Top ${SELECTO_TOP_N}</button>
       <button onclick="blancoPolLimpiar('a')" class="btn-secundario" style="font-size:.7rem;padding:4px 8px">Limpiar</button>`;
     poblarSelectPerfil(); renderBlancoA();
   } else if(v==='blanco-b'){
@@ -4220,7 +4397,7 @@ function setBlancoVista(v) {
     const btns=document.getElementById('blanco-pol-btns');
     if(btns) btns.innerHTML=`
       <button onclick="blancoPolTodos('b')" class="btn-secundario" style="font-size:.7rem;padding:4px 8px">Todos</button>
-      <button onclick="blancoPolSelectos('b')" class="btn-secundario" style="font-size:.7rem;padding:4px 8px">★ Top 5</button>
+      <button onclick="blancoPolSelectos('b')" class="btn-secundario" style="font-size:.7rem;padding:4px 8px">★ Top ${SELECTO_TOP_N}</button>
       <button onclick="blancoPolLimpiar('b')" class="btn-secundario" style="font-size:.7rem;padding:4px 8px">Limpiar</button>`;
     renderBlancoB();
   } else {
@@ -4374,8 +4551,8 @@ function renderBlancoB(){
   const normRDF=v=>rdfMax>rdfMin?(v-rdfMin)/(rdfMax-rdfMin)*100:50;
   const oypMap={};
   rs.scores.forEach(r=>oypMap[r.toro.nombre]=r.score);
-  const top5rf=new Set(aptos.slice(0,5).map(r=>r.toro.nombre));
-  const top5oyp=new Set(rs.scores.slice(0,5).map(r=>r.toro.nombre));
+  const top5rf=new Set(aptos.slice(0,SELECTO_TOP_N).map(r=>r.toro.nombre));
+  const top5oyp=new Set(rs.scores.slice(0,SELECTO_TOP_N).map(r=>r.toro.nombre));
   const dobleSelecto=n=>top5rf.has(n)&&top5oyp.has(n);
   const sel=window._blancoPolSel.b;
   const todos=aptos.filter(r=>sel.size===0||sel.has(r.toro.nombre)).map(r=>{
@@ -4414,7 +4591,7 @@ function colorAfinidad(af) {
 // Devuelve los nombres de los selectos para una categoría
 // Selectos = top5 RD_Factores ∩ top5 RD_OyP
 function getSelectos(catId) {
-  const TOP = 5;
+  const TOP = SELECTO_TOP_N;
   const rf = calcFactores(TOROS, catId);
   const rs = calcOyP(TOROS, catId);
   const aptosF = rf.filter(r => r.apto);
@@ -4885,8 +5062,9 @@ function infSd(v){const f=v.filter(x=>x!=null);if(f.length<2)return 1;const m=in
 
 function infGetST(){
   const st={};
-  INF_CHARS.forEach(c=>{
-    const v=TOROS.map(t=>t.deps[c]&&t.deps[c].dep!=null?t.deps[c].dep:null);
+  // DEP_ALL (12 claves) en vez de INF_CHARS (8) — Hilton/G1 ponderan EGD/GI además del modelo base
+  DEP_ALL.forEach(c=>{
+    const v=TOROS.map(t=>getDepVal(t,c));
     st[c]={m:infAvg(v),s:infSd(v)};
   });
   return st;
@@ -4894,8 +5072,8 @@ function infGetST(){
 
 function infZOf(t,st){
   const z={};
-  INF_CHARS.forEach(c=>{
-    const d=t.deps[c]&&t.deps[c].dep!=null?t.deps[c].dep:null;
+  DEP_ALL.forEach(c=>{
+    const d=getDepVal(t,c);
     z[c]=d==null?0:(st[c].s?((d-st[c].m)/st[c].s):0);
   });
   return z;
@@ -4909,7 +5087,7 @@ function infCalcF(toros,cat,st){
     const pm=pv.length?pv.reduce((a,b)=>a+b,0)/pv.length:null;
     const z=infZOf(t,st);
     // v9: mérito puro, sin descuento por precisión y sin filtro <6 DEPs (alineado con calcFactores de la app)
-    const raw=INF_CHARS.reduce((a,c)=>a+z[c]*(pesos[c]||0),0);
+    const raw=Object.keys(pesos).reduce((a,c)=>a+(z[c]||0)*(pesos[c]||0),0);
     return {t,nD,adj:raw,z,ok:nD>=1};
   });
   const ap=rows.filter(r=>r.ok);
@@ -4936,8 +5114,8 @@ function infCalcO(toros,cat){
 }
 
 function infSelectos(rf,oyp){
-  const t5f=new Set(rf.filter(r=>r.ok).slice(0,5).map(r=>r.t.nombre));
-  const t5o=new Set(oyp.slice(0,5).map(r=>r.t.nombre));
+  const t5f=new Set(rf.filter(r=>r.ok).slice(0,SELECTO_TOP_N).map(r=>r.t.nombre));
+  const t5o=new Set(oyp.slice(0,SELECTO_TOP_N).map(r=>r.t.nombre));
   return [...t5f].filter(n=>t5o.has(n));
 }
 
@@ -4975,7 +5153,7 @@ function infConfHallSection(RES, modo){
       html+='<table class="inf-tbl" style="font-size:.68rem;margin-top:6px"><thead><tr><th style="text-align:left">Categoría</th><th>#</th><th style="text-align:left">Toro</th><th style="text-align:left">Precisión de los DEPs que definen la categoría</th><th>Confiabilidad</th></tr></thead><tbody>';
       CATEGORIAS.forEach(function(c){
         const rfc=RES[c.id].rf.filter(function(r){return r.ok;}).slice(0,5);
-        const pesos=INF_CHARS.filter(function(k){return c.pesos[k]!==0;}).sort(function(a,b){return Math.abs(c.pesos[b])-Math.abs(c.pesos[a]);}).slice(0,3);
+        const pesos=Object.keys(c.pesos).filter(function(k){return c.pesos[k]!==0;}).sort(function(a,b){return Math.abs(c.pesos[b])-Math.abs(c.pesos[a]);}).slice(0,3);
         rfc.forEach(function(r,i){
           const px=P.lista.find(function(x){return x.toro.nombre===r.t.nombre;});
           const det=pesos.map(function(k){return {k:k,p:px?px.precByDep[k]:null};});
@@ -5029,17 +5207,17 @@ function infSelectosPage(RES, pid){
   let html='<div class="inf-page" id="inf-pg-'+pid+'" data-pid="'+pid+'">';
   html+='<div class="inf-section-title">★ SELECTOS por categoría</div>';
   html+='<div style="background:#fff8e1;border:1px solid #e0c070;border-radius:8px;padding:10px 14px;margin-bottom:14px">';
-  html+='<div style="font-weight:800;color:#7a5a10;font-size:.8rem;margin-bottom:4px">★ SELECTO = top 5 en RD_Factores <u>y</u> en RD_O&amp;P a la vez</div>';
+  html+='<div style="font-weight:800;color:#7a5a10;font-size:.8rem;margin-bottom:4px">★ SELECTO = top '+SELECTO_TOP_N+' en RD_Factores <u>y</u> en RD_O&amp;P a la vez</div>';
   html+='<div style="font-size:.72rem;color:#6b5320;line-height:1.5">RD_Factores es un índice ponderado (encaje con el objetivo de la categoría). RD_O&amp;P cuenta cuántos perfiles funcionales satisface el toro. Un toro puede ser <strong>#1 en un método y no ser SELECTO</strong>: los métodos no coinciden para él en esa categoría (p. ej. un toro de crecimiento puede liderar RD_O&amp;P en Vaquillona 15M pero quedar afuera de RD_Factores porque su peso al nacer no es lo bastante bajo).</div></div>';
   CATEGORIAS.forEach(function(cat){
     const r=RES[cat.id];
-    const t5f=r.rf.filter(function(x){return x.ok;}).slice(0,5);
-    const t5o=r.oyp.slice(0,5);
+    const t5f=r.rf.filter(function(x){return x.ok;}).slice(0,SELECTO_TOP_N);
+    const t5o=r.oyp.slice(0,SELECTO_TOP_N);
     const sel=r.sel;
-    html+='<div style="margin-bottom:14px"><div style="font-weight:800;color:#253a29;font-size:.8rem;border-bottom:2px solid #e9f0ea;padding-bottom:3px;margin-bottom:6px">'+cat.nombre+' <span style="font-weight:400;font-size:.66rem;color:#888">— '+cat.desc+'</span></div>';
+    html+='<div style="margin-bottom:14px"><div style="font-weight:800;color:#253a29;font-size:.8rem;border-bottom:2px solid #e9f0ea;padding-bottom:3px;margin-bottom:6px">'+infCatLabel(cat)+' <span style="font-weight:400;font-size:.66rem;color:#888">— '+cat.desc+'</span></div>';
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">';
     [['RD_Factores',t5f,true],['RD_O&P',t5o,false]].forEach(function(col){
-      html+='<table class="inf-tbl" style="font-size:.68rem"><thead><tr><th style="text-align:left">'+col[0]+' — Top 5</th><th>Score</th></tr></thead><tbody>';
+      html+='<table class="inf-tbl" style="font-size:.68rem"><thead><tr><th style="text-align:left">'+col[0]+' — Top '+SELECTO_TOP_N+'</th><th>Score</th></tr></thead><tbody>';
       col[1].forEach(function(x,i){
         const n=x.t.nombre, es=sel.indexOf(n)>=0;
         const v=col[2]?x.total.toFixed(1):x.score.toFixed(1);
@@ -5048,7 +5226,7 @@ function infSelectosPage(RES, pid){
       html+='</tbody></table>';
     });
     html+='</div>';
-    html+='<div style="font-size:.7rem;color:#3c6b45;font-weight:700;margin-top:5px">'+(sel.length?'★ SELECTO: '+sel.join(', '):'Sin SELECTOS — ningún toro en el top 5 de los dos métodos.')+'</div>';
+    html+='<div style="font-size:.7rem;color:#3c6b45;font-weight:700;margin-top:5px">'+(sel.length?'★ SELECTO: '+sel.join(', '):'Sin SELECTOS — ningún toro en el top '+SELECTO_TOP_N+' de los dos métodos.')+'</div>';
     html+='</div>';
   });
   html+=infFoot(pid)+'</div>';
@@ -5232,6 +5410,10 @@ function infFullO(oyp,perfiles,sel){
   return '<table class="inf-tbl" style="font-size:.7rem">'+h+b+'</table>';
 }
 
+// Nombre de categoría con el badge "★ Gran Selecto" para Rodeo General (espeja el badge de Vista Global en pantalla).
+function infCatLabel(cat){
+  return cat.nombre+(cat.id==='rodeoGeneral'?' <span style="font-size:.6em;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:#b8892b;color:#fff;border-radius:10px;padding:1px 7px;white-space:nowrap;vertical-align:middle">★ Gran Selecto</span>':'');
+}
 const INF_LEGAL='SEPA-Select&reg; &middot; DNDA EX-2026-81106223-APN-DNDA#MJ &middot; Sistema independiente de an&aacute;lisis de DEPs.';
 function infFoot(pid){
   const fecha=new Date().toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'});
@@ -5297,17 +5479,17 @@ function infGenerarContenido(){
   // ── CROSS-CATEGORÍA ──
   html+='<div class="inf-page" id="inf-pg-cross" data-pid="cross">';
   html+='<div class="inf-section-title">Resumen cross-categoría — '+catNombreActivo()+'</div>';
-  html+='<div style="font-size:.75rem;color:#6b6b6b;margin-bottom:12px">Top 5 de cada método por categoría. ★ = SELECTO (intersección top 5 ambos métodos).</div>';
+  html+='<div style="font-size:.75rem;color:#6b6b6b;margin-bottom:12px">Top '+SELECTO_TOP_N+' de cada método por categoría. ★ = SELECTO (intersección top '+SELECTO_TOP_N+' ambos métodos).</div>';
   html+='<div style="overflow-x:auto"><table class="inf-tbl" style="font-size:.71rem">';
-  html+='<tr><th style="text-align:left;min-width:105px">Categoría</th><th style="text-align:left">📊 RD_Factores Top 5</th><th style="text-align:left">🎯 RD_O&P Top 5</th><th style="text-align:left;min-width:95px">★ Selecto</th></tr>';
+  html+='<tr><th style="text-align:left;min-width:105px">Categoría</th><th style="text-align:left">📊 RD_Factores Top '+SELECTO_TOP_N+'</th><th style="text-align:left">🎯 RD_O&P Top '+SELECTO_TOP_N+'</th><th style="text-align:left;min-width:95px">★ Selecto</th></tr>';
   CATEGORIAS.forEach(cat=>{
     const r=RES[cat.id];
-    const t5f=r.rf.filter(x=>x.ok).slice(0,5);
-    const t5o=r.oyp.slice(0,5);
+    const t5f=r.rf.filter(x=>x.ok).slice(0,SELECTO_TOP_N);
+    const t5o=r.oyp.slice(0,SELECTO_TOP_N);
     const lf=t5f.map((x,i)=>{const s=r.sel.includes(x.t.nombre);return '<div style="padding:1px 0;'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+x.t.nombre+' <span style="color:#aaa">'+x.total.toFixed(1)+'</span></div>';}).join('');
     const lo=t5o.map((x,i)=>{const s=r.sel.includes(x.t.nombre);return '<div style="padding:1px 0;'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+x.t.nombre+' <span style="color:#aaa">'+x.score.toFixed(1)+'</span></div>';}).join('');
     const ls=r.sel.length?r.sel.map(n=>'<div class="inf-badge" style="margin-bottom:2px;display:block;width:fit-content">★ '+n+'</div>').join(''):'<span style="color:#aaa;font-style:italic;font-size:.68rem">—</span>';
-    html+='<tr><td style="font-weight:700;color:#253a29;vertical-align:top;padding-top:7px">'+cat.nombre+'<div style="font-size:.62rem;color:#888;font-weight:400">'+cat.desc+'</div></td>'
+    html+='<tr><td style="font-weight:700;color:#253a29;vertical-align:top;padding-top:7px">'+infCatLabel(cat)+'<div style="font-size:.62rem;color:#888;font-weight:400">'+cat.desc+'</div></td>'
       +'<td style="vertical-align:top;padding-top:7px">'+lf+'</td>'
       +'<td style="vertical-align:top;padding-top:7px">'+lo+'</td>'
       +'<td style="vertical-align:top;padding-top:7px">'+ls+'</td></tr>';
@@ -5346,14 +5528,14 @@ function infGenerarContenido(){
     const sel=r.sel;
     const perfiles=PERFILES_OYP.filter(p=>p.cats.includes(cat.id));
     const pesStr=Object.entries(cat.pesos).filter(([c,w])=>w!==0).map(([c,w])=>c+' '+(w>0?'+':'')+w).join(' · ');
-    const top10f=r.rf.filter(x=>x.ok).slice(0,10);
-    const top10o=r.oyp.slice(0,10);
+    const top10f=r.rf.filter(x=>x.ok).slice(0,SELECTO_TOP_N);
+    const top10o=r.oyp.slice(0,SELECTO_TOP_N);
     const pid=cat.id;
 
     // Vista Global
     html+='<div class="inf-page" id="inf-pg-'+pid+'-g" data-pid="'+pid+'-g">';
-    html+='<div class="inf-section-title">Vista Global — '+cat.nombre+'</div>';
-    html+='<div class="inf-insight"><span>💡</span><span>'+cat.desc+' <strong>★ SELECTO</strong> = top 5 simultáneo en ambos métodos.</span></div>';
+    html+='<div class="inf-section-title">Vista Global — '+infCatLabel(cat)+'</div>';
+    html+='<div class="inf-insight"><span>💡</span><span>'+cat.desc+' <strong>★ SELECTO</strong> = top '+SELECTO_TOP_N+' simultáneo en ambos métodos.</span></div>';
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">';
     html+='<div><div class="inf-sub-title">📊 RD_Factores — Top '+top10f.length+'</div>';
     html+='<div style="font-size:.65rem;color:#6b6b6b;margin-bottom:5px">'+pesStr+' · z-score interno · confiabilidad en Anexo D</div>';
@@ -5486,7 +5668,7 @@ function infGenerarContenido(){
   // ── ANEXO A — DEPs originales del catálogo ──
   html+='<div class="inf-page" id="inf-pg-anexo-a" data-pid="anexo-a">';
   html+='<div class="inf-section-title">Anexo A — DEPs originales del catálogo</div>';
-  html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:10px">Valores DEP tal como los provee el catálogo &middot; '+catNombreActivo()+' &middot; '+TOROS.length+' toros &middot; entre paréntesis, la precisión. Referenciado desde “RD_Factores — Ranking completo” de las 4 categorías.</div>';
+  html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:10px">Valores DEP tal como los provee el catálogo &middot; '+catNombreActivo()+' &middot; '+TOROS.length+' toros &middot; entre paréntesis, la precisión. Referenciado desde “RD_Factores — Ranking completo” de las 5 categorías.</div>';
   html+='<div style="overflow-x:auto"><table class="inf-tbl" style="font-size:.67rem"><thead><tr><th style="text-align:left">Toro</th><th style="text-align:left">Cabaña</th>';
   INF_CHARS.forEach(function(c){html+='<th style="text-align:center">'+c+'</th>';});
   html+='</tr></thead><tbody>';
@@ -5541,7 +5723,7 @@ function infGenerarContenido(){
   html+='</div>';
   html+='<div class="inf-sub-title">Cómo leer el radar</div>';
   html+='<div style="font-size:.72rem;color:#444;line-height:1.6">Ejes normalizados 0–1 (afuera = mejor), con PN/LG/Alt invertidos. Cada polígono es un toro del Top 5 RD_Factores. El color del rótulo del eje indica el peso de ese carácter en la categoría: <span style="color:#3c6b45;font-weight:700">verde = positivo</span>, <span style="color:#c0392b;font-weight:700">rojo = negativo</span>, gris = no pondera.</div>';
-  html+='<div style="margin-top:10px;font-size:.64rem;color:#999">★ SELECTO = top 5 simultáneo en RD_Factores y RD_O&amp;P.</div>';
+  html+='<div style="margin-top:10px;font-size:.64rem;color:#999">★ SELECTO = top '+SELECTO_TOP_N+' simultáneo en RD_Factores y RD_O&amp;P.</div>';
   html+=infFoot('anexo-c')+'</div>';
 
   // ── ANEXO D — Precisión por DEP · ANEXO E — Hallazgos ──
@@ -5657,7 +5839,7 @@ function infGenerarMini(){
     const r=RES[cat.id];
     const pesStr=Object.entries(cat.pesos).filter(([c,w])=>w!==0).map(([c,w])=>c+' '+(w>0?'+':'')+w).join(' ');
     const selStr=r.sel.length?r.sel.map(n=>'★ '+n).join(', '):'<span style="color:#aaa;font-style:italic">Sin SELECTOS</span>';
-    html+='<tr><td style="font-weight:700;color:#253a29;vertical-align:top;padding-top:8px">'+cat.nombre+'</td>'
+    html+='<tr><td style="font-weight:700;color:#253a29;vertical-align:top;padding-top:8px">'+infCatLabel(cat)+'</td>'
       +'<td style="vertical-align:top;padding-top:8px">'+cat.desc+'<div style="font-size:.62rem;color:#888;margin-top:2px">Pesos: '+pesStr+'</div></td>'
       +'<td style="vertical-align:top;padding-top:8px;font-size:.68rem">'+selStr+'</td></tr>';
   });
@@ -5668,12 +5850,12 @@ function infGenerarMini(){
   // ── Página 2: cross-categoría (= pág. 3 del Informe Plus) ──
   html+='<div class="inf-page" id="inf-pg-mini-cross" data-pid="mini-cross">';
   html+='<div class="inf-section-title">Resumen cross-categoría — '+catNombreActivo()+'</div>';
-  html+='<div style="font-size:.74rem;color:#6b6b6b;margin-bottom:12px">Top 5 de cada método por categoría. ★ = SELECTO (top 5 en RD_Factores y RD_O&amp;P a la vez).</div>';
-  html+='<table class="inf-tbl" style="font-size:.7rem"><thead><tr><th style="text-align:left;width:110px">Categoría</th><th style="text-align:left">📊 RD_Factores Top 5</th><th style="text-align:left">🎯 RD_O&amp;P Top 5</th><th style="text-align:left;width:95px">★ SELECTO</th></tr></thead><tbody>';
+  html+='<div style="font-size:.74rem;color:#6b6b6b;margin-bottom:12px">Top '+SELECTO_TOP_N+' de cada método por categoría. ★ = SELECTO (top '+SELECTO_TOP_N+' en RD_Factores y RD_O&amp;P a la vez).</div>';
+  html+='<table class="inf-tbl" style="font-size:.7rem"><thead><tr><th style="text-align:left;width:110px">Categoría</th><th style="text-align:left">📊 RD_Factores Top '+SELECTO_TOP_N+'</th><th style="text-align:left">🎯 RD_O&amp;P Top '+SELECTO_TOP_N+'</th><th style="text-align:left;width:95px">★ SELECTO</th></tr></thead><tbody>';
   CATEGORIAS.forEach(function(cat){
     const r=RES[cat.id];
-    const t5f=r.rf.filter(function(x){return x.ok;}).slice(0,5);
-    const t5o=r.oyp.slice(0,5);
+    const t5f=r.rf.filter(function(x){return x.ok;}).slice(0,SELECTO_TOP_N);
+    const t5o=r.oyp.slice(0,SELECTO_TOP_N);
     const lf=t5f.map(function(x,i){const s=r.sel.includes(x.t.nombre);return '<div style="'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+x.t.nombre+' <span style="color:#aaa">'+x.total.toFixed(1)+'</span></div>';}).join('');
     const lo=t5o.map(function(x,i){const s=r.sel.includes(x.t.nombre);return '<div style="'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+x.t.nombre+' <span style="color:#aaa">'+x.score.toFixed(1)+'</span></div>';}).join('');
     const ls=r.sel.length?r.sel.map(function(n){return '★ '+n;}).join('<br>'):'<span style="color:#aaa;font-style:italic">—</span>';
@@ -5707,24 +5889,25 @@ function infGenerarMini(){
   // ── Una página por categoría ──
   CATEGORIAS.forEach(cat=>{
     const r=RES[cat.id];
-    const top5f=r.rf.filter(x=>x.ok).slice(0,5);
-    const top5o=r.oyp.slice(0,5);
+    const top5f=r.rf.filter(x=>x.ok).slice(0,SELECTO_TOP_N);
+    const top5o=r.oyp.slice(0,SELECTO_TOP_N);
     const top6o=r.oyp.slice(0,6);
+    const radarSet=top5f.slice(0,5); // el radar solo aguanta ~5 polígonos legibles, aunque SELECTO ya mire el Top 10
     const pid='mini-'+cat.id;
     html+='<div class="inf-page" id="inf-pg-'+pid+'" data-pid="'+pid+'">';
-    html+='<div class="inf-section-title">'+cat.nombre+'</div>';
+    html+='<div class="inf-section-title">'+infCatLabel(cat)+'</div>';
     html+='<div style="font-size:.75rem;color:#6b6b6b;margin-bottom:10px">'+cat.desc+' '+(r.sel.length?'<strong>SELECTOS:</strong> '+r.sel.join(', '):'<strong>Sin SELECTOS</strong> en esta categoría')+'</div>';
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">';
-    html+='<div><div class="inf-sub-title">📊 RD_Factores — Top 5</div>'+infRankTable(top5f,true,r.sel)+'</div>';
-    html+='<div><div class="inf-sub-title">🎯 RD_O&amp;P — Top 5</div>'+infRankTable(top5o,false,r.sel)+'</div>';
+    html+='<div><div class="inf-sub-title">📊 RD_Factores — Top '+SELECTO_TOP_N+'</div>'+infRankTable(top5f,true,r.sel)+'</div>';
+    html+='<div><div class="inf-sub-title">🎯 RD_O&amp;P — Top '+SELECTO_TOP_N+'</div>'+infRankTable(top5o,false,r.sel)+'</div>';
     html+='</div>';
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start">';
-    if(top5f.length){
-      const zList=top5f.map(row=>infZOf(row.t,st));
+    if(radarSet.length){
+      const zList=radarSet.map(row=>infZOf(row.t,st));
       html+='<div><div class="inf-sub-title">Radar Top5 — '+cat.nombre+'</div>';
       html+='<div style="display:flex;justify-content:center">'+infRadar(zList,cat.pesos,190)+'</div>';
       html+='<div style="display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:6px">';
-      top5f.forEach((row,i)=>{
+      radarSet.forEach((row,i)=>{
         html+='<div style="display:flex;align-items:center;gap:4px;font-size:.62rem;color:#333">'
           +'<span style="width:8px;height:8px;border-radius:2px;background:'+INF_COLS[i%INF_COLS.length]+';display:inline-block;flex-shrink:0"></span>'
           +row.t.nombre+' '+row.total.toFixed(1)+'</div>';
@@ -5752,7 +5935,7 @@ function infGenerarMini(){
     html+='<tr><td style="font-weight:800;color:#253a29">'+p.id+'</td><td style="font-weight:600">'+p.nombre+'</td><td style="color:'+afColor+';font-weight:700">'+p.afinidad+'</td><td style="color:#555">'+(p.objetivo||'')+'</td><td style="color:#6b6b6b;white-space:nowrap">'+deps+'</td><td style="color:#888;font-size:.56rem">'+cats+'</td></tr>';
   });
   html+='</tbody></table>';
-  html+='<div class="inf-sub-title">Las 4 categorías</div>';
+  html+='<div class="inf-sub-title">Las '+CATEGORIAS.length+' categorías</div>';
   html+='<table class="inf-tbl" style="font-size:.66rem;margin-bottom:12px"><tbody>';
   CATEGORIAS.forEach(function(cat){
     var pesStr=Object.entries(cat.pesos).filter(function(e){return e[1]!==0;}).map(function(e){return e[0]+' '+(e[1]>0?'+':'')+e[1];}).join(' · ');
@@ -5760,13 +5943,14 @@ function infGenerarMini(){
   });
   html+='</tbody></table>';
   html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:10px">';
-  html+='<div><div class="inf-sub-title">RD_Factores</div><div style="font-size:.68rem;color:#444;line-height:1.5">Pondera los 8 DEPs según el objetivo de la categoría (z-scores en el catálogo), descuenta por precisión ERA y normaliza a <strong>0–100</strong>. En Plus suma el fenotipo (F). PN/LG/Alt entran invertidos.</div></div>';
-  html+='<div><div class="inf-sub-title">RD_O&amp;P (Objetivos &amp; Perfiles)</div><div style="font-size:.68rem;color:#444;line-height:1.5">Cada categoría activa un set de perfiles; cada perfil evalúa un par de DEPs (uno premia, otro penaliza). Score = promedio de perfiles, normalizado a <strong>0–100</strong>. <strong>★ SELECTO</strong> = top 5 en ambos métodos.</div></div>';
+  html+='<div><div class="inf-sub-title">RD_Factores</div><div style="font-size:.68rem;color:#444;line-height:1.5">Mérito puro: pondera los DEPs del modelo según el objetivo de la categoría (z-scores en el catálogo, sin descuento por precisión) y normaliza a <strong>0–100</strong>. En Plus suma el fenotipo (F). PN/LG/Alt entran invertidos. Hilton pondera además EGD/GI (terminación/marmoleo).</div></div>';
+  html+='<div><div class="inf-sub-title">RD_O&amp;P (Objetivos &amp; Perfiles)</div><div style="font-size:.68rem;color:#444;line-height:1.5">Cada categoría activa un set de perfiles; cada perfil evalúa un par de DEPs (uno premia, otro penaliza). Score = promedio de perfiles, normalizado a <strong>0–100</strong>. <strong>★ SELECTO</strong> = top '+SELECTO_TOP_N+' en ambos métodos.</div></div>';
   html+='</div>';
   html+='<div class="inf-sub-title">Glosario de siglas (DEPs)</div>';
   html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 16px;font-size:.66rem">';
-  var _glos={PN:'Peso al nacer',WW:'Peso al destete',PF:'Peso final',Alt:'Altura (frame)',Leche:'Habilidad materna / leche',AOB:'Área de ojo de bife',CE:'Circunferencia escrotal',LG:'Longitud de gestación'};
-  INF_CHARS.forEach(function(c){html+='<div><strong style="color:#253a29">'+c+'</strong> — '+_glos[c]+'</div>';});
+  var _glos={PN:'Peso al nacer',WW:'Peso al destete',PF:'Peso final',Alt:'Altura (frame)',Leche:'Habilidad materna / leche',AOB:'Área de ojo de bife',CE:'Circunferencia escrotal',LG:'Longitud de gestación',EGD:'Espesor de grasa dorsal',GI:'% Grasa intramuscular (marmoleo)'};
+  var _glosCols=INF_CHARS.concat([...new Set(CATEGORIAS.flatMap(function(c){return Object.keys(c.pesos);}))].filter(function(k){return INF_CHARS.indexOf(k)<0;}));
+  _glosCols.forEach(function(c){html+='<div><strong style="color:#253a29">'+c+'</strong> — '+(_glos[c]||c)+'</div>';});
   html+='</div>';
   html+=infFoot('mini-sintesis')+'</div>';
 
@@ -5787,11 +5971,11 @@ function infGenerarMini(){
   html+='<div class="inf-page" id="inf-pg-mini-anexo2" data-pid="mini-anexo2">';
   html+='<style>#inf-pg-mini-anexo2 .inf-tbl td{padding:2px 7px}</style>';
   html+='<div class="inf-section-title">Anexo 2 — Resultados completos ('+TOROS.length+' toros)</div>';
-  html+='<div style="font-size:.66rem;color:#6b6b6b;margin-bottom:10px">Una fila por toro · orden alfabético · score 0–100 en las 4 categorías por cada método · <strong>RD_F</strong> = RD_Factores · <strong>O&amp;P</strong> = RD_O&amp;P · fondo dorado = SELECTO · <strong>Confiab.</strong> = nivel de precisión media (RD_Confiabilidad) · <strong>⚑</strong> = nº de hallazgos en '+catNombreActivo()+' (RD_Hallazgos) · '+(_a2incCount?_a2incCount+' toro(s) con evaluación incompleta (fila gris)':'')+'</div>';
+  html+='<div style="font-size:.66rem;color:#6b6b6b;margin-bottom:10px">Una fila por toro · orden alfabético · score 0–100 en las '+CATEGORIAS.length+' categorías por cada método · <strong>RD_F</strong> = RD_Factores · <strong>O&amp;P</strong> = RD_O&amp;P · fondo dorado = SELECTO · <strong>Confiab.</strong> = nivel de precisión media (RD_Confiabilidad) · <strong>⚑</strong> = nº de hallazgos en '+catNombreActivo()+' (RD_Hallazgos) · '+(_a2incCount?_a2incCount+' toro(s) con evaluación incompleta (fila gris)':'')+'</div>';
   html+='<table class="inf-tbl" style="font-size:.68rem">';
   html+='<thead><tr><th rowspan="2" style="text-align:left;vertical-align:bottom">Toro</th>'
-      +'<th colspan="4" style="'+_a2gh+';border-left:2px solid #fff">RD_Factores</th>'
-      +'<th colspan="4" style="'+_a2gh+';border-left:2px solid #fff">RD_O&amp;P</th>'
+      +'<th colspan="'+CATEGORIAS.length+'" style="'+_a2gh+';border-left:2px solid #fff">RD_Factores</th>'
+      +'<th colspan="'+CATEGORIAS.length+'" style="'+_a2gh+';border-left:2px solid #fff">RD_O&amp;P</th>'
       +'<th rowspan="2" style="vertical-align:bottom;border-left:2px solid #fff">Confiab.</th>'
       +'<th rowspan="2" style="vertical-align:bottom">⚑</th></tr>';
   function _a2cn(c){ return c.nombre.replace(/^\d+-/,'').replace('Vaquillona entore 15M','Vaquillona 15M'); }
@@ -5915,18 +6099,22 @@ function infDoPrint(){
 // ── NAVEGADOR DE PANTALLAS ──────────────────────────────────────────────────
 const SNAV_PAGES=[
   {s:'resumen',    c:null,            lb:'Resumen'},
+  {s:'global',     c:'rodeoGeneral',  lb:'Global · Rodeo General'},
   {s:'global',     c:'terminal',      lb:'Global · Terminal'},
+  {s:'global',     c:'hilton',        lb:'Global · Hilton'},
   {s:'global',     c:'reposicion',    lb:'Global · Reposición'},
   {s:'global',     c:'vaq15',         lb:'Global · Vaq 15M'},
-  {s:'global',     c:'rodeoGeneral',  lb:'Global · Rodeo General'},
+  {s:'factores',   c:'rodeoGeneral',  lb:'Factores · Rodeo General'},
   {s:'factores',   c:'terminal',      lb:'Factores · Terminal'},
+  {s:'factores',   c:'hilton',        lb:'Factores · Hilton'},
   {s:'factores',   c:'reposicion',    lb:'Factores · Reposición'},
   {s:'factores',   c:'vaq15',         lb:'Factores · Vaq 15M'},
-  {s:'factores',   c:'rodeoGeneral',  lb:'Factores · Rodeo General'},
+  {s:'oyp',        c:'rodeoGeneral',  lb:'O&P · Rodeo General'},
   {s:'oyp',        c:'terminal',      lb:'O&P · Terminal'},
+  {s:'oyp',        c:'hilton',        lb:'O&P · Hilton'},
   {s:'oyp',        c:'reposicion',    lb:'O&P · Reposición'},
   {s:'oyp',        c:'vaq15',         lb:'O&P · Vaq 15M'},
-  {s:'oyp',        c:'rodeoGeneral',  lb:'O&P · Rodeo General'},
+  {s:'selectos',   c:null,            lb:'RD_Selectos'},
   {s:'confiabilidad',  c:null,            lb:'RD_Confiabilidad'},
   {s:'hallazgos',  c:null,            lb:'RD_Hallazgos'},
   {s:'blanco',     c:null,            lb:'O&P · Gráficos'},
@@ -5995,7 +6183,7 @@ function _snavSync(){
   var c=(currentCat==='graficos')?null:currentCat;
   var idx=SNAV_PAGES.findIndex(function(p){
     if(p.s==='graficos') return s==='graficos';
-    if(p.s==='confiabilidad'||p.s==='hallazgos') return p.s===s;
+    if(p.s==='selectos'||p.s==='confiabilidad'||p.s==='hallazgos') return p.s===s;
     return p.s===s&&(p.c===c||(p.c===null&&!c));
   });
   if(idx>=0&&idx!==_snavIdx){_snavIdx=idx;_snavRender();}
