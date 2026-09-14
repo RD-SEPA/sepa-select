@@ -893,6 +893,11 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <a id="carga-form-link" class="btn-login" target="_blank" rel="noopener"
        href="#" style="text-decoration:none;display:inline-block">Abrir formulario de carga →</a>
 
+    <div class="login-hint" style="margin-top:10px">
+      ¿Preferís mandarlo directo? Escribinos a
+      <a href="mailto:catalogo@programa-sepa.com.ar" style="color:white;text-decoration:underline">catalogo@programa-sepa.com.ar</a>
+    </div>
+
     <div style="margin-top:14px">
       <a href="#" onclick="cerrarCarga();return false" style="color:rgba(255,255,255,.7);font-size:.82rem">← Volver</a>
     </div>
@@ -1056,6 +1061,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <button class="btn-header" id="btn-ayuda" onclick="togglePanel('panel-ayuda')">❓ Ayuda</button>
     <button class="btn-header" onclick="cambioCatalogo()">≡ Catálogos</button>
     <button class="btn-header" onclick="mostrarInstruccionesCarga()">⬆ Cargar catálogo</button>
+    <button class="btn-header btn-header-gold" id="btn-plus" onclick="mostrarSelectorPlus()" hidden>★ Quiero PLUS</button>
   </div>
   <div class="sb-group sb-group-bottom">
     <button class="btn-header btn-salir" onclick="terminarSesion()">Salir</button>
@@ -1658,13 +1664,24 @@ function iniciarApp() {
   renderFAQs();
   // Modo desarrollador: badge
   const _db = document.getElementById('dev-badge'); if (_db) _db.hidden = !esDev();
-  // v9 deploy: sin registro ni selector de modo — acceso directo, permisos completos
-  try {
+  let u = null;
+  try { u = JSON.parse(localStorage.getItem('sepa_usuario') || 'null'); } catch (e) { u = null; }
+  if (u) {
+    // Ya registrado: entra directo con la licencia guardada (BASE por defecto)
     document.getElementById('registro-overlay').classList.add('hidden');
     document.getElementById('selector-modo').classList.add('hidden');
-  } catch (e) {}
-  sepaState.modo = 'PLUS';
-  sepaState.licencia = 'PLUS';
+    sepaState.modo = u.licencia || 'BASE';
+    sepaState.licencia = u.licencia || 'BASE';
+    actualizarHeaderUsuario();
+    cargarCatalogosYMostrar();
+  } else {
+    // Sin registrar: pedir registro (activa licencia BASE al completarlo)
+    document.getElementById('registro-overlay').classList.remove('hidden');
+    document.getElementById('selector-modo').classList.add('hidden');
+  }
+}
+
+function cargarCatalogosYMostrar() {
   fetch('data/catalogos.json')
     .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(j => { CATALOGOS_DISPONIBLES = j.catalogos || j || []; showCatalogos(); })
@@ -1734,8 +1751,8 @@ function mostrarLoadingCat(msg) {
 }
 function ocultarLoadingCat() {} // ya reemplazó el contenido
 const CATEGORIAS=[
-  {id:"rodeoGeneral",nombre:"Rodeo General",       pesos:{PN:-20,WW:25,PF:13,Alt:0, Leche:15,AOB:10,CE:12,LG:-5}, desc:"El mejor balance del catálogo. Buen ternero para venta (R1), hija que sirve como futura madre (R2) y parto sin complicaciones. Ideal para quien no quiere elegir un solo camino."},
-  {id:"terminal",  nombre:"#1.1_Terminal",         pesos:{PN:-20,WW:30,PF:25,Alt:0, Leche:5, AOB:10,CE:10,LG:0},  desc:"Apunta a lograr un ternero por vaca por año con manejo ganadero simplificado. Máxima eficiencia reproductiva, facilidad de manejo, crecimiento y rusticidad. El ternero se vende, no se guarda la hija."},
+  {id:"rodeoGeneral",nombre:"Rodeo General",       pesos:{PN:-20,WW:25,PF:18,Alt:0, Leche:10,AOB:10,CE:12,LG:-5}, desc:"El mejor balance del catálogo. Buen ternero para venta (R1), hija que sirve como futura madre (R2) y parto sin complicaciones. Ideal para quien no quiere elegir un solo camino."},
+  {id:"terminal",  nombre:"#1.1_Terminal",         pesos:{PN:-15,WW:25,PF:25,Alt:0, Leche:10,AOB:10,CE:5, LG:0,EGD:5,GI:5}, desc:"Apunta a lograr un ternero por vaca por año con manejo ganadero simplificado. Máxima eficiencia reproductiva, facilidad de manejo, crecimiento y rusticidad. El ternero se vende, no se guarda la hija."},
   {id:"hilton",    nombre:"#1.2_Hilton",           pesos:{PN:-10,WW:20,PF:25,Alt:0, Leche:5, AOB:15,CE:5, LG:0,EGD:10,GI:10}, desc:"Busca un producto de mayor calidad frigorífica. Más kilos de res, rendimiento, marmoleo y conformación para cuota Hilton y mercados premium. Valor agregado en el gancho."},
   {id:"reposicion",nombre:"#2.1_Reposición",       pesos:{PN:-25,WW:25,PF:5, Alt:-5, Leche:20,AOB:5, CE:10,LG:-5},  desc:"Selección para obtener terneras que serán futuras madres del rodeo. Énfasis en habilidad materna, fertilidad, ubre, docilidad y longevidad. Construye el vientre del futuro."},
   {id:"vaq15",    nombre:"#2.2_Vaquillona 15M",    pesos:{PN:-35,WW:10,PF:0, Alt:-10,Leche:20,AOB:0, CE:10,LG:-15},desc:"Precocidad sexual extrema. Vaquillonas para entorar a los 15 meses. Facilidad de parto, bajo peso al nacer y rápida entrada en producción. Acorta el ciclo generacional."}
@@ -1917,16 +1934,6 @@ function hidePlusGate(){
 // REGISTRO
 // ═══════════════════════════════════════════════
 
-// ── DETECCIÓN USUARIO PREVIO ──────────────────────────────
-function checkUsuarioPrevio() {
-  let u = null;
-  try { u = localStorage.getItem('sepa_usuario'); } catch (e) { u = null; }
-  if (u) {
-    document.getElementById('registro-overlay').classList.add('hidden');
-    document.getElementById('selector-modo').classList.remove('hidden');
-  }
-}
-
 // ── REGISTRO ─────────────────────────────────────────────
 function doRegistro() {
   const nombre   = document.getElementById('reg-nombre').value.trim();
@@ -1981,30 +1988,55 @@ function doRegistro() {
   );
   // Abrir mailto en background (no bloquea el flujo)
   const a = document.createElement('a');
-  a.href = `mailto:registro@programa-sepa.com.ar?subject=${asunto}&body=${cuerpo}`;
+  a.href = `mailto:contacto@programa-sepa.com.ar?subject=${asunto}&body=${cuerpo}`;
   a.style.display = 'none';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
 
-  // Avanzar a selector
+  // Registrado: licencia BASE activa, entra directo (sin pasar por el selector)
   document.getElementById('registro-overlay').classList.add('hidden');
-  document.getElementById('selector-modo').classList.remove('hidden');
+  sepaState.modo = 'BASE';
+  sepaState.licencia = 'BASE';
+  actualizarHeaderUsuario();
+  cargarCatalogosYMostrar();
 }
 
 function seleccionarModo(modo){
   if (modo === 'CARGA') {
-    localStorage.setItem('sepa_modo_operacion', 'CARGA');
     document.getElementById('selector-modo').classList.add('hidden');
     mostrarInstruccionesCarga();
     return;
   }
-  sepaState.modo=modo;
-  sepaState.licencia=modo;
-  localStorage.setItem('sepa_modo_operacion',modo);
+  if (modo === 'PLUS') {
+    solicitarPlus();
+    return;
+  }
+  // 'BASE' — seguir operando en Base, solo cierra el selector
   document.getElementById('selector-modo').classList.add('hidden');
   showCatalogos();
-  actualizarHeaderUsuario();
+}
+
+function mostrarSelectorPlus(){
+  document.getElementById('selector-modo').classList.remove('hidden');
+}
+
+// ── SOLICITUD DE PLUS (sin cobro automático — confirmación manual) ──
+function solicitarPlus(){
+  const u = JSON.parse(localStorage.getItem('sepa_usuario') || '{}');
+  const asunto = encodeURIComponent(`Solicitud PLUS SEPA-Select · ${u.nombre || ''}`);
+  const cuerpo = encodeURIComponent(
+    `Nombre: ${u.nombre||'—'}\nEmail: ${u.email||'—'}\nWhatsApp: ${u.whatsapp||'—'}\nRol: ${u.rol||'—'}\nPromo: ${u.promo||'—'}\nFecha: ${new Date().toLocaleString('es-AR')}`
+  );
+  const a = document.createElement('a');
+  a.href = `mailto:contacto@programa-sepa.com.ar?subject=${asunto}&body=${cuerpo}`;
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  document.getElementById('selector-modo').classList.add('hidden');
+  alert('Listo — te vamos a confirmar el alta a PLUS por WhatsApp o mail.');
+  showCatalogos();
 }
 
 // Google Form "Cargar catalogo en SEPA-Select" — URL base + IDs de campos
@@ -2048,6 +2080,8 @@ function cerrarCarga() {
 
 function actualizarHeaderUsuario() {
   const u = JSON.parse(localStorage.getItem('sepa_usuario') || '{}');
+  const btnPlus = document.getElementById('btn-plus');
+  if (btnPlus) btnPlus.hidden = (sepaState.modo === 'PLUS');
   const el = document.getElementById('header-usuario-info');
   if (el && u.nombre) {
     const modo = sepaState.modo || 'BASE';
@@ -2090,7 +2124,7 @@ function renderCatalogosDisponibles(){
       <div class="catalogo-card-meta">
         <div class="catalogo-meta-row">🐂 <strong>${cat.toros||cat.totalToros||'?'}</strong> toros · ${_modoAnonimo?'':cat.cabaña||cat.cabana||''}</div>
         <div class="catalogo-meta-row">📅 Alta: <strong>${cat.fecha}</strong></div>
-        <div class="catalogo-meta-row">🔓 Acceso <strong>${cat.acceso}</strong></div>
+        <div class="catalogo-meta-row">${cat.acceso==='clave'?'🔒 Con clave':'🔓 Abierto'}</div>
       </div>
       <button class="btn-entrar-cat">Entrar →</button>
     </div>`;
@@ -2112,6 +2146,12 @@ function renderCatalogosDisponibles(){
 async function seleccionarCatalogo(id){
   const cat=CATALOGOS_DISPONIBLES.find(c=>c.id===id);
   if(!cat) return;
+  if (cat.acceso === 'clave' && localStorage.getItem('sepa_catcode_'+id) !== cat.codigo) {
+    const intento = prompt('"' + cat.nombre + '" requiere un código de acceso.\nIngresá el código que te compartieron:');
+    if (intento === null) return;
+    if (intento.trim() !== cat.codigo) { alert('Código incorrecto.'); return; }
+    localStorage.setItem('sepa_catcode_'+id, intento.trim());
+  }
   mostrarLoadingCat('Cargando ' + cat.nombre + '…');
   try {
     const archivo = cat.archivo || ('toros_' + cat.id + '.json');
@@ -2284,9 +2324,10 @@ function terminarSesion(){
   localStorage.removeItem('sepa_catalogo_activo');
   sepaState.licencia=null; sepaState.modo=null; sepaState.catalogoActivo=null;
   document.getElementById('main-app').classList.add('hidden');
-  // v9 deploy: sin registro — volver al selector de catalogos
-  sepaState.modo = 'PLUS';
-  sepaState.licencia = 'PLUS';
+  // Vuelve al selector de catálogos con la licencia del usuario registrado (no fuerza PLUS)
+  const u = JSON.parse(localStorage.getItem('sepa_usuario') || 'null');
+  sepaState.modo = (u && u.licencia) || 'BASE';
+  sepaState.licencia = sepaState.modo;
   showCatalogos();
   navHistory=[]; updateVolverBar();
 }
