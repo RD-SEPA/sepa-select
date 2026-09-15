@@ -1598,6 +1598,20 @@ const ALIAS_CATALOGOS = {
   "Orden de Jura":  "Jura Expo Modelo"
 };
 
+// ─── Seguridad: escapes para datos de catálogo (vienen de ETL/PDF, no confiables) ───
+function escHtml(s){
+  return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});
+}
+function escJsAttr(s){
+  // Para usar dentro de onclick="fn('...')" : primero neutraliza la comilla simple (delimitador del string JS),
+  // después la comilla doble (delimitador del atributo HTML) y los signos < > (por si el navegador decodifica entidades antes).
+  return String(s==null?'':s)
+    .replace(/\\/g,'\\\\')
+    .replace(/'/g,"\\'")
+    .replace(/"/g,'&quot;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
+}
 function displayCatalogo(nombre){
   if(!_modoAnonimo) return nombre;
   return ALIAS_CATALOGOS[nombre] || nombre;
@@ -1697,6 +1711,9 @@ function cargarCatalogosYMostrar() {
 
 // ── CARGA DE TOROS AL SELECCIONAR CATÁLOGO ─────
 async function fetchToros(archivo) {
+  if (!/^[A-Za-z0-9_-]+\.json$/.test(archivo)) {
+    throw new Error('Nombre de archivo de catálogo inválido: ' + archivo);
+  }
   const r = await fetch('data/' + archivo);
   if (!r.ok) throw new Error('No se pudo cargar data/' + archivo + ' (HTTP ' + r.status + ')');
   const data = await r.json();
@@ -2486,7 +2503,7 @@ function onBuscador(q){
   if(!q.trim()){sug.classList.remove('open');return}
   const matches=TOROS.filter(t=>t.nombre.toLowerCase().includes(q.toLowerCase())).slice(0,8);
   if(!matches.length){sug.innerHTML='<div class="sug-item"><span class="sug-nombre" style="color:var(--gris)">Sin resultados</span></div>';sug.classList.add('open');return}
-  sug.innerHTML=matches.map(t=>`<div class="sug-item" onmousedown="selectToro('${t.nombre.replace(/'/g,"\\'")}')"><span class="sug-nombre">${pelBadge(t)} ${displayNombre(t.nombre)}</span><span class="sug-raza">${_modoAnonimo?"":t.raza}</span></div>`).join('');
+  sug.innerHTML=matches.map(t=>`<div class="sug-item" onmousedown="selectToro('${escJsAttr(t.nombre)}')"><span class="sug-nombre">${pelBadge(t)} ${escHtml(displayNombre(t.nombre))}</span><span class="sug-raza">${_modoAnonimo?"":escHtml(t.raza)}</span></div>`).join('');
   sug.classList.add('open');
 }
 function selectToro(nombre){
@@ -2831,9 +2848,9 @@ function renderRadarSelector(){
   if(q) toros=toros.filter(t=>t.nombre.toLowerCase().includes(q));
   listEl.innerHTML=toros.map(t=>{
     const on=sel.has(t.nombre);
-    return `<div onclick="radarToggle('${t.nombre.replace(/'/g,"\\'")}')" style="display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:6px;cursor:pointer;background:${on?'var(--verde-claro)':'transparent'};border:1px solid ${on?'var(--verde-medio)':'transparent'};margin-bottom:4px">
+    return `<div onclick="radarToggle('${escJsAttr(t.nombre)}')" style="display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:6px;cursor:pointer;background:${on?'var(--verde-claro)':'transparent'};border:1px solid ${on?'var(--verde-medio)':'transparent'};margin-bottom:4px">
       <input type="checkbox" ${on?'checked':''} style="pointer-events:none">
-      <span style="font-size:.82rem;font-weight:${on?'700':'500'};flex:1">${t.nombre}</span>
+      <span style="font-size:.82rem;font-weight:${on?'700':'500'};flex:1">${escHtml(t.nombre)}</span>
       <span style="font-size:.65rem;color:var(--gris)">${t.pelaje[0]}</span>
     </div>`;
   }).join('');
@@ -2846,7 +2863,7 @@ function renderRadarCanvas(){
   if(!zList.length){ canvas.innerHTML='Sin datos'; return; }
   canvas.innerHTML=buildRadarMulti(zList,cat,340);
   const colores=["#2a78d6","#eb6834","#1baf7a","#eda100","#e87ba4","#008300"];
-  legend.innerHTML=sel.map((n,i)=>`<span><span style="display:inline-block;width:10px;height:10px;background:${colores[i%colores.length]};border-radius:2px;margin-right:4px"></span>${n}</span>`).join('');
+  legend.innerHTML=sel.map((n,i)=>`<span><span style="display:inline-block;width:10px;height:10px;background:${colores[i%colores.length]};border-radius:2px;margin-right:4px"></span>${escHtml(n)}</span>`).join('');
 }
 
 // ═══════════════════════════════════════════════
@@ -2941,10 +2958,10 @@ function renderOypRadarLista(){
   if(q) toros=toros.filter(t=>t.nombre.toLowerCase().includes(q));
   listEl.innerHTML=toros.map(t=>{
     const on=sel.has(t.nombre);
-    const safeN=t.nombre.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    const safeN=escJsAttr(t.nombre);
     return`<div class="oyp-radar-toro${on?' on':''}" onclick="oypRadarToggle('${safeN}')">
       <input type="checkbox" ${on?'checked':''} style="pointer-events:none;accent-color:var(--verde-oscuro)">
-      <span style="font-size:.8rem;font-weight:${on?'700':'500'};flex:1">${t.nombre}</span>
+      <span style="font-size:.8rem;font-weight:${on?'700':'500'};flex:1">${escHtml(t.nombre)}</span>
       ${pelBadge(t)}
     </div>`;
   }).join('');
@@ -2989,7 +3006,7 @@ function renderOypRadarCanvas(){
       const bg=idx%2===0?'#fafaf8':'white';
       tbl+=`<tr style="background:${bg}">
         <td style="padding:5px 10px;font-weight:700;border-left:3px solid ${col}">
-          <span style="display:inline-block;width:8px;height:8px;background:${col};border-radius:2px;margin-right:5px;vertical-align:middle"></span>${displayNombre(item.nombre)}
+          <span style="display:inline-block;width:8px;height:8px;background:${col};border-radius:2px;margin-right:5px;vertical-align:middle"></span>${escHtml(displayNombre(item.nombre))}
         </td>
         ${OYP_RADAR_CATS.map(cat=>{
           const v=item.scores[cat.id];
@@ -3083,10 +3100,10 @@ function renderResumen(){
 
     // Celda RD_Factores
     const liderF=aptosF[0];
-    const sub2F=aptosF.slice(1,3).map(r=>`#${aptosF.indexOf(r)+2} ${r.toro.nombre}`).join(' · ');
+    const sub2F=aptosF.slice(1,3).map(r=>`#${aptosF.indexOf(r)+2} ${escHtml(r.toro.nombre)}`).join(' · ');
     html+=`<div class="rm-celda" onclick="irAMetodo('factores','${cat.id}')">
       <div class="rm-celda-method">RD_Factores</div>
-      ${liderF?`<div class="rm-lider">#1 ${displayNombre(liderF.toro.nombre)}</div>
+      ${liderF?`<div class="rm-lider">#1 ${escHtml(displayNombre(liderF.toro.nombre))}</div>
       <div class="rm-score">${liderF.total.toFixed(1)} pts</div>
       <div class="rm-sub">${sub2F}</div>`:'<div class="rm-sub" style="font-style:italic">Sin datos</div>'}
     </div>`;
@@ -3099,7 +3116,7 @@ function renderResumen(){
     const chipsNc=perfsNc.map(p=>`<span class="rm-chip-nc">?${p.id}</span>`).join('');
     html+=`<div class="rm-celda" onclick="irAMetodo('oyp','${cat.id}')">
       <div class="rm-celda-method">RD_O&amp;P</div>
-      ${liderS?`<div class="rm-lider">#1 ${displayNombre(liderS.toro.nombre)}</div>
+      ${liderS?`<div class="rm-lider">#1 ${escHtml(displayNombre(liderS.toro.nombre))}</div>
       <div class="rm-score">${liderS.score.toFixed(1)} / 100</div>`:''}
       <div class="rm-perfiles">${chipsOk}${chipsNc}</div>
     </div>`;
@@ -3109,7 +3126,7 @@ function renderResumen(){
       <div class="rm-celda-method">★ SELECTO</div>
       <div class="rm-selecto">
         ${selectos.length
-          ? selectos.map(n=>`<div class="rm-selecto-item">★ ${displayNombre(n)}</div>`).join('')
+          ? selectos.map(n=>`<div class="rm-selecto-item">★ ${escHtml(displayNombre(n))}</div>`).join('')
           : '<div class="rm-selecto-empty">Sin coincidencias top '+TOP5+'</div>'
         }
       </div>
@@ -3133,7 +3150,7 @@ function renderGlobal(rf,rs,cat){
   const top5F=new Set(rf.filter(r=>r.apto).slice(0,T5).map(r=>r.toro.nombre));
   const top5S=new Set(rs.scores.filter(r=>!toroSinDeps(r.toro)).slice(0,T5).map(r=>r.toro.nombre));
   const coin=[...top5F].filter(n=>top5S.has(n));
-  document.getElementById('insight-text').innerHTML=`<strong style="color:var(--verde-oscuro)">${coin.length} toro${coin.length!==1?'s':''}</strong> en el top ${T5} de <strong style="color:var(--verde-oscuro)">ambos métodos</strong> para <strong>${cat.nombre}</strong>${coin.length?': <em>'+coin.map(n=>displayNombre(n)).join(', ')+'</em>':''}`;
+  document.getElementById('insight-text').innerHTML=`<strong style="color:var(--verde-oscuro)">${coin.length} toro${coin.length!==1?'s':''}</strong> en el top ${T5} de <strong style="color:var(--verde-oscuro)">ambos métodos</strong> para <strong>${cat.nombre}</strong>${coin.length?': <em>'+coin.map(n=>escHtml(displayNombre(n))).join(', ')+'</em>':''}`;
 
   // Radar comparativo V2 mejorado - selector libre de toros
   window._radarState = window._radarState || {seleccionados:[], cat:null};
@@ -3165,9 +3182,9 @@ function renderGlobal(rf,rs,cat){
     const toro=TOROS.find(t=>t.nombre===n);
     const z=toro?zScoresDe(toro):{};
     const exp=toro?explicar(z,cat):'';
-    return`<li class="rank-item${coin2?' coincide':''}" onclick="onClickGlobalF('${n.replace(/'/g,"\\'")}')">
+    return`<li class="rank-item${coin2?' coincide':''}" onclick="onClickGlobalF('${escJsAttr(n)}')">
       <span class="rank-pos${pos<=3?' top3':''}">${pos}</span>${pelBadge(r.toro)}
-      <span class="rank-nombre" title="Clic para ver la ficha del toro">${displayNombre(n)}<span style="display:block;font-size:.68rem;color:var(--gris);font-weight:400;white-space:normal;line-height:1.2">${exp}</span></span>
+      <span class="rank-nombre" title="Clic para ver la ficha del toro">${escHtml(displayNombre(n))}<span style="display:block;font-size:.68rem;color:var(--gris);font-weight:400;white-space:normal;line-height:1.2">${exp}</span></span>
       <span class="rank-score-val">${sc}</span>${_gvIconos(n,_precMap,_hallSet)}
       ${coin2?'<span class="coin-badge">★ SELECTO</span>':''}
     </li>`;
@@ -3177,9 +3194,9 @@ function renderGlobal(rf,rs,cat){
     const n=r.toro.nombre,pos=i+1;const coin2=top5F.has(n)&&top5S.has(n);
     const sc=r.score.toFixed(1);
     const exp=r.det?explicacionOyP(r.det,rs.perfiles):'';
-    return`<li class="rank-item${coin2?' coincide':''}" onclick="onClickGlobalS('${n.replace(/'/g,"\\'")}')">
+    return`<li class="rank-item${coin2?' coincide':''}" onclick="onClickGlobalS('${escJsAttr(n)}')">
       <span class="rank-pos${pos<=3?' top3':''}">${pos}</span>${pelBadge(r.toro)}
-      <span class="rank-nombre" title="Clic para ver la ficha del toro">${displayNombre(n)}<span style="display:block;font-size:.68rem;color:var(--gris);font-weight:400;white-space:normal;line-height:1.2">${exp}</span></span>
+      <span class="rank-nombre" title="Clic para ver la ficha del toro">${escHtml(displayNombre(n))}<span style="display:block;font-size:.68rem;color:var(--gris);font-weight:400;white-space:normal;line-height:1.2">${exp}</span></span>
       <span class="rank-score-val">${sc}</span>${_gvIconos(n,_precMap,_hallSet)}
       ${coin2?'<span class="coin-badge">★ SELECTO</span>':''}
     </li>`;
@@ -3192,9 +3209,9 @@ function renderGlobal(rf,rs,cat){
     const fila=(r,i,isF)=>{
       const n=r.toro.nombre;const es=top5F.has(n)&&top5S.has(n);
       const val=isF?r.total.toFixed(1):r.score.toFixed(1);
-      return`<div onclick="${isF?'onClickGlobalF':'onClickGlobalS'}('${n.replace(/'/g,"\\'")}')" style="display:flex;align-items:center;gap:7px;padding:6px 9px;border-radius:7px;cursor:pointer;margin-bottom:4px;background:${es?'var(--oro-claro,#fdf3dc)':'var(--superficie,#f6f5f1)'};border:1px solid ${es?'var(--oro,#b8860b)':'transparent'}">
+      return`<div onclick="${isF?'onClickGlobalF':'onClickGlobalS'}('${escJsAttr(n)}')" style="display:flex;align-items:center;gap:7px;padding:6px 9px;border-radius:7px;cursor:pointer;margin-bottom:4px;background:${es?'var(--oro-claro,#fdf3dc)':'var(--superficie,#f6f5f1)'};border:1px solid ${es?'var(--oro,#b8860b)':'transparent'}">
         <span style="font-weight:800;color:var(--gris);width:16px;text-align:center">${i+1}</span>${pelBadge(r.toro)}
-        <span style="flex:1;font-size:.86rem;font-weight:${es?'800':'600'}">${displayNombre(n)}</span>
+        <span style="flex:1;font-size:.86rem;font-weight:${es?'800':'600'}">${escHtml(displayNombre(n))}</span>
         ${es?'<span class="coin-badge">★</span>':''}
         <span style="font-size:.78rem;color:var(--gris);font-variant-numeric:tabular-nums">${val}</span>
       </div>`;
@@ -3203,15 +3220,15 @@ function renderGlobal(rf,rs,cat){
       <div><div class="concord-title" style="margin-bottom:7px">RD_Factores — Top ${T5}</div>${t5f.map((r,i)=>fila(r,i,true)).join('')||'<div style="font-size:.8rem;color:var(--gris)">Sin datos</div>'}</div>
       <div><div class="concord-title" style="margin-bottom:7px">RD_O&amp;P — Top ${T5}</div>${t5s.map((r,i)=>fila(r,i,false)).join('')||'<div style="font-size:.8rem;color:var(--gris)">Sin datos</div>'}</div>
     </div>
-    <div style="font-size:.78rem;color:var(--verde-oscuro);font-weight:700;margin-bottom:16px">${coin.length?'★ SELECTO en '+cat.nombre+': '+coin.map(n=>displayNombre(n)).join(', '):'Sin SELECTOS en '+cat.nombre+' — los dos métodos no comparten ningún toro en el top '+T5+'.'}</div>`;
+    <div style="font-size:.78rem;color:var(--verde-oscuro);font-weight:700;margin-bottom:16px">${coin.length?'★ SELECTO en '+cat.nombre+': '+coin.map(n=>escHtml(displayNombre(n))).join(', '):'Sin SELECTOS en '+cat.nombre+' — los dos métodos no comparten ningún toro en el top '+T5+'.'}</div>`;
   }
   // concordancia
   document.getElementById('concord-tbody').innerHTML=aptosF.slice(0,TOP).map((r,i)=>{
     const n=r.toro.nombre,rfR=i+1,rsR=rsMap[n]||'—';
     const d=typeof rsR==='number'?rfR-rsR:null;
     const dc=d===null?'de':d===0?'de':d>0?'du':'dd';
-    return`<tr class="${typeof d==='number'&&Math.abs(d)<=2?'concord-agree':''}" onclick="onClickGlobalF('${n.replace(/'/g,"\\'")}')">
-      <td class="td-pos">${rfR}</td><td>${pelBadge(r.toro)} <strong>${displayNombre(n)}</strong></td>
+    return`<tr class="${typeof d==='number'&&Math.abs(d)<=2?'concord-agree':''}" onclick="onClickGlobalF('${escJsAttr(n)}')">
+      <td class="td-pos">${rfR}</td><td>${pelBadge(r.toro)} <strong>${escHtml(displayNombre(n))}</strong></td>
       <td class="num td-val td-g">${r.total.toFixed(1)}</td>
       <td class="num td-pos">${rsR}</td>
       <td class="num td-val td-score">${rs.scores.find(x=>x.toro.nombre===n)?.score.toFixed(1)||'—'}</td>
@@ -3236,9 +3253,9 @@ function renderFactores(rf,cat){
   let pos=0;
   document.getElementById('factores-tbody').innerHTML=ap.map(r=>{
     pos++;
-    return`<tr onclick="onClickToro('${r.toro.nombre.replace(/'/g,"\\'")}')">
+    return`<tr onclick="onClickToro('${escJsAttr(r.toro.nombre)}')">
       <td class="td-pos">${pos}</td>
-      <td class="td-nombre" title="Clic para ver la ficha del toro">${pelBadge(r.toro)} ${displayNombre(r.toro.nombre)}</td>
+      <td class="td-nombre" title="Clic para ver la ficha del toro">${pelBadge(r.toro)} ${escHtml(displayNombre(r.toro.nombre))}</td>
       <td class="num td-val td-g">${r.g.toFixed(1)}</td>
       <td class="num td-val td-f">${getFen(r.toro.nombre)>=0?'+':''}${getFen(r.toro.nombre)}</td>
       <td class="num td-val td-total">${r.total.toFixed(1)}</td>
@@ -3334,10 +3351,10 @@ function renderOyP(rs,cat){
       const cls2=v>=7.5?'hi':v>=5?'pos':'neg';
       return`<span class="ozchip ${cls2}" title="${p.nombre} · ${v.toFixed(1)}/10" onclick="showPerfilPanel('${p.id}',event)">${p.id} ${v.toFixed(1)}</span>`;
     }).join('');
-    const safeN=nombre.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    const safeN=escJsAttr(nombre);
     return`<tr class="${cls}" onclick="onClickOyP('${safeN}')">
       <td class="td-pos">${i+1}</td>
-      <td class="td-nombre" title="Clic para ver la ficha del toro">${pelBadge(r.toro)} ${star}${displayNombre(nombre)}</td>
+      <td class="td-nombre" title="Clic para ver la ficha del toro">${pelBadge(r.toro)} ${star}${escHtml(displayNombre(nombre))}</td>
       <td class="num td-val"><span class="oyp-score pos" style="font-size:.95rem">${r.score.toFixed(1)}</span></td>
       <td style="min-width:90px"><div class="oyp-bar-bi"><div class="oyp-bar-pos" style="width:${barPct.toFixed(1)}%"></div></div></td>
       <td><div class="oyp-chips-z">${chips}</div></td>
@@ -3390,7 +3407,7 @@ function renderCatalogo(){
     html+='</tbody></table>';
     oyp_body.innerHTML=html;
   }
-  document.getElementById('toro-grid').innerHTML=TOROS.map(t=>{const nD=CHARS.filter(c=>t.deps[c].dep!==null).length;return`<div class="toro-card"><div class="toro-card-nombre">${pelBadge(t)} ${t.nombre}</div><div class="toro-card-raza">${_modoAnonimo?"":t.raza}</div><div class="toro-card-raza">${_modoAnonimo?"":'RP: '+t.rp+' · '}${nD}/8 DEPs${t.sistema?' · '+t.sistema:''}</div></div>`}).join('');
+  document.getElementById('toro-grid').innerHTML=TOROS.map(t=>{const nD=CHARS.filter(c=>t.deps[c].dep!==null).length;return`<div class="toro-card"><div class="toro-card-nombre">${pelBadge(t)} ${escHtml(t.nombre)}</div><div class="toro-card-raza">${_modoAnonimo?"":escHtml(t.raza)}</div><div class="toro-card-raza">${_modoAnonimo?"":'RP: '+escHtml(t.rp)+' · '}${nD}/8 DEPs${t.sistema?' · '+escHtml(t.sistema):''}</div></div>`}).join('');
 }
 
 // ═══════════════════════════════════════════════
@@ -3405,7 +3422,7 @@ function openModalFactores(nombre){
   const puedeSlider=canAccess('fenotipo_slider');
   document.getElementById('modal-title').textContent=displayNombre(nombre);
   document.getElementById('modal-sub').textContent=`${_modoAnonimo?"":toro.raza+' · RP: '+toro.rp+' · '+toro.origen+' · Nac: '+toro.nacimiento}`;
-  const safeN=nombre.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  const safeN=escJsAttr(nombre);
 
   // Slider: visible siempre, funcional solo en Plus
   const sliderHtml=puedeSlider
@@ -3617,7 +3634,7 @@ function renderFactoresMatriz(){
       const best=Math.abs(e.total-bestCat[c.id])<0.05;
       return `<td class="num${best?' mm-best':''}" onclick="abrirDetalleCategoria('${c.id}')">${e.total.toFixed(1)}</td>`;
     }).join('');
-    return `<tr><td class="mm-nombre" title="Clic para ver la ficha del toro" onclick="onClickToro('${t.nombre.replace(/'/g,"\\'")}')">${pelBadge(t)} ${t.nombre}</td>${tds}</tr>`;
+    return `<tr><td class="mm-nombre" title="Clic para ver la ficha del toro" onclick="onClickToro('${escJsAttr(t.nombre)}')">${pelBadge(t)} ${escHtml(t.nombre)}</td>${tds}</tr>`;
   }).join('');
 }
 function renderOyPMatriz(){
@@ -3638,7 +3655,7 @@ function renderOyPMatriz(){
       const best=Math.abs(e.score-bestCat[c.id])<0.005;
       return `<td class="num${best?' mm-best':''}" onclick="abrirDetalleCategoria('${c.id}')">${e.score.toFixed(1)}</td>`;
     }).join('');
-    return `<tr><td class="mm-nombre" title="Clic para ver la ficha del toro" onclick="onClickOyP('${t.nombre.replace(/'/g,"\\'")}')">${pelBadge(t)} ${t.nombre}</td>${tds}</tr>`;
+    return `<tr><td class="mm-nombre" title="Clic para ver la ficha del toro" onclick="onClickOyP('${escJsAttr(t.nombre)}')">${pelBadge(t)} ${escHtml(t.nombre)}</td>${tds}</tr>`;
   }).join('');
 }
 function navRecord(prevView, prevCat){
@@ -3835,13 +3852,13 @@ function calcSelectos(toros){
 function renderSelectos(){
   const cont=document.getElementById('selectos-body'); if(!cont) return;
   const R=calcSelectos(TOROS);
-  const fila=(nombre,val,esSel)=>`<div onclick="onClickToro('${nombre.replace(/'/g,"\\'")}')" style="padding:2px 0;cursor:pointer;${esSel?'font-weight:800;color:#b8892b':''}" title="Clic para ver la ficha del toro">${esSel?'★ ':''}${displayNombre(nombre)} <span style="color:var(--gris)">${val}</span></div>`;
+  const fila=(nombre,val,esSel)=>`<div onclick="onClickToro('${escJsAttr(nombre)}')" style="padding:2px 0;cursor:pointer;${esSel?'font-weight:800;color:#b8892b':''}" title="Clic para ver la ficha del toro">${esSel?'★ ':''}${escHtml(displayNombre(nombre))} <span style="color:var(--gris)">${val}</span></div>`;
   let html='<div style="overflow-x:auto"><table class="prec-tabla"><thead><tr><th style="text-align:left">Categoría</th><th style="text-align:left">📊 RD_Factores Top '+SELECTO_TOP_N+'</th><th style="text-align:left">🎯 RD_O&amp;P Top '+SELECTO_TOP_N+'</th><th style="text-align:left">★ Selecto</th></tr></thead><tbody>';
   CATEGORIAS.forEach(cat=>{
     const r=R[cat.id];
     const lf=r.top5F.map(x=>fila(x.toro.nombre,x.total.toFixed(1),r.sel.includes(x.toro.nombre))).join('');
     const lo=r.top5S.map(x=>fila(x.toro.nombre,x.score.toFixed(1),r.sel.includes(x.toro.nombre))).join('');
-    const ls=r.sel.length?r.sel.map(n=>`<span class="coin-badge" style="display:inline-block;margin:1px 3px 1px 0">★ ${displayNombre(n)}</span>`).join(''):'<span style="color:var(--gris);font-style:italic">Sin SELECTOS</span>';
+    const ls=r.sel.length?r.sel.map(n=>`<span class="coin-badge" style="display:inline-block;margin:1px 3px 1px 0">★ ${escHtml(displayNombre(n))}</span>`).join(''):'<span style="color:var(--gris);font-style:italic">Sin SELECTOS</span>';
     html+=`<tr><td style="font-weight:700;color:var(--verde-oscuro,#253a29);vertical-align:top">${cat.nombre}<div style="font-size:.68rem;color:var(--gris);font-weight:400">${cat.desc}</div></td>
       <td style="vertical-align:top">${lf}</td><td style="vertical-align:top">${lo}</td><td style="vertical-align:top">${ls}</td></tr>`;
   });
@@ -3853,8 +3870,8 @@ function renderSelectos(){
   html+='<div style="margin-top:18px;font-weight:800;color:var(--verde-oscuro,#253a29);font-size:.86rem;margin-bottom:8px">Toros SELECTO en más de una categoría</div>';
   if(multi.length){
     html+='<div style="display:flex;flex-wrap:wrap;gap:9px">'+multi.map(([n,cats])=>
-      `<div onclick="onClickToro('${n.replace(/'/g,"\\'")}')" style="cursor:pointer;background:var(--superficie,#f6f5f1);border:1px solid var(--borde,#e5e0d5);border-radius:8px;padding:9px 13px" title="Clic para ver la ficha del toro">
-        <div style="font-weight:800;color:var(--verde-oscuro,#253a29);font-size:.83rem;margin-bottom:4px">★ ${displayNombre(n)}</div>
+      `<div onclick="onClickToro('${escJsAttr(n)}')" style="cursor:pointer;background:var(--superficie,#f6f5f1);border:1px solid var(--borde,#e5e0d5);border-radius:8px;padding:9px 13px" title="Clic para ver la ficha del toro">
+        <div style="font-weight:800;color:var(--verde-oscuro,#253a29);font-size:.83rem;margin-bottom:4px">★ ${escHtml(displayNombre(n))}</div>
         ${cats.map(c=>`<div style="font-size:.72rem;color:#3c6b45">✓ ${c}</div>`).join('')}
       </div>`).join('')+'</div>';
   } else {
@@ -3906,7 +3923,7 @@ function renderConfiabilidad(rf,cat){
     <button class="btn-secundario" onclick="window._precShowExtra=!window._precShowExtra;renderAll()">${extra?'– Ocultar DEPs extra':'+ Ver DEPs extra'}</button></div>
   <div style="overflow-x:auto"><table class="prec-tabla"><thead><tr><th>Toro</th>${cols.map(c=>`<th>${c}</th>`).join('')}<th>Prec.<br>media</th><th>nD</th><th>Evaluación</th></tr></thead><tbody>`;
   for(const x of lista){
-    tabla+=`<tr><td>${pelBadge(x.toro)} ${displayNombre(x.toro.nombre)}</td>`;
+    tabla+=`<tr><td>${pelBadge(x.toro)} ${escHtml(displayNombre(x.toro.nombre))}</td>`;
     for(const c of cols){const p=x.precByDep[c];tabla+=`<td class="prec-cell" style="${precHeat(p)}">${p!=null?p.toFixed(2):'—'}</td>`;}
     tabla+=`<td class="prec-media-cell">${x.precMedia!=null?x.precMedia.toFixed(2):'—'}</td>`;
     tabla+=`<td style="color:${x.nD<6?'var(--rojo)':'var(--gris)'}">${x.nD}/8</td>`;
@@ -3944,7 +3961,7 @@ function renderConfiabilidad(rf,cat){
       filas+=`<tr${i===0?' style="border-top:2px solid var(--borde)"':''}>
         <td>${i===0?`<strong>${c.nombre.replace(/^\d+-/,'')}</strong>`:''}</td>
         <td style="text-align:center;color:var(--gris)">${i+1}</td>
-        <td>${pelBadge(r.toro)} ${displayNombre(r.toro.nombre)}</td>
+        <td>${pelBadge(r.toro)} ${escHtml(displayNombre(r.toro.nombre))}</td>
         <td style="font-size:.7rem;text-align:left">${precTxt}</td>
         <td style="text-align:center"><span class="te-badge ${estadoCls}">${estado}</span></td>
       </tr>`;
@@ -3952,7 +3969,7 @@ function renderConfiabilidad(rf,cat){
   });
   const nivel=catPrecMedia<0.30?'baja':catPrecMedia<0.45?'media-baja':'media';
   let lectura=`<div class="lc-card"><h4>Lectura de confiabilidad</h4>`;
-  if(mejor) lectura+=`<p><strong>Mejor estudiado:</strong> ${displayNombre(mejor.toro.nombre)} — prec. media ${mejor.precMedia.toFixed(2)}${anio?`, nacido ${anio}`:''}. Es el toro con más respaldo de datos del catálogo.</p>`;
+  if(mejor) lectura+=`<p><strong>Mejor estudiado:</strong> ${escHtml(displayNombre(mejor.toro.nombre))} — prec. media ${mejor.precMedia.toFixed(2)}${anio?`, nacido ${anio}`:''}. Es el toro con más respaldo de datos del catálogo.</p>`;
   lectura+=`<p style="color:var(--gris)">Nota general: precisión media del catálogo ${catPrecMedia.toFixed(2)} (${nivel}).${conProg.length<lista.length?' Algunos toros sin precisión publicada.':''} Son evaluaciones mayormente genómicas — los DEPs se ajustan a medida que entra progenie.</p></div>`;
   lectura+=`<div style="font-size:.72rem;color:var(--gris);margin:4px 0 8px">Top 5 de RD_Factores en cada categoría · precisión de los 3 DEPs de mayor peso · <span style="color:var(--verde-oscuro);font-weight:700">verde</span> = ≥ mediana del catálogo, <span style="color:var(--rojo);font-weight:700">rojo</span> = por debajo · <span class="te-badge te-prog">✓ Sostenida</span> todos los DEPs clave firmes · <span class="te-badge te-inc">⚠ Preliminar</span> el puesto se apoya en un DEP de baja precisión</div>
   <div style="overflow-x:auto"><table class="prec-tabla"><thead><tr><th>Categoría</th><th>#</th><th>Toro</th><th style="text-align:left">Precisión de los DEPs que definen la categoría</th><th>Confiabilidad</th></tr></thead><tbody>${filas}</tbody></table></div>`;
@@ -4025,14 +4042,14 @@ function renderHallazgos(cat){
   const hmap={};
   items.forEach(it=>it.hall.forEach(h=>{
     hmap[it.toro.nombre+'|'+h.key]=h;
-    window._pctData[it.toro.nombre+'|'+h.key]={nombre:displayNombre(it.toro.nombre),depNom:NOMS[h.key]||h.key,frase:fraseHallazgo(h),z:h.z,pct:h.pct,tipo:h.tipo};
+    window._pctData[it.toro.nombre+'|'+h.key]={nombre:escHtml(displayNombre(it.toro.nombre)),depNom:NOMS[h.key]||h.key,frase:fraseHallazgo(h),z:h.z,pct:h.pct,tipo:h.tipo};
   }));
   let html=`<div style="font-size:.72rem;color:var(--gris);margin:10px 0"><span class="hall-tag hall-fuerte">▲</span> favorable para ${objetivo} · <span class="hall-tag hall-debil">▼</span> desfavorable · <span class="hall-tag hall-neutro">=</span> no pondera en esta categoría · celda vacía = dentro del conjunto (|z| &lt; 1,5) · referencia: media del propio catálogo</div>`;
   html+=`<div class="lc-card" id="pct-detalle" style="min-height:20px;font-size:.82rem">Tocá una celda marcada para ver el detalle del hallazgo.</div>`;
   html+=`<div style="overflow-x:auto"><table class="pct-matrix"><thead><tr><th>Toro</th>${DEP_ALL.map(k=>`<th>${k}</th>`).join('')}</tr></thead><tbody>`;
   for(const it of items){
-    const nEsc=it.toro.nombre.replace(/'/g,"\\'");
-    html+=`<tr><td>${pelBadge(it.toro)} ${displayNombre(it.toro.nombre)}</td>`;
+    const nEsc=escJsAttr(it.toro.nombre);
+    html+=`<tr><td>${pelBadge(it.toro)} ${escHtml(displayNombre(it.toro.nombre))}</td>`;
     for(const k of DEP_ALL){
       const h=hmap[it.toro.nombre+'|'+k];
       if(!h){ html+=`<td></td>`; continue; }
@@ -4108,9 +4125,9 @@ function renderGrafSelector(){
   if(q) toros=toros.filter(t=>t.nombre.toLowerCase().includes(q));
   listEl.innerHTML=toros.map(t=>{
     const on=sel.has(t.nombre);
-    return `<div onclick="grafToggle('${t.nombre.replace(/'/g,"\\'")}')" style="display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:6px;cursor:pointer;background:${on?'var(--verde-claro)':'transparent'};border:1px solid ${on?'var(--verde-medio)':'transparent'};margin-bottom:4px">
+    return `<div onclick="grafToggle('${escJsAttr(t.nombre)}')" style="display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:6px;cursor:pointer;background:${on?'var(--verde-claro)':'transparent'};border:1px solid ${on?'var(--verde-medio)':'transparent'};margin-bottom:4px">
       <input type="checkbox" ${on?'checked':''} style="pointer-events:none">
-      <span style="font-size:.82rem;font-weight:${on?'700':'500'};flex:1">${t.nombre}</span>
+      <span style="font-size:.82rem;font-weight:${on?'700':'500'};flex:1">${escHtml(t.nombre)}</span>
       <span style="font-size:.65rem;color:var(--gris)">${t.pelaje[0]}</span>
     </div>`;
   }).join('');
@@ -4125,7 +4142,7 @@ function renderGrafico(){
   const cat2=CATEGORIAS.find(c=>c.id===cat2Id);
   const colores=["#2a78d6","#eb6834","#1baf7a","#eda100","#e87ba4","#008300"];
   if(!sel.length){ canvas.innerHTML='<span style="font-size:.85rem;color:var(--gris)">Seleccioná 1 a 6 toros</span>'; legend.innerHTML=''; detalle.innerHTML=''; return; }
-  legend.innerHTML=sel.map((n,i)=>`<span><span style="display:inline-block;width:12px;height:12px;background:${colores[i%colores.length]};border-radius:2px;margin-right:6px"></span>${n}</span>`).join('');
+  legend.innerHTML=sel.map((n,i)=>`<span><span style="display:inline-block;width:12px;height:12px;background:${colores[i%colores.length]};border-radius:2px;margin-right:6px"></span>${escHtml(n)}</span>`).join('');
   if(opt==='oyp_scatter'){
     // Scatter por perfil O&P: selector de perfil + scatter X=DEP1 / Y=DEP2
     // Perfiles activos en la categoría con exactamente 2 DEPs base (para ejes claros)
@@ -4219,7 +4236,7 @@ function renderGrafico(){
       const pt=allPts.find(p=>p.nombre===n); if(!pt) return '';
       const px=toSvgX(pt.x),py=toSvgY(pt.y),col=colores[idx%colores.length];
       const short=n.length>12?n.slice(0,11)+'…':n;
-      return `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="7" fill="${col}" stroke="white" stroke-width="1.5"><title>${displayNombre(n)}\n${key1}: ${pt.x.toFixed(2)}\n${key2}: ${pt.y.toFixed(2)}</title></circle>
+      return `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="7" fill="${col}" stroke="white" stroke-width="1.5"><title>${escHtml(displayNombre(n))}\n${key1}: ${pt.x.toFixed(2)}\n${key2}: ${pt.y.toFixed(2)}</title></circle>
         <text x="${(px+9).toFixed(1)}" y="${(py+4).toFixed(1)}" font-size="9.5" fill="${col}" font-weight="700">${short}</text>`;
     }).join('');
 
@@ -4236,7 +4253,7 @@ function renderGrafico(){
     let axes='';CHARS.forEach((c,i)=>{const a=ang(i),e=pt(maxR,a),l=pt(maxR+28,a);axes+=`<line x1="${cx}" y1="${cy}" x2="${e.x.toFixed(1)}" y2="${e.y.toFixed(1)}" stroke="#ddd" stroke-width=".8"/><text x="${l.x.toFixed(1)}" y="${l.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#333" font-weight="700">${c}</text>`;});
     const avgPts=CHARS.map((_,i)=>{const p=pt(maxR*.5,ang(i));return`${p.x.toFixed(1)},${p.y.toFixed(1)}`;}).join(' ');
     const bullPts=CHARS.map((c,i)=>{const zc=Math.max(-mz,Math.min(mz,z0[c]||0));const r=maxR*((zc+mz)/(2*mz));const p=pt(r,ang(i));return`${p.x.toFixed(1)},${p.y.toFixed(1)}`;}).join(' ');
-    canvas.innerHTML=`<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" style="overflow:visible">${rings}<polygon points="${avgPts}" fill="rgba(150,150,150,.12)" stroke="#999" stroke-width="1.5" stroke-dasharray="5,3"/>${axes}<polygon points="${bullPts}" fill="${colores[0]}22" stroke="${colores[0]}" stroke-width="2.5"/></svg><div style="margin-top:8px;font-size:.8rem;color:var(--gris)">Comparando <b>${sel[0]}</b> vs promedio · <b>${cat.nombre}</b></div>`;
+    canvas.innerHTML=`<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" style="overflow:visible">${rings}<polygon points="${avgPts}" fill="rgba(150,150,150,.12)" stroke="#999" stroke-width="1.5" stroke-dasharray="5,3"/>${axes}<polygon points="${bullPts}" fill="${colores[0]}22" stroke="${colores[0]}" stroke-width="2.5"/></svg><div style="margin-top:8px;font-size:.8rem;color:var(--gris)">Comparando <b>${escHtml(sel[0])}</b> vs promedio · <b>${cat.nombre}</b></div>`;
   } else if(opt==='radar_2toros'){
     if(sel.length<2){ canvas.innerHTML='<span style="font-size:.85rem;color:var(--gris)">Seleccioná 2 toros</span>'; return; }
     const zList=sel.slice(0,2).map(n=>{ const t=TOROS.find(tt=>tt.nombre===n); return t?zScoresDe(t):null; }).filter(Boolean);
@@ -4326,7 +4343,7 @@ function renderGrafico(){
   }
   const rf=calcFactores(TOROS,catId);
   let detHtml=`<div style="font-size:.75rem;color:var(--gris);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">Resumen · ${cat.nombre}</div><table style="width:100%;border-collapse:collapse;font-size:.8rem"><thead><tr><th style="text-align:left;padding:4px">Toro</th><th style="padding:4px">Score</th><th style="padding:4px">Descripción</th></tr></thead><tbody>`;
-  sel.forEach(n=>{ const r=rf.find(x=>x.toro.nombre===n); const t=TOROS.find(tt=>tt.nombre===n); const exp=t?explicar(zScoresDe(t),cat):''; detHtml+=`<tr><td style="padding:4px;border-top:1px solid #eee">${displayNombre(n)}</td><td style="padding:4px;text-align:center;border-top:1px solid #eee">${r?r.total.toFixed(1):'—'}</td><td style="padding:4px;border-top:1px solid #eee;color:var(--gris)">${exp}</td></tr>`; });
+  sel.forEach(n=>{ const r=rf.find(x=>x.toro.nombre===n); const t=TOROS.find(tt=>tt.nombre===n); const exp=t?explicar(zScoresDe(t),cat):''; detHtml+=`<tr><td style="padding:4px;border-top:1px solid #eee">${escHtml(displayNombre(n))}</td><td style="padding:4px;text-align:center;border-top:1px solid #eee">${r?r.total.toFixed(1):'—'}</td><td style="padding:4px;border-top:1px solid #eee;color:var(--gris)">${exp}</td></tr>`; });
   detHtml+='</tbody></table>'; detalle.innerHTML=detHtml;
 }
 
@@ -4360,7 +4377,7 @@ function renderBlancoChips() {
   chips.innerHTML = aptos.map(t => {
     const activo = _blancoSeleccionados.has(t.nombre);
     const esSel = selectos.has(t.nombre);
-    return `<button class="blanco-chip${activo?' activo':''}${esSel?' selecto':''}" onclick="blancoToggleToro('${t.nombre.replace(/'/g,"\\'")}')">${esSel?'★ ':''}${t.nombre}</button>`;
+    return `<button class="blanco-chip${activo?' activo':''}${esSel?' selecto':''}" onclick="blancoToggleToro('${escJsAttr(t.nombre)}')">${esSel?'★ ':''}${escHtml(t.nombre)}</button>`;
   }).join('');
 }
 
@@ -4485,10 +4502,10 @@ function renderBlancoPolLista(which, allToros, top5Set){
     const esNegro=(t.pelaje||'').toLowerCase().includes('neg');
     const dot=`<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${esNegro?'#1a1a1a':'#b5541a'};flex-shrink:0"></span>`;
     const star=top5Set&&top5Set.has(t.nombre)?'★ ':'';
-    const safeN=t.nombre.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    const safeN=escJsAttr(t.nombre);
     return`<div class="blanco-pol-item${on?' on':''}" onclick="blancoPolToggle('${which}','${safeN}')">
       <input type="checkbox" ${on?'checked':''} style="pointer-events:none;accent-color:var(--verde-oscuro);flex-shrink:0">
-      ${dot}<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${star}${displayNombre(t.nombre)}</span>
+      ${dot}<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${star}${escHtml(displayNombre(t.nombre))}</span>
     </div>`;
   }).join('');
 }
@@ -4518,7 +4535,7 @@ function buildPolarSVG(items, {size=520, maxLabel=10, title='', axisLabels=[]}={
     if(item.nc){
       const r=maxR*0.97;
       const px=cx+r*Math.sin(item.angle_rad), py=cy-r*Math.cos(item.angle_rad);
-      svg+=`<text x="${px.toFixed(1)}" y="${py.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#ccc"><title>${item.label}</title>✕</text>`;
+      svg+=`<text x="${px.toFixed(1)}" y="${py.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#ccc"><title>${escHtml(item.label)}</title>✕</text>`;
       return;
     }
     const r=maxR*Math.min(item.r_norm,0.97);
@@ -4526,7 +4543,7 @@ function buildPolarSVG(items, {size=520, maxLabel=10, title='', axisLabels=[]}={
     const radius=item.selecto?9:7;
     const col=item.color||'#555';
     const sk=item.selecto?'#b8892b':'white', sw=item.selecto?2.5:1.5;
-    svg+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${radius}" fill="${col}" stroke="${sk}" stroke-width="${sw}" opacity=".93"><title>${item.label}</title></circle>`;
+    svg+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${radius}" fill="${col}" stroke="${sk}" stroke-width="${sw}" opacity=".93"><title>${escHtml(item.label)}</title></circle>`;
     svg+=`<text x="${px.toFixed(1)}" y="${(py+.5).toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-size="${radius<8?'7':'8'}" fill="white" font-weight="800" pointer-events="none">${item.rank||''}</text>`;
   });
   return`<svg viewBox="0 0 ${size} ${size}" width="100%" height="auto" style="max-width:${size}px;overflow:visible">${svg}</svg>`;
@@ -4575,7 +4592,7 @@ function renderBlancoA(){
   document.getElementById('blanco-a-svg').innerHTML=buildPolarSVG(items,{size:520,maxLabel:10,title:perfilId});
   const rows=filtrados.map((r,i)=>{
     const esNegro=(r.toro.pelaje||'').toLowerCase().includes('neg');
-    const row=[`${i+1}`,`<span style="display:inline-block;width:9px;height:9px;background:${esNegro?'#1a1a1a':'#b5541a'};border-radius:50%;vertical-align:middle"></span>`,displayNombre(r.toro.nombre),r.det[perfilId].score0_10.toFixed(1)];
+    const row=[`${i+1}`,`<span style="display:inline-block;width:9px;height:9px;background:${esNegro?'#1a1a1a':'#b5541a'};border-radius:50%;vertical-align:middle"></span>`,escHtml(displayNombre(r.toro.nombre)),r.det[perfilId].score0_10.toFixed(1)];
     row._color=top5.has(r.toro.nombre)?'#b8892b':'#333';
     return row;
   });
@@ -4615,7 +4632,7 @@ function renderBlancoB(){
   const rows=sorted.map((item,i)=>{
     const esNegro=(item.pelaje||'').toLowerCase().includes('neg');
     const dc=item.ds?'#b8892b':esNegro?'#1a1a1a':'#b5541a';
-    const row=[`${i+1}`,`<span style="display:inline-block;width:9px;height:9px;background:${dc};border-radius:50%;vertical-align:middle"></span>`,displayNombre(item.nombre),item.rdf.toFixed(0),item.oyp.toFixed(1)];
+    const row=[`${i+1}`,`<span style="display:inline-block;width:9px;height:9px;background:${dc};border-radius:50%;vertical-align:middle"></span>`,escHtml(displayNombre(item.nombre)),item.rdf.toFixed(0),item.oyp.toFixed(1)];
     row._color=item.ds?'#b8892b':'#333';
     return row;
   });
@@ -4770,10 +4787,10 @@ function renderSVGBlanco(tiros, modo) {
       : (t.score>0.5?'#16a34a':t.score<-0.5?'#c0392b':'#b8892b');
     const lbl = modo==='toro'
       ? t.oyp_id
-      : t.nombre.slice(0,5);
+      : escHtml(t.nombre.slice(0,5));
     const tip = modo==='toro'
       ? `${t.oyp_id} ${t.oyp_nombre} | X:${t.x} Y:${t.y} | ${t.afinidad}`
-      : `${t.nombre} | X:${t.x} Y:${t.y} | Score:${t.score}`;
+      : `${escHtml(t.nombre)} | X:${t.x} Y:${t.y} | Score:${t.score}`;
     return `<g class="blanco-punto"><title>${tip}</title>
       <circle cx="${cx}" cy="${cy}" r="6"
         fill="${color}" stroke="white" stroke-width="1.5" opacity="0.92"/>
@@ -4886,7 +4903,7 @@ function _renderBlancoPolToro(bz, selectosNombres){
       angle:2*Math.PI*i/N, label:p.id, color:'#888'
     }));
     html+=`<div class="blanco-card" style="grid-column:span 1">
-      <div class="blanco-card-title">🎯 ${displayNombre(nombre)}</div>
+      <div class="blanco-card-title">🎯 ${escHtml(displayNombre(nombre))}</div>
       <div class="blanco-card-sub">Score por perfil — centro = 10 · periferia = 0</div>
       ${buildPolarSVG(items,{size:300,maxLabel:10,axisLabels})}
     </div>`;
@@ -4940,7 +4957,7 @@ function _blancoCardToro(item) {
   const pct = item.pctQ1!==null ? item.pctQ1+'%' : 'N/D';
   const sc  = item.scoreTotal!==null ? item.scoreTotal : 'N/D';
   return `<div class="blanco-card">
-    <div class="blanco-card-title">★ ${displayNombre(item.toro.nombre)}</div>
+    <div class="blanco-card-title">★ ${escHtml(displayNombre(item.toro.nombre))}</div>
     <div class="blanco-card-sub">${item.toro.raza||''} · ${item.nCalc} O&P calculables</div>
     ${renderSVGBlanco(item.tiros, 'toro')}
     <div class="blanco-stats">
@@ -4994,15 +5011,15 @@ function infRenderToroLista(){
   const toros=TOROS.filter(function(t){return t._apto!==false&&(!q||t.nombre.toLowerCase().includes(q));});
   document.getElementById('inf-toro-lista').innerHTML=toros.map(function(t){
     const sel=_infTSel.has(t.nombre);
-    const nm=t.nombre.replace(/\\/g,'\\\\').replace(/"/g,'&quot;');
+    const nm=t.nombre.replace(/\\/g,'\\\\').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     return '<div onclick=\'infToggleToro(\"'+nm+'\")\''+
       ' style=\'display:flex;align-items:center;gap:6px;padding:6px 8px;'+
       'border:1.5px solid '+(sel?'#3c6b45':'#ddd6c8')+';border-radius:7px;cursor:pointer;'+
       'background:'+(sel?'#e9f0ea':'#fff')+';font-size:.78rem;font-weight:'+(sel?700:500)+'\'>'
       +'<span>'+(sel?'☑':'☐')+'</span>'
       +'<span style=\'color:#253a29\'>'
-      +t.nombre+'<span style=\'display:block;font-size:.63rem;color:#6b6b6b;font-weight:400\'>'
-      +t.pelaje+'</span></span></div>';
+      +escHtml(t.nombre)+'<span style=\'display:block;font-size:.63rem;color:#6b6b6b;font-weight:400\'>'
+      +escHtml(t.pelaje)+'</span></span></div>';
   }).join('');
 }
 function infToggleToro(nombre){
@@ -5037,7 +5054,7 @@ function infGenerarFichas(nombres){
       const rfRk=rfR&&rfR.ok?rf.filter(function(r){return r.ok;}).indexOf(rfR)+1:'N/A';
       const oRk=oR?oy.indexOf(oR)+1:'N/A';
       const es=sl.includes(nombre);
-      rr+='<tr><td style="font-weight:700;color:#253a29;font-size:.73rem">'+cat.nombre+'</td>'
+      rr+='<tr><td style="font-weight:700;color:#253a29;font-size:.73rem">'+infCatNombre(cat)+'</td>'
         +'<td style="text-align:center">'+(rfR&&rfR.ok?'#'+rfRk+' · '+rfR.total.toFixed(1):'<span style="color:#aaa">N/A</span>')+'</td>'
         +'<td style="text-align:center">'+(oR?'#'+oRk+' · '+oR.score.toFixed(1):'<span style="color:#aaa">N/A</span>')+'</td>'
         +'<td style="text-align:center;font-weight:800;color:'+(es?'#b8892b':'#ccc')+'">'+(es?'★':'–')+'</td></tr>';
@@ -5053,7 +5070,7 @@ function infGenerarFichas(nombres){
     CATEGORIAS.forEach(function(cat){
       const perfs=PERFILES_OYP.filter(function(p){return p.cats.includes(cat.id);});
       const oR=RES[cat.id].oyp.find(function(r){return r.t.nombre===nombre;});if(!oR)return;
-      op+='<div style="margin-bottom:10px"><div style="font-size:.68rem;font-weight:800;color:#253a29;margin-bottom:5px">'+cat.nombre+'</div><div style="display:flex;flex-wrap:wrap;gap:4px">';
+      op+='<div style="margin-bottom:10px"><div style="font-size:.68rem;font-weight:800;color:#253a29;margin-bottom:5px">'+infCatNombre(cat)+'</div><div style="display:flex;flex-wrap:wrap;gap:4px">';
       perfs.forEach(function(p){
         const d=oR.det[p.id];if(!d||!d.ok)return;
         const v=d.s,bg=v>0?'rgba(37,58,41,.12)':'rgba(192,57,43,.10)',fc=v>0?'#1a4020':'#7a1a10';
@@ -5062,14 +5079,14 @@ function infGenerarFichas(nombres){
       op+='</div></div>';
     });
     html+='<div class="inf-page" id="inf-pg-'+tId+'" data-pid="'+tId+'">';
-    html+='<div class="inf-section-title">Ficha · '+t.nombre+'<span style="font-size:.65rem;font-weight:400;color:#888;margin-left:10px">'+t.pelaje+' · '+t.raza+'</span></div>';
+    html+='<div class="inf-section-title">Ficha · '+escHtml(t.nombre)+'<span style="font-size:.65rem;font-weight:400;color:#888;margin-left:10px">'+escHtml(t.pelaje)+' · '+escHtml(t.raza)+'</span></div>';
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">';
     html+='<div style="background:#f8f6f1;border:1px solid #ddd6c8;border-radius:8px;padding:10px 13px"><div style="font-size:.68rem;font-weight:800;color:#253a29;text-transform:uppercase;margin-bottom:7px">Identificación</div>';
-    if(t.rp)html+='<div style="font-size:.73rem;margin-bottom:3px"><span style="color:#888">RP:</span> <strong>'+t.rp+'</strong></div>';
-    if(t.nacimiento)html+='<div style="font-size:.73rem;margin-bottom:3px"><span style="color:#888">Nacimiento:</span> '+t.nacimiento+'</div>';
-    if(t.pesoActual)html+='<div style="font-size:.73rem;margin-bottom:3px"><span style="color:#888">Peso:</span> '+t.pesoActual+' kg</div>';
-    if(t.expositor)html+='<div style="font-size:.73rem;margin-bottom:3px"><span style="color:#888">Expositor:</span> '+t.expositor+'</div>';
-    if(t.origen)html+='<div style="font-size:.68rem;color:#888;margin-top:5px;line-height:1.4">'+t.origen+'</div>';
+    if(t.rp)html+='<div style="font-size:.73rem;margin-bottom:3px"><span style="color:#888">RP:</span> <strong>'+escHtml(t.rp)+'</strong></div>';
+    if(t.nacimiento)html+='<div style="font-size:.73rem;margin-bottom:3px"><span style="color:#888">Nacimiento:</span> '+escHtml(t.nacimiento)+'</div>';
+    if(t.pesoActual)html+='<div style="font-size:.73rem;margin-bottom:3px"><span style="color:#888">Peso:</span> '+escHtml(t.pesoActual)+' kg</div>';
+    if(t.expositor)html+='<div style="font-size:.73rem;margin-bottom:3px"><span style="color:#888">Expositor:</span> '+escHtml(t.expositor)+'</div>';
+    if(t.origen)html+='<div style="font-size:.68rem;color:#888;margin-top:5px;line-height:1.4">'+escHtml(t.origen)+'</div>';
     html+='</div>';
     html+='<div style="background:#f8f6f1;border:1px solid #ddd6c8;border-radius:8px;padding:10px 13px"><div style="font-size:.68rem;font-weight:800;color:#253a29;text-transform:uppercase;margin-bottom:7px">Rankings</div>';
     html+='<table class="inf-tbl" style="font-size:.69rem"><thead><tr><th>Categoría</th><th style="text-align:center">Factores</th><th style="text-align:center">O&amp;P</th><th style="text-align:center">★</th></tr></thead><tbody>'+rr+'</tbody></table></div></div>';
@@ -5187,8 +5204,8 @@ function infConfHallSection(RES, modo){
     const peores=cp.slice().sort((a,b)=>a.precMedia-b.precMedia).slice(0,3);
     html+='<p style="font-size:.74rem;color:#444;line-height:1.5">Precisión media del catálogo: <strong>'+P.catPrecMedia.toFixed(2)+'</strong>. '
       +nProg+' con progenie · '+nGen+' genómica/pedigrí sin progenie'+(nInc?' · '+nInc+' con evaluación incompleta':'')+'.<br>'
-      +'<strong>Mejor estudiado:</strong> '+mejor.toro.nombre+' (prec. media '+mejor.precMedia.toFixed(2)+(_anioNac(mejor.toro.nacimiento)?', nacido '+_anioNac(mejor.toro.nacimiento):'')+'). '
-      +'<strong>Menos respaldo:</strong> '+peores.map(x=>x.toro.nombre+' '+x.precMedia.toFixed(2)).join(' · ')+'.</p>';
+      +'<strong>Mejor estudiado:</strong> '+escHtml(mejor.toro.nombre)+' (prec. media '+mejor.precMedia.toFixed(2)+(_anioNac(mejor.toro.nacimiento)?', nacido '+_anioNac(mejor.toro.nacimiento):'')+'). '
+      +'<strong>Menos respaldo:</strong> '+peores.map(x=>escHtml(x.toro.nombre)+' '+x.precMedia.toFixed(2)).join(' · ')+'.</p>';
     if(modo!=='mini'){
       // Tabla Top 5 x 4 categorías
       html+='<table class="inf-tbl" style="font-size:.68rem;margin-top:6px"><thead><tr><th style="text-align:left">Categoría</th><th>#</th><th style="text-align:left">Toro</th><th style="text-align:left">Precisión de los DEPs que definen la categoría</th><th>Confiabilidad</th></tr></thead><tbody>';
@@ -5212,9 +5229,9 @@ function infConfHallSection(RES, modo){
           }).join(' · ');
           const estCol=est.indexOf('✓')===0?'#2f6b3d':est.indexOf('⚠')===0?'#b3261e':'#888';
           html+='<tr>'
-            +'<td style="text-align:left">'+(i===0?'<strong>'+c.nombre.replace(/^\d+-/,'')+'</strong>':'')+'</td>'
+            +'<td style="text-align:left">'+(i===0?'<strong>'+infCatNombre(c)+'</strong>':'')+'</td>'
             +'<td style="text-align:center;color:#888">'+(i+1)+'</td>'
-            +'<td style="text-align:left">'+r.t.nombre+'</td>'
+            +'<td style="text-align:left">'+escHtml(r.t.nombre)+'</td>'
             +'<td style="text-align:left">'+precTxt+'</td>'
             +'<td style="text-align:center;color:'+estCol+';font-weight:700">'+est+'</td></tr>';
         });
@@ -5232,7 +5249,7 @@ function infConfHallSection(RES, modo){
   const top=flat.slice(0, modo==='mini'?6:9);
   if(!top.length){ html+='<p style="font-size:.72rem;color:#888">Sin hallazgos ≥ 1,5 desvíos en '+catNombreActivo()+'.</p>'; }
   else {
-    html+='<div style="font-size:.66rem;color:#888;margin-bottom:4px">Referencia: media del propio catálogo · categoría '+CATEGORIAS.find(function(c){return c.id===currentCat;}).nombre.replace(/^\d+-/,'')+'.</div>';
+    html+='<div style="font-size:.66rem;color:#888;margin-bottom:4px">Referencia: media del propio catálogo · categoría '+infCatNombre(CATEGORIAS.find(function(c){return c.id===currentCat;}))+'.</div>';
     top.forEach(function(x){
       const sym=x.h.tipo==='fuerte'?'<span style="color:#2f6b3d;font-weight:800">▲</span>':x.h.tipo==='debil'?'<span style="color:#b3261e;font-weight:800">▼</span>':'<span style="color:#888;font-weight:800">=</span>';
       html+='<div style="font-size:.72rem;padding:2px 0;border-bottom:1px solid #f0f0f0">'+sym+' <strong>'+x.n+'</strong> — '+fraseHallazgo(x.h)+'</div>';
@@ -5262,12 +5279,12 @@ function infSelectosPage(RES, pid){
       col[1].forEach(function(x,i){
         const n=x.t.nombre, es=sel.indexOf(n)>=0;
         const v=col[2]?x.total.toFixed(1):x.score.toFixed(1);
-        html+='<tr'+(es?' style="background:#fff8e1"':'')+'><td style="text-align:left;font-weight:'+(es?'800':'600')+';color:'+(es?'#b8892b':'#253a29')+'">'+(es?'★ ':'')+(i+1)+'. '+n+'</td><td style="text-align:center;color:#888">'+v+'</td></tr>';
+        html+='<tr'+(es?' style="background:#fff8e1"':'')+'><td style="text-align:left;font-weight:'+(es?'800':'600')+';color:'+(es?'#b8892b':'#253a29')+'">'+(es?'★ ':'')+(i+1)+'. '+escHtml(n)+'</td><td style="text-align:center;color:#888">'+v+'</td></tr>';
       });
       html+='</tbody></table>';
     });
     html+='</div>';
-    html+='<div style="font-size:.7rem;color:#3c6b45;font-weight:700;margin-top:5px">'+(sel.length?'★ SELECTO: '+sel.join(', '):'Sin SELECTOS — ningún toro en el top '+SELECTO_TOP_N+' de los dos métodos.')+'</div>';
+    html+='<div style="font-size:.7rem;color:#3c6b45;font-weight:700;margin-top:5px">'+(sel.length?'★ SELECTO: '+sel.map(escHtml).join(', '):'Sin SELECTOS — ningún toro en el top '+SELECTO_TOP_N+' de los dos métodos.')+'</div>';
     html+='</div>';
   });
   html+=infFoot(pid)+'</div>';
@@ -5288,7 +5305,7 @@ function infAnexoD(){
   DEP_ALL.forEach(function(k){html+='<th>'+k+'</th>';});
   html+='<th>Media</th><th>nD</th><th style="text-align:left">Evaluación</th></tr></thead><tbody>';
   P.lista.forEach(function(x){
-    html+='<tr><td style="text-align:left;font-weight:700;color:#253a29;white-space:nowrap">'+x.toro.nombre+'</td>';
+    html+='<tr><td style="text-align:left;font-weight:700;color:#253a29;white-space:nowrap">'+escHtml(x.toro.nombre)+'</td>';
     DEP_ALL.forEach(function(k){const p=x.precByDep[k];html+='<td style="'+_infHeat(p)+'">'+(p!=null?p.toFixed(2):'—')+'</td>';});
     html+='<td style="font-weight:800">'+(x.precMedia!=null?x.precMedia.toFixed(2):'—')+'</td>';
     html+='<td style="'+(x.nD<6?'color:#b3261e;font-weight:700':'')+'">'+x.nD+'/8</td>';
@@ -5304,7 +5321,7 @@ function infAnexoE(){
   const H=calcHallazgos(TOROS,currentCat);
   let html='<div class="inf-page" id="inf-pg-anexo-e" data-pid="anexo-e">';
   html+='<div class="inf-section-title">Anexo E — Hallazgos completos (RD_Hallazgos)</div>';
-  html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:10px">Matriz toro × DEP para <strong>'+cat.nombre.replace(/^\d+-/,'')+'</strong> · <span style="color:#2f6b3d;font-weight:800">▲</span> favorable · <span style="color:#b3261e;font-weight:800">▼</span> desfavorable · <span style="color:#888;font-weight:800">=</span> no pondera en la categoría · celda vacía = dentro del conjunto (|z| &lt; 1,5) · referencia: media del catálogo.</div>';
+  html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:10px">Matriz toro × DEP para <strong>'+infCatNombre(cat)+'</strong> · <span style="color:#2f6b3d;font-weight:800">▲</span> favorable · <span style="color:#b3261e;font-weight:800">▼</span> desfavorable · <span style="color:#888;font-weight:800">=</span> no pondera en la categoría · celda vacía = dentro del conjunto (|z| &lt; 1,5) · referencia: media del catálogo.</div>';
   if(!H.items.length){ html+='<p style="font-size:.74rem;color:#888">Sin hallazgos ≥ 1,5 desvíos.</p>'+infFoot('anexo-e')+'</div>'; return html; }
   const hmap={};
   H.items.forEach(function(it){it.hall.forEach(function(h){hmap[it.toro.nombre+'|'+h.key]=h;});});
@@ -5312,7 +5329,7 @@ function infAnexoE(){
   DEP_ALL.forEach(function(k){html+='<th>'+k+'</th>';});
   html+='</tr></thead><tbody>';
   H.items.forEach(function(it){
-    html+='<tr><td style="text-align:left;font-weight:700;color:#253a29;white-space:nowrap">'+it.toro.nombre+'</td>';
+    html+='<tr><td style="text-align:left;font-weight:700;color:#253a29;white-space:nowrap">'+escHtml(it.toro.nombre)+'</td>';
     DEP_ALL.forEach(function(k){
       const h=hmap[it.toro.nombre+'|'+k];
       if(!h){html+='<td></td>';return;}
@@ -5323,11 +5340,11 @@ function infAnexoE(){
     html+='</tr>';
   });
   html+='</tbody></table></div>';
-  html+='<div class="inf-sub-title" style="margin-top:12px">Lista de hallazgos — '+cat.nombre.replace(/^\d+-/,'')+'</div>';
+  html+='<div class="inf-sub-title" style="margin-top:12px">Lista de hallazgos — '+infCatNombre(cat)+'</div>';
   H.items.forEach(function(it){
     it.hall.forEach(function(h){
       const sym=h.tipo==='fuerte'?'<span style="color:#2f6b3d;font-weight:800">▲</span>':h.tipo==='debil'?'<span style="color:#b3261e;font-weight:800">▼</span>':'<span style="color:#888;font-weight:800">=</span>';
-      html+='<div style="font-size:.68rem;padding:2px 0;border-bottom:1px solid #f0f0f0">'+sym+' <strong>'+it.toro.nombre+'</strong> — '+fraseHallazgo(h)+'</div>';
+      html+='<div style="font-size:.68rem;padding:2px 0;border-bottom:1px solid #f0f0f0">'+sym+' <strong>'+escHtml(it.toro.nombre)+'</strong> — '+fraseHallazgo(h)+'</div>';
     });
   });
   html+=infFoot('anexo-e')+'</div>';
@@ -5411,7 +5428,7 @@ function infRankTable(rows,isF,sel){
     const s=sel.indexOf(r.t.nombre)>=0;
     const sc=isF?r.total.toFixed(1):r.score.toFixed(1);
     return '<tr class="'+(s?'sel':'')+'"><td class="inf-dc" style="color:#999">'+(i+1)+'</td>'
-      +'<td style="font-weight:'+(s?700:500)+';color:#253a29">'+(s?'★ ':'')+r.t.nombre+'<div style="font-size:.63rem;color:#999">'+r.t.pelaje+'</div></td>'
+      +'<td style="font-weight:'+(s?700:500)+';color:#253a29">'+(s?'★ ':'')+escHtml(r.t.nombre)+'<div style="font-size:.63rem;color:#999">'+escHtml(r.t.pelaje)+'</div></td>'
       +'<td class="inf-dr">'+sc+'</td></tr>';
   }).join('');
   return '<table class="inf-tbl">'+h+b+'</table>';
@@ -5423,8 +5440,8 @@ function infFullF(rf,sel){
   let b=rf.map((r,i)=>{
     const s=sel.indexOf(r.t.nombre)>=0;
     return '<tr class="'+(s?'sel':'')+'"><td class="inf-dc" style="color:#999;font-size:.68rem">'+(i+1)+'</td>'
-      +'<td style="font-weight:'+(s?700:500)+';color:#253a29">'+(s?'★ ':'')+r.t.nombre+'</td>'
-      +'<td style="color:#888;font-size:.68rem;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+r.t.origen+'</td>'
+      +'<td style="font-weight:'+(s?700:500)+';color:#253a29">'+(s?'★ ':'')+escHtml(r.t.nombre)+'</td>'
+      +'<td style="color:#888;font-size:.68rem;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escHtml(r.t.origen)+'</td>'
       +'<td style="text-align:right;color:#3c6b45;font-weight:700">'+r.g.toFixed(1)+'</td>'
       +'<td class="inf-dr">'+r.total.toFixed(1)+'</td>'
       +'<td class="inf-dc" style="color:#b8892b">'+(s?'★':'')+'</td></tr>';
@@ -5443,7 +5460,7 @@ function infFullO(oyp,perfiles,sel){
       return d&&d.ok?'<td class="inf-dc">'+d.s.toFixed(2)+'</td>':'<td class="inf-dn">—</td>';
     }).join('');
     return '<tr class="'+(s?'sel':'')+'"><td class="inf-dc" style="color:#999;font-size:.68rem">'+(i+1)+'</td>'
-      +'<td style="font-weight:'+(s?700:500)+';color:#253a29">'+(s?'★ ':'')+r.t.nombre+'</td>'
+      +'<td style="font-weight:'+(s?700:500)+';color:#253a29">'+(s?'★ ':'')+escHtml(r.t.nombre)+'</td>'
       +cells
       +'<td class="inf-dr">'+r.score.toFixed(1)+'</td>'
       +'<td class="inf-dc" style="color:#b8892b">'+(s?'★':'')+'</td></tr>';
@@ -5452,8 +5469,13 @@ function infFullO(oyp,perfiles,sel){
 }
 
 // Nombre de categoría con el badge "★ Gran Selecto" para Rodeo General (espeja el badge de Vista Global en pantalla).
+function infCatNombre(cat){
+  const num=CATEGORIAS.findIndex(function(c){return c.id===cat.id;})+1;
+  const limpio=cat.nombre.replace(/^#?\d+(\.\d+)?_?/,'').trim();
+  return '#'+num+' - '+limpio;
+}
 function infCatLabel(cat){
-  return cat.nombre+(cat.id==='rodeoGeneral'?' <span style="font-size:.6em;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:#b8892b;color:#fff;border-radius:10px;padding:1px 7px;white-space:nowrap;vertical-align:middle">★ Gran Selecto</span>':'');
+  return infCatNombre(cat)+(cat.id==='rodeoGeneral'?' <span style="font-size:.6em;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:#b8892b;color:#fff;border-radius:10px;padding:1px 7px;white-space:nowrap;vertical-align:middle">★ Gran Selecto</span>':'');
 }
 const INF_LEGAL='SEPA-Select&reg; &middot; DNDA EX-2026-81106223-APN-DNDA#MJ &middot; Sistema independiente de an&aacute;lisis de DEPs.';
 function infFoot(pid){
@@ -5498,8 +5520,8 @@ function infGenerarContenido(){
   html+='<div style="font-weight:800;color:#7a5a10;font-size:.78rem;margin-bottom:7px">★ TOROS SELECTO POR CATEGORÍA</div>';
   CATEGORIAS.forEach(cat=>{
     const sel=RES[cat.id].sel;
-    html+='<div style="margin-bottom:5px"><span style="font-size:.7rem;font-weight:700;color:#253a29">'+cat.nombre+': </span>';
-    if(sel.length) sel.forEach(n=>{html+='<span class="inf-badge" style="margin-right:3px">★ '+n+'</span>';});
+    html+='<div style="margin-bottom:5px"><span style="font-size:.7rem;font-weight:700;color:#253a29">'+infCatNombre(cat)+': </span>';
+    if(sel.length) sel.forEach(n=>{html+='<span class="inf-badge" style="margin-right:3px">★ '+escHtml(n)+'</span>';});
     else html+='<span style="font-size:.7rem;color:#aaa;font-style:italic">Sin selectos</span>';
     html+='</div>';
   });
@@ -5527,9 +5549,9 @@ function infGenerarContenido(){
     const r=RES[cat.id];
     const t5f=r.rf.filter(x=>x.ok).slice(0,SELECTO_TOP_N);
     const t5o=r.oyp.slice(0,SELECTO_TOP_N);
-    const lf=t5f.map((x,i)=>{const s=r.sel.includes(x.t.nombre);return '<div style="padding:1px 0;'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+x.t.nombre+' <span style="color:#aaa">'+x.total.toFixed(1)+'</span></div>';}).join('');
-    const lo=t5o.map((x,i)=>{const s=r.sel.includes(x.t.nombre);return '<div style="padding:1px 0;'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+x.t.nombre+' <span style="color:#aaa">'+x.score.toFixed(1)+'</span></div>';}).join('');
-    const ls=r.sel.length?r.sel.map(n=>'<div class="inf-badge" style="margin-bottom:2px;display:block;width:fit-content">★ '+n+'</div>').join(''):'<span style="color:#aaa;font-style:italic;font-size:.68rem">—</span>';
+    const lf=t5f.map((x,i)=>{const s=r.sel.includes(x.t.nombre);return '<div style="padding:1px 0;'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+escHtml(x.t.nombre)+' <span style="color:#aaa">'+x.total.toFixed(1)+'</span></div>';}).join('');
+    const lo=t5o.map((x,i)=>{const s=r.sel.includes(x.t.nombre);return '<div style="padding:1px 0;'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+escHtml(x.t.nombre)+' <span style="color:#aaa">'+x.score.toFixed(1)+'</span></div>';}).join('');
+    const ls=r.sel.length?r.sel.map(n=>'<div class="inf-badge" style="margin-bottom:2px;display:block;width:fit-content">★ '+escHtml(n)+'</div>').join(''):'<span style="color:#aaa;font-style:italic;font-size:.68rem">—</span>';
     html+='<tr><td style="font-weight:700;color:#253a29;vertical-align:top;padding-top:7px">'+infCatLabel(cat)+'<div style="font-size:.62rem;color:#888;font-weight:400">'+cat.desc+'</div></td>'
       +'<td style="vertical-align:top;padding-top:7px">'+lf+'</td>'
       +'<td style="vertical-align:top;padding-top:7px">'+lo+'</td>'
@@ -5538,14 +5560,14 @@ function infGenerarContenido(){
   html+='</table></div>';
   // Multi-categoría
   const conteo={};
-  CATEGORIAS.forEach(cat=>{RES[cat.id].sel.forEach(n=>{if(!conteo[n])conteo[n]=[];conteo[n].push(cat.nombre);});});
+  CATEGORIAS.forEach(cat=>{RES[cat.id].sel.forEach(n=>{if(!conteo[n])conteo[n]=[];conteo[n].push(infCatNombre(cat));});});
   const multi=Object.entries(conteo).filter(e=>e[1].length>1);
   html+='<div style="margin-top:16px"><div style="font-weight:800;color:#253a29;font-size:.83rem;margin-bottom:7px;border-top:2px solid #e9f0ea;padding-top:11px">Toros destacados en múltiples categorías</div>';
   if(multi.length){
     html+='<div style="display:flex;flex-wrap:wrap;gap:9px">';
     multi.forEach(e=>{
       html+='<div style="background:#f8f6f1;border:1px solid #ddd6c8;border-radius:8px;padding:9px 13px">';
-      html+='<div style="font-weight:800;color:#253a29;font-size:.81rem;margin-bottom:4px">★ '+e[0]+'</div>';
+      html+='<div style="font-weight:800;color:#253a29;font-size:.81rem;margin-bottom:4px">★ '+escHtml(e[0])+'</div>';
       e[1].forEach(c=>{html+='<div style="font-size:.7rem;color:#3c6b45">✓ '+c+'</div>';});
       html+='<div style="font-size:.66rem;color:#b8892b;font-weight:700;margin-top:3px">'+e[1].length+' categorías</div></div>';
     });
@@ -5589,7 +5611,7 @@ function infGenerarContenido(){
     // Radar — top 5 RD_Factores de la categoría (★ indica SELECTO)
     const top5rf=r.rf.filter(x=>x.ok).slice(0,5);
     html+='<div class="inf-page" id="inf-pg-'+pid+'-r" data-pid="'+pid+'-r">';
-    html+='<div class="inf-section-title">Radar Top 5 — '+cat.nombre+'</div>';
+    html+='<div class="inf-section-title">Radar Top 5 — '+infCatNombre(cat)+'</div>';
     if(top5rf.length){
       const zList=top5rf.map(row=>infZOf(row.t,st));
       html+='<div style="font-size:.75rem;color:#6b6b6b;margin-bottom:10px">Top 5 RD_Factores · Ejes: <span style="color:#3c6b45;font-weight:700">verde=peso positivo</span> · <span style="color:#c0392b;font-weight:700">rojo=peso negativo</span> · ★ = también SELECTO</div>';
@@ -5600,7 +5622,7 @@ function infGenerarContenido(){
         const esSel=sel.includes(row.t.nombre);
         html+='<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px">'
           +'<div style="width:11px;height:11px;border-radius:2px;background:'+INF_COLS[i%INF_COLS.length]+';flex-shrink:0"></div>'
-          +'<span style="font-size:.78rem;font-weight:'+(esSel?800:600)+';color:#253a29">'+(esSel?'★ ':''+(i+1)+'. ')+row.t.nombre+'</span>'
+          +'<span style="font-size:.78rem;font-weight:'+(esSel?800:600)+';color:#253a29">'+(esSel?'★ ':''+(i+1)+'. ')+escHtml(row.t.nombre)+'</span>'
           +'<span style="font-size:.65rem;color:#aaa;margin-left:auto">'+row.total.toFixed(1)+'</span></div>';
       });
       html+='<div style="margin-top:12px;padding-top:11px;border-top:1px solid #eee">';
@@ -5619,7 +5641,7 @@ function infGenerarContenido(){
       top5rf.forEach((rfR,i)=>{
         const oR=r.oyp.find(x=>x.t.nombre===rfR.t.nombre);
         const esSel=sel.includes(rfR.t.nombre);
-        html+='<tr class="'+(esSel?'sel':'')+'"><td style="font-weight:700;color:#253a29">'+(esSel?'★ ':(i+1)+'. ')+rfR.t.nombre+'</td>';
+        html+='<tr class="'+(esSel?'sel':'')+'"><td style="font-weight:700;color:#253a29">'+(esSel?'★ ':(i+1)+'. ')+escHtml(rfR.t.nombre)+'</td>';
         activos.forEach(c=>{
           const d=rfR.t.deps[c]&&rfR.t.deps[c].dep!=null?rfR.t.deps[c].dep:null;
           html+=d!=null?'<td class="inf-dc">'+d+'</td>':'<td class="inf-dn">—</td>';
@@ -5636,14 +5658,14 @@ function infGenerarContenido(){
 
     // RD_Factores completo
     html+='<div class="inf-page" id="inf-pg-'+pid+'-f" data-pid="'+pid+'-f">';
-    html+='<div class="inf-section-title">RD_Factores — Ranking completo · '+cat.nombre+'</div>';
+    html+='<div class="inf-section-title">RD_Factores — Ranking completo · '+infCatNombre(cat)+'</div>';
     html+='<div style="font-size:.7rem;color:#6b6b6b;margin-bottom:9px">'+pesStr+' · Score SCF normalizado 0–100 · ★ = SELECTO · <strong>DEPs de cada toro: Anexo A</strong> · Metodología: Anexo C</div>';
     html+='<div style="overflow-x:auto">'+infFullF(r.rf,sel)+'</div>';
     html+=infFoot(pid+'-f')+'</div>';
 
     // RD_O&P completo
     html+='<div class="inf-page" id="inf-pg-'+pid+'-o" data-pid="'+pid+'-o">';
-    html+='<div class="inf-section-title">RD_O&P — Ranking completo · '+cat.nombre+'</div>';
+    html+='<div class="inf-section-title">RD_O&P — Ranking completo · '+infCatNombre(cat)+'</div>';
     html+='<div style="font-size:.7rem;color:#6b6b6b;margin-bottom:9px">'+perfiles.length+' perfiles · "—" = DEP no disponible · ★ = SELECTO</div>';
     html+='<div style="overflow-x:auto">'+infFullO(r.oyp,perfiles,sel)+'</div>';
     html+=infFoot(pid+'-o')+'</div>';
@@ -5651,7 +5673,7 @@ function infGenerarContenido(){
     // RD_O&P — Detalle top 5
     const top5oyp=r.oyp.slice(0,5);
     html+='<div class="inf-page" id="inf-pg-'+pid+'-od" data-pid="'+pid+'-od">';
-    html+='<div class="inf-section-title">RD_O&P — Detalle Top 5 · '+cat.nombre+'</div>';
+    html+='<div class="inf-section-title">RD_O&P — Detalle Top 5 · '+infCatNombre(cat)+'</div>';
     html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:12px">Celdas: contribución z de cada perfil (+ premia, − penaliza) · Score O&amp;P en escala 0–100 · Q1 %: perfiles con contribución positiva · ★ = SELECTO</div>';
 
     if(top5oyp.length){
@@ -5670,7 +5692,7 @@ function infGenerarContenido(){
         const perfsCalc=perfiles.filter(p=>oR.det[p.id]&&oR.det[p.id].ok);
         const enQ1=perfsCalc.filter(p=>oR.det[p.id].s>0).length;
         const pctQ1=perfsCalc.length?Math.round(enQ1/perfsCalc.length*100):0;
-        html+='<tr class="'+(esSel?'sel':'')+'"><td style="font-weight:'+(esSel?800:600)+';color:#253a29;white-space:nowrap">'+(esSel?'★ ':(i+1)+'. ')+oR.t.nombre+'</td>';
+        html+='<tr class="'+(esSel?'sel':'')+'"><td style="font-weight:'+(esSel?800:600)+';color:#253a29;white-space:nowrap">'+(esSel?'★ ':(i+1)+'. ')+escHtml(oR.t.nombre)+'</td>';
         perfiles.forEach(p=>{
           const d=oR.det[p.id];
           if(!d||!d.ok){ html+='<td class="inf-dn">—</td>'; return; }
@@ -5685,7 +5707,7 @@ function infGenerarContenido(){
       html+='</tbody></table></div>';
 
       // Leyenda de perfiles activos (compacta — definiciones en Anexo B)
-      html+='<div style="margin-bottom:14px"><div style="font-size:.72rem;font-weight:800;color:#253a29;margin-bottom:7px;text-transform:uppercase;letter-spacing:.04em">Perfiles activos en '+cat.nombre+' <span style="font-weight:400;text-transform:none;color:#888">— definiciones completas: Anexo B</span></div>';
+      html+='<div style="margin-bottom:14px"><div style="font-size:.72rem;font-weight:800;color:#253a29;margin-bottom:7px;text-transform:uppercase;letter-spacing:.04em">Perfiles activos en '+infCatNombre(cat)+' <span style="font-weight:400;text-transform:none;color:#888">— definiciones completas: Anexo B</span></div>';
       html+='<div style="display:flex;flex-wrap:wrap;gap:6px">';
       perfiles.forEach(p=>{
         const afColor=p.afinidad==='Afín'?'#2563eb':p.afinidad==='Antagónico'?'#ea580c':'#7c3aed';
@@ -5714,8 +5736,8 @@ function infGenerarContenido(){
   INF_CHARS.forEach(function(c){html+='<th style="text-align:center">'+c+'</th>';});
   html+='</tr></thead><tbody>';
   TOROS.slice().sort(function(a,b){return a.nombre.localeCompare(b.nombre);}).forEach(function(t){
-    html+='<tr><td style="font-weight:700;color:#253a29;white-space:nowrap">'+t.nombre+'</td>';
-    html+='<td style="color:#888;font-size:.62rem;max-width:95px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(t.origen||'')+'</td>';
+    html+='<tr><td style="font-weight:700;color:#253a29;white-space:nowrap">'+escHtml(t.nombre)+'</td>';
+    html+='<td style="color:#888;font-size:.62rem;max-width:95px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escHtml(t.origen||'')+'</td>';
     INF_CHARS.forEach(function(c){
       const dd=t.deps&&t.deps[c]?t.deps[c]:null;
       if(dd&&dd.dep!=null){
@@ -5734,7 +5756,7 @@ function infGenerarContenido(){
   html+='<table class="inf-tbl" style="font-size:.69rem"><thead><tr><th style="text-align:left">ID</th><th style="text-align:left">Nombre</th><th style="text-align:left">Afinidad</th><th style="text-align:left">Objetivo</th><th style="text-align:left">DEPs</th><th style="text-align:left">Categorías</th></tr></thead><tbody>';
   PERFILES_OYP.forEach(function(p){
     const afColor=p.afinidad==='Afín'?'#2563eb':p.afinidad==='Antagónico'?'#ea580c':'#7c3aed';
-    const cats=p.cats.map(function(cid){const cc=CATEGORIAS.find(function(c){return c.id===cid;});return cc?cc.nombre.replace(/^\d+-/,''):cid;}).join(', ');
+    const cats=p.cats.map(function(cid){const cc=CATEGORIAS.find(function(c){return c.id===cid;});return cc?infCatNombre(cc):cid;}).join(', ');
     const deps=(p.deps_req||[]).slice(0,2).map(function(d){return (d.dir>0?'+':'−')+d.key;}).join(' · ');
     html+='<tr><td style="font-weight:800;color:#253a29">'+p.id+'</td>'
       +'<td style="font-weight:600">'+p.nombre+'</td>'
@@ -5785,14 +5807,14 @@ function infGenerarContenido(){
       {id:'conf-hall',label:'Confiabilidad y Hallazgos',tag:'Referencia'},
     ]},
     ...CATEGORIAS.map((cat,ci)=>({
-      label:'Cap. '+(ci+3)+' — '+cat.nombre,
+      label:'Cap. '+(ci+3)+' — '+infCatNombre(cat),
       fixed:false,
       items:[
-        {id:cat.id+'-g',label:'Vista Global',    tag:cat.nombre},
-        {id:cat.id+'-r',label:'Radar SELECTOS',  tag:cat.nombre},
-        {id:cat.id+'-f',label:'RD_Factores',     tag:cat.nombre},
-        {id:cat.id+'-o',label:'RD_O&P Ranking',  tag:cat.nombre},
-        {id:cat.id+'-od',label:'RD_O&P Detalle', tag:cat.nombre},
+        {id:cat.id+'-g',label:'Vista Global',    tag:infCatNombre(cat)},
+        {id:cat.id+'-r',label:'Radar SELECTOS',  tag:infCatNombre(cat)},
+        {id:cat.id+'-f',label:'RD_Factores',     tag:infCatNombre(cat)},
+        {id:cat.id+'-o',label:'RD_O&P Ranking',  tag:infCatNombre(cat)},
+        {id:cat.id+'-od',label:'RD_O&P Detalle', tag:infCatNombre(cat)},
       ]
     })),
     {label:'Anexos',fixed:false,items:[
@@ -5843,7 +5865,7 @@ function infSetAll(v){
 }
 
 function infMiniBarChart(rows,cat){
-  const titulo='<div class="inf-sub-title">🎯 RD_O&amp;P Score — '+cat.nombre+' (Top'+rows.length+')</div>';
+  const titulo='<div class="inf-sub-title">🎯 RD_O&amp;P Score — '+infCatNombre(cat)+' (Top'+rows.length+')</div>';
   if(!rows.length) return titulo+'<div style="color:#aaa;font-style:italic;font-size:.72rem">Sin datos.</div>';
   const W=280,barH=15,gap=6,padL=76,padR=36,padT=4;
   const maxV=Math.max.apply(null,rows.map(r=>Math.abs(r.score)).concat([0.01]));
@@ -5852,7 +5874,7 @@ function infMiniBarChart(rows,cat){
   rows.forEach((r,i)=>{
     const y=padT+i*(barH+gap);
     const bw=Math.max(2,(Math.abs(r.score)/maxV)*(W-padL-padR));
-    const nm=r.t.nombre.length>11?r.t.nombre.slice(0,10)+'…':r.t.nombre;
+    const nm=escHtml(r.t.nombre.length>11?r.t.nombre.slice(0,10)+'…':r.t.nombre);
     bars+='<text x="'+(padL-6)+'" y="'+(y+barH/2+3)+'" text-anchor="end" font-size="8.5" fill="#333">'+nm+'</text>';
     bars+='<rect x="'+padL+'" y="'+y+'" width="'+bw.toFixed(1)+'" height="'+barH+'" fill="#3c6b45" rx="2"/>';
     bars+='<text x="'+(padL+bw+4)+'" y="'+(y+barH/2+3)+'" font-size="8" fill="#555">'+r.score.toFixed(1)+'</text>';
@@ -5879,7 +5901,7 @@ function infGenerarMini(){
   CATEGORIAS.forEach(cat=>{
     const r=RES[cat.id];
     const pesStr=Object.entries(cat.pesos).filter(([c,w])=>w!==0).map(([c,w])=>c+' '+(w>0?'+':'')+w).join(' ');
-    const selStr=r.sel.length?r.sel.map(n=>'★ '+n).join(', '):'<span style="color:#aaa;font-style:italic">Sin SELECTOS</span>';
+    const selStr=r.sel.length?r.sel.map(n=>'★ '+escHtml(n)).join(', '):'<span style="color:#aaa;font-style:italic">Sin SELECTOS</span>';
     html+='<tr><td style="font-weight:700;color:#253a29;vertical-align:top;padding-top:8px">'+infCatLabel(cat)+'</td>'
       +'<td style="vertical-align:top;padding-top:8px">'+cat.desc+'<div style="font-size:.62rem;color:#888;margin-top:2px">Pesos: '+pesStr+'</div></td>'
       +'<td style="vertical-align:top;padding-top:8px;font-size:.68rem">'+selStr+'</td></tr>';
@@ -5897,22 +5919,22 @@ function infGenerarMini(){
     const r=RES[cat.id];
     const t5f=r.rf.filter(function(x){return x.ok;}).slice(0,SELECTO_TOP_N);
     const t5o=r.oyp.slice(0,SELECTO_TOP_N);
-    const lf=t5f.map(function(x,i){const s=r.sel.includes(x.t.nombre);return '<div style="'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+x.t.nombre+' <span style="color:#aaa">'+x.total.toFixed(1)+'</span></div>';}).join('');
-    const lo=t5o.map(function(x,i){const s=r.sel.includes(x.t.nombre);return '<div style="'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+x.t.nombre+' <span style="color:#aaa">'+x.score.toFixed(1)+'</span></div>';}).join('');
-    const ls=r.sel.length?r.sel.map(function(n){return '★ '+n;}).join('<br>'):'<span style="color:#aaa;font-style:italic">—</span>';
-    html+='<tr><td style="font-weight:700;color:#253a29;vertical-align:top;padding-top:7px">'+cat.nombre+'<div style="font-size:.6rem;color:#888;font-weight:400">'+cat.desc+'</div></td>'
+    const lf=t5f.map(function(x,i){const s=r.sel.includes(x.t.nombre);return '<div style="'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+escHtml(x.t.nombre)+' <span style="color:#aaa">'+x.total.toFixed(1)+'</span></div>';}).join('');
+    const lo=t5o.map(function(x,i){const s=r.sel.includes(x.t.nombre);return '<div style="'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+escHtml(x.t.nombre)+' <span style="color:#aaa">'+x.score.toFixed(1)+'</span></div>';}).join('');
+    const ls=r.sel.length?r.sel.map(function(n){return '★ '+escHtml(n);}).join('<br>'):'<span style="color:#aaa;font-style:italic">—</span>';
+    html+='<tr><td style="font-weight:700;color:#253a29;vertical-align:top;padding-top:7px">'+infCatNombre(cat)+'<div style="font-size:.6rem;color:#888;font-weight:400">'+cat.desc+'</div></td>'
       +'<td style="vertical-align:top;padding-top:7px">'+lf+'</td>'
       +'<td style="vertical-align:top;padding-top:7px">'+lo+'</td>'
       +'<td style="vertical-align:top;padding-top:7px;font-size:.66rem">'+ls+'</td></tr>';
   });
   html+='</tbody></table>';
   var _cnt={};
-  CATEGORIAS.forEach(function(cat){RES[cat.id].sel.forEach(function(n){(_cnt[n]=_cnt[n]||[]).push(cat.nombre.replace(/^\d+-/,''));});});
+  CATEGORIAS.forEach(function(cat){RES[cat.id].sel.forEach(function(n){(_cnt[n]=_cnt[n]||[]).push(infCatNombre(cat));});});
   var _multi=Object.keys(_cnt).filter(function(k){return _cnt[k].length>1;});
   html+='<div style="margin-top:14px;border-top:2px solid #e9f0ea;padding-top:10px"><div style="font-weight:800;color:#253a29;font-size:.8rem;margin-bottom:6px">Toros SELECTO en más de una categoría</div>';
   if(_multi.length){
     html+='<div style="display:flex;flex-wrap:wrap;gap:8px">';
-    _multi.forEach(function(k){html+='<span style="background:#f8f6f1;border:1px solid #ddd6c8;border-radius:7px;padding:5px 10px;font-size:.7rem"><strong>★ '+k+'</strong> <span style="color:#888">'+_cnt[k].join(' · ')+'</span></span>';});
+    _multi.forEach(function(k){html+='<span style="background:#f8f6f1;border:1px solid #ddd6c8;border-radius:7px;padding:5px 10px;font-size:.7rem"><strong>★ '+escHtml(k)+'</strong> <span style="color:#888">'+_cnt[k].join(' · ')+'</span></span>';});
     html+='</div>';
   } else { html+='<div style="color:#aaa;font-style:italic;font-size:.72rem">Ninguno.</div>'; }
   html+='</div>';
@@ -5937,7 +5959,7 @@ function infGenerarMini(){
     const pid='mini-'+cat.id;
     html+='<div class="inf-page" id="inf-pg-'+pid+'" data-pid="'+pid+'">';
     html+='<div class="inf-section-title">'+infCatLabel(cat)+'</div>';
-    html+='<div style="font-size:.75rem;color:#6b6b6b;margin-bottom:10px">'+cat.desc+' '+(r.sel.length?'<strong>SELECTOS:</strong> '+r.sel.join(', '):'<strong>Sin SELECTOS</strong> en esta categoría')+'</div>';
+    html+='<div style="font-size:.75rem;color:#6b6b6b;margin-bottom:10px">'+cat.desc+' '+(r.sel.length?'<strong>SELECTOS:</strong> '+r.sel.map(escHtml).join(', '):'<strong>Sin SELECTOS</strong> en esta categoría')+'</div>';
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">';
     html+='<div><div class="inf-sub-title">📊 RD_Factores — Top '+SELECTO_TOP_N+'</div>'+infRankTable(top5f,true,r.sel)+'</div>';
     html+='<div><div class="inf-sub-title">🎯 RD_O&amp;P — Top '+SELECTO_TOP_N+'</div>'+infRankTable(top5o,false,r.sel)+'</div>';
@@ -5945,13 +5967,13 @@ function infGenerarMini(){
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start">';
     if(radarSet.length){
       const zList=radarSet.map(row=>infZOf(row.t,st));
-      html+='<div><div class="inf-sub-title">Radar Top5 — '+cat.nombre+'</div>';
+      html+='<div><div class="inf-sub-title">Radar Top5 — '+infCatNombre(cat)+'</div>';
       html+='<div style="display:flex;justify-content:center">'+infRadar(zList,cat.pesos,190)+'</div>';
       html+='<div style="display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:6px">';
       radarSet.forEach((row,i)=>{
         html+='<div style="display:flex;align-items:center;gap:4px;font-size:.62rem;color:#333">'
           +'<span style="width:8px;height:8px;border-radius:2px;background:'+INF_COLS[i%INF_COLS.length]+';display:inline-block;flex-shrink:0"></span>'
-          +row.t.nombre+' '+row.total.toFixed(1)+'</div>';
+          +escHtml(row.t.nombre)+' '+row.total.toFixed(1)+'</div>';
       });
       html+='</div></div>';
     } else {
@@ -5971,7 +5993,7 @@ function infGenerarMini(){
   html+='<table class="inf-tbl" style="font-size:.61rem;margin-bottom:12px"><thead><tr><th style="text-align:left">ID</th><th style="text-align:left">Nombre</th><th style="text-align:left">Afin.</th><th style="text-align:left">Objetivo</th><th style="text-align:left">DEPs</th><th style="text-align:left">Categorías</th></tr></thead><tbody>';
   PERFILES_OYP.forEach(function(p){
     var afColor=p.afinidad==='Afín'?'#2563eb':p.afinidad==='Antagónico'?'#ea580c':'#7c3aed';
-    var cats=p.cats.map(function(cid){var cc=CATEGORIAS.find(function(c){return c.id===cid;});return cc?cc.nombre.replace(/^\d+-/,''):cid;}).join(', ');
+    var cats=p.cats.map(function(cid){var cc=CATEGORIAS.find(function(c){return c.id===cid;});return cc?infCatNombre(cc):cid;}).join(', ');
     var deps=(p.deps_req||[]).slice(0,2).map(function(d){return (d.dir>0?'+':'−')+d.key;}).join(' · ');
     html+='<tr><td style="font-weight:800;color:#253a29">'+p.id+'</td><td style="font-weight:600">'+p.nombre+'</td><td style="color:'+afColor+';font-weight:700">'+p.afinidad+'</td><td style="color:#555">'+(p.objetivo||'')+'</td><td style="color:#6b6b6b;white-space:nowrap">'+deps+'</td><td style="color:#888;font-size:.56rem">'+cats+'</td></tr>';
   });
@@ -5980,7 +6002,7 @@ function infGenerarMini(){
   html+='<table class="inf-tbl" style="font-size:.66rem;margin-bottom:12px"><tbody>';
   CATEGORIAS.forEach(function(cat){
     var pesStr=Object.entries(cat.pesos).filter(function(e){return e[1]!==0;}).map(function(e){return e[0]+' '+(e[1]>0?'+':'')+e[1];}).join(' · ');
-    html+='<tr><td style="font-weight:700;color:#253a29;width:115px;vertical-align:top">'+cat.nombre+'</td><td>'+cat.desc+'<div style="font-size:.58rem;color:#888;margin-top:1px">Pesos: '+pesStr+'</div></td></tr>';
+    html+='<tr><td style="font-weight:700;color:#253a29;width:115px;vertical-align:top">'+infCatNombre(cat)+'</td><td>'+cat.desc+'<div style="font-size:.58rem;color:#888;margin-top:1px">Pesos: '+pesStr+'</div></td></tr>';
   });
   html+='</tbody></table>';
   html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:10px">';
@@ -6019,14 +6041,14 @@ function infGenerarMini(){
       +'<th colspan="'+CATEGORIAS.length+'" style="'+_a2gh+';border-left:2px solid #fff">RD_O&amp;P</th>'
       +'<th rowspan="2" style="vertical-align:bottom;border-left:2px solid #fff">Confiab.</th>'
       +'<th rowspan="2" style="vertical-align:bottom">⚑</th></tr>';
-  function _a2cn(c){ return c.nombre.replace(/^\d+-/,'').replace('Vaquillona entore 15M','Vaquillona 15M'); }
+  function _a2cn(c){ return infCatNombre(c); }
   html+='<tr>'
       +CATEGORIAS.map(function(c,i){return '<th style="'+_a2vh+(i===0?';border-left:2px solid #fff':'')+'">'+_a2cn(c)+'</th>';}).join('')
       +CATEGORIAS.map(function(c,i){return '<th style="'+_a2vh+(i===0?';border-left:2px solid #fff':'')+'">'+_a2cn(c)+'</th>';}).join('')
       +'</tr></thead><tbody>';
   _a2rows.forEach(function(t){
     var isinc=_a2inc(t);
-    html+='<tr'+(isinc?' style="color:#999"':'')+'><td style="font-weight:600;color:'+(isinc?'#999':'#253a29')+';white-space:nowrap">'+t.nombre+'</td>';
+    html+='<tr'+(isinc?' style="color:#999"':'')+'><td style="font-weight:600;color:'+(isinc?'#999':'#253a29')+';white-space:nowrap">'+escHtml(t.nombre)+'</td>';
     CATEGORIAS.forEach(function(c,i){
       var sel=_a2sel[c.id].indexOf(t.nombre)>=0;
       var e=_a2rf[c.id][t.nombre];
