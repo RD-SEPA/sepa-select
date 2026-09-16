@@ -1930,7 +1930,7 @@ let currentScreen='global',currentCat='terminal';
 // ACCESS CONTROL
 // ═══════════════════════════════════════════════
 function canAccess(feature){
-  if(sepaState.modo==='PLUS') return true;
+  if(sepaState.modo==='PLUS'||esDev()) return true; // ?dev=RD2026 desbloquea Plus para pruebas
   // BASE rules
   switch(feature){
     case 'config':          return false;
@@ -2106,7 +2106,7 @@ function cerrarCarga() {
 function actualizarHeaderUsuario() {
   const u = JSON.parse(localStorage.getItem('sepa_usuario') || '{}');
   const btnPlus = document.getElementById('btn-plus');
-  if (btnPlus) btnPlus.hidden = (sepaState.modo === 'PLUS');
+  if (btnPlus) btnPlus.hidden = (sepaState.modo === 'PLUS' || esDev());
   const el = document.getElementById('header-usuario-info');
   if (el && u.nombre) {
     const modo = sepaState.modo || 'BASE';
@@ -2358,12 +2358,14 @@ function terminarSesion(){
 }
 
 function modoLabel(){
+  if(sepaState.modo!=='PLUS'&&esDev()) return 'Modo Plus (DEV)';
   return sepaState.modo==='PLUS'?'Modo Plus':sepaState.modo==='BASE'?'Modo Base':'';
 }
 function updateLicenciaBadge(){
   const b=document.getElementById('licencia-badge');
   if(!b) return;
-  b.className=`licencia-badge ${sepaState.modo==='PLUS'?'lb-plus':'lb-base'}`;
+  const plus=sepaState.modo==='PLUS'||esDev();
+  b.className=`licencia-badge ${plus?'lb-plus':'lb-base'}`;
   b.textContent=modoLabel();
 }
 
