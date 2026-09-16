@@ -767,7 +767,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px">
         <div onclick="infModo('catalogo')" style="background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">📋</div>
-          <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Informe Plus</div>
+          <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Informe Plus <span style="font-size:.6rem;background:#b8892b;color:#fff;padding:1px 6px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></div>
           <div style="font-size:.73rem;opacity:.75;line-height:1.45">Rankings, SELECTOS, radar y tablas por categoría. Secciones configurables.</div>
         </div>
         <div onclick="infModo('mini')" style="background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
@@ -777,7 +777,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
         </div>
         <div onclick="infModo('toro')" style="background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">🐂</div>
-          <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Informe Plus por Toro</div>
+          <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Informe Plus por Toro <span style="font-size:.6rem;background:#b8892b;color:#fff;padding:1px 6px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></div>
           <div style="font-size:.73rem;opacity:.75;line-height:1.45">Seleccioná uno o más toros. DEPs, rankings en 5 categorías y perfiles O&amp;P.</div>
         </div>
       </div>
@@ -790,6 +790,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
       <button class="inf-btn" onclick="document.getElementById('inf-modo-sel').style.display='flex'">⇄ Modo</button>
       <button class="inf-btn" id="inf-btn-todo" onclick="infSetAll(true)">✓ Todo</button>
       <button class="inf-btn" id="inf-btn-ninguno" onclick="infSetAll(false)">✗ Ninguno</button>
+      <button class="inf-btn" id="inf-btn-excel" onclick="infExportarExcel()">📊 Excel</button>
       <button class="inf-btn inf-btn-print" onclick="infDoPrint()">🖨 Imprimir / Guardar PDF</button>
       <button class="inf-btn inf-btn-close" onclick="cerrarInforme()">✕ Cerrar</button>
     </div>
@@ -803,6 +804,12 @@ tr.sel-z:hover td{background:#d4ecda!important}
       <button onclick="infSelAll(false)" class="inf-btn" style="background:#f8f6f1;color:#6b6b6b;border-color:#ddd6c8">✗ Ninguno</button>
     </div>
     <div id="inf-toro-lista" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:5px;max-height:220px;overflow-y:auto;border:1px solid #ddd6c8;border-radius:8px;padding:8px"></div>
+  </div>
+  <div id="inf-mini-opts" style="display:none;max-width:860px;margin:18px auto 0;background:white;border-radius:10px;padding:14px 22px;box-shadow:0 2px 14px rgba(0,0,0,.12);width:calc(100% - 32px)">
+    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.82rem;color:#253a29;font-weight:700">
+      <input type="checkbox" id="inf-mini-marco-check" checked onclick="infToggleMarcoMini(this.checked)">
+      📖 Incluir Marco Teórico (explicación en lenguaje simple, sin fórmulas)
+    </label>
   </div>
   <div id="inf-panel">
     <div class="inf-panel-title">📄 Seleccioná las secciones a incluir</div>
@@ -1930,6 +1937,7 @@ function canAccess(feature){
     case 'fenotipo_slider': return false;
     case 'sinergico':       return false; // modal sinergico completo
     case 'csv_export':      return false;
+    case 'informe_plus':    return false; // Informe Plus / Excel Plus / Ficha por Toro
     case 'cat_deep':        return currentCat==='terminal'; // solo Terminal
     default:                return true;
   }
@@ -4982,11 +4990,19 @@ function abrirInforme() {
 }
 let _infModo='catalogo';
 let _infTSel=new Set();
+let _infMarcoMini=true;
+function infToggleMarcoMini(v){ _infMarcoMini=v; infGenerarMini(); }
 function infModo(modo){
+  if((modo==='catalogo'||modo==='toro')&&!canAccess('informe_plus')){
+    showPlusGate(modo==='toro'?'La Ficha por Toro es exclusiva de Plus.':'El Informe Plus es exclusivo de Plus.');
+    return;
+  }
   _infModo=modo;
   document.getElementById('inf-modo-sel').style.display='none';
   document.getElementById('inf-modo-lbl').textContent=modo==='catalogo'?'Informe Plus':modo==='mini'?'Informe Base':'Informe Plus por Toro';
   const bt=document.getElementById('inf-btn-todo'),bn=document.getElementById('inf-btn-ninguno');
+  document.getElementById('inf-btn-excel').style.display=modo==='toro'?'none':'';
+  document.getElementById('inf-mini-opts').style.display=modo==='mini'?'':'none';
   if(modo==='catalogo'){
     document.getElementById('inf-panel').style.display='';
     document.getElementById('inf-toro-sel').style.display='none';
@@ -5079,7 +5095,7 @@ function infGenerarFichas(nombres){
       op+='</div></div>';
     });
     html+='<div class="inf-page" id="inf-pg-'+tId+'" data-pid="'+tId+'">';
-    html+='<div class="inf-section-title">Ficha · '+escHtml(t.nombre)+'<span style="font-size:.65rem;font-weight:400;color:#888;margin-left:10px">'+escHtml(t.pelaje)+' · '+escHtml(t.raza)+'</span></div>';
+    html+='<div class="inf-section-title">Ficha · '+escHtml(t.nombre)+'<span style="font-size:.65rem;font-weight:400;color:#888;margin-left:10px">'+escHtml(t.raza)+'</span></div>';
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">';
     html+='<div style="background:#f8f6f1;border:1px solid #ddd6c8;border-radius:8px;padding:10px 13px"><div style="font-size:.68rem;font-weight:800;color:#253a29;text-transform:uppercase;margin-bottom:7px">Identificación</div>';
     if(t.rp)html+='<div style="font-size:.73rem;margin-bottom:3px"><span style="color:#888">RP:</span> <strong>'+escHtml(t.rp)+'</strong></div>';
@@ -5177,6 +5193,135 @@ function infSelectos(rf,oyp){
   return [...t5f].filter(n=>t5o.has(n));
 }
 
+// ═══════════════════════════════════════════════════════
+// EXPORT EXCEL — Informe Base (4 hojas) / Informe Plus (+6 hojas)
+// Mismo motor que el informe PDF (infCalcF/infCalcO/infSelectos + calcConfiabilidad/calcHallazgos)
+// ═══════════════════════════════════════════════════════
+function _infExcelCols(widths){return widths.map(w=>({wch:w}));}
+const _INF_PESOS_COLS=INF_CHARS.concat(['EGD','GI']);
+const _INF_OYP_IDS=PERFILES_OYP.map(p=>p.id);
+
+function _infExcelRES(){
+  const st=infGetST(),RES={};
+  CATEGORIAS.forEach(cat=>{
+    const rf=infCalcF(TOROS,cat,st),oyp=infCalcO(TOROS,cat);
+    RES[cat.id]={rf,oyp,sel:infSelectos(rf,oyp),cat};
+  });
+  return RES;
+}
+
+function _infExcelSheetsBase(wb,RES){
+  // 00_Índice
+  const idx=[['Hoja','Contenido'],
+    ['10_Resumen','1 fila por categoría: objetivo y lista de ★ selectos.'],
+    ['20_Pesos_por_categoria','Matriz numérica categoría × DEP, con columna de control Suma |pesos|.'],
+    ['30_Cross_Selectos','Top '+SELECTO_TOP_N+' RD_Factores y RD_O&P de cada categoría, con marca ★ Selecto.']];
+  const wsIdx=XLSX.utils.aoa_to_sheet(idx);wsIdx['!cols']=_infExcelCols([26,70]);
+  XLSX.utils.book_append_sheet(wb,wsIdx,'00_Indice');
+
+  // 10_Resumen
+  const res=[['Categoría','Objetivo','★ Selectos']];
+  CATEGORIAS.forEach(cat=>res.push([infCatNombre(cat),cat.desc,RES[cat.id].sel.join(', ')]));
+  const wsRes=XLSX.utils.aoa_to_sheet(res);wsRes['!cols']=_infExcelCols([20,70,50]);
+  XLSX.utils.book_append_sheet(wb,wsRes,'10_Resumen');
+
+  // 20_Pesos_por_categoria (col. Suma |pesos| queda como fórmula de control)
+  const pesos=[['Categoría',..._INF_PESOS_COLS,'Suma |pesos|']];
+  CATEGORIAS.forEach(cat=>pesos.push([infCatNombre(cat),..._INF_PESOS_COLS.map(k=>cat.pesos[k]!=null?cat.pesos[k]:null)]));
+  const wsPesos=XLSX.utils.aoa_to_sheet(pesos);
+  CATEGORIAS.forEach((cat,i)=>{
+    const row=i+2,c0=XLSX.utils.encode_col(1),c1=XLSX.utils.encode_col(_INF_PESOS_COLS.length);
+    wsPesos[XLSX.utils.encode_cell({r:row-1,c:_INF_PESOS_COLS.length+1})]={t:'n',f:'SUMPRODUCT(ABS('+c0+row+':'+c1+row+'))'};
+  });
+  wsPesos['!cols']=_infExcelCols([20,..._INF_PESOS_COLS.map(()=>7),14]);
+  XLSX.utils.book_append_sheet(wb,wsPesos,'20_Pesos_por_categoria');
+
+  // 30_Cross_Selectos
+  const cross=[['Puesto','Toro','Score','★ Selecto','Categoría','Método']];
+  CATEGORIAS.forEach(cat=>{
+    const r=RES[cat.id];
+    r.rf.filter(x=>x.ok).slice(0,SELECTO_TOP_N).forEach((x,i)=>cross.push([i+1,x.t.nombre,x.total,r.sel.includes(x.t.nombre)?'★':'',infCatNombre(cat),'RD_Factores']));
+    r.oyp.slice(0,SELECTO_TOP_N).forEach((x,i)=>cross.push([i+1,x.t.nombre,x.score,r.sel.includes(x.t.nombre)?'★':'',infCatNombre(cat),'RD_O&P']));
+  });
+  const wsCross=XLSX.utils.aoa_to_sheet(cross);wsCross['!cols']=_infExcelCols([7,24,8,10,20,12]);
+  XLSX.utils.book_append_sheet(wb,wsCross,'30_Cross_Selectos');
+}
+
+function _infExcelSheetsPlus(wb,RES){
+  // 40_RF — ranking completo RD_Factores
+  const rf=[['Toro','Score (G)','Apto','Categoría','Puesto']];
+  CATEGORIAS.forEach(cat=>{
+    const r=RES[cat.id];
+    const ok=r.rf.filter(x=>x.ok),no=r.rf.filter(x=>!x.ok);
+    ok.forEach((x,i)=>rf.push([x.t.nombre,x.total,'Sí',infCatNombre(cat),i+1]));
+    no.forEach(x=>rf.push([x.t.nombre,null,'No',infCatNombre(cat),'—']));
+  });
+  const wsRf=XLSX.utils.aoa_to_sheet(rf);wsRf['!cols']=_infExcelCols([24,11,7,20,8]);
+  XLSX.utils.book_append_sheet(wb,wsRf,'40_RF');
+
+  // 50_OyP — ranking completo + detalle por perfil (zSum)
+  const oyp=[['Toro','Puesto','Categoría','Score (0-100)',..._INF_OYP_IDS]];
+  CATEGORIAS.forEach(cat=>{
+    RES[cat.id].oyp.forEach((x,i)=>{
+      oyp.push([x.t.nombre,i+1,infCatNombre(cat),x.score,..._INF_OYP_IDS.map(id=>{const d=x.det[id];return d&&d.ok&&d.s!=null?+d.s.toFixed(2):null;})]);
+    });
+  });
+  const wsOyp=XLSX.utils.aoa_to_sheet(oyp);wsOyp['!cols']=_infExcelCols([24,8,20,14,..._INF_OYP_IDS.map(()=>7)]);
+  XLSX.utils.book_append_sheet(wb,wsOyp,'50_OyP');
+
+  // 60_Confiabilidad
+  const {lista}=calcConfiabilidad(TOROS);
+  const conf=[['Toro',...DEP_ALL,'Precisión media','nD (de 8)','Confiabilidad','Tipo de evaluación']];
+  lista.forEach(x=>conf.push([x.toro.nombre,...DEP_ALL.map(k=>x.precByDep[k]),x.precMedia!=null?+x.precMedia.toFixed(3):null,x.nD,x.conf.lbl,x.tipo.lbl]));
+  const wsConf=XLSX.utils.aoa_to_sheet(conf);wsConf['!cols']=_infExcelCols([24,...DEP_ALL.map(()=>7),13,10,13,26]);
+  XLSX.utils.book_append_sheet(wb,wsConf,'60_Confiabilidad');
+
+  // 70_Hallazgos
+  const hall=[['Toro','Categoría','DEP','Valor DEP','z vs. catálogo','Percentil raza','Señal','Descripción']];
+  CATEGORIAS.forEach(cat=>{
+    calcHallazgos(TOROS,cat.id).items.forEach(it=>it.hall.forEach(h=>{
+      hall.push([it.toro.nombre,infCatNombre(cat),h.key,h.val,h.z,h.pct,
+        h.tipo==='fuerte'?'Fuerte (favorable)':h.tipo==='debil'?'Débil (desfavorable)':'No pondera',
+        fraseHallazgo(h)]);
+    }));
+  });
+  const wsHall=XLSX.utils.aoa_to_sheet(hall);wsHall['!cols']=_infExcelCols([24,20,8,10,12,12,18,55]);
+  XLSX.utils.book_append_sheet(wb,wsHall,'70_Hallazgos');
+
+  // 80_Anexo_A_DEPs_originales
+  const anexo=[['Toro','Cabaña/Origen',...INF_CHARS,...INF_CHARS.map(c=>c+'_prec')]];
+  TOROS.slice().sort((a,b)=>a.nombre.localeCompare(b.nombre)).forEach(t=>{
+    anexo.push([t.nombre,t.origen||'',
+      ...INF_CHARS.map(c=>t.deps[c]&&t.deps[c].dep!=null?t.deps[c].dep:null),
+      ...INF_CHARS.map(c=>t.deps[c]&&t.deps[c].prec!=null?t.deps[c].prec:null)]);
+  });
+  const wsAnexo=XLSX.utils.aoa_to_sheet(anexo);wsAnexo['!cols']=_infExcelCols([24,20,...INF_CHARS.map(()=>6),...INF_CHARS.map(()=>8)]);
+  XLSX.utils.book_append_sheet(wb,wsAnexo,'80_Anexo_A_DEPs_originales');
+
+  // 90_Perfiles_OyP
+  const perf=[['ID','Nombre','Afinidad','Para qué sirve','Qué evalúa','Categorías']];
+  PERFILES_OYP.forEach(p=>{
+    const queEvalua=p.deps_req.map(r=>{const f=FRASES[r.key]||{};return r.dir>0?(f.alta||r.key):(f.baja||r.key);}).join(' + ');
+    const cats=CATEGORIAS.filter(cat=>p.cats.includes(cat.id)).map(infCatNombre).join(', ');
+    perf.push([p.id,p.nombre,p.afinidad,p.objetivo,queEvalua,cats]);
+  });
+  const wsPerf=XLSX.utils.aoa_to_sheet(perf);wsPerf['!cols']=_infExcelCols([6,24,12,26,45,55]);
+  XLSX.utils.book_append_sheet(wb,wsPerf,'90_Perfiles_OyP');
+}
+
+function infExportarExcel(){
+  if(typeof XLSX==='undefined'){alert('Librería Excel no disponible. Verificá la conexión.');return;}
+  if(_infModo==='toro'){alert('El Excel no está disponible para la Ficha por Toro — usá el informe PDF.');return;}
+  if(_infModo==='catalogo'&&!canAccess('informe_plus')){showPlusGate('El Excel Plus es exclusivo de Plus.');return;}
+  const RES=_infExcelRES();
+  const wb=XLSX.utils.book_new();
+  _infExcelSheetsBase(wb,RES);
+  if(_infModo==='catalogo')_infExcelSheetsPlus(wb,RES);
+  const fecha=new Date().toLocaleDateString('es-AR').replace(/\//g,'-');
+  const label=_infModo==='catalogo'?'Plus':'Base';
+  XLSX.writeFile(wb,'SEPA-Select_'+label+'_'+fecha+'.xlsx');
+}
+
 // ── v9: RD_Confiabilidad / RD_Hallazgos en informes (usa calcConfiabilidad / calcHallazgos de la app) ──
 function _infConfCol(n){return n==='Alta'?'#2f6b3d':n==='Media'?'#8a6212':(n==='Baja'||n==='Incompl.')?'#b3261e':'#999';}
 function _infConfBadge(n){const bg=n==='Alta'?'#e5f2e8':n==='Media'?'#fbf1de':(n==='Baja'||n==='Incompl.')?'#fbe6e3':'#eee';return '<span style="display:inline-block;font-size:.58rem;font-weight:800;padding:1px 5px;border-radius:4px;background:'+bg+';color:'+_infConfCol(n)+'">'+n+'</span>';}
@@ -5190,7 +5335,7 @@ function infConfHallSection(RES, modo){
     html+='<div class="inf-sub-title">Confiabilidad del catálogo — RD_Confiabilidad</div>';
   } else {
     html+='<div class="inf-section-title">Confiabilidad y Hallazgos</div>';
-    html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:10px">Dos lecturas de referencia: cuánta información respalda a cada toro (RD_Confiabilidad) y qué valores se despegan del conjunto (RD_Hallazgos). No intervienen en RD_Factores ni en RD_O&amp;P. Detalle: Anexos D y E.</div>';
+    html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:10px">Dos lecturas de referencia: cuánta información respalda a cada toro (RD_Confiabilidad) y qué valores se despegan del conjunto (RD_Hallazgos). No intervienen en RD_Factores ni en RD_O&amp;P.</div>';
     html+='<div class="inf-sub-title">RD_Confiabilidad</div>';
   }
   if(!P.tienePrec){
@@ -5238,6 +5383,21 @@ function infConfHallSection(RES, modo){
       });
       html+='</tbody></table>';
       html+='<div style="font-size:.66rem;color:#888;margin-top:5px">✓ Sostenida = los DEPs clave de la categoría tienen precisión ≥ la mediana del catálogo · ⚠ Preliminar = se apoya en un DEP de baja precisión.</div>';
+
+      // Detalle completo — precisión por DEP, todos los toros (antes Anexo D)
+      html+='<div class="inf-sub-title" style="margin-top:14px">Precisión por DEP — detalle completo</div>';
+      html+='<div style="font-size:.7rem;color:#6b6b6b;margin-bottom:8px">Precisión ERA de cada carácter, los '+TOROS.length+' toros del catálogo · mapa de calor (pálido = baja, verde = alta) · orden: mayor prec. media primero, evaluaciones incompletas al final.</div>';
+      html+='<div style="overflow-x:auto"><table class="inf-tbl" style="font-size:.64rem"><thead><tr><th style="text-align:left">Toro</th>';
+      DEP_ALL.forEach(function(k){html+='<th>'+k+'</th>';});
+      html+='<th>Media</th><th>nD</th><th style="text-align:left">Evaluación</th></tr></thead><tbody>';
+      P.lista.forEach(function(x){
+        html+='<tr><td style="text-align:left;font-weight:700;color:#253a29;white-space:nowrap">'+escHtml(x.toro.nombre)+'</td>';
+        DEP_ALL.forEach(function(k){const p=x.precByDep[k];html+='<td style="'+_infHeat(p)+'">'+(p!=null?p.toFixed(2):'—')+'</td>';});
+        html+='<td style="font-weight:800">'+(x.precMedia!=null?x.precMedia.toFixed(2):'—')+'</td>';
+        html+='<td style="'+(x.nD<6?'color:#b3261e;font-weight:700':'')+'">'+x.nD+'/8</td>';
+        html+='<td style="text-align:left">'+_infConfBadge(x.conf.lbl)+' <span style="font-size:.6rem;color:#888">'+x.tipo.lbl+'</span></td></tr>';
+      });
+      html+='</tbody></table></div>';
     }
   }
   // Hallazgos (resumen, ambos modos)
@@ -5254,7 +5414,36 @@ function infConfHallSection(RES, modo){
       const sym=x.h.tipo==='fuerte'?'<span style="color:#2f6b3d;font-weight:800">▲</span>':x.h.tipo==='debil'?'<span style="color:#b3261e;font-weight:800">▼</span>':'<span style="color:#888;font-weight:800">=</span>';
       html+='<div style="font-size:.72rem;padding:2px 0;border-bottom:1px solid #f0f0f0">'+sym+' <strong>'+x.n+'</strong> — '+fraseHallazgo(x.h)+'</div>';
     });
-    html+='<div style="font-size:.66rem;color:#888;margin-top:4px">Matriz completa toro × DEP y lista total: Anexo E.</div>';
+  }
+  // Detalle completo — matriz toro × DEP + lista total (antes Anexo E), solo Plus
+  if(modo!=='mini' && H.items.length){
+    const cat=CATEGORIAS.find(function(c){return c.id===currentCat;});
+    html+='<div class="inf-sub-title" style="margin-top:14px">Hallazgos — detalle completo</div>';
+    html+='<div style="font-size:.7rem;color:#6b6b6b;margin-bottom:8px">Matriz toro × DEP para <strong>'+infCatNombre(cat)+'</strong> · <span style="color:#2f6b3d;font-weight:800">▲</span> favorable · <span style="color:#b3261e;font-weight:800">▼</span> desfavorable · <span style="color:#888;font-weight:800">=</span> no pondera en la categoría · celda vacía = dentro del conjunto (|z| &lt; 1,5) · referencia: media del catálogo.</div>';
+    const hmap={};
+    H.items.forEach(function(it){it.hall.forEach(function(h){hmap[it.toro.nombre+'|'+h.key]=h;});});
+    html+='<div style="overflow-x:auto"><table class="inf-tbl" style="font-size:.66rem"><thead><tr><th style="text-align:left">Toro</th>';
+    DEP_ALL.forEach(function(k){html+='<th>'+k+'</th>';});
+    html+='</tr></thead><tbody>';
+    H.items.forEach(function(it){
+      html+='<tr><td style="text-align:left;font-weight:700;color:#253a29;white-space:nowrap">'+escHtml(it.toro.nombre)+'</td>';
+      DEP_ALL.forEach(function(k){
+        const h=hmap[it.toro.nombre+'|'+k];
+        if(!h){html+='<td></td>';return;}
+        const sym=h.tipo==='fuerte'?'▲':h.tipo==='debil'?'▼':'=';
+        const col=h.tipo==='fuerte'?'#2f6b3d':h.tipo==='debil'?'#b3261e':'#888';
+        html+='<td style="color:'+col+';font-weight:800">'+sym+'</td>';
+      });
+      html+='</tr>';
+    });
+    html+='</tbody></table></div>';
+    html+='<div class="inf-sub-title" style="margin-top:12px">Lista de hallazgos — '+infCatNombre(cat)+'</div>';
+    H.items.forEach(function(it){
+      it.hall.forEach(function(h){
+        const sym=h.tipo==='fuerte'?'<span style="color:#2f6b3d;font-weight:800">▲</span>':h.tipo==='debil'?'<span style="color:#b3261e;font-weight:800">▼</span>':'<span style="color:#888;font-weight:800">=</span>';
+        html+='<div style="font-size:.68rem;padding:2px 0;border-bottom:1px solid #f0f0f0">'+sym+' <strong>'+escHtml(it.toro.nombre)+'</strong> — '+fraseHallazgo(h)+'</div>';
+      });
+    });
   }
   return html;
 }
@@ -5288,66 +5477,6 @@ function infSelectosPage(RES, pid){
     html+='</div>';
   });
   html+=infFoot(pid)+'</div>';
-  return html;
-}
-
-// Anexo D — precisión por DEP
-function infAnexoD(){
-  const P=calcConfiabilidad(TOROS);
-  let html='<div class="inf-page" id="inf-pg-anexo-d" data-pid="anexo-d">';
-  html+='<div class="inf-section-title">Anexo D — Precisión por DEP (RD_Confiabilidad)</div>';
-  if(!P.tienePrec){
-    html+='<p style="font-size:.74rem;color:#555">'+catNombreActivo()+' no trae precisión ERA publicada. Son toros con evaluación genómica sin historia de progenie.</p>'+infFoot('anexo-d')+'</div>';
-    return html;
-  }
-  html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:10px">Precisión ERA de cada carácter · mapa de calor (pálido = baja, verde = alta) · orden: mayor prec. media primero, evaluaciones incompletas al final · '+catNombreActivo()+'.</div>';
-  html+='<div style="overflow-x:auto"><table class="inf-tbl" style="font-size:.64rem"><thead><tr><th style="text-align:left">Toro</th>';
-  DEP_ALL.forEach(function(k){html+='<th>'+k+'</th>';});
-  html+='<th>Media</th><th>nD</th><th style="text-align:left">Evaluación</th></tr></thead><tbody>';
-  P.lista.forEach(function(x){
-    html+='<tr><td style="text-align:left;font-weight:700;color:#253a29;white-space:nowrap">'+escHtml(x.toro.nombre)+'</td>';
-    DEP_ALL.forEach(function(k){const p=x.precByDep[k];html+='<td style="'+_infHeat(p)+'">'+(p!=null?p.toFixed(2):'—')+'</td>';});
-    html+='<td style="font-weight:800">'+(x.precMedia!=null?x.precMedia.toFixed(2):'—')+'</td>';
-    html+='<td style="'+(x.nD<6?'color:#b3261e;font-weight:700':'')+'">'+x.nD+'/8</td>';
-    html+='<td style="text-align:left">'+_infConfBadge(x.conf.lbl)+' <span style="font-size:.6rem;color:#888">'+x.tipo.lbl+'</span></td></tr>';
-  });
-  html+='</tbody></table></div>'+infFoot('anexo-d')+'</div>';
-  return html;
-}
-
-// Anexo E — hallazgos: matriz + lista (categoría activa)
-function infAnexoE(){
-  const cat=CATEGORIAS.find(function(c){return c.id===currentCat;});
-  const H=calcHallazgos(TOROS,currentCat);
-  let html='<div class="inf-page" id="inf-pg-anexo-e" data-pid="anexo-e">';
-  html+='<div class="inf-section-title">Anexo E — Hallazgos completos (RD_Hallazgos)</div>';
-  html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:10px">Matriz toro × DEP para <strong>'+infCatNombre(cat)+'</strong> · <span style="color:#2f6b3d;font-weight:800">▲</span> favorable · <span style="color:#b3261e;font-weight:800">▼</span> desfavorable · <span style="color:#888;font-weight:800">=</span> no pondera en la categoría · celda vacía = dentro del conjunto (|z| &lt; 1,5) · referencia: media del catálogo.</div>';
-  if(!H.items.length){ html+='<p style="font-size:.74rem;color:#888">Sin hallazgos ≥ 1,5 desvíos.</p>'+infFoot('anexo-e')+'</div>'; return html; }
-  const hmap={};
-  H.items.forEach(function(it){it.hall.forEach(function(h){hmap[it.toro.nombre+'|'+h.key]=h;});});
-  html+='<div style="overflow-x:auto"><table class="inf-tbl" style="font-size:.66rem"><thead><tr><th style="text-align:left">Toro</th>';
-  DEP_ALL.forEach(function(k){html+='<th>'+k+'</th>';});
-  html+='</tr></thead><tbody>';
-  H.items.forEach(function(it){
-    html+='<tr><td style="text-align:left;font-weight:700;color:#253a29;white-space:nowrap">'+escHtml(it.toro.nombre)+'</td>';
-    DEP_ALL.forEach(function(k){
-      const h=hmap[it.toro.nombre+'|'+k];
-      if(!h){html+='<td></td>';return;}
-      const sym=h.tipo==='fuerte'?'▲':h.tipo==='debil'?'▼':'=';
-      const col=h.tipo==='fuerte'?'#2f6b3d':h.tipo==='debil'?'#b3261e':'#888';
-      html+='<td style="color:'+col+';font-weight:800">'+sym+'</td>';
-    });
-    html+='</tr>';
-  });
-  html+='</tbody></table></div>';
-  html+='<div class="inf-sub-title" style="margin-top:12px">Lista de hallazgos — '+infCatNombre(cat)+'</div>';
-  H.items.forEach(function(it){
-    it.hall.forEach(function(h){
-      const sym=h.tipo==='fuerte'?'<span style="color:#2f6b3d;font-weight:800">▲</span>':h.tipo==='debil'?'<span style="color:#b3261e;font-weight:800">▼</span>':'<span style="color:#888;font-weight:800">=</span>';
-      html+='<div style="font-size:.68rem;padding:2px 0;border-bottom:1px solid #f0f0f0">'+sym+' <strong>'+escHtml(it.toro.nombre)+'</strong> — '+fraseHallazgo(h)+'</div>';
-    });
-  });
-  html+=infFoot('anexo-e')+'</div>';
   return html;
 }
 
@@ -5387,7 +5516,7 @@ function infFichaConfHall(toro){
     base.forEach(function(h){
       html+='<div style="font-size:.68rem;padding:2px 0;border-bottom:1px solid #f2f2f2">'+fraseHallazgo(h)+'</div>';
     });
-    html+='<div style="font-size:.62rem;color:#999;margin-top:3px">El signo ▲/▼ de cada hallazgo depende de la categoría (ver Anexo E).</div>';
+    html+='<div style="font-size:.62rem;color:#999;margin-top:3px">El signo ▲/▼ de cada hallazgo depende de la categoría.</div>';
   }
   html+='</div>';
   return html;
@@ -5480,8 +5609,80 @@ function infCatLabel(cat){
 const INF_LEGAL='SEPA-Select&reg; &middot; DNDA EX-2026-81106223-APN-DNDA#MJ &middot; Sistema independiente de an&aacute;lisis de DEPs.';
 function infFoot(pid){
   const fecha=new Date().toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'});
-  return '<div class="inf-footer"><span>SEPA-Select '+APP_VERSION+'</span><span>'+catNombreActivo()+' &middot; '+fecha+'</span><span class="inf-pnum" data-id="'+pid+'">Pág. —</span></div>'
+  return '<div class="inf-footer"><span>SEPA-Select</span><span>'+catNombreActivo()+' &middot; '+fecha+'</span><span class="inf-pnum" data-id="'+pid+'">Pág. —</span></div>'
     +'<div style="text-align:center;font-size:.52rem;color:#bbb;margin-top:3px">'+INF_LEGAL+'</div>';
+}
+// Marco Teórico — explicación conceptual en lenguaje simple, sin fórmulas ni jerga estadística.
+// Opción tildable en los 3 tipos de informe (Base, Plus, Ficha por Toro), apagada por defecto.
+function infMarcoTeorico(pid){
+  let html='<div class="inf-page" id="inf-pg-'+pid+'" data-pid="'+pid+'">';
+  html+='<div class="inf-section-title">Marco Teórico — cómo funciona SEPA-Select</div>';
+  html+='<div style="font-size:.74rem;color:#6b6b6b;margin-bottom:14px">Explicación conceptual, en lenguaje simple y sin fórmulas.</div>';
+
+  html+='<div class="inf-sub-title">¿Qué es SEPA-Select?</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:13px">SEPA-Select ordena y compara los toros de un catálogo a partir de la información genética (DEPs) que publica cada cabaña, para ayudar a elegir qué toros conviene comprar según el objetivo de venta: cría, reposición, terminación, etc.</div>';
+
+  html+='<div class="inf-sub-title">RD_Factores — el puntaje de mérito</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:9px">Cada categoría de venta necesita cosas distintas de un toro. Por ejemplo, Vaquillona 15M prioriza la facilidad de parto, mientras que Terminal prioriza el engorde. RD_Factores compara a cada toro contra el resto del catálogo en las características que le importan a esa categoría, dándole más peso a las más relevantes para ese objetivo, y arma con todo eso un puntaje único de 0 a 100: cuanto más alto, mejor se ajusta el toro a lo que busca esa categoría. Ojo con tres características puntuales —Peso al Nacer, Altura y Longitud de Gestación—: ahí lo que conviene suele ser un valor más bajo, no más alto.</div>';
+
+  // Tabla: pesos por categoría × DEP
+  const pesosCols=INF_CHARS.concat([...new Set(CATEGORIAS.flatMap(function(c){return Object.keys(c.pesos);}))].filter(function(k){return INF_CHARS.indexOf(k)<0;}));
+  html+='<div style="font-size:.68rem;color:#888;margin-bottom:5px">Cuánto pesa cada característica (DEP) en el puntaje de cada categoría. <span style="color:#3c6b45;font-weight:700">Verde</span> = a favor del toro cuanto más alto el DEP · <span style="color:#c0392b;font-weight:700">rojo</span> = a favor cuanto más bajo · en blanco = no se tiene en cuenta en esa categoría.</div>';
+  html+='<div style="overflow-x:auto;margin-bottom:8px"><table class="inf-tbl" style="font-size:.66rem"><thead><tr><th style="text-align:left">Categoría</th>';
+  pesosCols.forEach(function(c){html+='<th style="text-align:center">'+c+'</th>';});
+  html+='</tr></thead><tbody>';
+  CATEGORIAS.forEach(function(cat){
+    html+='<tr><td style="font-weight:700;color:#253a29;white-space:nowrap">'+infCatNombre(cat)+'</td>';
+    pesosCols.forEach(function(c){
+      const w=cat.pesos[c];
+      if(w==null||w===0){html+='<td class="inf-dn">—</td>';}
+      else{html+='<td style="text-align:center;font-weight:700;color:'+(w>0?'#3c6b45':'#c0392b')+'">'+(w>0?'+':'')+w+'</td>';}
+    });
+    html+='</tr>';
+  });
+  html+='</tbody></table></div>';
+  html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 16px;font-size:.65rem;color:#555;margin-bottom:10px">';
+  pesosCols.forEach(function(c){html+='<div><strong style="color:#253a29">'+c+'</strong> — '+(DEP_INFO[c]?DEP_INFO[c].nombre:c)+'</div>';});
+  html+='</div>';
+
+  // Las 5 categorías, con su descripción completa
+  html+='<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:13px">';
+  CATEGORIAS.forEach(function(cat){
+    html+='<div style="font-size:.7rem;color:#444;line-height:1.5"><strong style="color:#253a29">'+infCatLabel(cat)+':</strong> '+cat.desc+'</div>';
+  });
+  html+='</div>';
+
+  html+='<div class="inf-sub-title">RD_O&amp;P — combinaciones que buscan los productores</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:9px">Además de mirar cada característica por separado, hay combinaciones típicas que los productores buscan juntas —por ejemplo, peso al nacer bajo combinado con buen crecimiento posterior. Cada una de esas combinaciones se llama "perfil". RD_O&amp;P revisa, para cada categoría, los perfiles que corresponden y le suma puntos al toro cuando cumple bien la combinación, restándole cuando no. El resultado también queda expresado de 0 a 100.</div>';
+
+  // Catálogo de Perfiles O&P — tabla plana (ID, Nombre, Afinidad, Objetivo, DEPs, Categorías)
+  html+='<div style="font-size:.68rem;color:#888;margin-bottom:5px">Cada perfil evalúa un par de DEPs (+ premia, − penaliza):</div>';
+  html+='<div style="overflow-x:auto;margin-bottom:13px"><table class="inf-tbl" style="font-size:.66rem"><thead><tr><th style="text-align:left">ID</th><th style="text-align:left">Nombre</th><th style="text-align:left">Afinidad</th><th style="text-align:left">Para qué sirve</th><th style="text-align:left">DEPs</th><th style="text-align:left">Categorías</th></tr></thead><tbody>';
+  PERFILES_OYP.forEach(function(p){
+    const afColor=p.afinidad==='Afín'?'#2563eb':p.afinidad==='Antagónico'?'#ea580c':'#7c3aed';
+    const cats=p.cats.map(function(cid){const cc=CATEGORIAS.find(function(c){return c.id===cid;});return cc?infCatNombre(cc):cid;}).join(', ');
+    const deps=(p.deps_req||[]).slice(0,2).map(function(d){return (d.dir>0?'+':'−')+d.key;}).join(' · ');
+    html+='<tr><td style="font-weight:800;color:#253a29">'+p.id+'</td>'
+      +'<td style="font-weight:600">'+p.nombre+'</td>'
+      +'<td style="color:'+afColor+';font-weight:700">'+p.afinidad+'</td>'
+      +'<td style="color:#555">'+(p.objetivo||'')+'</td>'
+      +'<td style="color:#6b6b6b;white-space:nowrap">'+deps+'</td>'
+      +'<td style="color:#888;font-size:.6rem">'+cats+'</td></tr>';
+  });
+  html+='</tbody></table></div>';
+  html+='<div style="font-size:.68rem;color:#888;margin-bottom:13px"><strong>Q1 %</strong> (columna que vas a ver en el detalle de RD_O&amp;P): de los perfiles activos en la categoría, qué porcentaje el toro cumple favorablemente.</div>';
+
+  html+='<div class="inf-sub-title">★ RD_Selectos</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:13px">Cuando un toro queda entre los mejores tanto en RD_Factores como en RD_O&amp;P al mismo tiempo, se lo marca como SELECTO. Que dos métodos distintos coincidan en destacar al mismo toro da más confianza en la elección.</div>';
+
+  html+='<div class="inf-sub-title">RD_Confiabilidad</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:13px">No mide qué tan bueno es el toro, sino qué tan sólido es el dato que tenemos sobre él. Un DEP puede estar respaldado por muchas crías ya evaluadas (dato confiable) o por muy pocas (dato más precoz, conviene tomarlo con cautela). Es una lectura complementaria: no cambia el puntaje de mérito del toro, solo advierte cuánto respaldo tiene ese dato.</div>';
+
+  html+='<div class="inf-sub-title">RD_Hallazgos</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:13px">Señala automáticamente los datos de un toro que se destacan mucho —para bien o para mal— respecto al resto del catálogo, para que no pasen desapercibidos al mirar la tabla completa. Tampoco modifica los rankings: es solo una alerta de lectura.</div>';
+
+  html+=infFoot(pid)+'</div>';
+  return html;
 }
 
 function infGenerarContenido(){
@@ -5506,7 +5707,7 @@ function infGenerarContenido(){
   html+='<div style="font-size:.73rem;color:#6b6b6b">Sistema de Evaluación y Selección de Animales · App3</div>';
   html+='<div style="border-left:5px solid #b8892b;padding-left:14px">';
   html+='<div style="font-size:1.35rem;font-weight:900;color:#253a29;line-height:1.2">'+catNombreActivo()+'</div>';
-  html+='<div style="font-size:.83rem;font-weight:700;color:#3c6b45;margin-top:3px">Informe General · '+CATEGORIAS.length+' Categorías</div></div>';
+  html+='<div style="font-size:.83rem;font-weight:700;color:#3c6b45;margin-top:3px">Informe PLUS · '+CATEGORIAS.length+' Categorías</div></div>';
   html+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:9px">';
   html+='<div class="inf-stat-box"><div class="inf-stat-val">'+TOROS.length+'</div><div class="inf-stat-lbl">Total toros</div></div>';
   const totalSel=Object.values(RES).reduce((a,r)=>a+r.sel.length,0);
@@ -5535,29 +5736,32 @@ function infGenerarContenido(){
   html+='<div class="inf-section-title">Índice de contenidos</div>';
   html+='<div id="inf-toc-body" style="margin-bottom:22px"><div style="color:#bbb;font-style:italic;font-size:.78rem">Se genera al imprimir.</div></div>';
   html+='<div style="border-top:1px solid #eee;padding-top:5px;font-size:.6rem;color:#aaa;display:flex;justify-content:space-between">';
-  html+='<span>SEPA-Select '+APP_VERSION+' · '+catNombreActivo()+'</span><span>Pág. 2</span></div>';
+  html+='<span>SEPA-Select · '+catNombreActivo()+'</span><span>Pág. 2</span></div>';
   html+='<div style="text-align:center;font-size:.52rem;color:#bbb;margin-top:3px">'+INF_LEGAL+'</div>';
   html+='</div>';
+
+  // ── MARCO TEÓRICO (opcional, lenguaje simple) — temprano, antes de cross-categoría ──
+  html+=infMarcoTeorico('marco-teorico');
 
   // ── CROSS-CATEGORÍA ──
   html+='<div class="inf-page" id="inf-pg-cross" data-pid="cross">';
   html+='<div class="inf-section-title">Resumen cross-categoría — '+catNombreActivo()+'</div>';
   html+='<div style="font-size:.75rem;color:#6b6b6b;margin-bottom:12px">Top '+SELECTO_TOP_N+' de cada método por categoría. ★ = SELECTO (intersección top '+SELECTO_TOP_N+' ambos métodos).</div>';
-  html+='<div style="overflow-x:auto"><table class="inf-tbl" style="font-size:.71rem">';
-  html+='<tr><th style="text-align:left;min-width:105px">Categoría</th><th style="text-align:left">📊 RD_Factores Top '+SELECTO_TOP_N+'</th><th style="text-align:left">🎯 RD_O&P Top '+SELECTO_TOP_N+'</th><th style="text-align:left;min-width:95px">★ Selecto</th></tr>';
   CATEGORIAS.forEach(cat=>{
     const r=RES[cat.id];
     const t5f=r.rf.filter(x=>x.ok).slice(0,SELECTO_TOP_N);
     const t5o=r.oyp.slice(0,SELECTO_TOP_N);
     const lf=t5f.map((x,i)=>{const s=r.sel.includes(x.t.nombre);return '<div style="padding:1px 0;'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+escHtml(x.t.nombre)+' <span style="color:#aaa">'+x.total.toFixed(1)+'</span></div>';}).join('');
     const lo=t5o.map((x,i)=>{const s=r.sel.includes(x.t.nombre);return '<div style="padding:1px 0;'+(s?'font-weight:700;color:#b8892b':'')+'">'+(i+1)+'. '+(s?'★ ':'')+escHtml(x.t.nombre)+' <span style="color:#aaa">'+x.score.toFixed(1)+'</span></div>';}).join('');
-    const ls=r.sel.length?r.sel.map(n=>'<div class="inf-badge" style="margin-bottom:2px;display:block;width:fit-content">★ '+escHtml(n)+'</div>').join(''):'<span style="color:#aaa;font-style:italic;font-size:.68rem">—</span>';
-    html+='<tr><td style="font-weight:700;color:#253a29;vertical-align:top;padding-top:7px">'+infCatLabel(cat)+'<div style="font-size:.62rem;color:#888;font-weight:400">'+cat.desc+'</div></td>'
-      +'<td style="vertical-align:top;padding-top:7px">'+lf+'</td>'
-      +'<td style="vertical-align:top;padding-top:7px">'+lo+'</td>'
-      +'<td style="vertical-align:top;padding-top:7px">'+ls+'</td></tr>';
+    html+='<div style="margin-bottom:14px"><div style="font-weight:800;color:#253a29;font-size:.8rem;border-bottom:2px solid #e9f0ea;padding-bottom:3px;margin-bottom:4px">'+infCatLabel(cat)+'</div>';
+    html+='<div style="font-size:.68rem;color:#6b6b6b;margin-bottom:8px">'+cat.desc+'</div>';
+    html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">';
+    html+='<div><div style="font-size:.68rem;font-weight:700;color:#253a29;margin-bottom:3px">📊 RD_Factores Top '+SELECTO_TOP_N+'</div>'+lf+'</div>';
+    html+='<div><div style="font-size:.68rem;font-weight:700;color:#253a29;margin-bottom:3px">🎯 RD_O&P Top '+SELECTO_TOP_N+'</div>'+lo+'</div>';
+    html+='</div>';
+    html+='<div style="font-size:.7rem;font-weight:700;margin-top:6px">'+(r.sel.length?'★ SELECTO: '+r.sel.map(n=>'<span class="inf-badge" style="margin-right:3px">★ '+escHtml(n)+'</span>').join(''):'<span style="color:#aaa;font-style:italic;font-weight:400">Sin SELECTOS en esta categoría.</span>')+'</div>';
+    html+='</div>';
   });
-  html+='</table></div>';
   // Multi-categoría
   const conteo={};
   CATEGORIAS.forEach(cat=>{RES[cat.id].sel.forEach(n=>{if(!conteo[n])conteo[n]=[];conteo[n].push(infCatNombre(cat));});});
@@ -5601,7 +5805,7 @@ function infGenerarContenido(){
     html+='<div class="inf-insight"><span>💡</span><span>'+cat.desc+' <strong>★ SELECTO</strong> = top '+SELECTO_TOP_N+' simultáneo en ambos métodos.</span></div>';
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">';
     html+='<div><div class="inf-sub-title">📊 RD_Factores — Top '+top10f.length+'</div>';
-    html+='<div style="font-size:.65rem;color:#6b6b6b;margin-bottom:5px">'+pesStr+' · z-score interno · confiabilidad en Anexo D</div>';
+    html+='<div style="font-size:.65rem;color:#6b6b6b;margin-bottom:5px">'+pesStr+' · z-score interno · confiabilidad en la sección Confiabilidad y Hallazgos</div>';
     html+=infRankTable(top10f,true,sel)+'</div>';
     html+='<div><div class="inf-sub-title">🎯 RD_O&P — Top '+top10o.length+'</div>';
     html+='<div style="font-size:.65rem;color:#6b6b6b;margin-bottom:5px">'+perfiles.length+' perfiles · Suma algebraica DEPs</div>';
@@ -5659,7 +5863,7 @@ function infGenerarContenido(){
     // RD_Factores completo
     html+='<div class="inf-page" id="inf-pg-'+pid+'-f" data-pid="'+pid+'-f">';
     html+='<div class="inf-section-title">RD_Factores — Ranking completo · '+infCatNombre(cat)+'</div>';
-    html+='<div style="font-size:.7rem;color:#6b6b6b;margin-bottom:9px">'+pesStr+' · Score SCF normalizado 0–100 · ★ = SELECTO · <strong>DEPs de cada toro: Anexo A</strong> · Metodología: Anexo C</div>';
+    html+='<div style="font-size:.7rem;color:#6b6b6b;margin-bottom:9px">'+pesStr+' · Score SCF normalizado 0–100 · ★ = SELECTO · <strong>DEPs de cada toro: Anexo A</strong> · Metodología: Marco Teórico</div>';
     html+='<div style="overflow-x:auto">'+infFullF(r.rf,sel)+'</div>';
     html+=infFoot(pid+'-f')+'</div>';
 
@@ -5706,8 +5910,8 @@ function infGenerarContenido(){
       });
       html+='</tbody></table></div>';
 
-      // Leyenda de perfiles activos (compacta — definiciones en Anexo B)
-      html+='<div style="margin-bottom:14px"><div style="font-size:.72rem;font-weight:800;color:#253a29;margin-bottom:7px;text-transform:uppercase;letter-spacing:.04em">Perfiles activos en '+infCatNombre(cat)+' <span style="font-weight:400;text-transform:none;color:#888">— definiciones completas: Anexo B</span></div>';
+      // Leyenda de perfiles activos (compacta — definiciones completas en Marco Teórico)
+      html+='<div style="margin-bottom:14px"><div style="font-size:.72rem;font-weight:800;color:#253a29;margin-bottom:7px;text-transform:uppercase;letter-spacing:.04em">Perfiles activos en '+infCatNombre(cat)+' <span style="font-weight:400;text-transform:none;color:#888">— definiciones completas: Marco Teórico</span></div>';
       html+='<div style="display:flex;flex-wrap:wrap;gap:6px">';
       perfiles.forEach(p=>{
         const afColor=p.afinidad==='Afín'?'#2563eb':p.afinidad==='Antagónico'?'#ea580c':'#7c3aed';
@@ -5749,50 +5953,6 @@ function infGenerarContenido(){
   html+='</tbody></table></div>';
   html+=infFoot('anexo-a')+'</div>';
 
-  // ── ANEXO B — Catálogo de Perfiles O&P ──
-  html+='<div class="inf-page" id="inf-pg-anexo-b" data-pid="anexo-b">';
-  html+='<div class="inf-section-title">Anexo B — Catálogo de Perfiles O&amp;P</div>';
-  html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:10px">Definición de cada perfil de Objetivos &amp; Perfiles. “DEPs” indica el par que evalúa (+ premia, − penaliza). Referenciado desde “RD_O&amp;P — Detalle Top 5”.</div>';
-  html+='<table class="inf-tbl" style="font-size:.69rem"><thead><tr><th style="text-align:left">ID</th><th style="text-align:left">Nombre</th><th style="text-align:left">Afinidad</th><th style="text-align:left">Objetivo</th><th style="text-align:left">DEPs</th><th style="text-align:left">Categorías</th></tr></thead><tbody>';
-  PERFILES_OYP.forEach(function(p){
-    const afColor=p.afinidad==='Afín'?'#2563eb':p.afinidad==='Antagónico'?'#ea580c':'#7c3aed';
-    const cats=p.cats.map(function(cid){const cc=CATEGORIAS.find(function(c){return c.id===cid;});return cc?infCatNombre(cc):cid;}).join(', ');
-    const deps=(p.deps_req||[]).slice(0,2).map(function(d){return (d.dir>0?'+':'−')+d.key;}).join(' · ');
-    html+='<tr><td style="font-weight:800;color:#253a29">'+p.id+'</td>'
-      +'<td style="font-weight:600">'+p.nombre+'</td>'
-      +'<td style="color:'+afColor+';font-weight:700">'+p.afinidad+'</td>'
-      +'<td style="color:#555">'+(p.objetivo||'')+'</td>'
-      +'<td style="color:#6b6b6b;white-space:nowrap">'+deps+'</td>'
-      +'<td style="color:#888;font-size:.62rem">'+cats+'</td></tr>';
-  });
-  html+='</tbody></table>';
-  html+=infFoot('anexo-b')+'</div>';
-
-  // ── ANEXO C — Metodología y glosario ──
-  html+='<div class="inf-page" id="inf-pg-anexo-c" data-pid="anexo-c">';
-  html+='<div class="inf-section-title">Anexo C — Metodología y glosario</div>';
-  html+='<div class="inf-sub-title">Caracteres evaluados (DEPs)</div>';
-  html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin-bottom:14px;font-size:.72rem">';
-  const GLOS_C={PN:'Peso al nacer',WW:'Peso al destete',PF:'Peso final',Alt:'Altura (frame)',Leche:'Habilidad materna / leche',AOB:'Área de ojo de bife',CE:'Circunferencia escrotal',LG:'Longitud de gestación'};
-  INF_CHARS.forEach(function(c){html+='<div><strong style="color:#253a29">'+c+'</strong> — '+(GLOS_C[c]||c)+'</div>';});
-  html+='</div>';
-  html+='<div class="inf-sub-title">Cómo se calculan los puntajes</div>';
-  html+='<div style="font-size:.72rem;color:#444;line-height:1.6;margin-bottom:14px">';
-  html+='<p style="margin-bottom:6px"><strong>RD_Factores (SCF, 0–100):</strong> se calcula el z-score de cada DEP dentro del catálogo, se pondera por el peso de la categoría, se suman y el resultado se normaliza de 0 a 100 (el mejor = 100). PN, LG y Alt entran invertidos (menos es mejor).</p>';
-  html+='<p style="margin-bottom:6px"><strong>RD_O&amp;P (Score Z):</strong> cada perfil activo evalúa un par de DEPs como suma algebraica de sus z-scores con signo (+ premia, − penaliza). El Score O&amp;P del toro es la suma de todos los perfiles activos de la categoría.</p>';
-  html+='<p style="margin-bottom:6px"><strong>Q1 %:</strong> porcentaje de perfiles activos en los que el toro tiene score positivo (cuadrante ideal).</p>';
-  html+='<p style="margin-bottom:6px"><strong>RD_Confiabilidad (Anexo D):</strong> lectura de <em>referencia</em>. Informa la precisión ERA de los DEPs publicados de cada toro y qué tanto respaldo de progenie tiene su evaluación. No descuenta ni interviene en RD_Factores ni en RD_O&amp;P.</p>';
-  html+='<p><strong>RD_Hallazgos (Anexo E):</strong> lectura de <em>referencia</em>. Marca los DEPs de cada toro que se despegan ≥ 1,5 desvíos de la media del catálogo, con el percentil de raza como apoyo. No interviene en los rankings de mérito.</p>';
-  html+='</div>';
-  html+='<div class="inf-sub-title">Cómo leer el radar</div>';
-  html+='<div style="font-size:.72rem;color:#444;line-height:1.6">Ejes normalizados 0–1 (afuera = mejor), con PN/LG/Alt invertidos. Cada polígono es un toro del Top 5 RD_Factores. El color del rótulo del eje indica el peso de ese carácter en la categoría: <span style="color:#3c6b45;font-weight:700">verde = positivo</span>, <span style="color:#c0392b;font-weight:700">rojo = negativo</span>, gris = no pondera.</div>';
-  html+='<div style="margin-top:10px;font-size:.64rem;color:#999">★ SELECTO = top '+SELECTO_TOP_N+' simultáneo en RD_Factores y RD_O&amp;P.</div>';
-  html+=infFoot('anexo-c')+'</div>';
-
-  // ── ANEXO D — Precisión por DEP · ANEXO E — Hallazgos ──
-  html+=infAnexoD();
-  html+=infAnexoE();
-
   document.getElementById('inf-report').innerHTML=html;
 
   // Construir panel y estado
@@ -5800,6 +5960,9 @@ function infGenerarContenido(){
     {label:'Siempre incluido',fixed:true,items:[
       {id:'portada',label:'Portada',tag:''},
       {id:'toc',label:'Índice',tag:''},
+    ]},
+    {label:'Marco Teórico',fixed:false,items:[
+      {id:'marco-teorico',label:'Marco Teórico',tag:'Sin fórmulas · lenguaje simple'},
     ]},
     {label:'Cap. 2 — Cross-categoría',fixed:false,items:[
       {id:'cross',label:'Resumen cross-cat.',tag:'Todas las categorías'},
@@ -5819,14 +5982,11 @@ function infGenerarContenido(){
     })),
     {label:'Anexos',fixed:false,items:[
       {id:'anexo-a',label:'Anexo A — DEPs originales',tag:'Referencia'},
-      {id:'anexo-b',label:'Anexo B — Perfiles O&P',tag:'Referencia'},
-      {id:'anexo-c',label:'Anexo C — Metodología',tag:'Referencia'},
-      {id:'anexo-d',label:'Anexo D — Precisión por DEP',tag:'Referencia'},
-      {id:'anexo-e',label:'Anexo E — Hallazgos',tag:'Referencia'},
     ]}
   ];
   infState={};
   infGroups.forEach(g=>g.items.forEach(item=>{infState[item.id]=true;}));
+  infState['marco-teorico']=true; // opcional, prendido por defecto — el usuario lo destilda si no lo quiere incluir
   infBuildPanel();
 }
 
@@ -5838,8 +5998,9 @@ function infBuildPanel(){
       if(g.fixed){
         html+='<div class="inf-pitem fixed"><span style="color:white;font-size:.8rem">✓</span><div style="flex:1"><span class="inf-plabel">'+item.label+'</span></div></div>';
       } else {
-        html+='<div class="inf-pitem on" id="inf-pi-'+item.id+'" data-sid="'+item.id+'" onclick="infToggle(this.dataset.sid)">'
-          +'<input type="checkbox" class="inf-pcheck" id="inf-pc-'+item.id+'" checked onclick="event.stopPropagation();infToggle(this.parentNode.dataset.sid)">'
+        const on=infState[item.id];
+        html+='<div class="inf-pitem'+(on?' on':'')+'" id="inf-pi-'+item.id+'" data-sid="'+item.id+'" onclick="infToggle(this.dataset.sid)">'
+          +'<input type="checkbox" class="inf-pcheck" id="inf-pc-'+item.id+'" '+(on?'checked ':'')+'onclick="event.stopPropagation();infToggle(this.parentNode.dataset.sid)">'
           +'<div style="flex:1"><span class="inf-plabel">'+item.label+'</span><span class="inf-ptag">'+item.tag+'</span></div></div>';
       }
     });
@@ -5895,7 +6056,7 @@ function infGenerarMini(){
 
   // ── Página 1: portada compacta ──
   html+='<div class="inf-page" id="inf-pg-mini-portada" data-pid="mini-portada">';
-  html+='<div style="font-size:1.35rem;font-weight:900;color:#253a29;line-height:1.25">SEPA<span style="color:#b8892b">-Select</span> · MINI INFORME con Gráficos</div>';
+  html+='<div style="font-size:1.35rem;font-weight:900;color:#253a29;line-height:1.25">SEPA<span style="color:#b8892b">-Select</span> · Informe BASE</div>';
   html+='<div style="font-size:.76rem;color:#6b6b6b;margin:4px 0 16px">'+catNombreActivo()+' · '+TOROS.length+' toros · '+totalSel+' SELECTOS · '+fecha+' · Incluye Radar Top5 y O&amp;P</div>';
   html+='<table class="inf-tbl" style="font-size:.73rem"><thead><tr><th style="text-align:left;width:110px">Categoría</th><th style="text-align:left">Objetivo</th><th style="text-align:left;width:190px">Selectos</th></tr></thead><tbody>';
   CATEGORIAS.forEach(cat=>{
@@ -5909,6 +6070,9 @@ function infGenerarMini(){
   html+='</tbody></table>';
   html+='<div style="margin-top:14px;font-size:.68rem;color:#888;line-height:1.55">Flujo: este Informe Base da la idea general (incluye resumen de Confiabilidad y Hallazgos). Para el detalle por toro —DEPs, %Q1, perfiles Z, precisión y hallazgos completos— usar el Informe Plus o el Informe Plus por Toro. El ranking completo de '+TOROS.length+' toros queda en la app.</div>';
   html+=infFoot('mini-portada')+'</div>';
+
+  // ── Marco Teórico (opcional, lenguaje simple) ──
+  if(_infMarcoMini) html+=infMarcoTeorico('mini-marco');
 
   // ── Página 2: cross-categoría (= pág. 3 del Informe Plus) ──
   html+='<div class="inf-page" id="inf-pg-mini-cross" data-pid="mini-cross">';
@@ -5985,38 +6149,6 @@ function infGenerarMini(){
     html+=infFoot(pid)+'</div>';
   });
 
-  // ── Página final: anexo — perfiles O&P (= pág. 29 Informe Plus) + categorías + métodos + glosario ──
-  html+='<div class="inf-page" id="inf-pg-mini-sintesis" data-pid="mini-sintesis">';
-  html+='<div class="inf-section-title">Anexo — Perfiles O&amp;P, categorías y métodos</div>';
-  html+='<div class="inf-sub-title">Catálogo de Perfiles O&amp;P</div>';
-  html+='<div style="font-size:.62rem;color:#888;margin-bottom:4px">Cada perfil evalúa un par de DEPs (+ premia, − penaliza).</div>';
-  html+='<table class="inf-tbl" style="font-size:.61rem;margin-bottom:12px"><thead><tr><th style="text-align:left">ID</th><th style="text-align:left">Nombre</th><th style="text-align:left">Afin.</th><th style="text-align:left">Objetivo</th><th style="text-align:left">DEPs</th><th style="text-align:left">Categorías</th></tr></thead><tbody>';
-  PERFILES_OYP.forEach(function(p){
-    var afColor=p.afinidad==='Afín'?'#2563eb':p.afinidad==='Antagónico'?'#ea580c':'#7c3aed';
-    var cats=p.cats.map(function(cid){var cc=CATEGORIAS.find(function(c){return c.id===cid;});return cc?infCatNombre(cc):cid;}).join(', ');
-    var deps=(p.deps_req||[]).slice(0,2).map(function(d){return (d.dir>0?'+':'−')+d.key;}).join(' · ');
-    html+='<tr><td style="font-weight:800;color:#253a29">'+p.id+'</td><td style="font-weight:600">'+p.nombre+'</td><td style="color:'+afColor+';font-weight:700">'+p.afinidad+'</td><td style="color:#555">'+(p.objetivo||'')+'</td><td style="color:#6b6b6b;white-space:nowrap">'+deps+'</td><td style="color:#888;font-size:.56rem">'+cats+'</td></tr>';
-  });
-  html+='</tbody></table>';
-  html+='<div class="inf-sub-title">Las '+CATEGORIAS.length+' categorías</div>';
-  html+='<table class="inf-tbl" style="font-size:.66rem;margin-bottom:12px"><tbody>';
-  CATEGORIAS.forEach(function(cat){
-    var pesStr=Object.entries(cat.pesos).filter(function(e){return e[1]!==0;}).map(function(e){return e[0]+' '+(e[1]>0?'+':'')+e[1];}).join(' · ');
-    html+='<tr><td style="font-weight:700;color:#253a29;width:115px;vertical-align:top">'+infCatNombre(cat)+'</td><td>'+cat.desc+'<div style="font-size:.58rem;color:#888;margin-top:1px">Pesos: '+pesStr+'</div></td></tr>';
-  });
-  html+='</tbody></table>';
-  html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:10px">';
-  html+='<div><div class="inf-sub-title">RD_Factores</div><div style="font-size:.68rem;color:#444;line-height:1.5">Mérito puro: pondera los DEPs del modelo según el objetivo de la categoría (z-scores en el catálogo, sin descuento por precisión) y normaliza a <strong>0–100</strong>. En Plus suma el fenotipo (F). PN/LG/Alt entran invertidos. Hilton pondera además EGD/GI (terminación/marmoleo).</div></div>';
-  html+='<div><div class="inf-sub-title">RD_O&amp;P (Objetivos &amp; Perfiles)</div><div style="font-size:.68rem;color:#444;line-height:1.5">Cada categoría activa un set de perfiles; cada perfil evalúa un par de DEPs (uno premia, otro penaliza). Score = promedio de perfiles, normalizado a <strong>0–100</strong>. <strong>★ SELECTO</strong> = top '+SELECTO_TOP_N+' en ambos métodos.</div></div>';
-  html+='</div>';
-  html+='<div class="inf-sub-title">Glosario de siglas (DEPs)</div>';
-  html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 16px;font-size:.66rem">';
-  var _glos={PN:'Peso al nacer',WW:'Peso al destete',PF:'Peso final',Alt:'Altura (frame)',Leche:'Habilidad materna / leche',AOB:'Área de ojo de bife',CE:'Circunferencia escrotal',LG:'Longitud de gestación',EGD:'Espesor de grasa dorsal',GI:'% Grasa intramuscular (marmoleo)'};
-  var _glosCols=INF_CHARS.concat([...new Set(CATEGORIAS.flatMap(function(c){return Object.keys(c.pesos);}))].filter(function(k){return INF_CHARS.indexOf(k)<0;}));
-  _glosCols.forEach(function(c){html+='<div><strong style="color:#253a29">'+c+'</strong> — '+(_glos[c]||c)+'</div>';});
-  html+='</div>';
-  html+=infFoot('mini-sintesis')+'</div>';
-
   // ── Anexo 2 — resultados completos: 1 fila por toro, 8 columnas + Confiab. + hallazgos ──
   function _a2inc(t){ return INF_CHARS.filter(function(c){return t.deps&&t.deps[c]&&t.deps[c].dep!=null;}).length < 6; }
   var _a2rows=TOROS.slice().sort(function(a,b){return a.nombre.localeCompare(b.nombre,'es');});
@@ -6081,11 +6213,11 @@ function infDoPrint(){
     included.forEach(function(id){infState[id]=true;});
   } else if(typeof _infModo!=='undefined'&&_infModo==='mini'){
     included.push('mini-portada');
+    if(_infMarcoMini) included.push('mini-marco');
     included.push('mini-cross');
     included.push('mini-selectos');
     included.push('mini-confhall');
     CATEGORIAS.forEach(function(cat){included.push('mini-'+cat.id);});
-    included.push('mini-sintesis');
     included.push('mini-anexo2');
     infGroups=[];infState={};
   } else {
