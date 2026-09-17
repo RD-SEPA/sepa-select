@@ -268,6 +268,13 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie)
 .pesos-tabla th{background:var(--verde-claro);padding:6px 10px;text-align:left;font-size:.7rem;font-weight:700;color:var(--verde-oscuro);text-transform:uppercase}
 .pesos-tabla td{padding:6px 10px;border-bottom:1px solid var(--borde)}
 .pesos-tabla tr:last-child td{border-bottom:none}
+.pesos-tabla input[type=number]{width:50px;text-align:center;border:1px solid var(--borde);border-radius:5px;padding:3px 2px;font-family:inherit;font-size:.8rem}
+.pesos-tabla input[type=number]:focus{outline:none;border-color:var(--verde-medio)}
+.pesos-suma-ok{color:#2e7d32;font-weight:800}
+.pesos-suma-mal{color:#c0392b;font-weight:800}
+.pesos-btn{border:1px solid var(--verde-medio);background:white;color:var(--verde-oscuro);border-radius:6px;padding:4px 9px;font-size:.68rem;font-weight:700;cursor:pointer;white-space:nowrap;margin:1px}
+.pesos-btn:hover{background:var(--verde-claro)}
+.pesos-btn[disabled]{opacity:.4;cursor:not-allowed}
 .peso-pos{color:var(--verde-medio);font-weight:700}
 .peso-neg{color:var(--rojo);font-weight:700}
 .peso-0{color:var(--gris)}
@@ -1144,12 +1151,16 @@ tr.sel-z:hover td{background:#d4ecda!important}
   <div class="cmd-panel-inner">
     <h3>Configuración</h3>
     <p style="font-size:.82rem;color:var(--gris)">RD_Factores y RD_O&P ordenan por mérito puro (z-score interno del catálogo). La confiabilidad de los DEPs se analiza aparte en <strong>RD_Confiabilidad</strong>; los valores que se despegan del conjunto, en <strong>RD_Hallazgos</strong>.</p>
-    <div id="config-plus-section" style="display:none">
-      <h4>Pesos por categoría (RD_Factores) <span style="font-size:.65rem;background:var(--oro);color:white;padding:2px 7px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></h4>
+    <div id="config-pesos-section">
+      <h4>Pesos por categoría (RD_Factores)</h4>
+      <p style="font-size:.78rem;color:var(--gris)">Son <strong>tus</strong> pesos — los podés ajustar a tu criterio, no afectan lo que ven otros usuarios. La suma de los valores absolutos de cada fila tiene que dar exactamente <strong>100</strong> para poder guardar.</p>
       <div style="overflow-x:auto">
         <table class="pesos-tabla" id="pesos-tabla"></table>
       </div>
-      <h4>Fenotipo</h4>
+      <div id="config-pesos-status" style="font-size:.78rem;color:var(--gris);margin-top:8px"></div>
+    </div>
+    <div id="config-fenotipo-section" style="display:none">
+      <h4>Fenotipo <span style="font-size:.65rem;background:var(--oro);color:white;padding:2px 7px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></h4>
       <p>Cada toro tiene un fenotipo editable desde su ficha (clic en cualquier tabla). El valor se suma directamente al índice genético G.</p>
       <button class="config-reset-btn" onclick="resetFenotipos()">↺ Resetear todos los fenotipos a 0</button>
       <div id="config-fen-status" style="font-size:.78rem;color:var(--gris);margin-top:8px"></div>
@@ -1762,6 +1773,7 @@ async function cargarPerfilYEntrar(user, perfilExtra) {
     const { data } = await sb.from('usuarios').select('*').eq('id', user.id).single();
     perfil = data;
   } catch (e) { perfil = null; }
+  await cargarPesosUsuario(user.id); // aplica los pesos personalizados de este usuario (si tiene) ANTES de rankear
 
   // Mantiene localStorage['sepa_usuario'] como caché de conveniencia para el resto de la app
   // (header, mailto de "Quiero PLUS", pedido de carga) — la fuente real de la licencia es Supabase.
@@ -1907,7 +1919,18 @@ const CATEGORIAS=[
 ];
 // Rodeo 1 (Terminal+Hilton) y Rodeo 2 (Reposición+Vaquillona 15M) son solo encabezados de agrupación
 // en el sidebar/landing (texto hardcodeado ahí) — no son categorías con ranking propio.
+
+// Foto de los pesos "de fábrica" de SEPA, tomada ANTES de que se apliquen los pesos personalizados
+// del usuario logueado — es lo que usa el botón "↺ Restaurar" de cada categoría.
+const CATEGORIAS_DEFAULT={};
+CATEGORIAS.forEach(c=>{ CATEGORIAS_DEFAULT[c.id]=Object.assign({},c.pesos); });
 const APP_VERSION='v9';
+// Lanzamiento 2026-09-17 (BASE-only, foco: carga de catálogos): RD pidió ocultar la
+// disponibilidad de PLUS por ahora — "tal vez este negocio no funcione, o si funciona
+// tendría que ver el feedback". No se borra nada: PLUS sigue funcionando igual para
+// quien ya lo tenga activado a mano en Supabase, y se puede volver a mostrar cambiando
+// esta única constante a true cuando RD decida reactivar la oferta.
+const PLUS_VISIBLE=false;
 function catNombreActivo(){
   try{
     const c=CATALOGOS_DISPONIBLES.find(function(x){return x.id===sepaState.catalogoActivo;});
@@ -1922,6 +1945,12 @@ const SELECTO_TOP_N=10;
 // Con ±2 casi nadie llega a top score >80 (rara vez un toro es +2 SD en TODOS los DEPs de TODOS los perfiles a la vez).
 // ±1.5 preserva el orden del ranking (rescala linealmente) y sube el techo real ~3-5 pts sin inflar al toro promedio (mediana sigue en 50).
 const OYP_Z_CLAMP=1.5;
+// Tope al z-score de PN en RD_Factores (2026-09-17, a pedido de RD): en Vaquillona 15M y
+// Reposición, PN es el peso más alto de la categoría — sin tope, un PN muy negativo (outlier)
+// puede aportar por sí solo la mayor parte del índice, tapando el resto de los DEPs.
+// Mismo mecanismo y mismo valor que OYP_Z_CLAMP, aplicado acá solo a PN y solo en estas 2 categorías.
+const PN_Z_CLAMP=1.5;
+const PN_CLAMP_CATS=['vaq15','reposicion'];
 // ═══════════════════════════════════════════════
 // PERFILES RD_O&P — 14 perfiles oficiales v5
 // Ref: 8-20-01 a 8-20-14 | SEPA v5 Oficial
@@ -1959,7 +1988,7 @@ const PERFILES_OYP=[
    objetivo:"Preñez y re-preñez",
    cats:["terminal","reposicion","vaq15","rodeoGeneral","hilton"],
    deps_req:[{key:"CE",dir:+1},{key:"WW",dir:+1}]},
-  // ── V Vaquillona 15M ──
+  // ── Familia V "Vaca" (Vaquillona 15M + Reposición) — antes eran 2 grupos separados V y R ──
   {id:"V01",codigo:"8-20-04",grupo:"V",nombre:"V01-Entore Base",     afinidad:"Antagónico",
    objetivo:"Vaq 15 sin riesgo",
    cats:["vaq15","rodeoGeneral"],
@@ -1976,16 +2005,16 @@ const PERFILES_OYP=[
    objetivo:"18 meses listo",
    cats:["vaq15"],
    deps_req:[{key:"CE",dir:+1},{key:"AOB",dir:+1}]},
-  // ── R Reposición ──
-  {id:"R01",codigo:"8-20-08",grupo:"R",nombre:"R01-Vaca Moderada",   afinidad:"Moderador",
+  // ── Reposición — 2026-09-17: unificado a la familia V ("Vaca"), antes era grupo R aparte ──
+  {id:"R01",codigo:"8-20-08",grupo:"V",nombre:"R01-Vaca Moderada",   afinidad:"Moderador",
    objetivo:"No pasarse de 650kg",
    cats:["reposicion","rodeoGeneral"],
    deps_req:[{key:"Alt",dir:-1},{key:"PF",dir:-1}]},
-  {id:"R02",codigo:"8-20-09",grupo:"R",nombre:"R02-Maternal Eficiente",afinidad:"Afín",
+  {id:"R02",codigo:"8-20-09",grupo:"V",nombre:"R02-Maternal Eficiente",afinidad:"Afín",
    objetivo:"Vaca que cría con poco",
    cats:["reposicion"],
    deps_req:[{key:"Leche",dir:+1},{key:"CE",dir:+1}]},
-  {id:"R03",codigo:"8-20-10",grupo:"R",nombre:"R03-Mansedumbre Materna",afinidad:"Afín",
+  {id:"R03",codigo:"8-20-10",grupo:"V",nombre:"R03-Mansedumbre Materna",afinidad:"Afín",
    objetivo:"Vaca mansa que cría",
    cats:["reposicion"],
    deps_req:[{key:"Leche",dir:+1},{key:"WW",dir:+1}]},
@@ -2005,16 +2034,25 @@ const PERFILES_OYP=[
   {id:"T04",codigo:"8-20-14",grupo:"T",nombre:"T04-Eficiencia Total",afinidad:"Afín",
    objetivo:"Come menos, engorda igual",
    cats:["terminal","hilton"],
-   deps_req:[{key:"WW",dir:+1},{key:"PF",dir:+1}]}
+   deps_req:[{key:"WW",dir:+1},{key:"PF",dir:+1}]},
+  // T05 — agregado 2026-09-17, NO es parte de los 14 perfiles oficiales v5 (8-20-01..14) que
+  // describe la memoria DNDA. Usa EGD, un DEP disponible en el 98% de los toros reales (263/269 en
+  // los 8 catálogos) que hasta ahora ningún perfil O&P evaluaba, aunque sí pesa en RD_Factores de
+  // Terminal/Hilton. Se distingue de T03 (AOB+GI, tamaño de bife+marmoleo) en que mide cobertura de
+  // grasa + marmoleo sin depender del área de ojo de bife.
+  {id:"T05",codigo:"8-20-15",grupo:"T",nombre:"T05-Terminación Grasa",afinidad:"Afín",
+   objetivo:"Grado justo de terminación",
+   cats:["terminal","hilton"],
+   deps_req:[{key:"EGD",dir:+1},{key:"GI",dir:+1}]}
 ];
 
 // Asignación por defecto de perfiles O&P por categoría (PLUS configurable)
 const CONFIG_OYP_DEFAULT={
-  terminal:   ["U01","U02","U03","T01","T02","T03","T04"],
+  terminal:   ["U01","U02","U03","T02","T03","T05"],
   reposicion: ["U01","U02","U03","R01","R02","R03"],
   vaq15:      ["U01","U02","U03","V01","V02","V03","V04"],
   rodeoGeneral:["U01","U02","U03","R01","V01","T01"],
-  hilton:     ["U01","U02","U03","T01","T02","T03","T04"]
+  hilton:     ["U01","U02","U03","T01","T02","T03","T04","T05"] // 2026-09-17: invertido con Terminal a pedido de RD — Hilton (mercado selecto, "lo hacen pocos") pasa a exigir el set T completo; Terminal (mercado masivo) queda con el subconjunto de calidad
 };
 let configOyP=JSON.parse(JSON.stringify(CONFIG_OYP_DEFAULT));
 const DEP_INFO={
@@ -2240,7 +2278,7 @@ function cerrarCarga() {
 function actualizarHeaderUsuario() {
   const u = JSON.parse(localStorage.getItem('sepa_usuario') || '{}');
   const btnPlus = document.getElementById('btn-plus');
-  if (btnPlus) btnPlus.hidden = (sepaState.modo === 'PLUS' || esDev());
+  if (btnPlus) btnPlus.hidden = (!PLUS_VISIBLE || sepaState.modo === 'PLUS' || esDev());
   const el = document.getElementById('header-usuario-info');
   if (el && u.nombre) {
     const modo = sepaState.modo || 'BASE';
@@ -2593,21 +2631,42 @@ function renderCurrentScreen(){
 }
 
 function onClickConfig(){
-  // OBS 1: config abre para todos; pesos y fenotipo solo visibles para PLUS
+  // Pesos: editable para BASE y PLUS (personalización propia). Fenotipo sigue exclusivo PLUS.
   togglePanel('panel-config');
-  const plusSec=document.getElementById('config-plus-section');
-  if(plusSec) plusSec.style.display=canAccess('config')?'block':'none';
-  if(canAccess('config')) renderConfigPanel();
+  const fenSec=document.getElementById('config-fenotipo-section');
+  if(fenSec) fenSec.style.display=canAccess('config')?'block':'none';
+  renderConfigPanel();
 }
 
 // ─── CONFIG PANEL ───
+// Ediciones de pesos todavía no guardadas, por categoría — catId -> {DEP:valor}.
+// Mientras exista una entrada acá, la tabla muestra ESTOS valores (no los de CATEGORIAS)
+// y el ranking en pantalla NO cambia hasta que se aprieta "Guardar" (evita mostrar un
+// estado a medio editar / con suma inválida).
+let _pesosEdit={};
+
 function renderConfigPanel(){
   const t=document.getElementById('pesos-tabla');
   if(!t) return;
   const extraCols=[...new Set(CATEGORIAS.flatMap(c=>Object.keys(c.pesos)))].filter(c=>!CHARS.includes(c));
   const cols=CHARS.concat(extraCols);
-  t.innerHTML=`<thead><tr><th>Categoría</th>${cols.map(c=>`<th style="text-align:center">${c}</th>`).join('')}</tr></thead><tbody>`+
-    CATEGORIAS.map(cat=>`<tr><td style="font-weight:700;color:var(--verde-oscuro)">${cat.nombre}</td>${cols.map(c=>{const p=cat.pesos[c]||0;return`<td style="text-align:center"><span class="${p>0?'peso-pos':p<0?'peso-neg':'peso-0'}">${p>0?'+':''}${p}</span></td>`}).join('')}</tr>`).join('')+
+  t.innerHTML=`<thead><tr><th>Categoría</th>${cols.map(c=>`<th style="text-align:center">${c}</th>`).join('')}<th style="text-align:center">Suma</th><th></th></tr></thead><tbody>`+
+    CATEGORIAS.map(cat=>{
+      const edit=_pesosEdit[cat.id]||cat.pesos;
+      const suma=cols.reduce((a,c)=>a+Math.abs(edit[c]||0),0);
+      const ok=suma===100;
+      const esDefault=cols.every(c=>(edit[c]||0)===(CATEGORIAS_DEFAULT[cat.id][c]||0));
+      return `<tr>
+        <td style="font-weight:700;color:var(--verde-oscuro)">${cat.nombre}</td>
+        ${cols.map(c=>`<td style="text-align:center"><input type="number" step="1" value="${edit[c]!=null?edit[c]:0}"
+           oninput="pesoInputChange('${cat.id}','${c}',this.value)"></td>`).join('')}
+        <td style="text-align:center" class="${ok?'pesos-suma-ok':'pesos-suma-mal'}">${suma}</td>
+        <td style="white-space:nowrap">
+          <button class="pesos-btn" ${ok?'':'disabled title="La suma tiene que dar 100"'} onclick="guardarPesos('${cat.id}')">Guardar</button>
+          <button class="pesos-btn" ${esDefault?'disabled title="Ya está en los valores originales"':''} onclick="restaurarPesos('${cat.id}')">↺ Restaurar</button>
+        </td>
+      </tr>`;
+    }).join('')+
     '</tbody>';
   const mod=Object.entries(fenotipoData).filter(([,v])=>v!==0);
   const st=document.getElementById('config-fen-status');
@@ -2619,11 +2678,76 @@ function resetFenotipos(){
   document.getElementById('config-fen-status').textContent='Todos los fenotipos reseteados a 0.';
 }
 
+function pesoInputChange(catId,dep,val){
+  if(!_pesosEdit[catId]) _pesosEdit[catId]=Object.assign({},CATEGORIAS.find(c=>c.id===catId).pesos);
+  _pesosEdit[catId][dep]=Number(val)||0;
+  renderConfigPanel();
+}
+
+async function guardarPesos(catId){
+  const cat=CATEGORIAS.find(c=>c.id===catId);
+  const edit=_pesosEdit[catId];
+  if(!edit) return; // nada editado, no hay nada que guardar
+  const suma=Object.keys(edit).reduce((a,c)=>a+Math.abs(edit[c]||0),0);
+  if(suma!==100){ alert('La suma de los pesos de '+cat.nombre+' tiene que dar exactamente 100 (hoy: '+suma+').'); return; }
+  cat.pesos=Object.assign({},edit);
+  delete _pesosEdit[catId];
+  const st=document.getElementById('config-pesos-status');
+  if(st) st.textContent='Guardando...';
+  await _guardarPesosSb(catId,cat.pesos);
+  if(st) st.textContent='Pesos de '+cat.nombre+' guardados — se aplicaron al ranking.';
+  renderConfigPanel();
+  renderAll();
+}
+
+async function restaurarPesos(catId){
+  const cat=CATEGORIAS.find(c=>c.id===catId);
+  cat.pesos=Object.assign({},CATEGORIAS_DEFAULT[catId]);
+  delete _pesosEdit[catId];
+  const st=document.getElementById('config-pesos-status');
+  if(st) st.textContent='Restaurando...';
+  await _guardarPesosSb(catId,null);
+  if(st) st.textContent='Pesos de '+cat.nombre+' restaurados a los originales de SEPA.';
+  renderConfigPanel();
+  renderAll();
+}
+
+// Guarda (o borra, si pesos===null) el override de pesos del usuario logueado en Supabase.
+// Si falla (sin sesión, sin red), el cambio queda igual aplicado en esta sesión del navegador
+// — solo no persiste para la próxima vez que entre.
+async function _guardarPesosSb(catId,pesos){
+  try{
+    const {data:{session}}=await sb.auth.getSession();
+    if(!session) return;
+    if(pesos){
+      await sb.from('pesos_usuario').upsert(
+        {usuario_id:session.user.id,categoria_id:catId,pesos,fecha_modificacion:new Date().toISOString()},
+        {onConflict:'usuario_id,categoria_id'}
+      );
+    } else {
+      await sb.from('pesos_usuario').delete().eq('usuario_id',session.user.id).eq('categoria_id',catId);
+    }
+  }catch(e){ console.error('No se pudo guardar pesos en Supabase:',e); }
+}
+
+// Trae los pesos personalizados del usuario (si tiene) y los aplica a CATEGORIAS ANTES
+// de calcular cualquier ranking — se llama una vez al entrar, en cargarPerfilYEntrar().
+async function cargarPesosUsuario(userId){
+  try{
+    const {data,error}=await sb.from('pesos_usuario').select('categoria_id,pesos').eq('usuario_id',userId);
+    if(error||!data) return;
+    data.forEach(row=>{
+      const cat=CATEGORIAS.find(c=>c.id===row.categoria_id);
+      if(cat&&row.pesos) cat.pesos=row.pesos;
+    });
+  }catch(e){ console.error('No se pudieron cargar los pesos personalizados:',e); }
+}
+
 // ─── AYUDA ───
 const AYUDA_ITEMS=[
   {titulo:"¿Cómo usar la app?",body:"Elegí la categoría de cría (barra superior) y la pantalla: Vista Global muestra ambos métodos en paralelo. RD_Factores y RD_O&P muestran los rankings individuales. Hacé clic en cualquier toro para ver su ficha completa. En RD_Factores podés editar el fenotipo con el slider (Plus)."},
-  {titulo:"¿Qué es RD_Factores?",body:"Análisis cuantitativo. Pondera 8 DEPs según el objetivo de cría usando z-scores internos del catálogo (comparación entre los toros del catálogo) y normaliza el resultado a escala 0-100 (G). Al G se suma el fenotipo F editable (Plus). Score final = G + F. No aplica descuento por precisión: la confiabilidad de los DEPs se analiza aparte en RD_Confiabilidad."},
-  {titulo:"¿Qué es RD_Objetivos & Perfiles (RD_O&P)?",body:"Evalúa 14 perfiles productivos organizados en 4 grupos: U Universales (U01-U03, activos para todas las categorías), V Vaquillona 15M (V01-V04), R Reposición (R01-R03) y T Terminal (T01-T04). El score de cada perfil es la suma algebraica de sus DEPs con signo según dirección favorable. Si algún DEP requerido no está disponible en el catálogo, el perfil queda no calculable."},
+  {titulo:"¿Qué es RD_Factores?",body:"Análisis cuantitativo. Pondera 8 DEPs según el objetivo de cría usando z-scores internos del catálogo (comparación entre los toros del catálogo) y normaliza el resultado a escala 0-100 (G). Al G se suma el fenotipo F editable (Plus/Base, editable por cada usuario). Score final = G + F. No aplica descuento por precisión: la confiabilidad de los DEPs se analiza aparte en RD_Confiabilidad. En Vaquillona 15M y Reposición, el z-score de PN tiene un <strong>tope de ±1.5</strong> antes de aplicarle el peso — sin este tope, un PN muy por fuera de lo normal podía por sí solo definir casi todo el puntaje de un toro, tapando el resto de sus características. Con el tope, un PN extremo sigue sumando fuerte pero ya no ahoga a los demás DEPs. El resto de las categorías (Rodeo General, Terminal, Hilton) usan el z-score real de PN, sin tope."},
+  {titulo:"¿Qué es RD_Objetivos & Perfiles (RD_O&P)?",body:"Evalúa 15 perfiles productivos organizados en 3 familias: U Universales (U01-U03, activos para todas las categorías), T Terminal/Hilton (T01-T05 — Hilton exige el set completo, Terminal un subconjunto de calidad) y V Vaca (V01-V04 + R01-R03, activos en Vaquillona 15M y Reposición respectivamente). El score de cada perfil es la suma algebraica de sus DEPs con signo según dirección favorable, con el mismo criterio de <strong>tope de ±1.5</strong> al z-score de cada DEP (así ningún DEP aislado, por más extremo que sea, define el perfil por sí solo). Si algún DEP requerido no está disponible en el catálogo, el perfil queda no calculable."},
   {titulo:"¿Qué significa Δ en la tabla RD_Factores × RD_O&P?",body:"Es la diferencia entre la posición de un toro en RD_Factores (RF) y en RD_O&P. Δ = posición_RF − posición_RD_O&P. Si un toro está en #3 en RF y #7 en RD_O&P, Δ = +4. Fondo dorado indica que la diferencia es ≤ 2 puestos (alta concordancia)."},
   {titulo:"Perfiles no calculables en RD_O&P",body:"Un perfil es no calculable para un toro cuando falta al menos uno de sus DEPs requeridos. El motor busca primero en los DEPs del sistema ERA y luego en deps_ext. Si el DEP no existe en ninguno, el perfil se marca como no calculable y se muestra el motivo (DEP faltante)."},
   {titulo:"RD_Confiabilidad (orientativo)",body:"Responde '¿cuánto sabemos de este toro?'. Muestra la precisión ERA de cada DEP (mapa de calor) y una lectura cualitativa: mejor estudiado, qué calificaciones están bien sostenidas y cuáles se apoyan en DEPs de baja precisión. No ordena por mérito ni interviene en RD_Factores / RD_O&P. Catálogos sin precisión publicada (genómica sin progenie) se informan como tales."},
@@ -2823,6 +2947,7 @@ function calcFactores(toros,catId){
     const pm=precs.length?precs.reduce((a,b)=>a+b,0)/precs.length:null; // solo informativo — la precisión vive en RD_Confiabilidad, no interviene en el mérito
     const z={};for(const c of CHARS)z[c]=zsc(t.deps[c].dep,stats[c].m,stats[c].s);
     for(const c of extraKeys)z[c]=zsc(getDepVal(t,c),stats[c].m,stats[c].s);
+    if(PN_CLAMP_CATS.includes(catId)) z.PN=Math.max(-PN_Z_CLAMP,Math.min(PN_Z_CLAMP,z.PN));
     // RD_Fact = mérito puro: z-score interno del catálogo × peso de la categoría. Sin descuento por precisión.
     const adj=Object.keys(cat.pesos).reduce((acc,c)=>acc+z[c]*cat.pesos[c],0);
     return{toro:t,nD,pm,z,adj};
@@ -2916,6 +3041,12 @@ function calcOyP(toros,catId){
 // ═══════════════════════════════════════════════
 // HELPERS VISUALES
 // ═══════════════════════════════════════════════
+
+// Orden alfabético (es-AR, ignora may/min y tildes) para listas donde no hay ranking
+// (ej. Catálogo, selector de Ficha por Toro) — no muta el array original.
+function ordenAlfabetico(toros){
+  return [...toros].sort((a,b)=>a.nombre.localeCompare(b.nombre,'es',{sensitivity:'base',numeric:true}));
+}
 
 // Un toro "sin DEPs" no tiene ningún DEP del modelo ni DEPs adicionales publicados.
 // Se excluye de todos los rankings/listas (solo figura en la pantalla Catálogo).
@@ -3018,6 +3149,7 @@ function renderRadarCanvas(){
 const OYP_RADAR_CATS=[
   {id:'rodeoGeneral',label:'Rodeo General'},
   {id:'terminal',   label:'Terminal'},
+  {id:'hilton',     label:'Hilton'}, // agregado 2026-09-17 — antes Hilton daba idéntico a Terminal en O&P, no aportaba un eje distinto
   {id:'reposicion', label:'Reposición'},
   {id:'vaq15',      label:'Vaq 15M'}
 ];
@@ -3135,14 +3267,13 @@ function renderOypRadarCanvas(){
   // SVG radar
   canvas.innerHTML=buildRadarOyP(items,300);
 
-  // Tabla a la derecha: Toro | S1 | S2 | S3 | S4
+  // Tabla a la derecha: Toro | una columna por eje de OYP_RADAR_CATS
   if(legend){
-    const CAT_ABREV=['Terminal','Repos.','Vaq15M','Torito'];
     let tbl=`<table style="border-collapse:collapse;font-size:.76rem;white-space:nowrap">
       <thead>
         <tr style="background:var(--verde-oscuro);color:white">
           <th style="padding:5px 10px;text-align:left;border-radius:6px 0 0 0">Toro</th>
-          ${OYP_RADAR_CATS.map((c,i)=>`<th style="padding:5px 8px;text-align:center">${CAT_ABREV[i]}</th>`).join('')}
+          ${OYP_RADAR_CATS.map(c=>`<th style="padding:5px 8px;text-align:center">${c.label}</th>`).join('')}
         </tr>
       </thead><tbody>`;
     items.forEach((item,idx)=>{
@@ -3533,7 +3664,7 @@ function renderCatalogo(){
   // Tabla de perfiles O&P calculables vs no calculables
   const oyp_body=document.getElementById('oyp-catalogo-body');
   if(oyp_body&&TOROS.length){
-    const grupos=[{g:'U',label:'Universales'},{g:'V',label:'Vaquillona 15M'},{g:'R',label:'Reposición'},{g:'T',label:'Terminal'}];
+    const grupos=[{g:'U',label:'Universales'},{g:'T',label:'Terminal / Hilton'},{g:'V',label:'Vaca (Vaquillona 15M + Reposición)'}];
     let html='<table class="dep-full-table"><thead><tr><th>ID</th><th>Perfil</th><th>Objetivo</th><th>DEPs requeridos</th><th>Estado en catálogo</th></tr></thead><tbody>';
     for(const grp of grupos){
       const ps=PERFILES_OYP.filter(p=>p.grupo===grp.g);
@@ -3551,7 +3682,7 @@ function renderCatalogo(){
     html+='</tbody></table>';
     oyp_body.innerHTML=html;
   }
-  document.getElementById('toro-grid').innerHTML=TOROS.map(t=>{const nD=CHARS.filter(c=>t.deps[c].dep!==null).length;return`<div class="toro-card"><div class="toro-card-nombre">${pelBadge(t)} ${escHtml(t.nombre)}</div><div class="toro-card-raza">${_modoAnonimo?"":escHtml(t.raza)}</div><div class="toro-card-raza">${_modoAnonimo?"":'RP: '+escHtml(t.rp)+' · '}${nD}/8 DEPs${t.sistema?' · '+escHtml(t.sistema):''}</div></div>`}).join('');
+  document.getElementById('toro-grid').innerHTML=ordenAlfabetico(TOROS).map(t=>{const nD=CHARS.filter(c=>t.deps[c].dep!==null).length;return`<div class="toro-card"><div class="toro-card-nombre">${pelBadge(t)} ${escHtml(t.nombre)}</div><div class="toro-card-raza">${_modoAnonimo?"":escHtml(t.raza)}</div><div class="toro-card-raza">${_modoAnonimo?"":'RP: '+escHtml(t.rp)+' · '}${nD}/8 DEPs${t.sistema?' · '+escHtml(t.sistema):''}</div></div>`}).join('');
 }
 
 // ═══════════════════════════════════════════════
@@ -5160,7 +5291,7 @@ function infModo(modo){
 }
 function infRenderToroLista(){
   const q=(document.getElementById('inf-toro-q').value||'').toLowerCase();
-  const toros=TOROS.filter(function(t){return t._apto!==false&&(!q||t.nombre.toLowerCase().includes(q));});
+  const toros=ordenAlfabetico(TOROS.filter(function(t){return t._apto!==false&&(!q||t.nombre.toLowerCase().includes(q));}));
   document.getElementById('inf-toro-lista').innerHTML=toros.map(function(t){
     const sel=_infTSel.has(t.nombre);
     const nm=t.nombre.replace(/\\/g,'\\\\').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -5296,6 +5427,7 @@ function infCalcF(toros,cat,st){
     const pv=INF_CHARS.map(c=>t.deps[c]&&t.deps[c].prec!=null?t.deps[c].prec:null).filter(x=>x!=null);
     const pm=pv.length?pv.reduce((a,b)=>a+b,0)/pv.length:null;
     const z=infZOf(t,st);
+    if(PN_CLAMP_CATS.includes(cat.id)) z.PN=Math.max(-PN_Z_CLAMP,Math.min(PN_Z_CLAMP,z.PN||0));
     // v9: mérito puro, sin descuento por precisión y sin filtro <6 DEPs (alineado con calcFactores de la app)
     const raw=Object.keys(pesos).reduce((a,c)=>a+(z[c]||0)*(pesos[c]||0),0);
     return {t,nD,adj:raw,z,ok:nD>=1};
@@ -5759,7 +5891,7 @@ function infMarcoTeorico(pid){
   html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:13px">SEPA-Select ordena y compara los toros de un catálogo a partir de la información genética (DEPs) que publica cada cabaña, para ayudar a elegir qué toros conviene comprar según el objetivo de venta: cría, reposición, terminación, etc.</div>';
 
   html+='<div class="inf-sub-title">RD_Factores — el puntaje de mérito</div>';
-  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:9px">Cada categoría de venta necesita cosas distintas de un toro. Por ejemplo, Vaquillona 15M prioriza la facilidad de parto, mientras que Terminal prioriza el engorde. RD_Factores compara a cada toro contra el resto del catálogo en las características que le importan a esa categoría, dándole más peso a las más relevantes para ese objetivo, y arma con todo eso un puntaje único de 0 a 100: cuanto más alto, mejor se ajusta el toro a lo que busca esa categoría. Ojo con tres características puntuales —Peso al Nacer, Altura y Longitud de Gestación—: ahí lo que conviene suele ser un valor más bajo, no más alto.</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:9px">Cada categoría de venta necesita cosas distintas de un toro. Por ejemplo, Vaquillona 15M prioriza la facilidad de parto, mientras que Terminal prioriza el engorde. RD_Factores compara a cada toro contra el resto del catálogo en las características que le importan a esa categoría, dándole más peso a las más relevantes para ese objetivo, y arma con todo eso un puntaje único de 0 a 100: cuanto más alto, mejor se ajusta el toro a lo que busca esa categoría. Ojo con tres características puntuales —Peso al Nacer, Altura y Longitud de Gestación—: ahí lo que conviene suele ser un valor más bajo, no más alto. En Vaquillona 15M y Reposición, un Peso al Nacer extremadamente bajo se pondera con un tope: sigue sumando fuerte, pero ya no alcanza para definir todo el puntaje del toro por sí solo, tapando el resto de sus características.</div>';
 
   // Tabla: pesos por categoría × DEP
   const pesosCols=INF_CHARS.concat([...new Set(CATEGORIAS.flatMap(function(c){return Object.keys(c.pesos);}))].filter(function(k){return INF_CHARS.indexOf(k)<0;}));
@@ -5789,7 +5921,7 @@ function infMarcoTeorico(pid){
   html+='</div>';
 
   html+='<div class="inf-sub-title">RD_O&amp;P — combinaciones que buscan los productores</div>';
-  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:9px">Además de mirar cada característica por separado, hay combinaciones típicas que los productores buscan juntas —por ejemplo, peso al nacer bajo combinado con buen crecimiento posterior. Cada una de esas combinaciones se llama "perfil". RD_O&amp;P revisa, para cada categoría, los perfiles que corresponden y le suma puntos al toro cuando cumple bien la combinación, restándole cuando no. El resultado también queda expresado de 0 a 100.</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:9px">Además de mirar cada característica por separado, hay combinaciones típicas que los productores buscan juntas —por ejemplo, peso al nacer bajo combinado con buen crecimiento posterior. Cada una de esas combinaciones se llama "perfil". RD_O&amp;P revisa, para cada categoría, los perfiles que corresponden y le suma puntos al toro cuando cumple bien la combinación, restándole cuando no. Igual que en RD_Factores, cada característica dentro de un perfil se pondera con un tope, así ningún DEP aislado —por más extremo que sea— define el perfil por sí solo. El resultado también queda expresado de 0 a 100.</div>';
 
   // Catálogo de Perfiles O&P — tabla plana (ID, Nombre, Afinidad, Objetivo, DEPs, Categorías)
   html+='<div style="font-size:.68rem;color:#888;margin-bottom:5px">Cada perfil evalúa un par de DEPs (+ premia, − penaliza):</div>';

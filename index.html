@@ -3,13 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SEPA-Select: ranking genético de toros Angus orientado al comprador. Aplicá tus pesos de selección sobre las DEPs del catálogo por categoría de cría. Desarrollado por Ing. Ricardo Delgado.">
-<title>SEPA-Select — Ranking genético de toros Angus</title>
 <meta name="robots" content="noindex, nofollow">
-<script>
-  /* Bloqueo de acceso previo al lanzamiento — quitar este bloque para liberar al público */
-  try{ if(localStorage.getItem('sepa_acceso_landing')!=='1'){ location.replace('acceso.html'); } }catch(e){}
-</script>
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LHJ17S6W9C"></script>
 <script>
@@ -18,231 +12,202 @@
   gtag('js', new Date());
   gtag('config', 'G-LHJ17S6W9C');
 </script>
+<meta name="description" content="SEPA-Select: Sistema de Soporte de Decisión genómica para selección de reproductores Angus. Objetivo → Perfil → DEP. Doble método, una decisión fundamentada.">
+<title>SEPA-Select — Soporte de Decisión Genómica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --dark:#253a29; --dark2:#1e2f1f; --green:#3c6b45; --green-lt:#e9f0ea;
-  --gold:#b8892b; --gold-lt:#fdf3dc; --gold-mid:#d4a84a;
-  --cream:#f8f6f1; --cream-dk:#eeeae2; --white:#ffffff;
-  --text:#1a1a1a; --muted:#6b6b6b; --border:#ddd6c8;
+  --dark:#253a29; --green:#3c6b45; --green-lt:#e9f0ea; --gold:#b8892b; --gold-lt:#fdf3dc; --gold-mid:#d4a84a;
+  --cream:#f8f6f1; --cream-dk:#eeeae2; --white:#fff; --text:#1a1a1a; --muted:#5c6b60; --border:#e6e0d2;
+  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px; --nav-h:44px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--text);line-height:1.6}
+html{font-size:15.5px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--white);color:var(--text);line-height:1.28;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);display:flex;align-items:center;justify-content:space-between;padding:0 2.8%;height:var(--nav-h);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer}
+.logo-sepa{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--dark)}
+.logo-sep{width:1px;height:14px;background:rgba(184,137,43,.4);flex-shrink:0}
+.logo-sel{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:1rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;cursor:pointer}
+.btn-nav{background:var(--gold);color:var(--dark)!important;padding:.35rem .9rem;border-radius:var(--r-sm);font-weight:800;font-size:.8rem!important;text-decoration:none}
 
-/* ── NAV ── */
-nav{position:sticky;top:0;z-index:100;background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;border-bottom:1px solid rgba(184,137,43,.2)}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-sepa{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--white);letter-spacing:-.02em;line-height:1}
-.logo-sep{width:1px;height:18px;background:rgba(184,137,43,.4);flex-shrink:0}
-.logo-sel{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:var(--gold);letter-spacing:.09em;text-transform:uppercase}
-.nav-links{display:flex;align-items:center;gap:1.75rem;list-style:none}
-.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.875rem;transition:color .2s}
-.nav-links a:hover{color:var(--white)}
-.btn-nav{background:var(--gold);color:var(--dark)!important;padding:.45rem 1.2rem;border-radius:6px;font-weight:600;font-size:.875rem!important}
-.btn-nav:hover{background:var(--gold-mid)!important}
+.deck{scroll-behavior:smooth}
+.slide{padding:calc(var(--nav-h) + 4px) 2.8% 6px; position:relative; overflow:hidden}
+.slide > .container{max-width:1420px;margin:0 auto;width:100%}
 
-/* ── HERO ── */
-.hero{background:linear-gradient(135deg,var(--dark2),var(--dark));padding:80px 5% 100px;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;min-height:calc(100vh - 64px)}
-.hero-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
-.hero-eyebrow::before{content:'';display:inline-block;width:24px;height:2px;background:var(--gold)}
-.hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4.5vw,3.6rem);line-height:1.1;color:var(--white);letter-spacing:-.03em;margin-bottom:1.5rem}
-.hero-text h1 em{color:var(--gold);font-style:normal}
-.hero-text p{color:rgba(255,255,255,.72);font-size:1.05rem;line-height:1.75;margin-bottom:2.5rem;max-width:460px}
-.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-primary{background:var(--gold);color:var(--dark);padding:.875rem 2rem;border-radius:8px;font-weight:600;font-size:1rem;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .1s}
-.btn-primary:hover{background:var(--gold-mid);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:rgba(255,255,255,.8);padding:.875rem 2rem;border-radius:8px;font-weight:500;font-size:1rem;text-decoration:none;border:1px solid rgba(255,255,255,.25);transition:all .2s}
-.btn-ghost:hover{border-color:rgba(255,255,255,.55);color:var(--white)}
-
-/* ── DEMO WIDGET ── */
-.demo-wrap{background:rgba(255,255,255,.05);border:1px solid rgba(184,137,43,.25);border-radius:14px;padding:1.25rem}
-.demo-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;gap:.5rem;flex-wrap:wrap}
-.demo-label{font-size:.68rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em}
-.demo-meta{font-size:.68rem;background:rgba(184,137,43,.15);color:var(--gold);padding:.2rem .65rem;border-radius:20px}
-.demo-sliders{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1rem}
-.sl-row{display:flex;align-items:center;gap:.75rem}
-.sl-name{font-size:.72rem;color:rgba(255,255,255,.6);min-width:140px;line-height:1.3}
-.sl-name small{display:block;font-size:.62rem;opacity:.6}
-.sl-row input[type=range]{flex:1;-webkit-appearance:none;height:3px;background:rgba(255,255,255,.15);border-radius:2px;outline:none}
-.sl-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;background:var(--gold);border-radius:50%;cursor:pointer}
-.sl-val{font-size:.72rem;color:var(--gold);min-width:30px;text-align:right;font-family:monospace}
-.bull-list{display:flex;flex-direction:column;gap:.45rem}
-.bull-row{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.55rem .8rem;display:flex;align-items:center;gap:.65rem;transition:all .4s cubic-bezier(.4,0,.2,1)}
-.b-pos{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--gold);min-width:18px}
-.b-info{flex:1;min-width:0}
-.b-name{font-size:.76rem;font-weight:600;color:rgba(255,255,255,.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.b-deps{display:flex;gap:.35rem;margin-top:.15rem}
-.dep-chip{font-size:.62rem;padding:.1rem .35rem;border-radius:3px;font-family:monospace}
-.dep-ww{background:rgba(60,107,69,.5);color:#b0d8b4}
-.dep-ce{background:rgba(37,58,41,.7);color:#9ec4a6}
-.b-score{text-align:right;flex-shrink:0}
-.b-score-val{font-size:.85rem;font-weight:700;color:var(--white);font-family:monospace}
-.b-bar{height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:3px;width:52px}
-.b-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .4s ease}
-.demo-note{font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.75rem;text-align:center}
-
-/* ── COMMON SECTION ── */
-section{padding:80px 5%}
-.container{max-width:1080px;margin:0 auto}
-.s-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
-.s-title{font-family:'Playfair Display',serif;font-size:clamp(1.75rem,3vw,2.4rem);line-height:1.2;letter-spacing:-.02em;color:var(--text);margin-bottom:1.1rem}
-.s-sub{color:var(--muted);font-size:1rem;line-height:1.75;max-width:580px}
-
-/* ── QUÉ ES ── */
-.ques-section{background:var(--white)}
-.ques-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-.ques-points{display:flex;flex-direction:column;gap:1.25rem;margin-top:2rem}
-.ques-point{display:flex;gap:1rem;align-items:flex-start}
-.qp-icon{width:38px;height:38px;border-radius:8px;background:var(--green-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.95rem}
-.qp-text strong{display:block;font-size:.9rem;margin-bottom:.2rem;color:var(--dark)}
-.qp-text span{font-size:.85rem;color:var(--muted);line-height:1.5}
-
-/* ── MÉTODOS ── */
-.metodos-section{background:var(--cream-dk)}
-.metodos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
-.metodo-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.75rem}
-.metodo-card.highlight{border-color:rgba(184,137,43,.35);background:#fffdf7}
-.metodo-badge{font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.3rem .75rem;border-radius:20px;display:inline-block;margin-bottom:1rem}
-.mb-rf{background:var(--green-lt);color:var(--dark)}
-.mb-oyp{background:var(--gold-lt);color:#7a5a10}
-.metodo-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--dark);margin-bottom:.75rem}
-.metodo-desc{font-size:.875rem;color:var(--muted);line-height:1.7;margin-bottom:1rem}
-.metodo-detail{font-size:.82rem;color:var(--dark);line-height:1.6;background:var(--cream);border-radius:6px;padding:.75rem 1rem}
-.metodo-detail strong{color:var(--dark)}
-
-/* ── CATEGORÍAS ── */
-.cats-section{background:var(--dark)}
-.cats-section .s-title{color:var(--white)}
-.cats-section .s-sub{color:rgba(255,255,255,.6)}
-.cats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
-.cat-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem}
-.cat-num{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:rgba(184,137,43,.4);line-height:1;margin-bottom:.75rem}
-.cat-name{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:.5rem}
-.cat-pesos{display:flex;flex-direction:column;gap:.3rem;margin-top:.75rem}
-.cp-row{display:flex;justify-content:space-between;font-size:.72rem;color:rgba(255,255,255,.5)}
-.cp-pos{color:#7ec88a;font-weight:600}
-.cp-neg{color:#e8908a;font-weight:600}
-.cat-desc{font-size:.78rem;color:rgba(255,255,255,.45);margin-top:.5rem;line-height:1.5}
-
-/* ── DEPs ── */
-.deps-section{background:var(--white)}
-.deps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
-.dep-card{background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:1.1rem}
-.dep-code{font-family:monospace;font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.4rem}
-.dep-full{font-size:.8rem;font-weight:600;color:var(--dark);margin-bottom:.3rem}
-.dep-unit{font-size:.72rem;color:var(--muted);margin-bottom:.5rem}
-.dep-dir{font-size:.7rem;font-weight:600;padding:.2rem .55rem;border-radius:4px;display:inline-block}
-.dir-pos{background:#e6f4ea;color:#1d6e3e}
-.dir-neg{background:#fce8e6;color:#c0392b}
-.dir-var{background:var(--cream-dk);color:var(--muted)}
-
-/* ── PLANES ── */
-.planes-section{background:var(--dark2)}
-.planes-section .s-title{color:var(--white)}
-.planes-section .s-sub{color:rgba(255,255,255,.58)}
-.planes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
-.plan-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:2rem}
-.plan-card.feat{background:rgba(184,137,43,.08);border-color:rgba(184,137,43,.38)}
-.plan-badge{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);background:rgba(184,137,43,.15);padding:.28rem .7rem;border-radius:20px;display:inline-block;margin-bottom:1.25rem}
-.plan-name{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:var(--white);margin-bottom:.4rem}
-.plan-price{font-size:2rem;font-weight:700;color:var(--white);margin-bottom:.2rem}
-.plan-price span{font-size:.95rem;font-weight:400;color:rgba(255,255,255,.45)}
-.plan-period{font-size:.82rem;color:rgba(255,255,255,.4);margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(255,255,255,.07)}
-.plan-group-label{font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.5rem;margin-top:1rem}
-.plan-features{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
-.plan-features li{font-size:.87rem;color:rgba(255,255,255,.72);display:flex;gap:.75rem;align-items:flex-start;line-height:1.45}
-.plan-features li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;margin-top:.05em}
-.plan-features li.no::before{content:'—';color:rgba(255,255,255,.2)}
-.plan-features li.no{color:rgba(255,255,255,.28)}
-.btn-plan{display:block;text-align:center;padding:.85rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s}
-.btn-base{background:transparent;border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.78)}
-.btn-base:hover{border-color:rgba(255,255,255,.5);color:var(--white)}
-.btn-plus{background:var(--gold);color:var(--dark)}
-.btn-plus:hover{background:var(--gold-mid)}
-.planes-nota{text-align:center;margin-top:1.25rem;font-size:.75rem;color:rgba(255,255,255,.27)}
-
-/* ── FAQS ── */
-.faqs-section{background:var(--cream)}
-.faqs-layout{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start;margin-top:2.5rem}
-.faqs-intro .s-sub{margin-top:.75rem}
-.faq-grupos{display:flex;flex-direction:column;gap:1.75rem}
-.faq-grupo-label{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
-.faq-item{border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--white);margin-bottom:.4rem}
-.faq-q{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;cursor:pointer;font-size:.875rem;font-weight:600;color:var(--dark);gap:.75rem;transition:background .15s;line-height:1.4}
-.faq-q:hover{background:var(--green-lt)}
-.faq-q.open{background:var(--green-lt)}
-.faq-arrow{font-size:.75rem;color:var(--muted);transition:transform .2s;flex-shrink:0}
-.faq-q.open .faq-arrow{transform:rotate(180deg)}
-.faq-a{font-size:.845rem;color:var(--muted);line-height:1.7;padding:0 1.1rem;max-height:0;overflow:hidden;transition:max-height .28s ease,padding .2s}
-.faq-a.open{max-height:600px;padding:.9rem 1.1rem 1.1rem}
-.faq-a strong{color:var(--dark)}
-.faq-a code{font-family:monospace;font-size:.82rem;background:var(--cream-dk);padding:.1rem .35rem;border-radius:3px;color:var(--dark)}
-
-/* ── REGISTRO ── */
-.reg-section{background:var(--white)}
-.reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-.reg-form-wrap{background:var(--cream);border-radius:14px;padding:2rem;border:1px solid var(--border)}
-.form-group{margin-bottom:1.1rem}
-.form-group label{display:block;font-size:.83rem;font-weight:600;margin-bottom:.4rem;color:var(--dark)}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:.7rem .9rem;border:1px solid var(--border);border-radius:7px;font-size:.9rem;font-family:inherit;color:var(--text);background:var(--white);transition:border-color .2s;outline:none}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green);background:var(--white)}
-.form-group textarea{resize:vertical;min-height:72px}
-.form-submit{width:100%;padding:.85rem;background:var(--dark);color:var(--white);border:none;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s;font-family:inherit}
-.form-submit:hover{background:var(--green)}
-.form-note{font-size:.75rem;color:var(--muted);text-align:center;margin-top:.9rem}
-.reg-puntos{display:flex;flex-direction:column;gap:1.1rem;margin-top:1.75rem}
-.reg-punto{display:flex;gap:.9rem;align-items:flex-start}
-.rp-icon{width:34px;height:34px;border-radius:7px;background:var(--green-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem}
-.rp-text strong{display:block;font-size:.875rem;margin-bottom:.15rem;color:var(--dark)}
-.rp-text span{font-size:.82rem;color:var(--muted)}
-
-/* ── FOOTER ── */
-footer{background:var(--dark);padding:3rem 5%;border-top:1px solid rgba(255,255,255,.06)}
-.footer-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1.5rem}
-.footer-logo{display:flex;align-items:center;gap:10px}
-.footer-tagline{font-size:.78rem;color:rgba(255,255,255,.32);margin-top:.4rem;line-height:1.5}
-.footer-right{font-size:.76rem;color:rgba(255,255,255,.35);text-align:right;line-height:1.8}
-.footer-right a{color:rgba(255,255,255,.35);text-decoration:none}
-.footer-right a:hover{color:var(--gold)}
-.footer-dnda{font-size:.68rem;color:rgba(255,255,255,.2);margin-top:.4rem}
-
-/* ── SECCIÓN SALIDA REAL ── */
-.real-section{background:var(--dark2)}
-.real-section .s-title{color:var(--white)}
-.real-section .s-sub{color:rgba(255,255,255,.58)}
-.real-meta{font-size:.72rem;color:rgba(255,255,255,.28);margin-top:.6rem;font-family:monospace;letter-spacing:.02em}
-.cats-real-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
-.cat-real-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:1.2rem}
-.cat-real-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
-.cat-real-name{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:.3rem}
-.cat-real-desc{font-size:.72rem;color:rgba(255,255,255,.38);margin-bottom:.9rem;line-height:1.4;padding-bottom:.75rem;border-bottom:1px solid rgba(255,255,255,.07)}
-.selecto-list{display:flex;flex-direction:column;gap:.4rem}
-.selecto-item{font-size:.78rem;font-weight:600;color:rgba(255,255,255,.85);display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
-.selecto-item::before{content:'★';color:var(--gold);font-size:.7rem;flex-shrink:0}
-.selecto-scores{font-size:.66rem;color:rgba(255,255,255,.3);font-family:monospace;white-space:nowrap}
-.real-note{font-size:.68rem;color:rgba(255,255,255,.22);margin-top:1.5rem;font-family:monospace;text-align:right}
-.multi-row{margin-top:2rem;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.07)}
-.multi-label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1rem}
-.multi-chips{display:flex;gap:.75rem;flex-wrap:wrap}
-.multi-chip{background:rgba(184,137,43,.1);border:1px solid rgba(184,137,43,.22);border-radius:8px;padding:.55rem .9rem}
-.mc-name{font-size:.84rem;font-weight:700;color:var(--gold);margin-bottom:.2rem}
-.mc-cats{font-size:.7rem;color:rgba(255,255,255,.38);line-height:1.5}
-
-/* ── RESPONSIVE ── */
-@media(max-width:920px){
-  .hero{grid-template-columns:1fr;padding:60px 5% 80px}
-  .demo-wrap{display:none}
-  .ques-grid,.metodos-grid,.planes-grid,.reg-grid{grid-template-columns:1fr;gap:2.5rem}
-  .cats-grid,.cats-real-grid{grid-template-columns:1fr 1fr;gap:.75rem}
-  .deps-grid{grid-template-columns:1fr 1fr}
-  .faqs-layout{grid-template-columns:1fr}
-  .nav-links{display:none}
+@media(min-width:941px){
+  html,body{height:100%;overflow:hidden}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none}
+  .deck::-webkit-scrollbar{display:none}
+  .slide{height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--nav-h) + 2px) 2.6% 4px}
+  .slide > .container{display:flex;flex-direction:column;justify-content:center;flex:1;min-height:0;height:100%;max-width:min(1420px,96vw);gap:.4rem;transform:none!important}
+  .deck-ui{position:fixed;right:8px;bottom:8px;z-index:120;display:flex;flex-direction:column;gap:4px}
+  .deck-btn{width:28px;height:28px;border-radius:50%;background:var(--dark);color:#fff;border:none;cursor:pointer;font-size:9px;display:flex;align-items:center;justify-content:center}
+  .deck-dots{position:fixed;right:8px;top:50%;transform:translateY(-50%);z-index:120;display:flex;flex-direction:column;gap:7px}
+  .deck-dot{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.12);border:none;cursor:pointer;padding:0}
+  .deck-dot.active{background:var(--gold);transform:scale(1.35)}
 }
-@media(max-width:500px){
-  .cats-grid,.deps-grid{grid-template-columns:1fr}
+@media(max-width:940px){
+  .deck-ui,.deck-dots{display:none}
+  .slide > .container{transform:none!important}
+}
+
+/* BASE TIPOGRAFIA - COMPACTA */
+.s-label{font-size:.78rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--gold);margin-bottom:.18rem}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,2.5vw,2.9rem);line-height:.97;letter-spacing:-.03em;margin-bottom:.28rem}
+.s-sub{color:var(--muted);font-size:clamp(.9rem,.95vw,1.15rem);line-height:1.3;max-width:900px}
+.sl-hero,.sl-a,.sl-b{background:var(--white)}
+.sl-b{border-top:1px solid var(--border)}
+.sl-hero .container{max-width:820px;text-align:center}
+.hero-tag{font-size:.74rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;display:inline-flex;align-items:center;gap:.45rem}
+.hero-tag::before{content:'';width:18px;height:1.5px;background:var(--gold);display:inline-block}
+.hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,3.6vw,4rem);line-height:.95;letter-spacing:-.03em;margin-bottom:.45rem;color:var(--dark)}
+.hero-text h1 .italic{font-style:italic;color:var(--green)}
+.hero-text p{color:var(--muted);font-size:clamp(.95rem,1vw,1.25rem);line-height:1.32;margin:0 auto .9rem;max-width:640px}
+.hero-ctas{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.btn-primary{background:var(--gold);color:var(--dark);padding:.6rem 1.4rem;border-radius:var(--r-sm);font-weight:800;font-size:.9rem;text-decoration:none;border:none;cursor:pointer}
+.btn-ghost{background:transparent;color:var(--dark);padding:.6rem 1.4rem;border-radius:var(--r-sm);font-weight:700;font-size:.9rem;text-decoration:none;border:1.5px solid var(--border)}
+.hero-scroll{margin-top:.8rem;font-size:.66rem;color:var(--muted);opacity:.6;text-transform:uppercase;letter-spacing:.07em}
+
+/* 2 - EL CONTEXTO - FIX CRUCE */
+.desafio-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:1.1rem;align-items:center}
+.desafio-cards{display:flex;flex-direction:column;gap:.42rem;justify-content:center}
+.desafio-card{border-radius:var(--r-md);padding:.6rem .85rem;border-left:3px solid transparent;background:var(--cream)}
+.dc-1{border-left-color:var(--gold)} .dc-2{border-left-color:var(--green)} .dc-3{border-left-color:rgba(184,137,43,.28)}
+.desafio-card strong{font-size:.96rem;color:var(--dark);margin-bottom:.08rem;display:block;line-height:1.12}
+.desafio-card p{font-size:.84rem;color:var(--muted);line-height:1.26}
+.puente{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:.55rem .8rem;display:grid;grid-template-columns:32px 1fr;gap:.5rem;align-items:center;margin-top:.25rem;flex-shrink:0;position:relative;z-index:1}
+.puente .ic{width:32px;height:32px;border-radius:50%;background:var(--gold-lt);border:1px solid rgba(184,137,43,.22);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.puente strong{font-size:.9rem;color:var(--dark);display:block;margin-bottom:.06rem}
+.puente p{font-size:.8rem;color:var(--muted);line-height:1.26}
+
+/* 3 - INDICE vs SSD - ACHICADA 10% */
+.ssd-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.3rem}
+.ssd-card{border-radius:var(--r-lg);padding:.75rem .95rem;display:flex;flex-direction:column}
+.ssd-indice{background:var(--white);border:1.5px solid var(--border)}
+.ssd-sepa{background:var(--gold-lt);border:1.5px solid rgba(184,137,43,.28)}
+.ssd-badge{font-size:.6rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:.16rem .45rem;border-radius:20px;margin-bottom:.3rem;display:inline-block}
+.badge-indice{background:var(--cream-dk);color:var(--muted)} .badge-sepa{background:rgba(184,137,43,.2);color:#7a5a10}
+.ssd-card h3{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:700;margin-bottom:.28rem;color:var(--dark)}
+.ssd-items{display:flex;flex-direction:column;gap:.26rem}
+.ssd-item{font-size:.82rem;line-height:1.24;padding-left:.8rem;position:relative;color:var(--muted)}
+.ssd-item::before{content:'';position:absolute;left:0;top:.45rem;width:4px;height:4px;border-radius:50%;background:var(--border)}
+.ssd-sepa .ssd-item::before{background:var(--gold)} .ssd-sepa .ssd-item{color:#5a4a2e}
+
+/* 4 - DEMO - ACHICADA 10% */
+.demo-flex{display:grid;grid-template-columns:1fr 1.02fr;gap:1.2rem;align-items:center;margin-top:.25rem;flex:1;min-height:0}
+.demo-quote{font-size:.96rem;color:var(--dark);line-height:1.28}
+.demo-quote .note{margin-top:.35rem;font-size:.8rem;color:var(--muted);display:block}
+.demo-wrap{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:.65rem .75rem}
+.demo-title{font-size:.62rem;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.08rem}
+.demo-desc{font-size:.68rem;color:var(--muted);line-height:1.2;margin-bottom:.32rem}
+.demo-sliders{display:flex;flex-direction:column;gap:.28rem;margin-bottom:.32rem;padding-bottom:.32rem;border-bottom:1px solid var(--border)}
+.sl-row{display:flex;align-items:center;gap:.4rem}
+.sl-name{font-size:.72rem;color:var(--dark);min-width:125px;line-height:1.1;font-weight:700}
+.sl-name small{display:block;font-size:.6rem;color:var(--muted);font-weight:400}
+.sl-row input[type=range]{flex:1;-webkit-appearance:none;height:3px;background:var(--cream-dk);border-radius:2px}
+.sl-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;background:var(--gold);border-radius:50%;border:1.5px solid var(--white);box-shadow:0 1px 2px rgba(0,0,0,.12);cursor:pointer}
+.sl-val{font-size:.7rem;color:var(--gold);min-width:28px;text-align:right;font-family:monospace;font-weight:800}
+.bull-list{display:flex;flex-direction:column;gap:.18rem}
+.bull-row{background:var(--cream);border:1px solid var(--border);border-radius:var(--r-sm);padding:.26rem .45rem;display:flex;align-items:center;gap:.35rem}
+.bull-row.rank-1{border-color:var(--gold);background:var(--gold-lt)}
+.b-pos{font-family:'Playfair Display',serif;font-size:.84rem;font-weight:800;color:var(--muted);min-width:14px}
+.b-info{flex:1}
+.b-name{font-size:.72rem;font-weight:800;color:var(--dark)}
+.b-deps{display:flex;gap:.15rem;margin-top:.02rem}
+.dep-chip{font-size:.54rem;padding:.05rem .22rem;border-radius:3px;font-family:monospace;font-weight:700}
+.dep-ww{background:var(--green-lt);color:var(--green)} .dep-pn{background:var(--cream-dk);color:var(--dark)}
+.b-score-val{font-size:.76rem;font-weight:800;font-family:monospace}
+.demo-foot{font-size:.6rem;color:var(--muted);margin-top:.28rem;line-height:1.2}
+
+/* 5 - OPD - FIX CRUCE */
+.opd-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.42rem;align-items:stretch;margin-top:.25rem}
+.opd-step{border-radius:var(--r-lg);padding:.6rem .7rem;border:1.5px solid var(--border);background:var(--white);display:flex;flex-direction:column}
+.opd-humano{border-left:3px solid var(--green)} .opd-biologico{border-left:3px solid var(--gold)} .opd-dato{border-left:3px solid var(--muted)}
+.opd-arrow{display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.8rem;flex-shrink:0}
+.opd-step-label{font-size:.58rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.14rem;color:var(--muted)}
+.opd-step h3{font-family:'Playfair Display',serif;font-size:.96rem;font-weight:700;margin-bottom:.14rem;line-height:1.05;color:var(--dark)}
+.opd-step p{font-size:.78rem;line-height:1.22;color:var(--muted)}
+.opd-chips{display:flex;flex-wrap:wrap;gap:.16rem;margin-top:.28rem}
+.opd-chip{font-size:.62rem;padding:.1rem .32rem;border-radius:4px;font-weight:600;background:var(--cream);border:1px solid var(--border);color:var(--dark)}
+.opd-nota{margin-top:.32rem;padding:.5rem .75rem;background:var(--cream);border-radius:var(--r-md);font-size:.82rem;color:var(--dark);line-height:1.22;border-left:3px solid var(--green);flex-shrink:0;position:relative;z-index:2}
+
+/* 6 - METODOS - FIX CRUCE */
+.metodos-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.25rem;align-items:start}
+.metodo-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:.6rem .75rem;display:flex;flex-direction:column}
+.metodo-card.dest{border-color:rgba(184,137,43,.28);background:var(--gold-lt)}
+.metodo-badge{font-size:.56rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:.12rem .38rem;border-radius:20px;display:inline-block;margin-bottom:.2rem}
+.mb-rf{background:var(--green-lt);color:var(--green)} .mb-oyp{background:rgba(184,137,43,.2);color:#7a5a10}
+.metodo-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:.12rem}
+.metodo-desc{font-size:.82rem;color:var(--muted);line-height:1.22;margin-bottom:.26rem}
+.metodo-detail{font-size:.74rem;color:var(--dark);line-height:1.22;background:var(--cream);border-radius:var(--r-sm);padding:.38rem .55rem;border:1px solid var(--border)}
+.selecto-box{margin-top:.35rem;background:var(--cream);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:.5rem .7rem;flex-shrink:0;position:relative;z-index:2}
+.sb-title{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--green);margin-bottom:.12rem}
+.sb-content{font-size:.78rem;color:var(--dark);line-height:1.22}
+
+/* 7 PARA QUIEN */
+#paraquien .s-title{font-size:clamp(1.9rem,2.6vw,2.8rem)!important}
+#paraquien .s-sub{font-size:clamp(.85rem,.92vw,1.08rem)!important}
+.paraquien-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:.3rem;align-items:start;flex:1;min-height:0}
+.pq-grupo-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--gold);margin-bottom:.3rem;padding-bottom:.22rem;border-bottom:1.5px solid var(--border)}
+.pq-items{display:flex;flex-direction:column;gap:.36rem}
+.pq-item{background:var(--cream);border:1.5px solid var(--border);border-radius:var(--r-md);padding:.55rem .7rem}
+.pq-item strong{font-size:.92rem;font-weight:800;color:var(--dark);margin-bottom:.06rem;display:block;line-height:1.1}
+.pq-item span{font-size:.8rem;color:var(--muted);line-height:1.22}
+
+/* 8 PLANES */
+.planes-tabla{width:100%;border-collapse:collapse;margin-top:.25rem;font-size:.88rem;flex:1}
+.planes-tabla th,.planes-tabla td{text-align:left;padding:.38rem .65rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.18}
+.planes-tabla thead th{border-bottom:2px solid var(--dark)}
+.planes-tabla td:first-child,.planes-tabla th:first-child{width:32%;font-weight:800;color:var(--dark)}
+.planes-tabla td:not(:first-child){color:var(--muted)}
+.planes-tabla .pt-feat{background:var(--gold-lt)}
+.pt-plan{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--dark)}
+.pt-precio{font-size:1.04rem;font-weight:800;color:var(--dark)}
+.pt-precio span{font-size:.68rem;font-weight:400;color:var(--muted)}
+.pt-nota{font-size:.64rem;color:var(--muted);line-height:1.1;margin-top:.06rem}
+.planes-nota{text-align:center;margin-top:.4rem;font-size:.76rem;color:var(--muted)}
+
+/* 9 FAQ */
+.faq-cols{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 2rem;margin-top:.3rem;align-items:stretch;flex:1;min-height:0}
+.faq-cols > div{display:flex;flex-direction:column;justify-content:space-evenly}
+.faq-grupo-label{font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem;padding-bottom:.25rem;border-bottom:1.5px solid var(--border)}
+.faq-item{border:1.5px solid var(--border);border-radius:var(--r-sm);overflow:hidden;background:var(--white)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:.7rem .9rem;cursor:pointer;font-size:.94rem;font-weight:800;color:var(--dark);line-height:1.15}
+.faq-a{font-size:.88rem;color:var(--muted);line-height:1.4;padding:0 .9rem;max-height:0;overflow:hidden;transition:max-height .22s ease,padding .15s}
+.faq-a.open{max-height:680px;padding:.55rem .9rem .7rem}
+
+/* 10 CONTACTO */
+#contacto .s-title{font-size:clamp(1.9rem,2.6vw,2.8rem)!important}
+#contacto .s-sub{font-size:clamp(.85rem,.92vw,1.05rem)!important}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.25rem;align-items:center}
+.contacto-left{display:flex;flex-direction:column;justify-content:center}
+.contacto-puntos{display:flex;flex-direction:column;gap:.42rem;margin-top:.45rem}
+.cp-item{display:flex;gap:.5rem;align-items:flex-start}
+.cp-ic{width:30px;height:30px;border-radius:var(--r-sm);background:var(--cream);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.82rem}
+.cp-txt strong{font-size:.9rem;color:var(--dark);margin-bottom:.05rem;display:block}
+.cp-txt span{font-size:.78rem;color:var(--muted);line-height:1.22}
+.contacto-box{background:var(--cream);border:1.5px solid var(--border);border-radius:var(--r-xl);padding:.7rem .85rem}
+.contacto-box h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--dark);margin-bottom:.12rem}
+.contacto-box .lead{font-size:.82rem;color:var(--muted);line-height:1.22;margin-bottom:.42rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.38rem}
+.form-group{margin-bottom:.3rem}
+.form-group label{font-size:.72rem;font-weight:800;margin-bottom:.1rem;color:var(--dark);display:block}
+.form-group input,.form-group textarea{width:100%;padding:.4rem .55rem;border:1.5px solid var(--border);border-radius:var(--r-sm);font-size:.8rem;font-family:inherit;color:var(--text);background:var(--white)}
+.form-group textarea{resize:vertical;min-height:38px}
+.form-submit{width:100%;padding:.5rem;background:var(--dark);color:var(--white);border:none;border-radius:var(--r-sm);font-size:.84rem;font-weight:800;cursor:pointer;font-family:inherit}
+.contacto-meta{margin-top:.4rem;padding-top:.35rem;border-top:1.5px solid var(--border);font-size:.68rem;color:var(--muted);line-height:1.3}
+.cm-dnda{margin-top:.15rem;font-size:.6rem}
+
+@media(max-width:940px){
+  .desafio-grid,.ssd-grid,.demo-flex,.metodos-grid,.paraquien-grid,.faq-cols,.contacto-grid{grid-template-columns:1fr;gap:.5rem}
+  .opd-flow{grid-template-columns:1fr;gap:.3rem} .opd-arrow{transform:rotate(90deg);padding:.04rem 0}
+  .puente,.opd-nota,.selecto-box{grid-template-columns:1fr}
+  html{font-size:14px}
 }
 </style>
 </head>
@@ -250,601 +215,457 @@ footer{background:var(--dark);padding:3rem 5%;border-top:1px solid rgba(255,255,
 
 <!-- ══ NAV ══ -->
 <nav>
-  <a href="#" class="nav-logo"><span class="logo-sepa">SEPA</span><span class="logo-sep"></span><span class="logo-sel">Select</span></a>
+  <a class="nav-logo" data-goto="0">
+    <span class="logo-sepa">SEPA</span>
+    <span class="logo-sep"></span>
+    <span class="logo-sel">Select</span>
+  </a>
   <ul class="nav-links">
-    <li><a href="#metodos">Metodología</a></li>
-    <li><a href="#planes">Planes</a></li>
-    <li><a href="#faqs">Preguntas frecuentes</a></li>
-    <li><a href="#registro">Registrarse</a></li>
-    <li><a href="app.html" class="btn-nav">Acceder a la app →</a></li>
+    <li><a data-goto="2">Metodología</a></li>
+    <li><a data-goto="6">Para quién</a></li>
+    <li><a data-goto="7">Planes</a></li>
+    <li><a data-goto="8">Preguntas</a></li>
+    <li><a data-goto="9">Contacto</a></li>
+    <li><a href="SEPA-Select_x_DEPs_v9.html" class="btn-nav">Ingresar a la app →</a></li>
   </ul>
 </nav>
 
-<!-- ══ HERO ══ -->
-<section class="hero">
-  <div class="hero-text">
-    <div class="hero-eyebrow">Evaluación genética · Toros Angus · ERA</div>
-    <h1>El ranking que construye<br><em>el comprador.</em></h1>
-    <p>SEPA-Select aplica tus pesos de selección sobre las DEPs del catálogo y ordena los animales por objetivo de cría. Cada posición es el resultado de tu fórmula, no la del vendedor.</p>
-    <div class="hero-ctas">
-      <a href="#registro" class="btn-primary">Solicitar acceso</a>
-      <a href="app.html" class="btn-ghost">Probar la app →</a>
-    </div>
-  </div>
+<div class="deck" id="deck">
 
-  <div class="demo-wrap">
-    <div class="demo-head">
-      <span class="demo-label">Demo · RD_Factores</span>
-      <span class="demo-meta">Catálogo: CIIADO 2026 · Terminal</span>
-    </div>
-    <div class="demo-sliders">
-      <div class="sl-row">
-        <span class="sl-name">WW — Peso al destete <small>dirección favorable: positivo</small></span>
-        <input type="range" id="sl-ww" min="0" max="10" value="7">
-        <span class="sl-val" id="vl-ww">70%</span>
+<!-- ══ 1 · HERO ══ -->
+<section class="slide sl-hero">
+  <div class="container">
+    <div class="hero-text">
+      <div class="hero-tag">Sistema de Soporte de Decisión · Genómica Angus</div>
+      <h1>Del dato genómico<br><span class="italic">a la decisión fundamentada.</span></h1>
+      <p>SEPA-Select transforma la evaluación genómica en una decisión documentada. Primero define tu objetivo. El sistema traduce ese objetivo en perfiles biológicos posibles y lo valida con dos métodos independientes.</p>
+      <div class="hero-ctas">
+        <a href="SEPA-Select_x_DEPs_v9.html" class="btn-primary">Ingresar a la app →</a>
+        <a class="btn-ghost" data-goto="9">Consultas y contacto</a>
       </div>
-      <div class="sl-row">
-        <span class="sl-name">PN — Facilidad de parto <small>dirección favorable: negativo</small></span>
-        <input type="range" id="sl-pn" min="0" max="10" value="3">
-        <span class="sl-val" id="vl-pn">30%</span>
-      </div>
+      <div class="hero-scroll">↓ Recorré la metodología · Page&nbsp;Down</div>
     </div>
-    <div class="bull-list" id="bull-list"></div>
-    <div class="demo-note">Modificá los pesos y el ranking se recalcula. Así opera SEPA-Select.</div>
   </div>
 </section>
 
-<!-- ══ QUÉ ES ══ -->
-<section class="ques-section">
+<!-- ══ 2 · EL PROBLEMA ══ -->
+<section class="slide sl-a">
   <div class="container">
-    <div class="ques-grid">
+    <div class="desafio-grid">
       <div>
-        <p class="s-eyebrow">El problema</p>
-        <h2 class="s-title">El catálogo presenta datos.<br>No da tu respuesta.</h2>
-        <p class="s-sub">Cada cabaña ordena y destaca las DEPs que favorecen a sus toros. El comprador necesita la fórmula opuesta: sus objetivos de cría aplicados a los datos del catálogo, no al revés.</p>
+        <p class="s-label">El contexto</p>
+        <h2 class="s-title">La información genómica sin marco genera más incertidumbre, no menos.</h2>
+        <p class="s-sub">El acceso a datos genómicos creció en los últimos años. El desafío que persiste no es acceder a los datos: es convertirlos en una decisión que responda a tu sistema productivo.</p>
       </div>
+      <div class="desafio-cards">
+        <div class="desafio-card dc-1">
+          <strong>La avalancha de DEPs sin encuadre</strong>
+          <p>Un informe genómico puede incluir 15 a 23 DEPs por animal. Revisarlos uno por uno sin un marco previo no lleva a una decisión: lleva a priorizar el que se vio último o el que presenta el valor más llamativo.</p>
+        </div>
+        <div class="desafio-card dc-2">
+          <strong>El objetivo es previo a los datos</strong>
+          <p>Antes de mirar un solo número conviene responder tres preguntas: ¿Qué hacés con las hijas? ¿A qué edad entorás? ¿Cuál es tu principal desafío productivo hoy? Esas respuestas filtran el 60% de los DEPs que no aplican a tu caso.</p>
+        </div>
+        <div class="desafio-card dc-3">
+          <strong>La trazabilidad hace auditable la decisión</strong>
+          <p>Poder explicar por qué se eligió determinado reproductor —con pesos visibles, perfiles documentados y dos métodos independientes— es tan importante como la elección en sí.</p>
+        </div>
+      </div>
+    </div>
+    <div class="puente">
+      <div class="ic">⇌</div>
       <div>
-        <div class="ques-points">
-          <div class="ques-point">
-            <div class="qp-icon">📊</div>
-            <div class="qp-text">
-              <strong>Las DEPs son datos crudos, no una decisión</strong>
-              <span>WW +42 no dice si ese toro es mejor para tu objetivos que uno con WW +35 y CE +5.8. SEPA-Select construye el score combinado con tus pesos.</span>
-            </div>
-          </div>
-          <div class="ques-point">
-            <div class="qp-icon">🔄</div>
-            <div class="qp-text">
-              <strong>Dos métodos complementarios de ranking</strong>
-              <span>RD_Factores pondera 8 DEPs por z-score con descuento por precisión ERA. RD_O&P evalúa 14 perfiles productivos predefinidos en 4 grupos. La concordancia entre ambos orienta la decisión final.</span>
-            </div>
-          </div>
-          <div class="ques-point">
-            <div class="qp-icon">📁</div>
-            <div class="qp-text">
-              <strong>Catálogos permanentes y de remate</strong>
-              <span>La plataforma aloja catálogos públicos (cabañas, remates) y privados. El usuario accede con password provisto por el publicador.</span>
-            </div>
-          </div>
+        <strong>Cada actor mira los mismos datos desde su lugar</strong>
+        <p>El productor mira WW y PF; el encargado, la parición; el veterinario, la precisión; la cabaña, la diferenciación. Cada foco es legítimo. SEPA-Select no reemplaza ninguno: traduce el objetivo del sistema productivo en perfiles biológicos posibles y produce una salida que cada rol puede leer desde su foco. <strong>Objetivo, Perfil y DEP es el idioma común.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3 · ÍNDICE vs SSD ══ -->
+<section class="slide sl-b" id="metodologia">
+  <div class="container">
+    <p class="s-label">Qué es SEPA-Select</p>
+    <h2 class="s-title">Un Sistema de Soporte de Decisión no es un índice.</h2>
+    <p class="s-sub">La diferencia no es de grado: es de diseño. Un índice produce un número. Un SSD produce un marco de decisión auditable.</p>
+    <div class="ssd-grid">
+      <div class="ssd-card ssd-indice">
+        <span class="ssd-badge badge-indice">Índice genético</span>
+        <h3>Un número. Sin contexto.</h3>
+        <div class="ssd-items">
+          <div class="ssd-item">Produce un ranking único, independiente del objetivo de cría del usuario.</div>
+          <div class="ssd-item">Los pesos son fijos y definidos por el publicador. No se ajustan al sistema productivo.</div>
+          <div class="ssd-item">No es posible auditar por qué un animal ocupa determinada posición.</div>
+          <div class="ssd-item">No distingue entre categorías de cría con objetivos distintos.</div>
+          <div class="ssd-item">La precisión de la DEP no tiene impacto visible en el resultado.</div>
+        </div>
+      </div>
+      <div class="ssd-card ssd-sepa">
+        <span class="ssd-badge badge-sepa">SSD · SEPA-Select</span>
+        <h3>Un marco. Con trazabilidad.</h3>
+        <div class="ssd-items">
+          <div class="ssd-item">El objetivo de cría es el punto de partida, no el resultado. El usuario define qué evalúa.</div>
+          <div class="ssd-item">Los pesos son del usuario, visibles y configurables. El ranking es de su fórmula.</div>
+          <div class="ssd-item">Cada posición es auditable: se ven los z-scores, los pesos aplicados y el descuento por precisión ERA.</div>
+          <div class="ssd-item">Cuatro categorías de cría con matrices de peso distintas. Una misma evaluación produce cuatro rankings.</div>
+          <div class="ssd-item">Dos métodos independientes (RD_Factores y RD_O&P). La concordancia entre ellos es parte del análisis.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ MÉTODOS ══ -->
-<section id="metodos" class="metodos-section">
+<!-- ══ 4 · DEMO ══ -->
+<section class="slide sl-a">
   <div class="container">
-    <p class="s-eyebrow">Metodología de ranking</p>
-    <h2 class="s-title">Dos modelos, una decisión más informada</h2>
-    <p class="s-sub">SEPA-Select opera con dos métodos independientes y complementarios. La concordancia entre ambos — medida por el delta de posición — es parte del análisis.</p>
+    <p class="s-label">El ranking sigue tu objetivo</p>
+    <h2 class="s-title">Vos ponés los pesos. El orden cambia.</h2>
+    <div class="demo-flex">
+      <div class="demo-quote">
+        <strong>SEPA-Select no genera DEPs.</strong> Usa las evaluaciones ERA o genómicas existentes y las ordena según el objetivo del evaluador. Es una capa de decisión sobre datos que ya existen.
+        <span class="note">En la app, esto que ves acá al lado es la <strong>matriz de pesos por categoría</strong> — las 8 DEPs del modelo, editable en PLUS.</span>
+      </div>
+      <div class="demo-wrap">
+        <div class="demo-title">Demo interactivo</div>
+        <div class="demo-desc">Movés el peso de cada DEP y el ranking se reordena.</div>
+        <div class="demo-sliders">
+          <div class="sl-row">
+            <span class="sl-name">WW — Peso al destete <small>más es mejor</small></span>
+            <input type="range" id="sl-ww" min="0" max="10" value="7" aria-label="Peso de WW">
+            <span class="sl-val" id="vl-ww">70%</span>
+          </div>
+          <div class="sl-row">
+            <span class="sl-name">PN — Peso al nacer <small>menos es mejor</small></span>
+            <input type="range" id="sl-pn" min="0" max="10" value="3" aria-label="Peso de PN">
+            <span class="sl-val" id="vl-pn">30%</span>
+          </div>
+        </div>
+        <div class="bull-list" id="bull-list"></div>
+        <div class="demo-foot">Datos de ejemplo. <b>El ranking responde a tu objetivo, no al del publicador.</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5 · OBJETIVO → PERFIL → DEP ══ -->
+<section class="slide sl-b">
+  <div class="container">
+    <p class="s-label">El flujo conceptual</p>
+    <h2 class="s-title">Objetivo → Perfil → DEP.</h2>
+    <p class="s-sub">La mayoría empieza por el dato genómico. SEPA-Select invierte el orden: primero el objetivo del sistema productivo, después los perfiles biológicos que la naturaleza permite, y recién entonces los DEPs que los representan.</p>
+    <div class="opd-flow">
+      <div class="opd-step opd-humano">
+        <div class="opd-step-label">Paso 1 — Decisión empresarial</div>
+        <h3>Objetivo de cría</h3>
+        <p>¿Qué querés lograr con la próxima generación? La respuesta define qué DEPs pesan y cuánto.</p>
+        <div class="opd-chips"><span class="opd-chip">Terminal</span><span class="opd-chip">Reposición</span><span class="opd-chip">Vaquillona 15M</span><span class="opd-chip">Rodeo general</span></div>
+      </div>
+      <div class="opd-arrow">→</div>
+      <div class="opd-step opd-biologico">
+        <div class="opd-step-label">Paso 2 — Lo que permite la biología</div>
+        <h3>Perfiles productivos</h3>
+        <p>No toda combinación de DEPs existe en la naturaleza. Los perfiles mapean los caminos biológicos posibles para cada objetivo.</p>
+        <div class="opd-chips"><span class="opd-chip">U01 Quebrador</span><span class="opd-chip">V01 Entore</span><span class="opd-chip">R02 Maternal</span><span class="opd-chip">T01 Carnicero</span></div>
+      </div>
+      <div class="opd-arrow">→</div>
+      <div class="opd-step opd-dato">
+        <div class="opd-step-label">Paso 3 — El dato medido</div>
+        <h3>DEPs con precisión</h3>
+        <p>El DEP es el insumo, no la decisión. Dentro del perfil correcto, su valor y su precisión ERA se ponderan juntos.</p>
+        <div class="opd-chips"><span class="opd-chip">PN</span><span class="opd-chip">WW</span><span class="opd-chip">CE</span><span class="opd-chip">Leche</span><span class="opd-chip">AOB</span><span class="opd-chip">LG</span></div>
+      </div>
+    </div>
+    <div class="opd-nota">
+      <strong>El perfil U01-Quebrador</strong>, por ejemplo, combina PN bajo y WW alto: rompe la correlación biológica más común en la raza. Un reproductor que lo expresa puede dar más destete sin penalizar la facilidad de parto. El sistema identifica quién lo expresa dentro del conjunto evaluado.
+    </div>
+  </div>
+</section>
+
+<!-- ══ 6 · DOS MÉTODOS ══ -->
+<section class="slide sl-a">
+  <div class="container">
+    <p class="s-label">Metodología</p>
+    <h2 class="s-title">Dos métodos. Una decisión más robusta.</h2>
+    <p class="s-sub">RD_Factores y RD_O&P son independientes entre sí. Cuando dos métodos que no comparten lógica llegan al mismo reproductor, la decisión gana en solidez. Cuando divergen, esa información también es útil.</p>
     <div class="metodos-grid">
       <div class="metodo-card">
         <span class="metodo-badge mb-rf">RD_Factores</span>
         <div class="metodo-title">Ponderación por objetivo de cría</div>
-        <p class="metodo-desc">Pondera las 8 DEPs del sistema ERA mediante z-scores poblacionales calculados sobre el catálogo activo. Aplica descuento por precisión ERA y normaliza el resultado a escala 0–100. Al score genético (G) se suma un ajuste fenotípico editable (F) disponible en PLUS.</p>
-        <div class="metodo-detail">
-          <strong>Score final = G + F</strong><br>
-          G: score genético ponderado · F: ajuste fenotípico (PLUS)<br>
-          Categorías: Terminal · Reposición · Vaq 15M · Toro para vaq 15M
-        </div>
+        <p class="metodo-desc">Pondera las 8 DEPs del sistema ERA mediante z-scores calculados sobre el conjunto activo. Aplica descuento por precisión ERA configurable y normaliza el resultado a escala 0–100. Al score genético (G) puede sumarse un ajuste fenotípico editable (F), disponible en PLUS.</p>
+        <div class="metodo-detail"><strong>Score G + F = resultado final</strong><br>G: score genético ponderado con precisión ERA<br>F: ajuste fenotípico por animal (disponible en PLUS)</div>
       </div>
-      <div class="metodo-card highlight">
+      <div class="metodo-card dest">
         <span class="metodo-badge mb-oyp">RD_O&P</span>
         <div class="metodo-title">Evaluación por perfiles productivos</div>
-        <p class="metodo-desc">Evalúa al toro contra 14 perfiles productivos organizados en 4 grupos: Universales (U01–U03, activos para todas las categorías), Vaquillona 15M (V01–V04), Reposición (R01–R03) y Terminal (T01–T04). El score de cada perfil es la suma algebraica de sus DEPs requeridas, con signo según dirección favorable.</p>
-        <div class="metodo-detail">
-          <strong>14 perfiles oficiales (v5) · Ref. 8-20-01 a 8-20-14</strong><br>
-          Perfiles no calculables cuando falta alguna DEP requerida.<br>
-          Δ = diferencia de posición RF vs RD_O&P · Fondo dorado si Δ ≤ 2
-        </div>
+        <p class="metodo-desc">Evalúa al reproductor contra 14 perfiles productivos en 4 grupos: Universales (U01–U03, activos en todas las categorías), Vaquillona 15M (V01–V04), Reposición (R01–R03) y Terminal (T01–T04). El score de cada perfil es la suma algebraica de sus DEPs requeridas con signo según la dirección favorable.</p>
+        <div class="metodo-detail"><strong>14 perfiles oficiales · Referencia v5</strong><br>Δ = diferencia de posición RF vs RD_O&P<br>Fondo dorado cuando Δ ≤ 2 puestos (concordancia alta)</div>
       </div>
+    </div>
+    <div class="selecto-box">
+      <div class="sb-title">El concepto SELECTO</div>
+      <div class="sb-content"><strong>SELECTO</strong> identifica a los reproductores que figuran en el Top 5 simultáneo de ambos métodos para una misma categoría. No es el mejor según un solo criterio: es el que dos lógicas independientes reconocen al mismo tiempo. Si un reproductor alcanza 100 en RD_Factores pero ocupa posición baja en RD_O&P, el sistema lo muestra como una <strong>tensión a gestionar</strong> — información útil para la decisión, no un descarte automático.</div>
     </div>
   </div>
 </section>
 
-<!-- ══ CATEGORÍAS ══ -->
-<section class="cats-section">
+<!-- ══ 7 · PARA QUIÉN ══ -->
+<section class="slide sl-b" id="paraquien">
   <div class="container">
-    <p class="s-eyebrow" style="color:var(--gold)">Objetivos de cría</p>
-    <h2 class="s-title">Cuatro categorías, pesos distintos</h2>
-    <p class="s-sub">Cada categoría de cría tiene una matriz de pesos predefinida sobre las 8 DEPs del sistema. En PLUS, la configuración es editable.</p>
-    <div class="cats-grid">
-      <div class="cat-card">
-        <div class="cat-num">01</div>
-        <div class="cat-name">Terminal</div>
-        <div class="cat-desc">Cría a faena. Máximo peso al destete y músculo.</div>
-        <div class="cat-pesos">
-          <div class="cp-row"><span>WW</span><span class="cp-pos">+40</span></div>
-          <div class="cp-row"><span>AOB</span><span class="cp-pos">+15</span></div>
-          <div class="cp-row"><span>PF</span><span class="cp-pos">+15</span></div>
-          <div class="cp-row"><span>PN</span><span class="cp-neg">−20</span></div>
-        </div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-num">02</div>
-        <div class="cat-name">Reposición</div>
-        <div class="cat-desc">Hijas retenidas. Leche, fertilidad, frame contenido.</div>
-        <div class="cat-pesos">
-          <div class="cp-row"><span>Leche</span><span class="cp-pos">+20</span></div>
-          <div class="cp-row"><span>WW</span><span class="cp-pos">+25</span></div>
-          <div class="cp-row"><span>PN</span><span class="cp-neg">−20</span></div>
-          <div class="cp-row"><span>Alt</span><span class="cp-neg">−15</span></div>
-        </div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-num">03</div>
-        <div class="cat-name">Vaquillona 15M</div>
-        <div class="cat-desc">Entore precoz. Prioriza facilidad de parto.</div>
-        <div class="cat-pesos">
-          <div class="cp-row"><span>CE</span><span class="cp-pos">+10</span></div>
-          <div class="cp-row"><span>PN</span><span class="cp-neg">−50</span></div>
-          <div class="cp-row"><span>LG</span><span class="cp-neg">−15</span></div>
-          <div class="cp-row"><span>Alt</span><span class="cp-neg">−10</span></div>
-        </div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-num">04</div>
-        <div class="cat-name">Toro para Vaq 15M</div>
-        <div class="cat-desc">Toro reproductor para vaquillona de 15 meses.</div>
-        <div class="cat-pesos">
-          <div class="cp-row"><span>CE</span><span class="cp-pos">+20</span></div>
-          <div class="cp-row"><span>WW</span><span class="cp-pos">+20</span></div>
-          <div class="cp-row"><span>PN</span><span class="cp-neg">−35</span></div>
-          <div class="cp-row"><span>Alt</span><span class="cp-neg">−10</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ DEPs ══ -->
-<section class="deps-section">
-  <div class="container">
-    <p class="s-eyebrow">DEPs consideradas</p>
-    <h2 class="s-title">El sistema opera sobre las DEPs del ERA</h2>
-    <p class="s-sub">RD_Factores pondera 8 DEPs del sistema ERA. RD_O&P puede requerir DEPs adicionales según el perfil. Los perfiles con DEPs faltantes quedan marcados como no calculables.</p>
-    <div class="deps-grid">
-      <div class="dep-card">
-        <div class="dep-code">PN</div>
-        <div class="dep-full">Peso al nacer</div>
-        <div class="dep-unit">kg</div>
-        <span class="dep-dir dir-neg">Favorable: negativo</span>
-      </div>
-      <div class="dep-card">
-        <div class="dep-code">WW</div>
-        <div class="dep-full">Peso al destete</div>
-        <div class="dep-unit">kg</div>
-        <span class="dep-dir dir-pos">Favorable: positivo</span>
-      </div>
-      <div class="dep-card">
-        <div class="dep-code">PF</div>
-        <div class="dep-full">Peso final / yearling</div>
-        <div class="dep-unit">kg</div>
-        <span class="dep-dir dir-pos">Favorable: positivo</span>
-      </div>
-      <div class="dep-card">
-        <div class="dep-code">Alt</div>
-        <div class="dep-full">Altura / frame</div>
-        <div class="dep-unit">cm</div>
-        <span class="dep-dir dir-var">Variable por categoría</span>
-      </div>
-      <div class="dep-card">
-        <div class="dep-code">Leche</div>
-        <div class="dep-full">Habilidad lechera</div>
-        <div class="dep-unit">kg</div>
-        <span class="dep-dir dir-pos">Favorable: positivo</span>
-      </div>
-      <div class="dep-card">
-        <div class="dep-code">AOB</div>
-        <div class="dep-full">Área ojo de bife / REA</div>
-        <div class="dep-unit">cm²</div>
-        <span class="dep-dir dir-pos">Favorable: positivo</span>
-      </div>
-      <div class="dep-card">
-        <div class="dep-code">CE</div>
-        <div class="dep-full">Circunferencia escrotal</div>
-        <div class="dep-unit">cm</div>
-        <span class="dep-dir dir-pos">Favorable: positivo</span>
-      </div>
-      <div class="dep-card">
-        <div class="dep-code">LG</div>
-        <div class="dep-full">Longitud de gestación</div>
-        <div class="dep-unit">días</div>
-        <span class="dep-dir dir-neg">Favorable: negativo</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SALIDA REAL — CIIADO 2026 ══ -->
-<section class="real-section">
-  <div class="container">
-    <p class="s-eyebrow" style="color:var(--gold)">Ejemplo de salida real</p>
-    <h2 class="s-title">CIIADO 2026 · 26 toros · 4 categorías</h2>
-    <p class="s-sub">Resumen cross-categoría generado por SEPA-Select el 28/08/2026. <strong style="color:rgba(255,255,255,.75)">★ SELECTO</strong> indica que el toro figura en el top 5 simultáneo de ambos métodos para esa categoría.</p>
-    <div class="real-meta">App3 · v8 · RD_Factores con precisión ERA · 14 perfiles RD_O&P · Cabañas: Doble Hache · La Esencia · Casamu · La Cassina · El Yerua · La Huella · Coleman Angus · El Hinojo de Bru · Niquel Huitru · Mayacó</div>
-
-    <div class="cats-real-grid">
-
-      <div class="cat-real-card">
-        <div class="cat-real-eyebrow">1 · Terminal</div>
-        <div class="cat-real-name">Cría a faena</div>
-        <div class="cat-real-desc">Máximo peso al destete y músculo · PN−20 · WW+40 · PF+15 · AOB+15 · CE+10</div>
-        <div class="selecto-list">
-          <div class="selecto-item">Baqueano <span class="selecto-scores">RF 100.0 · O&P 17.71</span></div>
-          <div class="selecto-item">Botija <span class="selecto-scores">RF 93.2 · O&P 13.04</span></div>
-          <div class="selecto-item">Jerarca <span class="selecto-scores">RF 78.4 · O&P 13.10</span></div>
-          <div class="selecto-item">Kyoto <span class="selecto-scores">RF 64.7 · O&P 11.47</span></div>
-          <div class="selecto-item">Bonifacio <span class="selecto-scores">RF 61.8 · O&P 7.20</span></div>
-        </div>
-      </div>
-
-      <div class="cat-real-card">
-        <div class="cat-real-eyebrow">2 · Reposición</div>
-        <div class="cat-real-name">Hijas retenidas</div>
-        <div class="cat-real-desc">Leche, fertilidad, frame contenido · PN−20 · WW+25 · Leche+20 · CE+10 · Alt−15</div>
-        <div class="selecto-list">
-          <div class="selecto-item">Baqueano <span class="selecto-scores">RF 100.0 · O&P 11.44</span></div>
-          <div class="selecto-item">Serafín <span class="selecto-scores">RF 71.2 · O&P 5.00</span></div>
-          <div class="selecto-item">Botija <span class="selecto-scores">RF 68.6 · O&P 5.13</span></div>
-          <div class="selecto-item">Jerarca <span class="selecto-scores">RF 60.6 · O&P 9.28</span></div>
-        </div>
-      </div>
-
-      <div class="cat-real-card">
-        <div class="cat-real-eyebrow">3 · Vaquillona 15M</div>
-        <div class="cat-real-name">Entore precoz</div>
-        <div class="cat-real-desc">Prioriza facilidad de parto · PN−50 · LG−15 · CE+10 · Leche+10 · WW+5</div>
-        <div class="selecto-list">
-          <div class="selecto-item">Serafín <span class="selecto-scores">RF 78.3 · O&P 6.02</span></div>
-        </div>
-        <div style="margin-top:.75rem;font-size:.72rem;color:rgba(255,255,255,.3);line-height:1.5">1 SELECTO. La divergencia entre RD_Factores (prioriza PN bajo) y RD_O&P (perfiles V01–V04) reduce la intersección.</div>
-      </div>
-
-      <div class="cat-real-card">
-        <div class="cat-real-eyebrow">4 · Toro para Vaq 15M</div>
-        <div class="cat-real-name">Reproductor precoz</div>
-        <div class="cat-real-desc">Toro para vaquillona de 15 meses · PN−35 · CE+20 · WW+20 · AOB+10 · LG−5</div>
-        <div class="selecto-list">
-          <div class="selecto-item">Baqueano <span class="selecto-scores">RF 100.0 · O&P 16.82</span></div>
-          <div class="selecto-item">Botija <span class="selecto-scores">RF 80.0 · O&P 9.74</span></div>
-          <div class="selecto-item">Serafín <span class="selecto-scores">RF 72.6 · O&P 6.02</span></div>
-          <div class="selecto-item">Kyoto <span class="selecto-scores">RF 64.6 · O&P 7.94</span></div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="multi-row">
-      <div class="multi-label">Toros destacados en múltiples categorías</div>
-      <div class="multi-chips">
-        <div class="multi-chip">
-          <div class="mc-name">★ Baqueano — Doble Hache</div>
-          <div class="mc-cats">Terminal · Reposición · Toro Vaq 15M · 3 categorías</div>
-        </div>
-        <div class="multi-chip">
-          <div class="mc-name">★ Botija — La Esencia</div>
-          <div class="mc-cats">Terminal · Reposición · Toro Vaq 15M · 3 categorías</div>
-        </div>
-        <div class="multi-chip">
-          <div class="mc-name">★ Serafín — Casamu</div>
-          <div class="mc-cats">Reposición · Vaquillona 15M · Toro Vaq 15M · 3 categorías</div>
-        </div>
-        <div class="multi-chip">
-          <div class="mc-name">★ Jerarca — La Esencia</div>
-          <div class="mc-cats">Terminal · Reposición · 2 categorías</div>
-        </div>
-        <div class="multi-chip">
-          <div class="mc-name">★ Kyoto — La Esencia</div>
-          <div class="mc-cats">Terminal · Toro Vaq 15M · 2 categorías</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="real-note">RF = RD_Factores (score G normalizado 0–100) · O&P = RD_O&P (suma algebraica DEPs) · ERA Argentina 2026</div>
-  </div>
-</section>
-
-<!-- ══ PLANES ══ -->
-<section id="planes" class="planes-section">
-  <div class="container">
-    <p class="s-eyebrow">Licencias</p>
-    <h2 class="s-title">BASE y PLUS</h2>
-    <p class="s-sub">BASE incluye el motor de ranking completo para la categoría Terminal y la Vista Global (SELECTO). PLUS habilita el acceso completo a todas las funcionalidades.</p>
-    <div class="planes-grid">
-      <div class="plan-card">
-        <span class="plan-badge">Sin cargo</span>
-        <div class="plan-name">BASE</div>
-        <div class="plan-price">$0 <span>/ año</span></div>
-        <div class="plan-period">Sin vencimiento · Sin tarjeta de crédito</div>
-        <div class="plan-group-label">Acceso</div>
-        <ul class="plan-features">
-          <li>2 catálogos activos simultáneos</li>
-          <li>Acceso a catálogos públicos y búsqueda por cabaña</li>
-          <li>Motor de ranking RD_Factores completo · Categoría Terminal</li>
-          <li>Vista Global SELECTO</li>
-          <li>Selector de precisión ERA (activar/desactivar)</li>
-          <li>Reports predefinidos · PDF estándar</li>
-          <li>Header y footer de reporte editables</li>
-        </ul>
-        <div class="plan-group-label">No incluido</div>
-        <ul class="plan-features">
-          <li class="no">Configuración de pesos por categoría</li>
-          <li class="no">Ajuste fenotípico (score F editable)</li>
-          <li class="no">Análisis RD_O&P con detalle de perfiles</li>
-          <li class="no">Exportación Excel y CSV</li>
-        </ul>
-        <a href="#registro" class="btn-plan btn-base">Solicitar acceso BASE</a>
-      </div>
-      <div class="plan-card feat">
-        <span class="plan-badge">Acceso completo</span>
-        <div class="plan-name">PLUS</div>
-        <div class="plan-price">200 KN <span>/ año</span></div>
-        <div class="plan-period">≈ USD 585 · 12 meses desde contratación · Renovación al precio original</div>
-        <div class="plan-group-label">Todo lo de BASE, más</div>
-        <ul class="plan-features">
-          <li>5 catálogos activos simultáneos</li>
-          <li>Todas las categorías de cría desbloqueadas</li>
-          <li>Configuración de pesos por categoría (PLUS edita la matriz)</li>
-          <li>Ajuste fenotípico F editable por toro (score G + F)</li>
-          <li>Análisis RD_O&P: 14 perfiles · detalle de concordancia · Δ</li>
-          <li>Exportación Excel y CSV con configuración personalizada</li>
-          <li>Reports configurables a medida · gráficos en el informe</li>
-          <li>Acceso a catálogos privados (con password del publicador)</li>
-        </ul>
-        <a href="#registro" class="btn-plan btn-plus">Solicitar acceso PLUS</a>
-      </div>
-    </div>
-    <p class="planes-nota">KN = Kilo de novillo. Precio de referencia del mercado ganadero argentino. Actualizable periódicamente según variación del indicador.</p>
-  </div>
-</section>
-
-<!-- ══ FAQs ══ -->
-<section id="faqs" class="faqs-section">
-  <div class="container">
-    <div class="faqs-layout">
-      <div class="faqs-intro">
-        <p class="s-eyebrow">Preguntas frecuentes</p>
-        <h2 class="s-title">Cómo opera el sistema</h2>
-        <p class="s-sub">Aspectos técnicos sobre la metodología, los datos requeridos y las diferencias entre licencias.</p>
-      </div>
-      <div class="faq-grupos">
-
-        <div>
-          <div class="faq-grupo-label">Metodología</div>
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Cómo funciona el ranking RD_Factores?</span><span class="faq-arrow">▾</span></div>
-            <div class="faq-a">Pondera las 8 DEPs del sistema ERA (<code>PN, WW, PF, Alt, Leche, AOB, CE, LG</code>) según los pesos definidos para la categoría de cría activa. La comparación se realiza por z-score sobre el catálogo activo (comparación interna entre los animales del catálogo). Aplica un descuento por precisión ERA configurable y normaliza el resultado a una escala 0–100 (score G). En PLUS, al score G se suma un ajuste fenotípico F editable por toro. <strong>Score final = G + F.</strong></div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué evalúa el método RD_O&P?</span><span class="faq-arrow">▾</span></div>
-            <div class="faq-a">Evalúa al toro contra 14 perfiles productivos predefinidos, organizados en 4 grupos: <strong>U Universales</strong> (U01–U03, activos para todas las categorías), <strong>V Vaquillona 15M</strong> (V01–V04), <strong>R Reposición</strong> (R01–R03) y <strong>T Terminal</strong> (T01–T04). El score de cada perfil es la suma algebraica de sus DEPs requeridas con signo según la dirección favorable. Si falta algún DEP requerido, el perfil queda marcado como no calculable con indicación de la DEP faltante. El delta de posición (Δ) entre RD_Factores y RD_O&P es parte del análisis.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué significa el delta Δ en la tabla de concordancia?</span><span class="faq-arrow">▾</span></div>
-            <div class="faq-a">Δ es la diferencia entre la posición del toro en RD_Factores y en RD_O&P. <strong>Δ = posición_RF − posición_RD_O&P.</strong> Si un toro está en #3 en RF y en #7 en RD_O&P, Δ = +4. Fondo dorado indica concordancia alta (Δ ≤ 2 puestos). Un Δ elevado sugiere que los dos métodos valoran al animal de manera distinta, lo que es información útil para la decisión.</div>
-          </div>
-        </div>
-
-        <div>
-          <div class="faq-grupo-label">Datos y catálogos</div>
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Los toros deben estar evaluados en ERA?</span><span class="faq-arrow">▾</span></div>
-            <div class="faq-a">Para que el motor de ranking opere en modo completo, el catálogo debe incluir las DEPs del sistema ERA. Los catálogos sin precisiones ERA (por ejemplo, genómica propia) pueden rankearse activando el <strong>modo sin precisión</strong> en Configuración, que opera por z-score ponderado directo sin descuento por confiabilidad. La pantalla muestra una nota aclaratoria cuando el modo está activo.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Puedo usar catálogos propios o de genómica?</span><span class="faq-arrow">▾</span></div>
-            <div class="faq-a">Sí. La app acepta catálogos propios en formato JSON. Catálogos provenientes de genómica propia o de registros RAAA (SEPA-Select ha operado con Angus Colorado del sistema RAAA) pueden cargarse, aunque algunos perfiles de RD_O&P pueden quedar no calculables si faltan DEPs específicas. Los catálogos los carga Ing. Delgado en la plataforma; el publicador decide si el acceso es libre o por password.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué DEPs son indispensables para el ranking?</span><span class="faq-arrow">▾</span></div>
-            <div class="faq-a">Para <strong>RD_Factores</strong>: las 8 DEPs del sistema (<code>PN, WW, PF, Alt, Leche, AOB, CE, LG</code>). Para <strong>RD_O&P</strong>: cada perfil requiere sus propias DEPs (p. ej., U01-Quebrador requiere <code>PN</code> y <code>WW</code>). Los perfiles que no encuentran sus DEPs requeridas quedan marcados como no calculables y no afectan el ranking general. RD_O&P también puede operar con <code>EGD, EGC, GI</code> y <code>% Cortes</code> si el catálogo los incluye.</div>
-          </div>
-        </div>
-
-        <div>
-          <div class="faq-grupo-label">Plataforma y licencias</div>
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Necesito instalar algún programa?</span><span class="faq-arrow">▾</span></div>
-            <div class="faq-a">No. SEPA-Select opera como aplicación web desde el navegador. No requiere instalación. Funciona en computadora de escritorio, notebook y tablet. Acceso mediante código de licencia provisto al registrarse: <strong>Código B</strong> (acceso BASE) · <strong>Código P</strong> (acceso PLUS).</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué diferencias operativas hay entre BASE y PLUS?</span><span class="faq-arrow">▾</span></div>
-            <div class="faq-a"><strong>BASE</strong> incluye: motor de ranking RD_Factores completo para la categoría Terminal, Vista Global SELECTO, exploración de catálogo, selector de precisión ERA, reports predefinidos con header/footer editables, exportación PDF estándar. <strong>PLUS</strong> agrega: configuración de pesos por categoría, ajuste fenotípico F editable, análisis RD_O&P con detalle de perfiles y concordancia, las 4 categorías de cría desbloqueadas, exportación Excel y CSV, reports configurables a medida y gráficos incorporables al informe.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué ocurre al vencer la licencia PLUS sin renovar?</span><span class="faq-arrow">▾</span></div>
-            <div class="faq-a">La cuenta baja automáticamente a BASE. Mantiene todos los catálogos que tenía publicados (el límite de 2 catálogos aplica solo al registrarse, no como restricción operativa permanente). Mantiene acceso a los catálogos privados para los que tiene password. Pierde las funcionalidades exclusivas PLUS. La renovación se realiza al precio original contratado, no al precio vigente.</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ REGISTRO ══ -->
-<section id="registro" class="reg-section">
-  <div class="container">
-    <div class="reg-grid">
+    <p class="s-label">Usuarios</p>
+    <h2 class="s-title">SEPA-Select sirve a dos lados de la cadena.</h2>
+    <p class="s-sub">El mismo motor de ranking produce salidas distintas según el rol: quien evalúa para decidir qué reproductor usar, y quien necesita comunicar el valor genético de su material.</p>
+    <div class="paraquien-grid">
       <div>
-        <p class="s-eyebrow">Acceso anticipado</p>
-        <h2 class="s-title">Solicitar acceso a la plataforma</h2>
-        <p class="s-sub">SEPA-Select está en desarrollo activo. Completá el formulario y te enviamos el código de acceso cuando tu licencia esté habilitada.</p>
-        <div class="reg-puntos">
-          <div class="reg-punto">
-            <div class="rp-icon">🔓</div>
-            <div class="rp-text"><strong>BASE sin cargo</strong><span>Sin tarjeta de crédito. Sin vencimiento. El acceso BASE es gratuito de manera permanente.</span></div>
-          </div>
-          <div class="reg-punto">
-            <div class="rp-icon">📬</div>
-            <div class="rp-text"><strong>Confirmación en 24–48 horas</strong><span>Enviamos el código de acceso y la URL de la app por correo electrónico.</span></div>
-          </div>
-          <div class="reg-punto">
-            <div class="rp-icon">🛠</div>
-            <div class="rp-text"><strong>Soporte directo con el desarrollador</strong><span>Canal de consulta directo con Ing. Ricardo Delgado durante el período de acceso anticipado.</span></div>
-          </div>
+        <div class="pq-grupo-label">Quienes evalúan para decidir</div>
+        <div class="pq-items">
+          <div class="pq-item"><strong>Productor ganadero</strong><span>Ordena un conjunto de evaluaciones según su objetivo de sistema y recibe cuatro rankings simultáneos —uno por categoría de cría.</span></div>
+          <div class="pq-item"><strong>Técnico o veterinario IATF</strong><span>Documenta la recomendación con la ficha individual: z-scores, posiciones por categoría y detalle de perfiles.</span></div>
+          <div class="pq-item"><strong>Cabañero que califica producción propia</strong><span>Evalúa sus reproductores genotipados para decidir cuáles retiene, cuáles ofrece con respaldo y cuáles reorienta.</span></div>
+          <div class="pq-item"><strong>Jura en exposición</strong><span>Suma una capa genómica objetiva al fenotipo. La concordancia —o la tensión— entre ambos es información para el jurado.</span></div>
         </div>
       </div>
-      <div class="reg-form-wrap">
-        <form id="reg-form">
-          <div class="form-group">
-            <label>Nombre y apellido</label>
-            <input type="text" name="nombre" placeholder="Ing. Juan García" required>
-          </div>
-          <div class="form-group">
-            <label>Correo electrónico</label>
-            <input type="email" name="email" placeholder="juan@establecimiento.com" required>
-          </div>
-          <div class="form-group">
-            <label>Perfil profesional</label>
-            <select name="perfil">
-              <option value="">Seleccioná</option>
-              <option>Ingeniero agrónomo</option>
-              <option>Médico veterinario</option>
-              <option>Productor ganadero</option>
-              <option>Técnico agropecuario</option>
-              <option>Cabaña / criador registrado</option>
-              <option>Otro</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Provincia</label>
-            <select name="provincia">
-              <option value="">Seleccioná tu provincia</option>
-              <option>Buenos Aires</option><option>Córdoba</option><option>Santa Fe</option>
-              <option>Entre Ríos</option><option>Corrientes</option><option>Salta</option>
-              <option>Neuquén</option><option>Río Negro</option><option>La Pampa</option>
-              <option>Santiago del Estero</option><option>Tucumán</option><option>Otra</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Licencia de interés</label>
-            <select name="licencia">
-              <option value="BASE">BASE — sin cargo</option>
-              <option value="PLUS">PLUS — 200 KN/año</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Contexto de uso (opcional)</label>
-            <textarea name="contexto" placeholder="Descripción del rodeo, categorías de interés, tipo de catálogos que opera..."></textarea>
-          </div>
-          <button type="submit" class="form-submit">Enviar solicitud →</button>
-          <p class="form-note">Los datos no se comparten con terceros. Contacto exclusivo con el equipo de desarrollo.</p>
-        </form>
-        <div id="form-ok" style="display:none;text-align:center;padding:2.5rem 0">
-          <div style="font-size:2rem;margin-bottom:1rem">✓</div>
-          <strong>Solicitud recibida.</strong>
-          <p style="font-size:.875rem;color:var(--muted);margin-top:.5rem">Recibirás el código de acceso en 24–48 horas hábiles.</p>
+      <div>
+        <div class="pq-grupo-label">Quienes comunican valor genético</div>
+        <div class="pq-items">
+          <div class="pq-item"><strong>Cabaña — remate o venta directa</strong><span>Ofrece los reproductores organizados por objetivo de cría del comprador, con respaldo de doble método y precio diferenciado para los SELECTOS.</span></div>
+          <div class="pq-item"><strong>Centro de distribución de semen / IATF</strong><span>Identifica qué material es estratégico (presente en varias categorías) y compara nuevos ingresos contra el techo biológico del stock actual.</span></div>
+          <div class="pq-item"><strong>Consignatario / martillero</strong><span>Con los perfiles SELECTO documentados, segmenta la oferta y justifica precios ante compradores distintos en el mismo remate.</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-logo"><span class="logo-sepa">SEPA</span><span class="logo-sep"></span><span class="logo-sel">Select</span></div>
-      <div class="footer-tagline">Sistema de evaluación y ranking genético de toros Angus para el comprador.<br>Aplicación web · v8 · En desarrollo activo.</div>
-    </div>
-    <div class="footer-right">
-      <div>Ing. Ricardo Emilio Delgado · Bariloche, Argentina</div>
-      <div><a href="mailto:info@programa-sepa.com.ar">info@programa-sepa.com.ar</a></div>
-      <div>programa-sepa.com.ar · 2026</div>
-      <div class="footer-dnda">Exp. DNDA EX-2026-81106223-APN-DNDA#MJ</div>
+<!-- ══ 8 · PLANES ══ -->
+<section class="slide sl-a" id="planes">
+  <div class="container">
+    <p class="s-label">Licencias</p>
+    <h2 class="s-title">Plan BASE</h2>
+    <table class="planes-tabla">
+      <thead>
+        <tr>
+          <th></th>
+          <th><div class="pt-plan">BASE</div><div class="pt-precio">$0 <span>/ año</span></div><div class="pt-nota">Sin cargo · sin vencimiento</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Motor de ranking RD_Factores · Vista Global SELECTO</td><td>Categoría Terminal</td></tr>
+        <tr><td>Análisis RD_O&P</td><td>Vista Global</td></tr>
+        <tr><td>Exportación e informes</td><td>PDF predefinido</td></tr>
+        <tr><td>Catálogo propio privado</td><td>$131.000 (30 KN) · P1 hasta 25 toros · P2 hasta 40 toros</td></tr>
+      </tbody>
+    </table>
+    <p class="planes-nota">KN = Kilo de Novillo · Índice de Arrendamiento Mercado de Cañuelas. Precios actualizados trimestralmente · IVA incluido. La carga de catálogos se gestiona por <a data-goto="9">contacto directo</a>.</p>
+    <!-- 2026-09-17: se sacó la columna/oferta PLUS de este plan a pedido de RD (lanzamiento BASE-only,
+         "mantener oculta la eventual disponibilidad de PLUS"). No se borró contenido del negocio PLUS,
+         solo se dejó de mostrar acá. El resto de esta landing sigue con contenido viejo (pendiente
+         de revisión de FAQs/textos que RD retoma el 2026-09-18) — no se tocó nada más en este cambio. -->
+  </div>
+</section>
+
+<!-- ══ 9 · FAQ ══ -->
+<section class="slide sl-b" id="faqs">
+  <div class="container">
+    <p class="s-label">Preguntas frecuentes</p>
+    <h2 class="s-title">Cómo opera el sistema</h2>
+    <div class="faq-cols">
+      <div>
+        <div class="faq-grupo-label">Metodología</div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>¿Cómo funciona el ranking RD_Factores?</span><span class="faq-arrow">▾</span></div>
+          <div class="faq-a">Pondera las 8 DEPs del sistema ERA (<code>PN, WW, PF, Alt, Leche, AOB, CE, LG</code>) según los pesos definidos para la categoría activa. La comparación es interna al conjunto cargado: opera por z-score sobre ese universo. Aplica descuento por precisión ERA configurable y normaliza el resultado a escala 0–100 (score G). En PLUS, el score G se suma con un ajuste fenotípico F editable por animal. <strong>Score final = G + F.</strong></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué evalúa el método RD_O&P?</span><span class="faq-arrow">▾</span></div>
+          <div class="faq-a">Evalúa al reproductor contra 14 perfiles productivos predefinidos en 4 grupos: <strong>U Universales</strong> (U01–U03), <strong>V Vaquillona 15M</strong> (V01–V04), <strong>R Reposición</strong> (R01–R03) y <strong>T Terminal</strong> (T01–T04). El score de cada perfil es la suma algebraica de sus DEPs con signo según la dirección favorable. Si falta alguna DEP requerida, el perfil queda no calculable con indicación de la DEP ausente.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué significa el delta Δ?</span><span class="faq-arrow">▾</span></div>
+          <div class="faq-a">Δ es la diferencia de posición entre RD_Factores y RD_O&P para el mismo reproductor. <strong>Δ = posición RF − posición RD_O&P.</strong> Fondo dorado indica concordancia alta (Δ ≤ 2 puestos). Un Δ elevado no invalida al animal: indica que los dos métodos lo valoran de manera diferente.</div>
+        </div>
+      </div>
+      <div>
+        <div class="faq-grupo-label">Datos y licencias</div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>¿Los reproductores deben estar evaluados en ERA?</span><span class="faq-arrow">▾</span></div>
+          <div class="faq-a">Para operar en modo completo, el conjunto debe incluir las DEPs del sistema ERA con sus precisiones. Los conjuntos sin precisiones ERA (genómica propia, RAAA u otros) pueden rankearse activando el <strong>modo sin precisión</strong> en Configuración, que opera por z-score ponderado directo sin descuento por confiabilidad.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>¿Puedo usar evaluaciones de genómica propia?</span><span class="faq-arrow">▾</span></div>
+          <div class="faq-a">Sí. El sistema acepta conjuntos propios en formato JSON. Los provenientes de genómica propia o de registros RAAA pueden cargarse, aunque algunos perfiles de RD_O&P pueden quedar no calculables si faltan DEPs específicas. Los conjuntos los carga Ing. Delgado en la plataforma; el publicador decide si el acceso es abierto o requiere clave.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>¿Se necesita instalar algo?</span><span class="faq-arrow">▾</span></div>
+          <div class="faq-a">No. SEPA-Select opera como aplicación web desde el navegador, sin instalación. Funciona en computadora de escritorio, notebook y tablet.</div>
+        </div>
+      </div>
     </div>
   </div>
-</footer>
+</section>
+
+<!-- ══ 10 · CONTACTO ══ -->
+<section class="slide sl-a" id="contacto">
+  <div class="container">
+    <p class="s-label">Contacto</p>
+    <h2 class="s-title">Escribinos.</h2>
+    <div class="contacto-grid">
+      <div class="contacto-left">
+        <p class="s-sub">La app está abierta: entrá y probala directamente. Este canal es para carga de catálogos y consultas técnicas.</p>
+        <div class="contacto-puntos">
+          <div class="cp-item"><div class="cp-ic">🔓</div><div class="cp-txt"><strong>BASE sin cargo</strong><span>Sin tarjeta ni vencimiento. La herramienta de ranking es de acceso libre.</span></div></div>
+          <div class="cp-item"><div class="cp-ic">📄</div><div class="cp-txt"><strong>Carga de catálogos</strong><span>Enviás el PDF o Excel; se analiza, se carga y vos definís el acceso.</span></div></div>
+          <div class="cp-item"><div class="cp-ic">🛠</div><div class="cp-txt"><strong>Soporte directo</strong><span>Consulta directa con Ing. Ricardo Delgado.</span></div></div>
+        </div>
+      </div>
+      <div class="contacto-box">
+        <h3>Consultas y contacto</h3>
+        <p class="lead">Dejá tus datos y te respondemos dentro de las 24–48&nbsp;h hábiles.</p>
+        <form id="reg-form">
+          <div class="form-row">
+            <div class="form-group"><label>Nombre y apellido</label><input type="text" name="nombre" placeholder="Ing. Juan García" required></div>
+            <div class="form-group"><label>WhatsApp</label><input type="tel" name="whatsapp" placeholder="+54 9 11 1234-5678"></div>
+          </div>
+          <div class="form-group"><label>Correo electrónico</label><input type="email" name="email" placeholder="juan@establecimiento.com" required></div>
+          <div class="form-group"><label>Consulta</label><textarea name="mensaje" placeholder="Carga de catálogo, sistema productivo, dudas técnicas..."></textarea></div>
+          <button type="submit" class="form-submit">Enviar consulta →</button>
+          <p class="form-note">Escribe a <a href="mailto:contacto@programa-sepa.com.ar">contacto@programa-sepa.com.ar</a> · No compartimos tus datos.</p>
+        </form>
+        <div id="form-ok" style="display:none;text-align:center;padding:1.4rem 0;color:var(--muted)">
+          <div style="font-size:1.6rem;margin-bottom:.4rem">✓</div>
+          <strong style="color:var(--dark)">Se abrió el borrador de correo.</strong>
+          <p style="font-size:.82rem;margin-top:.4rem">Si no se abrió, escribí a <a href="mailto:contacto@programa-sepa.com.ar" style="color:var(--green)">contacto@programa-sepa.com.ar</a></p>
+        </div>
+        <div class="contacto-meta">
+          <div><strong>Ing. Ricardo Emilio Delgado</strong> · Bariloche, Argentina</div>
+          <div><a href="mailto:contacto@programa-sepa.com.ar">contacto@programa-sepa.com.ar</a> · programa-sepa.com.ar</div>
+          <div class="cm-dnda">SEPA-Select · v9 · En desarrollo activo · Exp. DNDA EX-2026-81106223-APN-DNDA#MJ · Sistema independiente de análisis de DEPs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /deck -->
+
+<div class="deck-ui">
+  <button class="deck-btn" id="btn-prev" aria-label="Anterior">▲</button>
+  <button class="deck-btn" id="btn-next" aria-label="Siguiente">▼</button>
+</div>
+<div class="deck-dots" id="deck-dots"></div>
 
 <script>
-/* ── RANKING DEMO — datos reales CIIADO 2026 ── */
-// WW dirección positiva · PN dirección negativa (PN bajo = mejor facilidad de parto)
-// El demo muestra el antagonismo clásico WW vs facilidad de parto en Angus
-const bulls=[
-  {name:"Baqueano",  WW:15.6, PN:-0.6},  // máximo WW, PN aceptable
-  {name:"Jerarca",   WW:14.5, PN: 0.5},  // alto WW, PN positivo (partos difíciles)
-  {name:"Kyoto",     WW: 8.7, PN:-1.5},  // WW medio, buen PN
-  {name:"Serafín",   WW: 2.8, PN:-1.7},  // WW bajo, mínimo PN
-  {name:"Práctico",  WW:-1.2, PN:-1.7},  // menor WW del catálogo, mínimo PN
+/* ── DEMO ── */
+const repros = [
+  {name:"Reproductor A", WW:15.6, PN:-0.6},
+  {name:"Reproductor B", WW:14.5, PN: 0.5},
+  {name:"Reproductor C", WW: 8.7, PN:-1.5},
+  {name:"Reproductor D", WW: 2.8, PN:-1.7},
+  {name:"Reproductor E", WW:-1.2, PN:-1.7},
 ];
-// Normalización: WW positivo (mayor=mejor), PN negativo (menor=mejor → invertir)
-const WW_MIN=-1.2,WW_MAX=15.6,PN_MIN=-1.7,PN_MAX=0.5;
+const WW_MIN=-1.2, WW_MAX=15.6, PN_MIN=-1.7, PN_MAX=0.5;
 const normPos=(v,mn,mx)=>(v-mn)/(mx-mn)*100;
-const normNeg=(v,mn,mx)=>(mx-v)/(mx-mn)*100; // invierte dirección
-
-function calcScore(b,ww,pn){
-  const t=ww+pn||1;
-  return(normPos(b.WW,WW_MIN,WW_MAX)*ww + normNeg(b.PN,PN_MIN,PN_MAX)*pn)/t;
-}
+const normNeg=(v,mn,mx)=>(mx-v)/(mx-mn)*100;
+const fmt=v=>v>0?'+'+v.toFixed(1):v.toFixed(1);
+function calcScore(r, ww, pn){ const t = ww + pn || 1; return (normPos(r.WW,WW_MIN,WW_MAX)*ww + normNeg(r.PN,PN_MIN,PN_MAX)*pn) / t; }
 function renderDemo(){
-  const ww=+document.getElementById('sl-ww').value;
-  const pn=+document.getElementById('sl-pn').value;
-  document.getElementById('vl-ww').textContent=(ww*10)+'%';
-  document.getElementById('vl-pn').textContent=(pn*10)+'%';
-  const sc=bulls.map(b=>({...b,score:calcScore(b,ww,pn)})).sort((a,b)=>b.score-a.score);
-  const mx=sc[0].score||1;
-  const pnFmt=v=>v>0?'+'+v.toFixed(1):v.toFixed(1);
-  document.getElementById('bull-list').innerHTML=sc.map((b,i)=>`
-    <div class="bull-row">
+  const ww = +document.getElementById('sl-ww').value;
+  const pn = +document.getElementById('sl-pn').value;
+  document.getElementById('vl-ww').textContent = (ww*10)+'%';
+  document.getElementById('vl-pn').textContent = (pn*10)+'%';
+  const sc = repros.map(r=>({...r, score:calcScore(r,ww,pn)})).sort((a,b)=>b.score-a.score);
+  document.getElementById('bull-list').innerHTML = sc.map((r,i)=>`
+    <div class="bull-row${i===0?' rank-1':''}">
       <div class="b-pos">${i+1}</div>
       <div class="b-info">
-        <div class="b-name">${b.name}</div>
-        <div class="b-deps">
-          <span class="dep-chip dep-ww">WW ${pnFmt(b.WW)}</span>
-          <span class="dep-chip dep-ce">PN ${pnFmt(b.PN)}</span>
-        </div>
+        <div class="b-name">${r.name}</div>
+        <div class="b-deps"><span class="dep-chip dep-ww">WW ${fmt(r.WW)}</span><span class="dep-chip dep-pn">PN ${fmt(r.PN)}</span></div>
       </div>
-      <div class="b-score">
-        <div class="b-score-val">${b.score.toFixed(0)}</div>
-        <div class="b-bar"><div class="b-fill" style="width:${(b.score/mx*100).toFixed(0)}%"></div></div>
-      </div>
+      <div class="b-score-val">${r.score.toFixed(0)}</div>
     </div>`).join('');
 }
-document.getElementById('sl-ww').addEventListener('input',renderDemo);
-document.getElementById('sl-pn').addEventListener('input',renderDemo);
+document.getElementById('sl-ww').addEventListener('input', renderDemo);
+document.getElementById('sl-pn').addEventListener('input', renderDemo);
 renderDemo();
 
 /* ── FAQs ── */
 function toggleFaq(el){
-  const a=el.nextElementSibling;
-  const isOpen=a.classList.contains('open');
+  const a = el.nextElementSibling;
+  const isOpen = a.classList.contains('open');
   document.querySelectorAll('.faq-a.open').forEach(x=>x.classList.remove('open'));
   document.querySelectorAll('.faq-q.open').forEach(x=>x.classList.remove('open'));
-  if(!isOpen){a.classList.add('open');el.classList.add('open');}
+  if(!isOpen){ a.classList.add('open'); el.classList.add('open'); }
+  if(window.__refit) setTimeout(window.__refit, 40);
 }
 
-/* ── FORMULARIO ── */
-document.getElementById('reg-form').addEventListener('submit',function(e){
+/* ── FORMULARIO (mailto) ── */
+document.getElementById('reg-form').addEventListener('submit', function(e){
   e.preventDefault();
-  const d=new FormData(this);
-  const body=[...d.entries()].map(([k,v])=>`${k}: ${v}`).join('\n');
-  window.location.href=`mailto:info@programa-sepa.com.ar?subject=Solicitud de acceso SEPA-Select&body=${encodeURIComponent(body)}`;
-  this.style.display='none';
-  document.getElementById('form-ok').style.display='block';
+  const d = new FormData(this);
+  const body = [...d.entries()].map(([k,v])=>`${k}: ${v}`).join('\n');
+  window.location.href = `mailto:contacto@programa-sepa.com.ar?subject=${encodeURIComponent('Consulta SEPA-Select')}&body=${encodeURIComponent(body)}`;
+  this.style.display = 'none';
+  document.getElementById('form-ok').style.display = 'block';
 });
+
+/* ── DECK ── */
+(function(){
+  const deck = document.getElementById('deck');
+  const slides = [...deck.querySelectorAll('.slide')];
+  const dotsWrap = document.getElementById('deck-dots');
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  let cur = 0;
+  const deckMode = () => window.innerWidth >= 941;
+
+  function fitSlide(s){ const c = s.querySelector('.container'); if(!c) return; c.style.transform='none'; s.classList.remove('fit-scroll'); }
+  function fitAll(){ slides.forEach(fitSlide); }
+  let rt;
+  window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(fitAll, 120); });
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+  window.addEventListener('load', fitAll);
+  window.__refit = () => { fitSlide(slides[cur]); };
+
+  slides.forEach((s,i)=>{
+    const b = document.createElement('button');
+    b.className = 'deck-dot'; b.title = 'Diapositiva ' + (i+1);
+    b.addEventListener('click', ()=>goTo(i));
+    dotsWrap.appendChild(b);
+  });
+  const dots = [...dotsWrap.children];
+  function paint(){
+    dots.forEach((d,i)=>d.classList.toggle('active', i===cur));
+    btnPrev.disabled = cur===0;
+    btnNext.disabled = cur===slides.length-1;
+  }
+  function goTo(i){
+    cur = Math.max(0, Math.min(slides.length-1, i));
+    slides[cur].scrollIntoView({behavior:'smooth', block:'start'});
+    paint();
+  }
+  window.__goTo = goTo;
+  btnPrev.addEventListener('click', ()=>goTo(cur-1));
+  btnNext.addEventListener('click', ()=>goTo(cur+1));
+  document.querySelectorAll('[data-goto]').forEach(el=>{
+    el.addEventListener('click', e=>{ e.preventDefault(); goTo(+el.dataset.goto); });
+  });
+  window.addEventListener('keydown', e=>{
+    if(!deckMode()) return;
+    const t = e.target.tagName;
+    if(t==='INPUT' || t==='TEXTAREA' || t==='SELECT') return;
+    const k = e.key, c = e.code;
+    if(k==='PageDown'||c==='PageDown'||k==='ArrowDown'||(k===' '&&!e.shiftKey)){ e.preventDefault(); goTo(cur+1); }
+    else if(k==='PageUp'||c==='PageUp'||k==='ArrowUp'||(k===' '&&e.shiftKey)){ e.preventDefault(); goTo(cur-1); }
+    else if(k==='Home'){ e.preventDefault(); goTo(0); }
+    else if(k==='End'){ e.preventDefault(); goTo(slides.length-1); }
+  });
+  const io = new IntersectionObserver(es=>{
+    es.forEach(en=>{ if(en.isIntersecting){ cur = slides.indexOf(en.target); paint(); } });
+  }, {root: deckMode() ? deck : null, threshold:0.55});
+  slides.forEach(s=>io.observe(s));
+
+  fitAll();
+  paint();
+})();
 </script>
 </body>
 </html>
