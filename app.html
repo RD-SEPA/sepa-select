@@ -25,8 +25,8 @@
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie);color:var(--texto);font-size:14px;min-height:100vh}
 
 /* ── LOGIN ── */
-#registro-overlay,#carga-overlay{position:fixed;inset:0;background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));z-index:400;display:flex;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto}
-#registro-overlay.hidden,#carga-overlay.hidden{display:none!important}
+#registro-overlay,#carga-overlay,#login-overlay{position:fixed;inset:0;background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));z-index:400;display:flex;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto}
+#registro-overlay.hidden,#carga-overlay.hidden,#login-overlay.hidden{display:none!important}
 #carga-overlay .login-box{max-width:520px;margin:auto}
 .carga-field{margin-bottom:12px}
 .carga-field input,.carga-field select,.carga-field textarea{width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box;font-family:inherit}
@@ -617,7 +617,7 @@ textarea.inf-notas::placeholder{color:#c0bbb4;font-style:italic}
 @media print{
   @page{size:A4 portrait;margin:12mm 14mm}
   html,body{overflow:visible!important;height:auto!important;background:white!important}
-  #registro-overlay,#carga-overlay,#main-app{display:none!important}
+  #registro-overlay,#carga-overlay,#login-overlay,#main-app{display:none!important}
   #informe-overlay{position:static!important;overflow:visible!important;background:white!important;padding:0!important}
   #informe-overlay .inf-topbar,#informe-overlay #inf-panel{display:none!important}
   #inf-report{display:block!important;overflow:visible!important;padding:0!important}
@@ -754,6 +754,13 @@ tr.sel-z:hover td{background:#d4ecda!important}
 .conf-dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex-shrink:0}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+  // Backend de control de acceso (usuarios/licencias/catálogos) — no reemplaza data/*.json
+  const SUPABASE_URL = 'https://eyfvqlairgpnriyrkdor.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_M6MvPIvBDXfrjmpGlGPFAw_5Wh8vOSG';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+</script>
 
 </head>
 <body>
@@ -846,6 +853,12 @@ tr.sel-z:hover td{background:#d4ecda!important}
           color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box">
       </div>
       <div>
+        <div class="login-label">Contraseña * <span style="opacity:.5;font-size:.8em">(mín. 6 caracteres)</span></div>
+        <input id="reg-password" type="password" placeholder="••••••••" autocomplete="new-password"
+          style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
+          color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box">
+      </div>
+      <div>
         <div class="login-label">Rol</div>
         <select id="reg-rol"
           style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
@@ -876,8 +889,48 @@ tr.sel-z:hover td{background:#d4ecda!important}
 
     <button class="btn-login" onclick="doRegistro()">Registrarme y entrar →</button>
 
+    <div style="margin-top:12px">
+      <a href="#" onclick="mostrarLogin();return false" style="color:rgba(255,255,255,.85);font-size:.85rem">
+        ¿Ya tenés cuenta? Iniciar sesión →</a>
+    </div>
+
     <div class="login-credito">
       Al registrarte se activa tu licencia BASE sin cargo.<br>
+      SEPA-Select® · DNDA EX-2026-81106223-APN-DNDA#MJ
+    </div>
+  </div>
+</div>
+
+<!-- ══ LOGIN (usuario ya registrado) ══ -->
+<div id="login-overlay" class="hidden">
+  <div class="login-box" style="max-width:420px">
+    <div class="login-logo">SEPA<span>-Select</span></div>
+    <div class="login-sub">Iniciar sesión</div>
+    <div class="login-error" id="login-error"></div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;text-align:left">
+      <div>
+        <div class="login-label">Email</div>
+        <input id="login-email" type="email" placeholder="juan@establecimiento.com" autocomplete="username"
+          style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
+          color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box">
+      </div>
+      <div>
+        <div class="login-label">Contraseña</div>
+        <input id="login-password" type="password" placeholder="••••••••" autocomplete="current-password"
+          style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
+          color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box">
+      </div>
+    </div>
+
+    <button class="btn-login" onclick="doLogin()">Ingresar →</button>
+
+    <div style="margin-top:12px">
+      <a href="#" onclick="mostrarRegistro();return false" style="color:rgba(255,255,255,.85);font-size:.85rem">
+        ¿No tenés cuenta? Registrate →</a>
+    </div>
+
+    <div class="login-credito">
       SEPA-Select® · DNDA EX-2026-81106223-APN-DNDA#MJ
     </div>
   </div>
@@ -989,7 +1042,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <header class="app-header">
   <div class="header-top">
     <div class="header-brand">
-      <div class="header-title">SEPA-Select: Evaluación por DEPS <span class="licencia-badge lb-base" id="licencia-badge">BASE</span><span id="header-usuario-info" style="font-size:.72rem;opacity:.6;font-weight:400;margin-left:12px"></span></div>
+      <div class="header-title">SEPA-Select: Evaluación por DEPS <span class="licencia-badge lb-base" id="licencia-badge">BASE</span><span id="header-usuario-info" style="font-size:.72rem;opacity:.6;font-weight:400;margin-left:12px"></span><a href="#" onclick="cerrarSesionCuenta();return false" title="Cerrar sesión de tu cuenta (distinto de 'Salir', que solo vuelve a catálogos)" style="font-size:.68rem;opacity:.55;font-weight:400;margin-left:8px;color:inherit;text-decoration:underline">cerrar sesión</a></div>
       <div class="header-sub" id="header-sub">${_modoAnonimo?"Proveedor IATF":'CIIADO 2026 · Angus Negro y Colorado · 26 toros'}</div>
       <span id="dev-badge" hidden style="position:absolute;top:8px;right:12px;font-size:.66rem;font-weight:700;letter-spacing:.08em;color:#f0d9a8;background:rgba(184,137,43,.35);border:1px solid var(--oro);padding:2px 8px;border-radius:5px">MODO DEV</span>
     </div>
@@ -1681,31 +1734,102 @@ const EMBEDDED_CATALOGOS = {catalogos:[]};  // deploy: data via fetch
 const EMBEDDED_TOROS = {};  // deploy: data via fetch
 
 // ── CARGA INICIAL ──────────────────────────────
-function iniciarApp() {
+async function iniciarApp() {
   renderFAQs();
   // Modo desarrollador: badge
   const _db = document.getElementById('dev-badge'); if (_db) _db.hidden = !esDev();
-  let u = null;
-  try { u = JSON.parse(localStorage.getItem('sepa_usuario') || 'null'); } catch (e) { u = null; }
-  if (u) {
-    // Ya registrado: entra directo con la licencia guardada (BASE por defecto)
-    document.getElementById('registro-overlay').classList.add('hidden');
-    document.getElementById('selector-modo').classList.add('hidden');
-    sepaState.modo = u.licencia || 'BASE';
-    sepaState.licencia = u.licencia || 'BASE';
-    actualizarHeaderUsuario();
-    cargarCatalogosYMostrar();
+  let session = null;
+  try {
+    const r = await sb.auth.getSession();
+    session = r.data && r.data.session;
+  } catch (e) { session = null; }
+  if (session) {
+    await cargarPerfilYEntrar(session.user);
   } else {
-    // Sin registrar: pedir registro (activa licencia BASE al completarlo)
+    // Sin sesión: pedir registro (activa licencia BASE al completarlo) o login si ya tiene cuenta
+    document.getElementById('login-overlay').classList.add('hidden');
     document.getElementById('registro-overlay').classList.remove('hidden');
     document.getElementById('selector-modo').classList.add('hidden');
   }
 }
 
-function cargarCatalogosYMostrar() {
+// Trae el perfil real (licencia) desde Supabase y entra a la app.
+// perfilExtra (opcional) trae nombre/whatsapp/rol/promo recién tipeados en el registro,
+// para no depender de que ya estén guardados en localStorage.
+async function cargarPerfilYEntrar(user, perfilExtra) {
+  let perfil = null;
+  try {
+    const { data } = await sb.from('usuarios').select('*').eq('id', user.id).single();
+    perfil = data;
+  } catch (e) { perfil = null; }
+
+  // Mantiene localStorage['sepa_usuario'] como caché de conveniencia para el resto de la app
+  // (header, mailto de "Quiero PLUS", pedido de carga) — la fuente real de la licencia es Supabase.
+  const prev = (() => { try { return JSON.parse(localStorage.getItem('sepa_usuario') || 'null'); } catch (e) { return null; } })() || {};
+  const usuarioCache = Object.assign({}, prev, perfilExtra || {}, {
+    email: (perfil && perfil.email) || user.email,
+    nombre: (perfilExtra && perfilExtra.nombre) || prev.nombre || (perfil && perfil.nombre) || '',
+    licencia: (perfil && perfil.licencia) || 'BASE'
+  });
+  localStorage.setItem('sepa_usuario', JSON.stringify(usuarioCache));
+
+  document.getElementById('registro-overlay').classList.add('hidden');
+  document.getElementById('login-overlay').classList.add('hidden');
+  document.getElementById('selector-modo').classList.add('hidden');
+  sepaState.modo = usuarioCache.licencia || 'BASE';
+  sepaState.licencia = sepaState.modo;
+  actualizarHeaderUsuario();
+  cargarCatalogosYMostrar();
+}
+
+function mostrarLogin() {
+  document.getElementById('registro-overlay').classList.add('hidden');
+  document.getElementById('login-overlay').classList.remove('hidden');
+}
+function mostrarRegistro() {
+  document.getElementById('login-overlay').classList.add('hidden');
+  document.getElementById('registro-overlay').classList.remove('hidden');
+}
+
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const err = document.getElementById('login-error');
+  err.style.color = '#ffb3b3'; err.textContent = '';
+  if (!email || !password) { err.textContent = 'Ingresá email y contraseña.'; return; }
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  if (error) {
+    err.textContent = 'No pudimos iniciar sesión: ' + (error.message === 'Invalid login credentials'
+      ? 'email o contraseña incorrectos.' : error.message);
+    return;
+  }
+  await cargarPerfilYEntrar(data.user);
+}
+
+async function cerrarSesionCuenta() {
+  try { await sb.auth.signOut(); } catch (e) {}
+  localStorage.removeItem('sepa_usuario');
+  location.reload();
+}
+
+async function cargarCatalogosYMostrar() {
+  // Qué catálogos puede ver ESTE usuario, según Supabase (RLS: activos + públicos, o
+  // privados propios). Si la consulta falla (offline, RLS mal configurada, etc.) se
+  // muestra todo lo de data/catalogos.json como antes, para no dejar la app en blanco.
+  let permitidos = null;
+  try {
+    const { data, error } = await sb.from('catalogos').select('id');
+    if (!error) permitidos = new Set((data || []).map(c => c.id));
+  } catch (e) { permitidos = null; }
+
   fetch('data/catalogos.json')
     .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-    .then(j => { CATALOGOS_DISPONIBLES = j.catalogos || j || []; showCatalogos(); })
+    .then(j => {
+      let lista = j.catalogos || j || [];
+      if (permitidos) lista = lista.filter(c => permitidos.has(c.id));
+      CATALOGOS_DISPONIBLES = lista;
+      showCatalogos();
+    })
     .catch(err => {
       CATALOGOS_DISPONIBLES = [];
       showCatalogos();
@@ -1960,22 +2084,26 @@ function hidePlusGate(){
 // ═══════════════════════════════════════════════
 
 // ── REGISTRO ─────────────────────────────────────────────
-function doRegistro() {
+async function doRegistro() {
   const nombre   = document.getElementById('reg-nombre').value.trim();
   const email    = document.getElementById('reg-email').value.trim();
   const whatsapp = document.getElementById('reg-whatsapp').value.trim();
+  const password = document.getElementById('reg-password').value;
   const rol      = document.getElementById('reg-rol').value;
   const promo    = document.getElementById('reg-promo').value.trim().toUpperCase();
   const err      = document.getElementById('reg-error');
+  err.style.color = '#ffb3b3'; err.textContent = '';
 
-  if (!nombre || !email || !whatsapp) {
-    err.style.color = '#ffb3b3';
-    err.textContent = 'Nombre, email y WhatsApp son obligatorios.';
+  if (!nombre || !email || !whatsapp || !password) {
+    err.textContent = 'Nombre, email, WhatsApp y contraseña son obligatorios.';
     return;
   }
   if (!/\S+@\S+\.\S+/.test(email)) {
-    err.style.color = '#ffb3b3';
     err.textContent = 'Ingresá un email válido.';
+    return;
+  }
+  if (password.length < 6) {
+    err.textContent = 'La contraseña debe tener al menos 6 caracteres.';
     return;
   }
 
@@ -1987,31 +2115,42 @@ function doRegistro() {
     if (PROMOS[promo] !== undefined) {
       promoValido = true;
       promoDesc   = PROMOS[promo];
-      err.style.color = 'lightgreen';
-      err.textContent = `Código ${promo} aplicado · ${promoDesc*100}% de descuento en PLUS`;
     } else {
-      err.style.color = '#ffb3b3';
       err.textContent = `Código "${promo}" no reconocido. Podés continuar igual.`;
     }
   }
 
-  // Guardar en localStorage
-  localStorage.setItem('sepa_usuario', JSON.stringify({
-    nombre, email, whatsapp, rol,
+  const { data, error } = await sb.auth.signUp({
+    email, password,
+    options: { data: { nombre } }
+  });
+  if (error) {
+    err.textContent = error.message.includes('already registered') || error.message.includes('already exists')
+      ? 'Ya existe una cuenta con ese email — probá "Iniciar sesión".'
+      : 'No pudimos registrarte: ' + error.message;
+    return;
+  }
+  if (!data.session) {
+    // El proyecto tiene "Confirm email" activado en Supabase Auth — no hay alta instantánea posible
+    // hasta que RD lo desactive (ver memoria del proyecto). Avisar en vez de fallar en silencio.
+    err.style.color = 'lightgreen';
+    err.textContent = 'Cuenta creada. Revisá tu email para confirmar y después iniciá sesión.';
+    return;
+  }
+
+  const perfilExtra = {
+    nombre, whatsapp, rol,
     autorizado: document.getElementById('reg-autorizado').checked,
     promo: promoValido ? promo : null,
     promo_desc: promoDesc,
-    licencia: 'BASE',
     fecha_registro: new Date().toISOString()
-  }));
-  localStorage.setItem('sepa_login_time', Date.now());
+  };
 
   // Enviar mail de notificación (Fase 1)
   const asunto = encodeURIComponent(`Nuevo registro SEPA-Select · ${nombre}`);
   const cuerpo = encodeURIComponent(
     `Nombre: ${nombre}\nEmail: ${email}\nWhatsApp: ${whatsapp}\nRol: ${rol}\nPromo: ${promo||'—'}\nFecha: ${new Date().toLocaleString('es-AR')}`
   );
-  // Abrir mailto en background (no bloquea el flujo)
   const a = document.createElement('a');
   a.href = `mailto:contacto@programa-sepa.com.ar?subject=${asunto}&body=${cuerpo}`;
   a.style.display = 'none';
@@ -2019,12 +2158,7 @@ function doRegistro() {
   a.click();
   document.body.removeChild(a);
 
-  // Registrado: licencia BASE activa, entra directo (sin pasar por el selector)
-  document.getElementById('registro-overlay').classList.add('hidden');
-  sepaState.modo = 'BASE';
-  sepaState.licencia = 'BASE';
-  actualizarHeaderUsuario();
-  cargarCatalogosYMostrar();
+  await cargarPerfilYEntrar(data.user, perfilExtra);
 }
 
 function seleccionarModo(modo){
