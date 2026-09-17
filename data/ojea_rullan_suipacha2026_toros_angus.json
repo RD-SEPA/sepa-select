@@ -1,0 +1,280 @@
+{
+ "meta": {
+  "nombre": "Ojea Rullán - La Juanita - Suipacha 2026",
+  "cabana": "La Juanita",
+  "expositor": "Ojea Rullán Online",
+  "evento": "Suipacha 2026",
+  "raza": "Angus",
+  "tipo": "temporal",
+  "fuente": "web",
+  "fuente_url": "https://ojearullanonline.com.ar/suipacha2026/toros-angus/",
+  "catalogo_pdf_oficial": "https://ojearullanonline.com.ar/suipacha2026/wp-content/uploads/2026/09/LaJuanitaSuipacha2026.pdf",
+  "totalToros": 8,
+  "fecha_extraccion": "2026-09-17",
+  "notas": [
+   "DEPs extraídos directamente de cada página de lote (sin precisión/percentil ERA en la fuente).",
+   "Mapeo de columnas del sitio -> esquema interno: PD->WW, ALT->Alt, LECHE->Leche, GD->EGD, GC->EGC, %C.MIN->Cortes.",
+   "Lote 7: el sitio y el PDF oficial (pag. 45) publican PF=42,0 sin signo, atípico vs. el resto del lote (rango +/-20). No es error de esta extracción. Se reemplazó por el promedio de PF de los otros 7 toros (13,59) como valor provisorio -- verificar con el criador/Surangus antes de usar en un informe definitivo.",
+   "Datos verificados 1:1 contra el PDF oficial 'Gran Venta La Juanita Suipacha 2026' (58 pags., descargado 2026-09-17), lotes 1-8 = paginas 32-46.",
+   "Pelaje confirmado revisando las fotos de cada lote en el PDF oficial + descripciones (2 lotes lo mencionan explícitamente: Lote 2 colorado, Lote 7 negro)."
+  ]
+ },
+ "toros": [
+  {
+   "nombre": "TALISMAN LA JUANITA 74 SORGO-FIV-",
+   "rp": "74",
+   "nacimiento": "25/03/2024",
+   "hba": "915956",
+   "padre": "ERRE TE 383 CONDOR EURO-T/E-",
+   "madre": "BEST 4262 TAYTON MR ANGUS T/E",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "lote": 1,
+   "subasta": {
+    "estado": "Subasta Activa",
+    "inicio": "2026-09-15 10:00",
+    "fin": "2026-09-17 20:00",
+    "precioInicial": 18000000,
+    "ofertaActual": 18000000
+   },
+   "deps": {
+    "PN": { "dep": 0.3 },
+    "WW": { "dep": 5.9 },
+    "PF": { "dep": 16.2 },
+    "Alt": { "dep": 1.0 },
+    "Leche": { "dep": 1.1 },
+    "AOB": { "dep": 3.3 },
+    "CE": { "dep": 1.2 },
+    "LG": { "dep": -1.3 },
+    "EGD": { "dep": 0.87 },
+    "EGC": { "dep": 1.23 },
+    "GI": { "dep": 0.02 },
+    "Cortes": { "dep": -0.7 }
+   }
+  },
+  {
+   "nombre": "LA JUANITA 1671 MATEO T/E",
+   "rp": "1671",
+   "nacimiento": "11/05/2024",
+   "hba": "913435",
+   "padre": "INDIO NUEVO 795 MATEO 326 -FIV-",
+   "madre": "PASTORIZA 2490 VIOLETA T/E",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "lote": 2,
+   "subasta": {
+    "estado": "Subasta Activa",
+    "inicio": "2026-09-15 10:00",
+    "fin": "2026-09-17 20:00",
+    "precioInicial": 15000000,
+    "ofertaActual": 16000000
+   },
+   "deps": {
+    "PN": { "dep": 1.1 },
+    "WW": { "dep": 9.9 },
+    "PF": { "dep": 14.8 },
+    "Alt": { "dep": 2.2 },
+    "Leche": { "dep": -0.5 },
+    "AOB": { "dep": 0.5 },
+    "CE": { "dep": 1.7 },
+    "LG": { "dep": -0.4 },
+    "EGD": { "dep": 0.0 },
+    "EGC": { "dep": 0.07 },
+    "GI": { "dep": 0.04 },
+    "Cortes": { "dep": 0.1 }
+   }
+  },
+  {
+   "nombre": "NEROS LA JUANITA ESPECIAL 1916",
+   "rp": "1916",
+   "nacimiento": "19/05/2024",
+   "hba": "925100",
+   "padre": "SURANGUS 03477 ESPECIAL",
+   "madre": "LA JUANITA 864 FLOR Y FLOR T/E",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "lote": 3,
+   "subasta": {
+    "estado": "Subasta Activa",
+    "inicio": "2026-09-15 10:00",
+    "fin": "2026-09-17 20:00",
+    "precioInicial": 12000000,
+    "ofertaActual": 13000000
+   },
+   "deps": {
+    "PN": { "dep": -1.3 },
+    "WW": { "dep": -3.2 },
+    "PF": { "dep": -0.8 },
+    "Alt": { "dep": 1.0 },
+    "Leche": { "dep": 6.0 },
+    "AOB": { "dep": 2.6 },
+    "CE": { "dep": 1.0 },
+    "LG": { "dep": 0.0 },
+    "EGD": { "dep": 0.57 },
+    "EGC": { "dep": 0.63 },
+    "GI": { "dep": 0.05 },
+    "Cortes": { "dep": -0.2 }
+   }
+  },
+  {
+   "nombre": "LA JUANITA RED 1623 TITAN",
+   "rp": "1623",
+   "nacimiento": "04/08/2024",
+   "hba": "910218",
+   "padre": "BENJAMIN 9539 TITAN",
+   "madre": "LA JUANITA RED 912 DOLORES",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "lote": 4,
+   "subasta": {
+    "estado": "Subasta Activa",
+    "inicio": "2026-09-15 10:00",
+    "fin": "2026-09-17 20:00",
+    "precioInicial": 13000000,
+    "ofertaActual": 14000000
+   },
+   "deps": {
+    "PN": { "dep": 0.2 },
+    "WW": { "dep": 4.1 },
+    "PF": { "dep": 8.4 },
+    "Alt": { "dep": 1.7 },
+    "Leche": { "dep": -1.3 },
+    "AOB": { "dep": 1.5 },
+    "CE": { "dep": 0.3 },
+    "LG": { "dep": 0.2 },
+    "EGD": { "dep": 0.05 },
+    "EGC": { "dep": 0.01 },
+    "GI": { "dep": -0.06 },
+    "Cortes": { "dep": 0.5 }
+   }
+  },
+  {
+   "nombre": "NERO'S 2000 C CAS 3057 HORUS",
+   "rp": "2000",
+   "nacimiento": "18/07/2024",
+   "hba": "910733",
+   "padre": "ESENCIAL 721 HORUS",
+   "madre": "CASAMU 3057 EPEU GIFT 1079",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "lote": 5,
+   "subasta": {
+    "estado": "Subasta Activa",
+    "inicio": "2026-09-15 10:00",
+    "fin": "2026-09-17 20:00",
+    "precioInicial": 13000000,
+    "ofertaActual": 14000000
+   },
+   "deps": {
+    "PN": { "dep": -1.8 },
+    "WW": { "dep": 4.2 },
+    "PF": { "dep": 1.0 },
+    "Alt": { "dep": 1.7 },
+    "Leche": { "dep": 1.8 },
+    "AOB": { "dep": 1.8 },
+    "CE": { "dep": 0.8 },
+    "LG": { "dep": -0.6 },
+    "EGD": { "dep": 0.47 },
+    "EGC": { "dep": 1.06 },
+    "GI": { "dep": -0.02 },
+    "Cortes": { "dep": -1.0 }
+   }
+  },
+  {
+   "nombre": "LA JUANITA 1607 EURO",
+   "rp": "1607",
+   "nacimiento": "02/04/2024",
+   "hba": "916066",
+   "padre": "ERRE TE 383 CONDOR EURO-T/E-",
+   "madre": "LA JUANITA 686 PINTURA",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "lote": 6,
+   "subasta": {
+    "estado": "Subasta Activa",
+    "inicio": "2026-09-15 10:00",
+    "fin": "2026-09-17 20:00",
+    "precioInicial": 10000000,
+    "ofertaActual": 10000000
+   },
+   "deps": {
+    "PN": { "dep": -0.5 },
+    "WW": { "dep": 9.5 },
+    "PF": { "dep": 21.6 },
+    "Alt": { "dep": 1.0 },
+    "Leche": { "dep": -1.1 },
+    "AOB": { "dep": 1.2 },
+    "CE": { "dep": 0.9 },
+    "LG": { "dep": -0.8 },
+    "EGD": { "dep": 0.59 },
+    "EGC": { "dep": 0.92 },
+    "GI": { "dep": 0.03 },
+    "Cortes": { "dep": -0.7 }
+   }
+  },
+  {
+   "nombre": "LA JUANITA 1611 DINAMITADO",
+   "rp": "1611",
+   "nacimiento": "01/08/2024",
+   "hba": "910222",
+   "padre": "BENJAMIN 9539 TITAN",
+   "madre": "CASAMU C9 LIGUA ALULEN",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "lote": 7,
+   "subasta": {
+    "estado": "Subasta Activa",
+    "inicio": "2026-09-15 10:00",
+    "fin": "2026-09-17 20:00",
+    "precioInicial": 12000000,
+    "ofertaActual": 12000000
+   },
+   "deps": {
+    "PN": { "dep": 0.6 },
+    "WW": { "dep": 8.4 },
+    "PF": { "dep": 13.59, "_advertencia": "valor original de la fuente (42,0, sin signo, confirmado igual en el PDF oficial pag. 45) es atípico vs. el resto del lote y fue reemplazado por el promedio de PF de los otros 7 toros del lote (13,59) hasta tener una aclaración del criador/Surangus" },
+    "Alt": { "dep": 1.4 },
+    "Leche": { "dep": 0.3 },
+    "AOB": { "dep": 1.3 },
+    "CE": { "dep": 1.0 },
+    "LG": { "dep": -0.2 },
+    "EGD": { "dep": 0.45 },
+    "EGC": { "dep": 0.82 },
+    "GI": { "dep": -0.06 },
+    "Cortes": { "dep": -0.5 }
+   }
+  },
+  {
+   "nombre": "LA JUANITA 100",
+   "rp": "100",
+   "nacimiento": "24/05/2024",
+   "hba": "917997",
+   "padre": "MUSGRAVE 316 COLOSSAL 137",
+   "madre": "DON FLORENCIO 1612 HEREDERA 1076",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "lote": 8,
+   "subasta": {
+    "estado": "Subasta Activa",
+    "inicio": "2026-09-15 10:00",
+    "fin": "2026-09-17 20:00",
+    "precioInicial": 10000000,
+    "ofertaActual": 10000000
+   },
+   "deps": {
+    "PN": { "dep": 0.1 },
+    "WW": { "dep": 10.7 },
+    "PF": { "dep": 33.9 },
+    "Alt": { "dep": 2.5 },
+    "Leche": { "dep": 1.1 },
+    "AOB": { "dep": 2.1 },
+    "CE": { "dep": 1.6 },
+    "LG": { "dep": -0.7 },
+    "EGD": { "dep": 0.64 },
+    "EGC": { "dep": 0.91 },
+    "GI": { "dep": 0.08 },
+    "Cortes": { "dep": -0.7 }
+   }
+  }
+ ]
+}
