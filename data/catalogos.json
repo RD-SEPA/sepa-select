@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "actualizado": "2026-08-24",
+ "actualizado": "2026-09-17",
  "catalogos": [
   {
    "id": "001",
@@ -161,6 +161,26 @@
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-09-11",
    "ultimo_ingreso": "2026-09-11"
+  },
+  {
+   "id": "009",
+   "nombre": "La Juanita - Suipacha 2026 (Ojea Rullán)",
+   "fecha": "2026-09-17",
+   "cabana": "La Juanita",
+   "expositor": "Ojea Rullán Online",
+   "email": "",
+   "puntaje": 2,
+   "tipo": "temporal",
+   "esNovedad": true,
+   "novedad": "",
+   "acceso": "abierto",
+   "totalToros": 8,
+   "aptos": 8,
+   "archivo": "ojea_rullan_suipacha2026_toros_angus.json",
+   "fuente": "web",
+   "cargado_por": "Ricardo",
+   "fecha_carga": "2026-09-17",
+   "ultimo_ingreso": "2026-09-17"
   }
  ]
 }
