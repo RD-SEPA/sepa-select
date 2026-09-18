@@ -841,6 +841,20 @@ tr.sel-z:hover td{background:#d4ecda!important}
 </div>
 
 <!-- ══ REGISTRO OVERLAY ══ -->
+<!-- Selector rápido de cuentas de prueba — SOLO modo desarrollador (?dev=RD2026),
+     visible desde la primera pantalla, no depende de estar logueado. -->
+<div id="dev-switcher" class="hidden" style="position:fixed;top:10px;right:10px;z-index:9999;
+  background:rgba(20,20,20,.85);padding:8px 10px;border-radius:9px;box-shadow:0 2px 10px rgba(0,0,0,.35)">
+  <select onchange="if(this.value) cambiarUsuarioDev(this.value)"
+    style="padding:6px 8px;border-radius:6px;border:none;font-size:.82rem">
+    <option value="">🔄 Cambiar usuario (DEV)…</option>
+    <option value="A1">A1</option>
+    <option value="B1">B1</option>
+    <option value="C1">C1</option>
+    <option value="RD1">RD1</option>
+  </select>
+</div>
+
 <div id="registro-overlay" class="hidden">
   <div class="login-box" style="max-width:480px">
     <div class="login-logo">SEPA<span>-Select</span></div>
@@ -1793,6 +1807,7 @@ async function iniciarApp() {
   renderFAQs();
   // Modo desarrollador: badge
   const _db = document.getElementById('dev-badge'); if (_db) _db.hidden = !esDev();
+  const _dsw = document.getElementById('dev-switcher'); if (_dsw) _dsw.classList.toggle('hidden', !esDev());
   let session = null;
   try {
     const r = await sb.auth.getSession();
@@ -2426,8 +2441,19 @@ function renderCatalogosDisponibles(){
     <div class="catalogo-card-top"><div class="catalogo-card-nombre">🔑 Tengo un código de catálogo</div></div>
     <div class="catalogo-card-meta"><div class="catalogo-meta-row">Canjeá el código que te compartió el dueño del catálogo</div></div>
   </div>`;
-  // Carga de JSON local: solo modo desarrollador
+  // Carga de JSON local + cambio rápido de usuario de prueba: solo modo desarrollador
   if (esDev()) {
+    const opcionesUsuarios = Object.keys(DEV_TEST_USERS)
+      .map(alias => `<option value="${alias}">${alias}</option>`).join('');
+    html += `<div class="catalogo-card" style="border-style:dashed;opacity:.7">
+    <div class="catalogo-card-top"><div class="catalogo-card-nombre">🔄 Cambiar usuario <span style="color:var(--oro)">· DEV</span></div></div>
+    <div class="catalogo-card-meta"><div class="catalogo-meta-row">Entrar como cuenta de prueba</div></div>
+    <select onchange="if(this.value) cambiarUsuarioDev(this.value)"
+      style="width:100%;padding:9px;border-radius:8px;margin-top:4px;border:1px solid var(--border)">
+      <option value="">Elegir cuenta…</option>
+      ${opcionesUsuarios}
+    </select>
+  </div>`;
     html += `<div class="catalogo-card" style="border-style:dashed;opacity:.7">
     <div class="catalogo-card-top"><div class="catalogo-card-nombre">📂 Cargar JSON local <span style="color:var(--oro)">· DEV</span></div></div>
     <div class="catalogo-card-meta"><div class="catalogo-meta-row">Para testing sin servidor</div></div>
@@ -2438,6 +2464,23 @@ function renderCatalogosDisponibles(){
   </div>`;
   }
   grid.innerHTML = html;
+}
+
+// Solo para uso de RD en modo desarrollador (?dev=RD2026) — cuentas de prueba
+// creadas el 2026-09-18 para testear el canje de código por catálogo.
+const DEV_TEST_USERS = {
+  A1:  { email:'ricardodelgadobariloche1+A1@yahoo.com.ar',  pass:'A11111'  },
+  B1:  { email:'ricardodelgadobariloche1+B1@yahoo.com.ar',  pass:'B11111'  },
+  C1:  { email:'ricardodelgadobariloche1+C1@yahoo.com.ar',  pass:'C11111'  },
+  RD1: { email:'ricardodelgadobariloche1+RD1@yahoo.com.ar', pass:'RD12026' },
+};
+async function cambiarUsuarioDev(alias){
+  const u = DEV_TEST_USERS[alias];
+  if (!u) return;
+  await sb.auth.signOut().catch(()=>{});
+  const { error } = await sb.auth.signInWithPassword({ email: u.email, password: u.pass });
+  if (error) { alert('No se pudo entrar como ' + alias + ': ' + error.message); return; }
+  location.reload();
 }
 
 async function seleccionarCatalogo(id){
