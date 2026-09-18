@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "actualizado": "2026-09-17",
+ "actualizado": "2026-08-24",
  "catalogos": [
   {
    "id": "001",
@@ -13,14 +13,15 @@
    "tipo": "permanente",
    "esNovedad": false,
    "novedad": "",
-   "acceso": "abierto",
+   "acceso": "clave",
    "totalToros": 26,
    "aptos": 23,
    "archivo": "toros_001.json",
    "fuente": "manual",
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-08-22",
-   "ultimo_ingreso": "2026-08-22"
+   "ultimo_ingreso": "2026-08-22",
+   "codigo": "CIIADO26"
   },
   {
    "id": "002",
@@ -33,14 +34,15 @@
    "tipo": "temporal",
    "esNovedad": true,
    "novedad": "",
-   "acceso": "abierto",
+   "acceso": "clave",
    "totalToros": 20,
    "aptos": 20,
    "archivo": "toros_002.json",
    "fuente": "pdf",
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-08-24",
-   "ultimo_ingreso": "2026-08-24"
+   "ultimo_ingreso": "2026-08-24",
+   "codigo": "AMISTAD24"
   },
   {
    "id": "003",
@@ -53,14 +55,15 @@
    "tipo": "temporal",
    "esNovedad": true,
    "novedad": "",
-   "acceso": "abierto",
+   "acceso": "clave",
    "totalToros": 19,
    "aptos": 19,
    "archivo": "toros_003.json",
    "fuente": "pdf",
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-08-24",
-   "ultimo_ingreso": "2026-08-24"
+   "ultimo_ingreso": "2026-08-24",
+   "codigo": "JURA2026"
   },
   {
    "id": "004",
@@ -73,14 +76,15 @@
    "tipo": "permanente",
    "esNovedad": true,
    "novedad": "",
-   "acceso": "abierto",
+   "acceso": "clave",
    "totalToros": 29,
    "aptos": 29,
    "archivo": "toros_004.json",
    "fuente": "excel",
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-08-24",
-   "ultimo_ingreso": "2026-08-24"
+   "ultimo_ingreso": "2026-08-24",
+   "codigo": "GENOMICA26"
   },
   {
    "id": "005",
@@ -93,14 +97,15 @@
    "tipo": "temporal",
    "esNovedad": true,
    "novedad": "",
-   "acceso": "abierto",
+   "acceso": "clave",
    "totalToros": 77,
    "aptos": 77,
    "archivo": "toros_005.json",
    "fuente": "pdf",
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-09-11",
-   "ultimo_ingreso": "2026-09-11"
+   "ultimo_ingreso": "2026-09-11",
+   "codigo": "SRA2026"
   },
   {
    "id": "006",
@@ -113,14 +118,15 @@
    "tipo": "permanente",
    "esNovedad": true,
    "novedad": "",
-   "acceso": "abierto",
+   "acceso": "clave",
    "totalToros": 29,
    "aptos": 29,
    "archivo": "toros_006.json",
    "fuente": "pdf",
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-09-11",
-   "ultimo_ingreso": "2026-09-11"
+   "ultimo_ingreso": "2026-09-11",
+   "codigo": "PINYTA26"
   },
   {
    "id": "007",
@@ -133,14 +139,15 @@
    "tipo": "temporal",
    "esNovedad": true,
    "novedad": "",
-   "acceso": "abierto",
+   "acceso": "clave",
    "totalToros": 40,
    "aptos": 40,
    "archivo": "toros_007.json",
    "fuente": "excel",
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-09-11",
-   "ultimo_ingreso": "2026-09-11"
+   "ultimo_ingreso": "2026-09-11",
+   "codigo": "LILAS26"
   },
   {
    "id": "008",
@@ -153,14 +160,15 @@
    "tipo": "permanente",
    "esNovedad": true,
    "novedad": "",
-   "acceso": "abierto",
+   "acceso": "clave",
    "totalToros": 29,
    "aptos": 27,
    "archivo": "toros_008.json",
    "fuente": "excel",
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-09-11",
-   "ultimo_ingreso": "2026-09-11"
+   "ultimo_ingreso": "2026-09-11",
+   "codigo": "FELLER26"
   },
   {
    "id": "009",
@@ -173,14 +181,95 @@
    "tipo": "temporal",
    "esNovedad": true,
    "novedad": "",
-   "acceso": "abierto",
+   "acceso": "clave",
    "totalToros": 8,
    "aptos": 8,
    "archivo": "ojea_rullan_suipacha2026_toros_angus.json",
    "fuente": "web",
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-09-17",
-   "ultimo_ingreso": "2026-09-17"
+   "ultimo_ingreso": "2026-09-17",
+   "codigo": "JUANITA26"
+  },
+  {
+   "id": "101",
+   "nombre": "Proveedor IATF (demo)",
+   "fecha": "2026-09-18",
+   "cabana": "",
+   "expositor": "",
+   "email": "",
+   "puntaje": 2,
+   "tipo": "permanente",
+   "esNovedad": false,
+   "novedad": "",
+   "acceso": "abierto",
+   "totalToros": 26,
+   "aptos": 23,
+   "archivo": "toros_101.json",
+   "fuente": "manual",
+   "cargado_por": "Ricardo",
+   "fecha_carga": "2026-09-18",
+   "ultimo_ingreso": "2026-09-18"
+  },
+  {
+   "id": "102",
+   "nombre": "Cabaña Modelo (demo)",
+   "fecha": "2026-09-18",
+   "cabana": "Cabaña Modelo",
+   "expositor": "",
+   "email": "",
+   "puntaje": 2,
+   "tipo": "permanente",
+   "esNovedad": false,
+   "novedad": "",
+   "acceso": "abierto",
+   "totalToros": 20,
+   "aptos": 20,
+   "archivo": "toros_102.json",
+   "fuente": "pdf",
+   "cargado_por": "Ricardo",
+   "fecha_carga": "2026-09-18",
+   "ultimo_ingreso": "2026-09-18"
+  },
+  {
+   "id": "103",
+   "nombre": "Jura Expo Modelo (demo)",
+   "fecha": "2026-09-18",
+   "cabana": "",
+   "expositor": "",
+   "email": "",
+   "puntaje": 2,
+   "tipo": "permanente",
+   "esNovedad": false,
+   "novedad": "",
+   "acceso": "abierto",
+   "totalToros": 19,
+   "aptos": 19,
+   "archivo": "toros_103.json",
+   "fuente": "pdf",
+   "cargado_por": "Ricardo",
+   "fecha_carga": "2026-09-18",
+   "ultimo_ingreso": "2026-09-18"
+  },
+  {
+   "id": "104",
+   "nombre": "Cabaña Genómica Demo",
+   "fecha": "2026-09-18",
+   "cabana": "Cabaña Genómica Demo",
+   "expositor": "",
+   "email": "",
+   "puntaje": 2,
+   "tipo": "permanente",
+   "esNovedad": false,
+   "novedad": "",
+   "acceso": "abierto",
+   "totalToros": 29,
+   "aptos": 29,
+   "archivo": "toros_104.json",
+   "fuente": "excel",
+   "cargado_por": "Ricardo",
+   "fecha_carga": "2026-09-18",
+   "ultimo_ingreso": "2026-09-18"
   }
  ]
 }
