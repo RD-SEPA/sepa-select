@@ -1123,7 +1123,6 @@ tr.sel-z:hover td{background:#d4ecda!important}
   <div class="sb-group">
     <div class="sb-label">Herramientas</div>
     <button class="btn-header" id="btn-config" onclick="onClickConfig()">⚙ Configuración</button>
-    <button class="btn-header" id="btn-export" onclick="togglePanel('panel-export')">⬇ Exportar</button>
     <button class="btn-header btn-header-gold" onclick="abrirInforme()">■ Informe PDF</button>
     <button class="btn-header" id="btn-ayuda" onclick="togglePanel('panel-ayuda')">❓ Ayuda</button>
     <button class="btn-header" onclick="cambioCatalogo()">≡ Catálogos</button>
@@ -1165,44 +1164,6 @@ tr.sel-z:hover td{background:#d4ecda!important}
       <button class="config-reset-btn" onclick="resetFenotipos()">↺ Resetear todos los fenotipos a 0</button>
       <div id="config-fen-status" style="font-size:.78rem;color:var(--gris);margin-top:8px"></div>
     </div>
-  </div>
-</div>
-
-<div id="panel-export" class="cmd-panel">
-  <div class="cmd-panel-topbar">
-    <span class="cmd-panel-topbar-title">Exportar</span>
-    <button class="btn-panel-volver" onclick="togglePanel('panel-export')">← Volver</button>
-  </div>
-  <div class="cmd-panel-inner">
-
-    <h4>PDF — Categoría activa</h4>
-    <p>Imprime la pantalla activa de la categoría seleccionada.</p>
-    <div class="export-btns" style="margin-bottom:16px">
-      <button class="btn-export" onclick="exportarPDF()">Exportar / Imprimir PDF</button>
-    </div>
-
-    <h4>PDF — Informe completo <span style="font-size:.65rem;background:var(--oro);color:white;padding:2px 7px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></h4>
-    <p>Genera el informe con todas las categorías de una vez. Abre vista de impresión con todas las secciones activas.</p>
-    <div class="export-btns" style="margin-bottom:16px">
-      <button class="btn-export" onclick="onExportInformeCompleto()">Informe completo — todas las categorías</button>
-    </div>
-
-    <h4>CSV — Categoría activa <span style="font-size:.65rem;background:var(--oro);color:white;padding:2px 7px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></h4>
-    <p>Descarga los resultados de la categoría activa en formato CSV.</p>
-    <div class="export-btns" style="margin-bottom:16px">
-      <button class="btn-export" onclick="onExportCSV('factores')">CSV — RD_Factores</button>
-      <button class="btn-export" onclick="onExportCSV('oyp')">CSV — RD_O&amp;P</button>
-      <button class="btn-export" onclick="onExportCSV('ambos')">CSV — Comparativo</button>
-    </div>
-
-    <h4>Excel — Todas las categorías <span style="font-size:.65rem;background:var(--oro);color:white;padding:2px 7px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></h4>
-    <p>Genera un archivo .xlsx con una hoja por método y categoría.</p>
-    <div class="export-btns" style="margin-bottom:4px">
-      <button class="btn-export" onclick="onExportExcel('factores')">Excel — RD_Factores (5 categorías)</button>
-      <button class="btn-export" onclick="onExportExcel('oyp')">Excel — RD_O&amp;P (5 categorías)</button>
-      <button class="btn-export" onclick="onExportExcel('completo')">Excel — Completo (todos los datos)</button>
-    </div>
-    <p style="margin-top:12px;font-size:.78rem;color:var(--gris)">PDF: abre vista de impresión del navegador. CSV y Excel: se descargan directamente.</p>
   </div>
 </div>
 
@@ -2782,150 +2743,6 @@ function selectToro(nombre){
 }
 function closeSug(){document.getElementById('buscador-sug').classList.remove('open')}
 
-// ─── EXPORT ───
-function onExportInformeCompleto(){
-  if(!canAccess('csv_export')){showPlusGate('El informe completo es exclusivo de Plus.');return;}
-  // Activa todas las secciones del informe y abre impresión
-  abrirInforme();
-  setTimeout(()=>{
-    // Marcar todos los checkboxes del informe
-    document.querySelectorAll('.inf-page-check').forEach(cb=>{cb.checked=true;cb.dispatchEvent(new Event('change'));});
-    setTimeout(()=>window.print(),300);
-  },400);
-}
-
-function onExportExcel(modo){
-  if(!canAccess('csv_export')){showPlusGate('La exportación Excel es exclusiva de Plus.');return;}
-  exportarExcel(modo);
-}
-
-function exportarExcel(modo){
-  if(typeof XLSX==='undefined'){alert('Librería Excel no disponible. Verificá la conexión.');return;}
-  const wb=XLSX.utils.book_new();
-  const cats=CATEGORIAS.filter(c=>c.id!=='graficos');
-  const fecha=new Date().toLocaleDateString('es-AR');
-
-  if(modo==='factores'||modo==='completo'){
-    cats.forEach(cat=>{
-      const rf=calcFactores(TOROS,cat.id);
-      const rows=[['Pos','Toro','Pelaje','G (genético)','F (fenotipo)','Total','Apto']];
-      rf.forEach((r,i)=>{
-        rows.push([i+1, r.toro.nombre, r.toro.pelaje,
-          parseFloat(r.g.toFixed(1)), getFen(r.toro.nombre),
-          parseFloat(r.total.toFixed(1)), r.apto?'Sí':'No']);
-      });
-      const ws=XLSX.utils.aoa_to_sheet(rows);
-      ws['!cols']=[{wch:5},{wch:28},{wch:10},{wch:14},{wch:14},{wch:10},{wch:6}];
-      XLSX.utils.book_append_sheet(wb,ws,`RF_${cat.id.substring(0,8)}`);
-    });
-  }
-
-  if(modo==='oyp'||modo==='completo'){
-    cats.forEach(cat=>{
-      const rs=calcOyP(TOROS,cat.id);
-      const perfiles=rs.perfiles;
-      const header=['Pos','Toro','Pelaje','Score (0-100)','Perfiles calc'];
-      perfiles.forEach(p=>header.push(p.id+' '+p.nombre.substring(0,12)));
-      const rows=[header];
-      rs.scores.forEach((r,i)=>{
-        const row=[i+1, r.toro.nombre, r.toro.pelaje,
-          parseFloat(r.score.toFixed(3)),
-          `${r.nCalc}/${perfiles.length}`];
-        perfiles.forEach(p=>{
-          const d=r.det[p.id];
-          row.push(d&&d.calculable?parseFloat(d.score0_10.toFixed(2)):'N/C');
-        });
-        rows.push(row);
-      });
-      const ws=XLSX.utils.aoa_to_sheet(rows);
-      ws['!cols']=[{wch:5},{wch:28},{wch:10},{wch:10},{wch:12},...perfiles.map(()=>({wch:14}))];
-      XLSX.utils.book_append_sheet(wb,ws,`OyP_${cat.id.substring(0,8)}`);
-    });
-  }
-
-  if(modo==='completo'){
-    // Hoja comparativa resumen
-    const rows=[['Toro','Pelaje',...cats.flatMap(c=>[`RF_${c.id}`,`OyP_${c.id}`])]];
-    const toroData={};
-    cats.forEach(cat=>{
-      const rf=calcFactores(TOROS,cat.id);
-      const rs=calcOyP(TOROS,cat.id);
-      rf.forEach((r,i)=>{if(!toroData[r.toro.nombre])toroData[r.toro.nombre]={pelaje:r.toro.pelaje,scores:{}};toroData[r.toro.nombre].scores[`RF_${cat.id}`]=parseFloat(r.total.toFixed(1));});
-      rs.scores.forEach(r=>{if(!toroData[r.toro.nombre])toroData[r.toro.nombre]={pelaje:r.toro.pelaje,scores:{}};toroData[r.toro.nombre].scores[`OyP_${cat.id}`]=parseFloat(r.score.toFixed(3));});
-    });
-    Object.entries(toroData).forEach(([nombre,d])=>{
-      rows.push([nombre,d.pelaje,...cats.flatMap(c=>[d.scores[`RF_${c.id}`]||'',d.scores[`OyP_${c.id}`]||''])]);
-    });
-    const ws=XLSX.utils.aoa_to_sheet(rows);
-    XLSX.utils.book_append_sheet(wb,ws,'Resumen');
-  }
-
-  if(modo==='completo'){
-    // Hoja Confiabilidad (RD_Confiabilidad)
-    const P=calcConfiabilidad(TOROS);
-    const ch=[['Toro','Pelaje',...DEP_ALL,'Prec. media','nD (de 8)','Confiabilidad','Tipo de evaluación']];
-    P.lista.forEach(x=>{
-      ch.push([x.toro.nombre,x.toro.pelaje,
-        ...DEP_ALL.map(k=>x.precByDep[k]!=null?x.precByDep[k]:''),
-        x.precMedia!=null?parseFloat(x.precMedia.toFixed(3)):'', x.nD, x.conf.lbl, x.tipo.lbl]);
-    });
-    const wsc=XLSX.utils.aoa_to_sheet(ch);
-    wsc['!cols']=[{wch:24},{wch:9},...DEP_ALL.map(()=>({wch:6})),{wch:11},{wch:10},{wch:13},{wch:32}];
-    XLSX.utils.book_append_sheet(wb,wsc,'Confiabilidad');
-
-    // Hoja Hallazgos (RD_Hallazgos) — formato largo, 1 fila por toro×DEP×categoría
-    const hh=[['Categoría','Toro','Pelaje','DEP','Valor DEP','z vs. catálogo','Percentil raza','Señal','Tipo']];
-    cats.forEach(cat=>{
-      const H=calcHallazgos(TOROS,cat.id);
-      H.items.forEach(it=>it.hall.forEach(h=>{
-        hh.push([cat.nombre, it.toro.nombre, it.toro.pelaje, h.key,
-          h.val!=null?h.val:'', parseFloat(h.z.toFixed(2)),
-          h.pct!=null?h.pct:'', parseFloat(h.senal.toFixed(2)),
-          h.tipo==='fuerte'?'Fuerte (favorable)':h.tipo==='debil'?'Débil (desfavorable)':'No pondera']);
-      }));
-    });
-    const wsh=XLSX.utils.aoa_to_sheet(hh);
-    wsh['!cols']=[{wch:22},{wch:24},{wch:9},{wch:8},{wch:10},{wch:14},{wch:14},{wch:9},{wch:22}];
-    XLSX.utils.book_append_sheet(wb,wsh,'Hallazgos');
-  }
-
-  const catLabel=modo==='completo'?'Completo':modo==='factores'?'RDFactores':'RD_OyP';
-  XLSX.writeFile(wb,`SEPA-Select_${catLabel}_${fecha.replace(/\//g,'-')}.xlsx`);
-}
-
-function exportarPDF(){
-  const cat=CATEGORIAS.find(c=>c.id===currentCat);
-  const fecha=new Date().toLocaleDateString('es-AR');
-  document.querySelectorAll('.print-header').forEach(el=>el.textContent=`SEPA-Select ${APP_VERSION} · ${catNombreActivo()} · ${cat.nombre} · ${fecha}`);
-  window.print();
-}
-function onExportCSV(modo){
-  if(!canAccess('csv_export')){
-    showPlusGate('La exportación CSV es exclusiva de Plus.');
-    return;
-  }
-  exportarCSV(modo);
-}
-function exportarCSV(modo){
-  const cat=CATEGORIAS.find(c=>c.id===currentCat);
-  let csv='',filename='';
-  if(modo==='factores'){
-    const rf=calcFactores(TOROS,currentCat);
-    csv="Pos,Toro,Pelaje,G,F,Total\n"+rf.filter(r=>r.apto).map((r,i)=>`${i+1},${displayNombre(r.toro.nombre)},${r.toro.pelaje},${r.g.toFixed(1)},${getFen(r.toro.nombre)},${r.total.toFixed(1)}`).join('\n');
-    filename=`RDFactores_${currentCat}.csv`;
-  } else if(modo==='oyp'){
-    const rs=calcOyP(TOROS,currentCat);
-    csv="Pos,Toro,Pelaje,Score_0_100,Perfiles_calc\n"+rs.scores.map((r,i)=>`${i+1},${displayNombre(r.toro.nombre)},${r.toro.pelaje},${r.score.toFixed(1)},${r.nCalc}/${rs.perfiles.length}`).join('\n');
-    filename=`RD_OyP_${currentCat}.csv`;
-  } else {
-    const rf=calcFactores(TOROS,currentCat);const rs=calcOyP(TOROS,currentCat);
-    const rsMap={};rs.scores.forEach((r,i)=>rsMap[r.toro.nombre]={rank:i+1,score:r.score});
-    csv="Toro,Pelaje,#RF,Score_RF,#OyP,Score_OyP,Delta\n"+rf.filter(r=>r.apto).map((r,i)=>{const rs2=rsMap[r.toro.nombre]||{rank:'—',score:'—'};return`${r.toro.nombre},${r.toro.pelaje},${i+1},${r.total.toFixed(1)},${rs2.rank},${typeof rs2.score==='number'?rs2.score.toFixed(3):'—'},${typeof rs2.rank==='number'?i+1-rs2.rank:'—'}`}).join('\n');
-    filename=`Comparativo_${currentCat}.csv`;
-  }
-  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();
-}
 
 // ═══════════════════════════════════════════════
 // MOTORES
@@ -5478,12 +5295,23 @@ function _infExcelRES(){
   return RES;
 }
 
-function _infExcelSheetsBase(wb,RES){
-  // 00_Índice
+function _infExcelSheetsBase(wb,RES,esPlus){
+  // 00_Índice — contenido distinto según Base o Plus (2026-09-18, a pedido de RD)
   const idx=[['Hoja','Contenido'],
     ['10_Resumen','1 fila por categoría: objetivo y lista de ★ selectos.'],
     ['20_Pesos_por_categoria','Matriz numérica categoría × DEP, con columna de control Suma |pesos|.'],
-    ['30_Cross_Selectos','Top '+SELECTO_TOP_N+' RD_Factores y RD_O&P de cada categoría, con marca ★ Selecto.']];
+    ['30_Cross_Selectos','Top '+SELECTO_TOP_N+' RD_Factores y RD_O&P de cada categoría, con marca ★ Selecto.'],
+    ['40_DEPs_del_catalogo','DEPs originales del catálogo (los 8 del modelo + precisión), 1 fila por toro.']];
+  if(esPlus){
+    idx.push(
+      ['50_RF','Ranking completo RD_Factores (todas las categorías): G, F, Total, Apto, Puesto.'],
+      ['60_OyP','Ranking completo RD_O&P + detalle de cada perfil calculado.'],
+      ['70_Comparativo','RD_Factores vs RD_O&P lado a lado con Δ de posición, todos los toros aptos.'],
+      ['80_Confiabilidad','Precisión ERA por DEP y nivel de confiabilidad de cada toro.'],
+      ['90_Hallazgos','DEPs que se despegan del conjunto del catálogo, 1 fila por toro×DEP×categoría.'],
+      ['100_Perfiles_OyP','Catálogo de los 15 perfiles O&P: qué evalúan y en qué categorías aplican.']
+    );
+  }
   const wsIdx=XLSX.utils.aoa_to_sheet(idx);wsIdx['!cols']=_infExcelCols([26,70]);
   XLSX.utils.book_append_sheet(wb,wsIdx,'00_Indice');
 
@@ -5512,39 +5340,79 @@ function _infExcelSheetsBase(wb,RES){
     r.oyp.slice(0,SELECTO_TOP_N).forEach((x,i)=>cross.push([i+1,x.t.nombre,x.score,r.sel.includes(x.t.nombre)?'★':'',infCatNombre(cat),'RD_O&P']));
   });
   const wsCross=XLSX.utils.aoa_to_sheet(cross);wsCross['!cols']=_infExcelCols([7,24,8,10,20,12]);
+  // Filtro de Excel (flechitas en el encabezado) — a pedido de RD, para poder filtrar
+  // por Categoría/Método/★ Selecto directo en la planilla sin tocar la app.
+  wsCross['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:cross.length-1,c:5}})};
   XLSX.utils.book_append_sheet(wb,wsCross,'30_Cross_Selectos');
+
+  // 40_DEPs_del_catalogo — ex "80_Anexo_A_DEPs_originales", pasa a Base 2026-09-18 a pedido de RD
+  const anexo=[['Toro','Cabaña/Origen',...INF_CHARS,...INF_CHARS.map(c=>c+'_prec')]];
+  TOROS.slice().sort((a,b)=>a.nombre.localeCompare(b.nombre)).forEach(t=>{
+    anexo.push([t.nombre,t.origen||'',
+      ...INF_CHARS.map(c=>t.deps[c]&&t.deps[c].dep!=null?t.deps[c].dep:null),
+      ...INF_CHARS.map(c=>t.deps[c]&&t.deps[c].prec!=null?t.deps[c].prec:null)]);
+  });
+  const wsAnexo=XLSX.utils.aoa_to_sheet(anexo);wsAnexo['!cols']=_infExcelCols([24,20,...INF_CHARS.map(()=>6),...INF_CHARS.map(()=>8)]);
+  XLSX.utils.book_append_sheet(wb,wsAnexo,'40_DEPs_del_catalogo');
 }
 
 function _infExcelSheetsPlus(wb,RES){
-  // 40_RF — ranking completo RD_Factores
-  const rf=[['Toro','Score (G)','Apto','Categoría','Puesto']];
+  // 40_RF — ranking completo RD_Factores (2026-09-18: +Pelaje, +F, +Total G+F — a pedido de RD,
+  // recupera el detalle que traía el CSV viejo del panel Exportar, ahora retirado)
+  const rf=[['Toro','Pelaje','G (genético)','F (fenotipo)','Total (G+F)','Apto','Categoría','Puesto']];
   CATEGORIAS.forEach(cat=>{
     const r=RES[cat.id];
     const ok=r.rf.filter(x=>x.ok),no=r.rf.filter(x=>!x.ok);
-    ok.forEach((x,i)=>rf.push([x.t.nombre,x.total,'Sí',infCatNombre(cat),i+1]));
-    no.forEach(x=>rf.push([x.t.nombre,null,'No',infCatNombre(cat),'—']));
+    ok.forEach((x,i)=>{
+      const f=getFen(x.t.nombre);
+      rf.push([x.t.nombre,x.t.pelaje,x.g,f,+(x.g+f).toFixed(1),'Sí',infCatNombre(cat),i+1]);
+    });
+    no.forEach(x=>rf.push([x.t.nombre,x.t.pelaje,null,null,null,'No',infCatNombre(cat),'—']));
   });
-  const wsRf=XLSX.utils.aoa_to_sheet(rf);wsRf['!cols']=_infExcelCols([24,11,7,20,8]);
-  XLSX.utils.book_append_sheet(wb,wsRf,'40_RF');
+  const wsRf=XLSX.utils.aoa_to_sheet(rf);wsRf['!cols']=_infExcelCols([24,8,12,12,13,7,20,8]);
+  wsRf['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:rf.length-1,c:7}})};
+  XLSX.utils.book_append_sheet(wb,wsRf,'50_RF');
 
-  // 50_OyP — ranking completo + detalle por perfil (zSum)
-  const oyp=[['Toro','Puesto','Categoría','Score (0-100)',..._INF_OYP_IDS]];
+  // 50_OyP — ranking completo + detalle por perfil (zSum). 2026-09-18: +Pelaje, +Perfiles_calc (n/total)
+  const oyp=[['Toro','Pelaje','Puesto','Categoría','Score (0-100)','Perfiles_calc',..._INF_OYP_IDS]];
   CATEGORIAS.forEach(cat=>{
     RES[cat.id].oyp.forEach((x,i)=>{
-      oyp.push([x.t.nombre,i+1,infCatNombre(cat),x.score,..._INF_OYP_IDS.map(id=>{const d=x.det[id];return d&&d.ok&&d.s!=null?+d.s.toFixed(2):null;})]);
+      const detVals=Object.values(x.det);
+      const nCalc=detVals.filter(d=>d.ok).length;
+      oyp.push([x.t.nombre,x.t.pelaje,i+1,infCatNombre(cat),x.score,`${nCalc}/${detVals.length}`,
+        ..._INF_OYP_IDS.map(id=>{const d=x.det[id];return d&&d.ok&&d.s!=null?+d.s.toFixed(2):null;})]);
     });
   });
-  const wsOyp=XLSX.utils.aoa_to_sheet(oyp);wsOyp['!cols']=_infExcelCols([24,8,20,14,..._INF_OYP_IDS.map(()=>7)]);
-  XLSX.utils.book_append_sheet(wb,wsOyp,'50_OyP');
+  const wsOyp=XLSX.utils.aoa_to_sheet(oyp);wsOyp['!cols']=_infExcelCols([24,8,8,20,14,13,..._INF_OYP_IDS.map(()=>7)]);
+  wsOyp['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:oyp.length-1,c:5+_INF_OYP_IDS.length}})};
+  XLSX.utils.book_append_sheet(wb,wsOyp,'60_OyP');
 
-  // 60_Confiabilidad
+  // 55_Comparativo — RD_Factores vs RD_O&P lado a lado, con Δ de posición (2026-09-18, a pedido
+  // de RD — recupera el CSV "Comparativo" del panel Exportar viejo, ahora para TODOS los toros
+  // aptos de las 5 categorías, no solo la categoría activa en pantalla).
+  const comp=[['Toro','Pelaje','Categoría','#RF','Score_RF','#OyP','Score_OyP','Δ (RF−OyP)']];
+  CATEGORIAS.forEach(cat=>{
+    const r=RES[cat.id];
+    const oypRank={};r.oyp.forEach((x,i)=>{oypRank[x.t.nombre]={puesto:i+1,score:x.score};});
+    r.rf.filter(x=>x.ok).forEach((x,i)=>{
+      const o=oypRank[x.t.nombre]||{puesto:null,score:null};
+      comp.push([x.t.nombre,x.t.pelaje,infCatNombre(cat),i+1,x.total,o.puesto,
+        o.score!=null?+o.score.toFixed(1):null,
+        o.puesto!=null?(i+1)-o.puesto:null]);
+    });
+  });
+  const wsComp=XLSX.utils.aoa_to_sheet(comp);wsComp['!cols']=_infExcelCols([24,8,20,7,10,8,10,12]);
+  wsComp['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:comp.length-1,c:7}})};
+  XLSX.utils.book_append_sheet(wb,wsComp,'70_Comparativo');
+
+  // 80_Confiabilidad
   const {lista}=calcConfiabilidad(TOROS);
   const conf=[['Toro',...DEP_ALL,'Precisión media','nD (de 8)','Confiabilidad','Tipo de evaluación']];
   lista.forEach(x=>conf.push([x.toro.nombre,...DEP_ALL.map(k=>x.precByDep[k]),x.precMedia!=null?+x.precMedia.toFixed(3):null,x.nD,x.conf.lbl,x.tipo.lbl]));
   const wsConf=XLSX.utils.aoa_to_sheet(conf);wsConf['!cols']=_infExcelCols([24,...DEP_ALL.map(()=>7),13,10,13,26]);
-  XLSX.utils.book_append_sheet(wb,wsConf,'60_Confiabilidad');
+  XLSX.utils.book_append_sheet(wb,wsConf,'80_Confiabilidad');
 
-  // 70_Hallazgos
+  // 90_Hallazgos
   const hall=[['Toro','Categoría','DEP','Valor DEP','z vs. catálogo','Percentil raza','Señal','Descripción']];
   CATEGORIAS.forEach(cat=>{
     calcHallazgos(TOROS,cat.id).items.forEach(it=>it.hall.forEach(h=>{
@@ -5554,19 +5422,9 @@ function _infExcelSheetsPlus(wb,RES){
     }));
   });
   const wsHall=XLSX.utils.aoa_to_sheet(hall);wsHall['!cols']=_infExcelCols([24,20,8,10,12,12,18,55]);
-  XLSX.utils.book_append_sheet(wb,wsHall,'70_Hallazgos');
+  XLSX.utils.book_append_sheet(wb,wsHall,'90_Hallazgos');
 
-  // 80_Anexo_A_DEPs_originales
-  const anexo=[['Toro','Cabaña/Origen',...INF_CHARS,...INF_CHARS.map(c=>c+'_prec')]];
-  TOROS.slice().sort((a,b)=>a.nombre.localeCompare(b.nombre)).forEach(t=>{
-    anexo.push([t.nombre,t.origen||'',
-      ...INF_CHARS.map(c=>t.deps[c]&&t.deps[c].dep!=null?t.deps[c].dep:null),
-      ...INF_CHARS.map(c=>t.deps[c]&&t.deps[c].prec!=null?t.deps[c].prec:null)]);
-  });
-  const wsAnexo=XLSX.utils.aoa_to_sheet(anexo);wsAnexo['!cols']=_infExcelCols([24,20,...INF_CHARS.map(()=>6),...INF_CHARS.map(()=>8)]);
-  XLSX.utils.book_append_sheet(wb,wsAnexo,'80_Anexo_A_DEPs_originales');
-
-  // 90_Perfiles_OyP
+  // 100_Perfiles_OyP
   const perf=[['ID','Nombre','Afinidad','Para qué sirve','Qué evalúa','Categorías']];
   PERFILES_OYP.forEach(p=>{
     const queEvalua=p.deps_req.map(r=>{const f=FRASES[r.key]||{};return r.dir>0?(f.alta||r.key):(f.baja||r.key);}).join(' + ');
@@ -5574,7 +5432,7 @@ function _infExcelSheetsPlus(wb,RES){
     perf.push([p.id,p.nombre,p.afinidad,p.objetivo,queEvalua,cats]);
   });
   const wsPerf=XLSX.utils.aoa_to_sheet(perf);wsPerf['!cols']=_infExcelCols([6,24,12,26,45,55]);
-  XLSX.utils.book_append_sheet(wb,wsPerf,'90_Perfiles_OyP');
+  XLSX.utils.book_append_sheet(wb,wsPerf,'100_Perfiles_OyP');
 }
 
 function infExportarExcel(){
@@ -5583,7 +5441,7 @@ function infExportarExcel(){
   if(_infModo==='catalogo'&&!canAccess('informe_plus')){showPlusGate('El Excel Plus es exclusivo de Plus.');return;}
   const RES=_infExcelRES();
   const wb=XLSX.utils.book_new();
-  _infExcelSheetsBase(wb,RES);
+  _infExcelSheetsBase(wb,RES,_infModo==='catalogo');
   if(_infModo==='catalogo')_infExcelSheetsPlus(wb,RES);
   const fecha=new Date().toLocaleDateString('es-AR').replace(/\//g,'-');
   const label=_infModo==='catalogo'?'Plus':'Base';
