@@ -25,8 +25,8 @@
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie);color:var(--texto);font-size:14px;min-height:100vh}
 
 /* ── LOGIN ── */
-#registro-overlay,#carga-overlay,#login-overlay{position:fixed;inset:0;background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));z-index:400;display:flex;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto}
-#registro-overlay.hidden,#carga-overlay.hidden,#login-overlay.hidden{display:none!important}
+#registro-overlay,#carga-overlay,#login-overlay,#recovery-overlay,#nueva-password-overlay{position:fixed;inset:0;background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));z-index:400;display:flex;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto}
+#registro-overlay.hidden,#carga-overlay.hidden,#login-overlay.hidden,#recovery-overlay.hidden,#nueva-password-overlay.hidden{display:none!important}
 #carga-overlay .login-box{max-width:520px;margin:auto}
 .carga-field{margin-bottom:12px}
 .carga-field input,.carga-field select,.carga-field textarea{width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box;font-family:inherit}
@@ -624,7 +624,7 @@ textarea.inf-notas::placeholder{color:#c0bbb4;font-style:italic}
 @media print{
   @page{size:A4 portrait;margin:12mm 14mm}
   html,body{overflow:visible!important;height:auto!important;background:white!important}
-  #registro-overlay,#carga-overlay,#login-overlay,#main-app{display:none!important}
+  #registro-overlay,#carga-overlay,#login-overlay,#recovery-overlay,#nueva-password-overlay,#main-app{display:none!important}
   #informe-overlay{position:static!important;overflow:visible!important;background:white!important;padding:0!important}
   #informe-overlay .inf-topbar,#informe-overlay #inf-panel{display:none!important}
   #inf-report{display:block!important;overflow:visible!important;padding:0!important}
@@ -767,6 +767,13 @@ tr.sel-z:hover td{background:#d4ecda!important}
   const SUPABASE_URL = 'https://eyfvqlairgpnriyrkdor.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_M6MvPIvBDXfrjmpGlGPFAw_5Wh8vOSG';
   const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  sb.auth.onAuthStateChange((event) => {
+    if (event === 'PASSWORD_RECOVERY') {
+      ['registro-overlay','login-overlay','recovery-overlay','carga-overlay','selector-modo','main-app']
+        .forEach(id => { const el = document.getElementById(id); if (el) el.classList.add('hidden'); });
+      document.getElementById('nueva-password-overlay').classList.remove('hidden');
+    }
+  });
 </script>
 
 </head>
@@ -861,9 +868,14 @@ tr.sel-z:hover td{background:#d4ecda!important}
       </div>
       <div>
         <div class="login-label">Contraseña * <span style="opacity:.5;font-size:.8em">(mín. 6 caracteres)</span></div>
-        <input id="reg-password" type="password" placeholder="••••••••" autocomplete="new-password"
-          style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
-          color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box">
+        <div style="position:relative">
+          <input id="reg-password" type="password" placeholder="••••••••" autocomplete="new-password"
+            style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
+            color:white;padding:11px 44px 11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box">
+          <button type="button" onclick="togglePasswordVisibility('reg-password',this)" title="Mostrar/ocultar contraseña"
+            style="position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;
+            color:white;opacity:.75;cursor:pointer;font-size:1.05rem;padding:8px">👁</button>
+        </div>
       </div>
       <div>
         <div class="login-label">Rol</div>
@@ -924,18 +936,89 @@ tr.sel-z:hover td{background:#d4ecda!important}
       </div>
       <div>
         <div class="login-label">Contraseña</div>
-        <input id="login-password" type="password" placeholder="••••••••" autocomplete="current-password"
-          style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
-          color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box">
+        <div style="position:relative">
+          <input id="login-password" type="password" placeholder="••••••••" autocomplete="current-password"
+            style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
+            color:white;padding:11px 44px 11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box">
+          <button type="button" onclick="togglePasswordVisibility('login-password',this)" title="Mostrar/ocultar contraseña"
+            style="position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;
+            color:white;opacity:.75;cursor:pointer;font-size:1.05rem;padding:8px">👁</button>
+        </div>
       </div>
     </div>
 
     <button class="btn-login" onclick="doLogin()">Ingresar →</button>
 
-    <div style="margin-top:12px">
+    <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
       <a href="#" onclick="mostrarRegistro();return false" style="color:rgba(255,255,255,.85);font-size:.85rem">
         ¿No tenés cuenta? Registrate →</a>
+      <a href="#" onclick="mostrarRecuperar();return false" style="color:rgba(255,255,255,.65);font-size:.8rem">
+        ¿Olvidaste tu contraseña?</a>
     </div>
+
+    <div class="login-credito">
+      SEPA-Select® · DNDA EX-2026-81106223-APN-DNDA#MJ
+    </div>
+  </div>
+</div>
+
+<!-- ══ RECUPERAR CONTRASEÑA ══ -->
+<div id="recovery-overlay" class="hidden">
+  <div class="login-box" style="max-width:420px">
+    <div class="login-logo">SEPA<span>-Select</span></div>
+    <div class="login-sub">Recuperar contraseña</div>
+    <div class="login-error" id="rec-error"></div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;text-align:left">
+      <div>
+        <div class="login-label">Email de tu cuenta</div>
+        <input id="rec-email" type="email" placeholder="juan@establecimiento.com" autocomplete="username"
+          style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
+          color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box">
+      </div>
+    </div>
+
+    <button class="btn-login" onclick="doRecuperar()">Enviar link de recuperación →</button>
+
+    <div style="margin-top:12px">
+      <a href="#" onclick="volverALogin();return false" style="color:rgba(255,255,255,.85);font-size:.85rem">
+        ← Volver a iniciar sesión</a>
+    </div>
+
+    <div class="login-credito">
+      SEPA-Select® · DNDA EX-2026-81106223-APN-DNDA#MJ
+    </div>
+  </div>
+</div>
+
+<!-- ══ NUEVA CONTRASEÑA (llegada desde el link de recuperación) ══ -->
+<div id="nueva-password-overlay" class="hidden">
+  <div class="login-box" style="max-width:420px">
+    <div class="login-logo">SEPA<span>-Select</span></div>
+    <div class="login-sub">Elegí tu nueva contraseña</div>
+    <div class="login-error" id="np-error"></div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;text-align:left">
+      <div>
+        <div class="login-label">Nueva contraseña <span style="opacity:.5;font-size:.8em">(mín. 6 caracteres)</span></div>
+        <div style="position:relative">
+          <input id="np-password" type="password" placeholder="••••••••" autocomplete="new-password"
+            style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
+            color:white;padding:11px 44px 11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box">
+          <button type="button" onclick="togglePasswordVisibility('np-password',this)" title="Mostrar/ocultar contraseña"
+            style="position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;
+            color:white;opacity:.75;cursor:pointer;font-size:1.05rem;padding:8px">👁</button>
+        </div>
+      </div>
+      <div>
+        <div class="login-label">Repetila</div>
+        <input id="np-password2" type="password" placeholder="••••••••" autocomplete="new-password"
+          style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
+          color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box">
+      </div>
+    </div>
+
+    <button class="btn-login" onclick="doNuevaPassword()">Guardar nueva contraseña →</button>
 
     <div class="login-credito">
       SEPA-Select® · DNDA EX-2026-81106223-APN-DNDA#MJ
@@ -2145,19 +2228,54 @@ async function doRegistro() {
     fecha_registro: new Date().toISOString()
   };
 
-  // Enviar mail de notificación (Fase 1)
-  const asunto = encodeURIComponent(`Nuevo registro SEPA-Select · ${nombre}`);
-  const cuerpo = encodeURIComponent(
-    `Nombre: ${nombre}\nEmail: ${email}\nWhatsApp: ${whatsapp}\nRol: ${rol}\nPromo: ${promo||'—'}\nFecha: ${new Date().toLocaleString('es-AR')}`
-  );
-  const a = document.createElement('a');
-  a.href = `mailto:contacto@programa-sepa.com.ar?subject=${asunto}&body=${cuerpo}`;
-  a.style.display = 'none';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
+  // El registro ya queda en Supabase (tabla usuarios) — RD lo consulta ahí,
+  // no depende de que este mailto se abra ni se envíe (2026-09-18, a pedido de RD).
   await cargarPerfilYEntrar(data.user, perfilExtra);
+}
+
+function togglePasswordVisibility(inputId, btnEl){
+  const input = document.getElementById(inputId);
+  const mostrar = input.type === 'password';
+  input.type = mostrar ? 'text' : 'password';
+  btnEl.textContent = mostrar ? '🙈' : '👁';
+}
+
+function mostrarRecuperar(){
+  document.getElementById('login-overlay').classList.add('hidden');
+  document.getElementById('registro-overlay').classList.add('hidden');
+  document.getElementById('recovery-overlay').classList.remove('hidden');
+}
+
+function volverALogin(){
+  document.getElementById('recovery-overlay').classList.add('hidden');
+  document.getElementById('login-overlay').classList.remove('hidden');
+}
+
+async function doRecuperar(){
+  const email = document.getElementById('rec-email').value.trim();
+  const err = document.getElementById('rec-error');
+  err.style.color = '#ffb3b3'; err.textContent = '';
+  if (!/\S+@\S+\.\S+/.test(email)) { err.textContent = 'Ingresá un email válido.'; return; }
+  const { error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: location.origin + location.pathname
+  });
+  if (error) { err.textContent = 'No pudimos enviar el link: ' + error.message; return; }
+  err.style.color = 'lightgreen';
+  err.textContent = 'Listo — revisá tu email y hacé clic en el link para elegir una nueva contraseña.';
+}
+
+async function doNuevaPassword(){
+  const p1 = document.getElementById('np-password').value;
+  const p2 = document.getElementById('np-password2').value;
+  const err = document.getElementById('np-error');
+  err.style.color = '#ffb3b3'; err.textContent = '';
+  if (p1.length < 6) { err.textContent = 'La contraseña debe tener al menos 6 caracteres.'; return; }
+  if (p1 !== p2) { err.textContent = 'Las contraseñas no coinciden.'; return; }
+  const { error } = await sb.auth.updateUser({ password: p1 });
+  if (error) { err.textContent = 'No pudimos actualizar la contraseña: ' + error.message; return; }
+  err.style.color = 'lightgreen';
+  err.textContent = 'Contraseña actualizada. Entrando…';
+  setTimeout(() => { location.href = location.origin + location.pathname; }, 1200);
 }
 
 function seleccionarModo(modo){
