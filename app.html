@@ -1896,6 +1896,21 @@ async function cargarCatalogosYMostrar() {
     });
 }
 
+async function canjearCodigoCatalogo(){
+  const intento = prompt('Ingresá el código de invitación que te compartieron:');
+  if (intento === null) return;
+  const codigo = intento.trim();
+  if (!codigo) return;
+  try {
+    const { data, error } = await sb.rpc('canjear_codigo_catalogo', { p_codigo: codigo });
+    if (error || !data || !data.length) { alert('Código incorrecto o vencido.'); return; }
+    alert('¡Listo! Ya tenés acceso a "' + data[0].nombre_catalogo + '".');
+    await cargarCatalogosYMostrar();
+  } catch (e) {
+    alert('No pudimos validar el código. Probá de nuevo.');
+  }
+}
+
 // ── CARGA DE TOROS AL SELECCIONAR CATÁLOGO ─────
 async function fetchToros(archivo) {
   if (!/^[A-Za-z0-9_-]+\.json$/.test(archivo)) {
@@ -2405,6 +2420,12 @@ function renderCatalogosDisponibles(){
       <button class="btn-entrar-cat">Entrar →</button>
     </div>`;
   }).join('');
+  // Canje de código de invitación: siempre visible, así el usuario puede sumar
+  // a su lista un catálogo con clave que todavía no le apareció.
+  html += `<div class="catalogo-card" style="border-style:dashed;opacity:.85;cursor:pointer" onclick="canjearCodigoCatalogo()">
+    <div class="catalogo-card-top"><div class="catalogo-card-nombre">🔑 Tengo un código de catálogo</div></div>
+    <div class="catalogo-card-meta"><div class="catalogo-meta-row">Canjeá el código que te compartió el dueño del catálogo</div></div>
+  </div>`;
   // Carga de JSON local: solo modo desarrollador
   if (esDev()) {
     html += `<div class="catalogo-card" style="border-style:dashed;opacity:.7">
@@ -2422,12 +2443,9 @@ function renderCatalogosDisponibles(){
 async function seleccionarCatalogo(id){
   const cat=CATALOGOS_DISPONIBLES.find(c=>c.id===id);
   if(!cat) return;
-  if (cat.acceso === 'clave' && localStorage.getItem('sepa_catcode_'+id) !== cat.codigo) {
-    const intento = prompt('"' + cat.nombre + '" requiere un código de acceso.\nIngresá el código que te compartieron:');
-    if (intento === null) return;
-    if (intento.trim() !== cat.codigo) { alert('Código incorrecto.'); return; }
-    localStorage.setItem('sepa_catcode_'+id, intento.trim());
-  }
+  // El acceso a catálogos "con clave" ya se resuelve al canjear el código
+  // (canjearCodigoCatalogo) — si el catálogo aparece acá es porque Supabase
+  // (RLS) ya confirmó que este usuario tiene permiso. No se vuelve a pedir nada.
   mostrarLoadingCat('Cargando ' + cat.nombre + '…');
   try {
     const archivo = cat.archivo || ('toros_' + cat.id + '.json');
