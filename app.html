@@ -779,7 +779,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
       <div style="font-size:1.4rem;font-weight:900;margin-bottom:4px">SEPA<span style="color:#b8892b">-Select</span></div>
       <div style="font-size:.8rem;opacity:.65;margin-bottom:28px">Informe PDF — Elegí el tipo</div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px">
-        <div onclick="infModo('catalogo')" style="background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
+        <div id="inf-card-catalogo" onclick="infModo('catalogo')" style="background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">📋</div>
           <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Informe Plus <span style="font-size:.6rem;background:#b8892b;color:#fff;padding:1px 6px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></div>
           <div style="font-size:.73rem;opacity:.75;line-height:1.45">Rankings, SELECTOS, radar y tablas por categoría. Secciones configurables.</div>
@@ -791,7 +791,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
         </div>
         <div onclick="infModo('toro')" style="background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">🐂</div>
-          <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Informe Plus por Toro <span style="font-size:.6rem;background:#b8892b;color:#fff;padding:1px 6px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></div>
+          <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Ficha de Toros</div>
           <div style="font-size:.73rem;opacity:.75;line-height:1.45">Seleccioná uno o más toros. DEPs, rankings en 5 categorías y perfiles O&amp;P.</div>
         </div>
       </div>
@@ -1326,12 +1326,12 @@ tr.sel-z:hover td{background:#d4ecda!important}
         <h2 id="oyp-title">RD_Objetivos &amp; Perfiles</h2>
         <p id="oyp-desc"></p>
       </div>
-      <button class="btn-accion" onclick="toggleCatalogoOyP()" id="btn-catalogo-oyp" style="white-space:nowrap;flex-shrink:0;margin-top:4px">▸ Ver catálogo de perfiles</button>
+      <button class="btn-accion" onclick="toggleCatalogoOyP()" id="btn-catalogo-oyp" style="white-space:nowrap;flex-shrink:0;margin-top:4px">▸ Ver Objetivos &amp; Perfiles (O&amp;P)</button>
     </div>
 
     <div id="catalogo-oyp-panel" style="display:none;background:var(--superficie);border:1px solid var(--borde);border-radius:10px;padding:14px 16px;margin-bottom:16px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
-        <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gris)">Catálogo de perfiles O&amp;P</span>
+        <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gris)">Objetivos &amp; Perfiles (O&amp;P) — definiciones</span>
         <div style="display:flex;gap:6px;flex-wrap:wrap">
           <button class="btn-secundario cat-oyp-filtro active-filtro" onclick="filtrarCatalogoOyP('todas',this)">Todos</button>
           <button class="btn-secundario cat-oyp-filtro" data-cat="rodeoGeneral" onclick="filtrarCatalogoOyP('rodeoGeneral',this)">Rodeo General</button>
@@ -2421,7 +2421,7 @@ function toggleCatalogoOyP(){
   const btn=document.getElementById('btn-catalogo-oyp');
   const open=panel.style.display==='block';
   panel.style.display=open?'none':'block';
-  btn.textContent=open?'▸ Ver catálogo de perfiles':'▾ Ocultar catálogo';
+  btn.textContent=open?'▸ Ver Objetivos & Perfiles (O&P)':'▾ Ocultar Objetivos & Perfiles';
   if(!open) renderCatalogoOyP('todas');
 }
 
@@ -5071,19 +5071,26 @@ function abrirInforme() {
   document.getElementById('inf-panel').style.display='none';
   document.getElementById('inf-toro-sel').style.display='none';
   document.getElementById('inf-report').innerHTML='';
+  // 2026-09-18, a pedido de RD: BASE ni siquiera ve la opción "Informe Plus" (antes se mostraba
+  // igual, con upsell al hacer clic). Ficha de Toros quedó disponible para BASE, no se oculta.
+  const cardCatalogo=document.getElementById('inf-card-catalogo');
+  if(cardCatalogo) cardCatalogo.style.display=canAccess('informe_plus')?'':'none';
 }
 let _infModo='catalogo';
 let _infTSel=new Set();
 let _infMarcoMini=true;
 function infToggleMarcoMini(v){ _infMarcoMini=v; infGenerarMini(); }
 function infModo(modo){
-  if((modo==='catalogo'||modo==='toro')&&!canAccess('informe_plus')){
-    showPlusGate(modo==='toro'?'La Ficha por Toro es exclusiva de Plus.':'El Informe Plus es exclusivo de Plus.');
+  // 2026-09-18: Ficha de Toros ("toro") pasó a estar disponible en BASE — solo "catalogo"
+  // (Informe Plus) sigue exclusivo de Plus. La tarjeta de "catalogo" además ya viene oculta
+  // para BASE desde abrirInforme(), este chequeo queda como respaldo.
+  if(modo==='catalogo'&&!canAccess('informe_plus')){
+    showPlusGate('El Informe Plus es exclusivo de Plus.');
     return;
   }
   _infModo=modo;
   document.getElementById('inf-modo-sel').style.display='none';
-  document.getElementById('inf-modo-lbl').textContent=modo==='catalogo'?'Informe Plus':modo==='mini'?'Informe Base':'Informe Plus por Toro';
+  document.getElementById('inf-modo-lbl').textContent=modo==='catalogo'?'Informe Plus':modo==='mini'?'Informe Base':'Ficha de Toros';
   const bt=document.getElementById('inf-btn-todo'),bn=document.getElementById('inf-btn-ninguno');
   document.getElementById('inf-btn-excel').style.display=modo==='toro'?'none':'';
   document.getElementById('inf-mini-opts').style.display=modo==='mini'?'':'none';
@@ -5435,9 +5442,9 @@ function _infExcelSheetsPlus(wb,RES){
   XLSX.utils.book_append_sheet(wb,wsPerf,'100_Perfiles_OyP');
 }
 
-function infExportarExcel(){
+async function infExportarExcel(){
   if(typeof XLSX==='undefined'){alert('Librería Excel no disponible. Verificá la conexión.');return;}
-  if(_infModo==='toro'){alert('El Excel no está disponible para la Ficha por Toro — usá el informe PDF.');return;}
+  if(_infModo==='toro'){alert('El Excel no está disponible para Ficha de Toros — usá el informe PDF.');return;}
   if(_infModo==='catalogo'&&!canAccess('informe_plus')){showPlusGate('El Excel Plus es exclusivo de Plus.');return;}
   const RES=_infExcelRES();
   const wb=XLSX.utils.book_new();
@@ -5445,7 +5452,28 @@ function infExportarExcel(){
   if(_infModo==='catalogo')_infExcelSheetsPlus(wb,RES);
   const fecha=new Date().toLocaleDateString('es-AR').replace(/\//g,'-');
   const label=_infModo==='catalogo'?'Plus':'Base';
-  XLSX.writeFile(wb,'SEPA-Select_'+label+'_'+fecha+'.xlsx');
+  const filename='SEPA-Select_'+label+'_'+fecha+'.xlsx';
+
+  // 2026-09-18, a pedido de RD: en PC con Chrome/Edge, dejar elegir nombre y carpeta al guardar
+  // (misma API que ya usa Puente para elegir la carpeta data/). En tablet/celular/Safari esta
+  // función no existe — cae solo al método de siempre (descarga directa a la carpeta del navegador).
+  if(typeof window.showSaveFilePicker==='function'){
+    try{
+      const handle=await window.showSaveFilePicker({
+        suggestedName:filename,
+        types:[{description:'Excel',accept:{'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':['.xlsx']}}]
+      });
+      const buf=XLSX.write(wb,{type:'array',bookType:'xlsx'});
+      const writable=await handle.createWritable();
+      await writable.write(buf);
+      await writable.close();
+      return;
+    }catch(e){
+      if(e&&e.name==='AbortError') return; // el usuario cerró el diálogo sin elegir — no forzar descarga
+      // cualquier otro error (navegador raro, permiso denegado, etc.): seguir al método de siempre
+    }
+  }
+  XLSX.writeFile(wb,filename);
 }
 
 // ── v9: RD_Confiabilidad / RD_Hallazgos en informes (usa calcConfiabilidad / calcHallazgos de la app) ──
@@ -6254,6 +6282,14 @@ function infGenerarMini(){
     html+='<div><div class="inf-sub-title">📊 RD_Factores — Top '+SELECTO_TOP_N+'</div>'+infRankTable(top5f,true,r.sel)+'</div>';
     html+='<div><div class="inf-sub-title">🎯 RD_O&amp;P — Top '+SELECTO_TOP_N+'</div>'+infRankTable(top5o,false,r.sel)+'</div>';
     html+='</div>';
+    html+=infFoot(pid)+'</div>';
+
+    // 2026-09-18: página separada para los gráficos — antes compartía página con las tablas
+    // Top10 de arriba, y desde que SELECTO_TOP_N pasó de 5 a 10 (14-sep) el contenido se pasaba
+    // del alto de una página/pantalla (RD lo reportó probando en tablet).
+    const pidG=pid+'-graf';
+    html+='<div class="inf-page" id="inf-pg-'+pidG+'" data-pid="'+pidG+'">';
+    html+='<div class="inf-section-title">'+infCatLabel(cat)+' — Gráficos</div>';
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start">';
     if(radarSet.length){
       const zList=radarSet.map(row=>infZOf(row.t,st));
@@ -6272,7 +6308,7 @@ function infGenerarMini(){
     html+='<div>'+infMiniBarChart(top6o,cat)+'</div>';
     html+='</div>';
     html+='<div style="margin-top:12px;font-size:.62rem;color:#999;line-height:1.45">Interpretación Radar: ejes normalizados 0–1, invertidos PN/LG/Alt (afuera = mejor). Verde = peso positivo en esta categoría. O&amp;P: suma algebraica de perfiles Z.</div>';
-    html+=infFoot(pid)+'</div>';
+    html+=infFoot(pidG)+'</div>';
   });
 
   // ── Anexo 2 — resultados completos: 1 fila por toro, 8 columnas + Confiab. + hallazgos ──
