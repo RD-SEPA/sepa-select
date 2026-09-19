@@ -843,7 +843,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <!-- ══ REGISTRO OVERLAY ══ -->
 <!-- Selector rápido de cuentas de prueba — SOLO modo desarrollador (?dev=RD2026),
      visible desde la primera pantalla, no depende de estar logueado. -->
-<div id="dev-switcher" class="hidden" style="position:fixed;top:10px;right:10px;z-index:9999;
+<div id="dev-switcher" class="hidden" style="position:fixed;bottom:10px;left:10px;z-index:9999;
   background:rgba(20,20,20,.85);padding:8px 10px;border-radius:9px;box-shadow:0 2px 10px rgba(0,0,0,.35)">
   <select onchange="if(this.value) cambiarUsuarioDev(this.value)"
     style="padding:6px 8px;border-radius:6px;border:none;font-size:.82rem">
@@ -1044,22 +1044,20 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <div id="carga-overlay" class="hidden">
   <div class="login-box">
     <div class="login-logo">SEPA<span>-Select</span></div>
-    <div class="login-sub">Cargar un catálogo</div>
+    <div class="login-sub">Enviar catálogo</div>
 
     <div class="carga-solicitante" id="carga-solicitante"><!-- datos del solicitante, se llenan por JS --></div>
 
     <div class="login-hint" id="carga-precio" style="margin-top:2px"></div>
-    <div class="login-hint" style="margin-bottom:6px">
-      Completás un formulario con los datos del catálogo y <b>adjuntás el PDF o Excel</b>.
-      Ing. Delgado analiza la factibilidad, confirma el costo y sube el catálogo a la plataforma.
+    <div class="login-hint" style="margin-bottom:10px">
+      Mandanos el PDF o Excel del catálogo directo, por mail o WhatsApp. Se analiza la factibilidad, se confirma el costo y se sube a la plataforma.
     </div>
 
-    <a id="carga-form-link" class="btn-login" target="_blank" rel="noopener"
-       href="#" style="text-decoration:none;display:inline-block">Abrir formulario de carga →</a>
-
-    <div class="login-hint" style="margin-top:10px">
-      ¿Preferís mandarlo directo? Escribinos a
-      <a href="mailto:catalogo@programa-sepa.com.ar" style="color:white;text-decoration:underline">catalogo@programa-sepa.com.ar</a>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:6px">
+      <a href="mailto:catalogo@programa-sepa.com.ar" class="btn-login"
+         style="text-decoration:none;display:inline-block">✉ catalogo@programa-sepa.com.ar</a>
+      <a href="https://wa.me/5492944562079" target="_blank" rel="noopener" class="btn-login"
+         style="text-decoration:none;display:inline-block">📱 WhatsApp +54 9 2944 562079</a>
     </div>
 
     <div style="margin-top:14px">
@@ -1067,9 +1065,10 @@ tr.sel-z:hover td{background:#d4ecda!important}
     </div>
 
     <div class="login-credito">
-      Proceso: 1) enviás el formulario con el archivo · 2) análisis de factibilidad ·
-      3) confirmación y pago · 4) carga y validación · 5) definís el acceso ·
-      6) los temporales se dan de baja después del evento (te avisamos).
+      Proceso: 1) enviás el catálogo en PDF o Excel · 2) recepción y análisis — te confirmamos
+      por el mismo medio si se puede cargar a SEPA-Select · 3) transferencia y envío del
+      comprobante · 4) te avisamos que el catálogo ya está disponible en SEPA-Select, bajo la
+      modalidad acordada (público o privado).
     </div>
   </div>
 </div>
@@ -1099,7 +1098,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
       </div>
       <div class="selector-card" onclick="seleccionarModo('CARGA')">
         <div class="selector-badge" style="background:rgba(255,255,255,.15);color:white">CARGA</div>
-        <div class="selector-card-title">Cargar catálogo</div>
+        <div class="selector-card-title">Enviar catálogo</div>
         <div class="selector-card-desc">
           <p>Enviá tu catálogo para que esté disponible en la plataforma.</p>
           <p>BASE: $131.000 (30 KN) · privado solo para vos<br>
@@ -1146,7 +1145,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <header class="app-header">
   <div class="header-top">
     <div class="header-brand">
-      <div class="header-title">SEPA-Select: Evaluación por DEPS <span class="licencia-badge lb-base" id="licencia-badge">BASE</span><span id="header-usuario-info" style="font-size:.72rem;opacity:.6;font-weight:400;margin-left:12px"></span><a href="#" onclick="cerrarSesionCuenta();return false" title="Cerrar sesión de tu cuenta (distinto de 'Salir', que solo vuelve a catálogos)" style="font-size:.68rem;opacity:.55;font-weight:400;margin-left:8px;color:inherit;text-decoration:underline">cerrar sesión</a></div>
+      <div class="header-title">SEPA-Select: Evaluación por DEPS <span class="licencia-badge lb-base" id="licencia-badge" hidden>BASE</span><span id="header-usuario-info" style="font-size:.72rem;opacity:.6;font-weight:400;margin-left:12px"></span><a href="#" onclick="cerrarSesionCuenta();return false" title="Cerrar sesión de tu cuenta (distinto de 'Salir', que solo vuelve a catálogos)" style="font-size:.68rem;opacity:.55;font-weight:400;margin-left:8px;color:inherit;text-decoration:underline">cerrar sesión</a></div>
       <div class="header-sub" id="header-sub">Cargando catálogo…</div>
       <span id="dev-badge" hidden style="position:absolute;top:8px;right:12px;font-size:.66rem;font-weight:700;letter-spacing:.08em;color:#f0d9a8;background:rgba(184,137,43,.35);border:1px solid var(--oro);padding:2px 8px;border-radius:5px">MODO DEV</span>
     </div>
@@ -1223,7 +1222,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <button class="btn-header btn-header-gold" onclick="abrirInforme()">■ Informe PDF</button>
     <button class="btn-header" id="btn-ayuda" onclick="togglePanel('panel-ayuda')">❓ Ayuda</button>
     <button class="btn-header" onclick="cambioCatalogo()">≡ Catálogos</button>
-    <button class="btn-header" onclick="mostrarInstruccionesCarga()">⬆ Cargar catálogo</button>
+    <button class="btn-header" onclick="mostrarInstruccionesCarga()">⬆ Enviar catálogo</button>
     <button class="btn-header btn-header-gold" id="btn-plus" onclick="mostrarSelectorPlus()" hidden>★ Quiero PLUS</button>
   </div>
   <div class="sb-group sb-group-bottom">
@@ -1804,7 +1803,6 @@ const EMBEDDED_TOROS = {};  // deploy: data via fetch
 
 // ── CARGA INICIAL ──────────────────────────────
 async function iniciarApp() {
-  renderFAQs();
   // Modo desarrollador: badge
   const _db = document.getElementById('dev-badge'); if (_db) _db.hidden = !esDev();
   const _dsw = document.getElementById('dev-switcher'); if (_dsw) _dsw.classList.toggle('hidden', !esDev());
@@ -2345,36 +2343,17 @@ function solicitarPlus(){
   showCatalogos();
 }
 
-// Google Form "Cargar catalogo en SEPA-Select" — URL base + IDs de campos
-const CARGA_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSc1uWjlfWxMOSggS5IVVpD8umPkg4cEtwOihoaro826rRW8xA/viewform';
-const CARGA_FORM_ENTRY = { nombre:'1307685349', email:'268203802', whatsapp:'850511875', rol:'1490052776' };
-const CARGA_ROL_MAP = {
-  productor:'Productor', cabana:'Cabaña', asesor:'Asesor',
-  veterinario:'Veterinario / Agrónomo', consignatario:'Consignatario', otro:'Otro'
-};
-
 function mostrarInstruccionesCarga() {
   const u = JSON.parse(localStorage.getItem('sepa_usuario') || '{}');
-  const licencia = u.licencia || 'BASE';
-  // Datos del solicitante (del registro)
+  // Datos del solicitante (del registro) — solo de referencia en pantalla, no se envía a ningún lado
   document.getElementById('carga-solicitante').innerHTML =
     `<b>Solicitante</b><br>` +
     `${u.nombre || '—'}<br>` +
     `${u.email || '—'} · ${u.whatsapp || '—'}<br>` +
-    `Rol: ${u.rol || '—'} · Licencia: ${licencia}` +
+    `Rol: ${u.rol || '—'}` +
     (u.promo ? ` · Promo: ${u.promo}` : '');
-  document.getElementById('carga-precio').textContent = licencia === 'PLUS'
-    ? 'Costo: $219.000 (50 KN) por catálogo — o usás uno de tus 2 incluidos por año.'
-    : 'Costo: $131.000 (30 KN) — catálogo privado solo para vos.';
-
-  // Link al Google Form con los datos del usuario prellenados
-  const p = new URLSearchParams({ usp: 'pp_url' });
-  if (u.nombre)   p.append('entry.' + CARGA_FORM_ENTRY.nombre,   u.nombre);
-  if (u.email)    p.append('entry.' + CARGA_FORM_ENTRY.email,    u.email);
-  if (u.whatsapp) p.append('entry.' + CARGA_FORM_ENTRY.whatsapp, u.whatsapp);
-  const rolForm = CARGA_ROL_MAP[u.rol];
-  if (rolForm)    p.append('entry.' + CARGA_FORM_ENTRY.rol,      rolForm);
-  document.getElementById('carga-form-link').href = CARGA_FORM_URL + '?' + p.toString();
+  document.getElementById('carga-precio').textContent =
+    'Costo: $131.000 (30 KN) — catálogo privado solo para vos.';
 
   document.getElementById('selector-modo').classList.add('hidden');
   document.getElementById('carga-overlay').classList.remove('hidden');
@@ -2547,53 +2526,6 @@ function volverDesdeCatalogos(){
   document.getElementById('main-app').classList.remove('hidden');
 }
 
-const FAQS=[
-  {bloque:"Los catálogos", items:[
-    {q:"¿Cómo cargo un catálogo?",
-     r:"La carga de catálogos <strong>no es una función de la app</strong>: la realiza Ricardo Delgado a pedido. Para solicitar la incorporación de un catálogo (remate, plantel propio u otro), contactar directamente. Una vez cargado, aparece disponible en la pantalla de selección de catálogos."},
-    {q:"¿Qué diferencia hay entre catálogo permanente y temporal?",
-     r:"Un catálogo <strong>permanente</strong> está disponible indefinidamente: corresponde a stock en venta continua o plantel propio. Un catálogo <strong>temporal</strong> tiene vigencia acotada al período de un remate: se activa antes del evento y se desactiva después para evitar consultar animales ya adjudicados."},
-  ]},
-  {bloque:"Los resultados", items:[
-    {q:"¿Qué significa que un perfil aparezca como 'no calculable'?",
-     r:"Significa que el catálogo activo <strong>no tiene publicada alguna de las DEPs</strong> que ese perfil necesita. Por ejemplo, el perfil T02 requiere AOB y Cortes: si la cabaña no publicó Cortes, el perfil no se puede calcular. No es un error — es información: ese catálogo no permite comparar en esa dimensión."},
-    {q:"¿Cómo interpreto el Score Z?",
-     r:"El Score Z indica <strong>cuántos desvíos estándar</strong> está el toro por encima o debajo del promedio del catálogo en ese perfil. Un score de +2.0 significa que ese animal está 2 desvíos por encima del promedio — es un toro claramente superior en esa dimensión. Scores negativos indican desempeño por debajo del promedio del grupo disponible."},
-    {q:"¿El ranking cambia si cambio de categoría?",
-     r:"Sí, y es esperable. Cada categoría tiene <strong>pesos distintos</strong>: un toro ideal para Terminal (máximo PF y AOB) puede ser mediocre para Vaquillona 15M (donde lo crítico es PN bajo y CE alto). El ranking no describe al animal — describe qué tan bien encaja ese animal en tu objetivo productivo específico."},
-  ]},
-  {bloque:"Exportar", items:[
-    {q:"¿Qué formatos de exportación están disponibles?",
-     r:"<strong>PDF</strong>: impresión de la pantalla activa o del informe completo con todas las categorías. <strong>CSV</strong>: descarga de RD_Factores, RD_O&P o comparativo de la categoría activa. <strong>Excel</strong>: workbook con múltiples hojas — RD_Factores (5 categorías), RD_O&P con desglose por perfil (5 categorías) o completo con hoja resumen comparativa. CSV y Excel requieren licencia PLUS."},
-  ]},
-];
-
-function renderFAQs(){
-  const el=document.getElementById('ayuda-acordeon');
-  if(!el) return;
-  el.innerHTML=FAQS.map((bloque,bi)=>`
-    <div class="faq-bloque">
-      <div class="faq-bloque-titulo">${bloque.bloque}</div>
-      ${bloque.items.map((item,ii)=>{
-        const id=`faq-${bi}-${ii}`;
-        return`<div class="faq-item">
-          <div class="faq-pregunta" id="${id}-q" onclick="toggleFAQ('${id}')">
-            <span>${item.q}</span>
-            <span class="faq-arrow" id="${id}-arr">▾</span>
-          </div>
-          <div class="faq-respuesta" id="${id}-r">${item.r}</div>
-        </div>`;
-      }).join('')}
-    </div>`).join('');
-}
-
-function toggleFAQ(id){
-  const q=document.getElementById(id+'-q');
-  const r=document.getElementById(id+'-r');
-  const isOpen=r.classList.contains('open');
-  q.classList.toggle('open',!isOpen);
-  r.classList.toggle('open',!isOpen);
-}
 
 function toggleCatalogoOyP(){
   const panel=document.getElementById('catalogo-oyp-panel');
@@ -2677,6 +2609,9 @@ function updateLicenciaBadge(){
   const b=document.getElementById('licencia-badge');
   if(!b) return;
   const plus=sepaState.modo==='PLUS'||esDev();
+  // Sin PLUS disponible para el público, mostrar "BASE" no aporta nada (no hay con qué
+  // contrastarlo) — el badge solo se muestra en modo Plus/dev, donde sí es útil distinguirlo.
+  b.hidden=!plus;
   b.className=`licencia-badge ${plus?'lb-plus':'lb-base'}`;
   b.textContent=modoLabel();
 }
@@ -2893,8 +2828,8 @@ const AYUDA_ITEMS=[
   {titulo:"RD_Confiabilidad (orientativo)",body:"Responde '¿cuánto sabemos de este toro?'. Muestra la precisión ERA de cada DEP (mapa de calor) y una lectura cualitativa: mejor estudiado, qué calificaciones están bien sostenidas y cuáles se apoyan en DEPs de baja precisión. No ordena por mérito ni interviene en RD_Factores / RD_O&P. Catálogos sin precisión publicada (genómica sin progenie) se informan como tales."},
   {titulo:"RD_Hallazgos (referencia)",body:"Marca los DEPs de cada toro que se despegan del conjunto del catálogo (|z| ≥ 1,5 respecto de la media), con el percentil de raza como referencia. ▲ = valor favorable para la categoría activa, ▼ = desfavorable. No interviene en los rankings de mérito."},
   {titulo:(_modoAnonimo?"":"Nota sobre Forager"),body:(_modoAnonimo?"":"Forager es un Angus Colorado del sistema RAAA (EE.UU.): solo tiene PN, Leche, AOB y EGD publicados, por lo que la mayoría de sinergias no son calculables para este toro. Los toros sin DEPs publicados (ver pantalla Catálogo → Notas) no aparecen en los rankings.")},
-  {titulo:"BASE vs PLUS",body:"BASE: Vista Global (SELECTO), Catálogo, exploración completa en categoría Terminal. PLUS: acceso completo — configuración de pesos, fenotipo editable, RD_O&P con detalle, RD_Confiabilidad, RD_Hallazgos, exportación CSV."},
-  {titulo:"Glosario de DEPs",body:"PN=Peso al nacer (kg, favorable: negativo) · WW=Peso al destete (kg) · PF=Peso final/yearling (kg) · Alt=Altura (cm) · Leche=habilidad lechera (kg) · AOB=Área ojo de bife / REA (cm²) · CE=Circunferencia escrotal / SC (cm) · LG=Longitud de gestación (días, favorable: negativo) · MW=Mature Weight · FRT=Fertility · CED/CEM=Ease direct/maternal · YG=Yield Grade · DMI=Dry Matter Intake"}
+  {titulo:"Glosario de DEPs",body:"PN=Peso al nacer (kg, favorable: negativo) · WW=Peso al destete (kg) · PF=Peso final/yearling (kg) · Alt=Altura (cm) · Leche=habilidad lechera (kg) · AOB=Área ojo de bife / REA (cm²) · CE=Circunferencia escrotal / SC (cm) · LG=Longitud de gestación (días, favorable: negativo) · MW=Mature Weight · FRT=Fertility · CED/CEM=Ease direct/maternal · YG=Yield Grade · DMI=Dry Matter Intake"},
+  {titulo:"¿Cómo hago para que mi catálogo esté en SEPA-Select?",body:"Botón \"⬆ Enviar catálogo\" del menú: nos mandás el PDF o Excel directo, por mail a catalogo@programa-sepa.com.ar o por WhatsApp al +54 9 2944 562079. Proceso: 1) enviás el catálogo en PDF o Excel · 2) recepción y análisis — te confirmamos por el mismo medio si se puede cargar · 3) transferencia y envío del comprobante · 4) te avisamos que el catálogo ya está disponible en SEPA-Select, bajo la modalidad acordada (público o privado)."}
 ];
 function renderAyuda(){
   document.getElementById('ayuda-acordeon').innerHTML=AYUDA_ITEMS.map((item,i)=>`

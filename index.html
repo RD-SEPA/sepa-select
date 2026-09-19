@@ -306,8 +306,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);disp
         <div class="ssd-items">
           <div class="ssd-item">El objetivo de cría es el punto de partida, no el resultado. El usuario define qué evalúa.</div>
           <div class="ssd-item">Los pesos son del usuario, visibles y configurables. El ranking es de su fórmula.</div>
-          <div class="ssd-item">Cada posición es auditable: se ven los z-scores, los pesos aplicados y el descuento por precisión ERA.</div>
-          <div class="ssd-item">Cuatro categorías de cría con matrices de peso distintas. Una misma evaluación produce cuatro rankings.</div>
+          <div class="ssd-item">Cada posición es auditable: se ven los z-scores y los pesos aplicados. La confiabilidad del dato (precisión ERA) se analiza aparte, sin penalizar el mérito.</div>
+          <div class="ssd-item">Cinco categorías de cría con matrices de peso distintas. Una misma evaluación produce cinco rankings.</div>
           <div class="ssd-item">Dos métodos independientes (RD_Factores y RD_O&P). La concordancia entre ellos es parte del análisis.</div>
         </div>
       </div>
@@ -323,7 +323,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);disp
     <div class="demo-flex">
       <div class="demo-quote">
         <strong>SEPA-Select no genera DEPs.</strong> Usa las evaluaciones ERA o genómicas existentes y las ordena según el objetivo del evaluador. Es una capa de decisión sobre datos que ya existen.
-        <span class="note">En la app, esto que ves acá al lado es la <strong>matriz de pesos por categoría</strong> — las 8 DEPs del modelo, editable en PLUS.</span>
+        <span class="note">En la app, esto que ves acá al lado es la <strong>matriz de pesos por categoría</strong> — las 8 DEPs del modelo, editable por vos.</span>
       </div>
       <div class="demo-wrap">
         <div class="demo-title">Demo interactivo</div>
@@ -371,7 +371,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);disp
       <div class="opd-step opd-dato">
         <div class="opd-step-label">Paso 3 — El dato medido</div>
         <h3>DEPs con precisión</h3>
-        <p>El DEP es el insumo, no la decisión. Dentro del perfil correcto, su valor y su precisión ERA se ponderan juntos.</p>
+        <p>El DEP es el insumo, no la decisión. Dentro del perfil correcto, su valor pondera el ranking; su precisión ERA se analiza aparte, como referencia de confiabilidad.</p>
         <div class="opd-chips"><span class="opd-chip">PN</span><span class="opd-chip">WW</span><span class="opd-chip">CE</span><span class="opd-chip">Leche</span><span class="opd-chip">AOB</span><span class="opd-chip">LG</span></div>
       </div>
     </div>
@@ -391,19 +391,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);disp
       <div class="metodo-card">
         <span class="metodo-badge mb-rf">RD_Factores</span>
         <div class="metodo-title">Ponderación por objetivo de cría</div>
-        <p class="metodo-desc">Pondera las 8 DEPs del sistema ERA mediante z-scores calculados sobre el conjunto activo. Aplica descuento por precisión ERA configurable y normaliza el resultado a escala 0–100. Al score genético (G) puede sumarse un ajuste fenotípico editable (F), disponible en PLUS.</p>
-        <div class="metodo-detail"><strong>Score G + F = resultado final</strong><br>G: score genético ponderado con precisión ERA<br>F: ajuste fenotípico por animal (disponible en PLUS)</div>
+        <p class="metodo-desc">Pondera las 8 DEPs del sistema ERA mediante z-scores calculados sobre el conjunto activo, y normaliza el resultado a escala 0–100. Es mérito puro: no aplica descuento por precisión — la confiabilidad del dato se analiza aparte, en RD_Confiabilidad, sin penalizar el score.</p>
+        <div class="metodo-detail"><strong>Score G = resultado final</strong><br>G: score genético ponderado por objetivo de cría, normalizado 0–100</div>
       </div>
       <div class="metodo-card dest">
         <span class="metodo-badge mb-oyp">RD_O&P</span>
         <div class="metodo-title">Evaluación por perfiles productivos</div>
-        <p class="metodo-desc">Evalúa al reproductor contra 14 perfiles productivos en 4 grupos: Universales (U01–U03, activos en todas las categorías), Vaquillona 15M (V01–V04), Reposición (R01–R03) y Terminal (T01–T04). El score de cada perfil es la suma algebraica de sus DEPs requeridas con signo según la dirección favorable.</p>
-        <div class="metodo-detail"><strong>14 perfiles oficiales · Referencia v5</strong><br>Δ = diferencia de posición RF vs RD_O&P<br>Fondo dorado cuando Δ ≤ 2 puestos (concordancia alta)</div>
+        <p class="metodo-desc">Evalúa al reproductor contra 15 perfiles productivos en 3 familias: Universales (U01–U03, activos en todas las categorías), Vaca (V01–V04 en Vaquillona 15M y R01–R03 en Reposición) y Terminal (T01–T05, activos en Terminal y Hilton). El score de cada perfil es la suma algebraica de sus DEPs requeridas con signo según la dirección favorable.</p>
+        <div class="metodo-detail"><strong>15 perfiles oficiales</strong><br>Δ = diferencia de posición RF vs RD_O&P<br>Fondo dorado cuando Δ ≤ 2 puestos (concordancia alta)</div>
       </div>
     </div>
     <div class="selecto-box">
       <div class="sb-title">El concepto SELECTO</div>
-      <div class="sb-content"><strong>SELECTO</strong> identifica a los reproductores que figuran en el Top 5 simultáneo de ambos métodos para una misma categoría. No es el mejor según un solo criterio: es el que dos lógicas independientes reconocen al mismo tiempo. Si un reproductor alcanza 100 en RD_Factores pero ocupa posición baja en RD_O&P, el sistema lo muestra como una <strong>tensión a gestionar</strong> — información útil para la decisión, no un descarte automático.</div>
+      <div class="sb-content"><strong>SELECTO</strong> identifica a los reproductores que figuran en el Top 10 simultáneo de ambos métodos para una misma categoría. No es el mejor según un solo criterio: es el que dos lógicas independientes reconocen al mismo tiempo. Si un reproductor alcanza 100 en RD_Factores pero ocupa posición baja en RD_O&P, el sistema lo muestra como una <strong>tensión a gestionar</strong> — información útil para la decisión, no un descarte automático.</div>
     </div>
   </div>
 </section>
@@ -418,7 +418,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);disp
       <div>
         <div class="pq-grupo-label">Quienes evalúan para decidir</div>
         <div class="pq-items">
-          <div class="pq-item"><strong>Productor ganadero</strong><span>Ordena un conjunto de evaluaciones según su objetivo de sistema y recibe cuatro rankings simultáneos —uno por categoría de cría.</span></div>
+          <div class="pq-item"><strong>Productor ganadero</strong><span>Ordena un conjunto de evaluaciones según su objetivo de sistema y recibe cinco rankings simultáneos —uno por categoría de cría.</span></div>
           <div class="pq-item"><strong>Técnico o veterinario IATF</strong><span>Documenta la recomendación con la ficha individual: z-scores, posiciones por categoría y detalle de perfiles.</span></div>
           <div class="pq-item"><strong>Cabañero que califica producción propia</strong><span>Evalúa sus reproductores genotipados para decidir cuáles retiene, cuáles ofrece con respaldo y cuáles reorienta.</span></div>
           <div class="pq-item"><strong>Jura en exposición</strong><span>Suma una capa genómica objetiva al fenotipo. La concordancia —o la tensión— entre ambos es información para el jurado.</span></div>
@@ -439,19 +439,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);disp
 <!-- ══ 8 · PLANES ══ -->
 <section class="slide sl-a" id="planes">
   <div class="container">
-    <p class="s-label">Licencias</p>
-    <h2 class="s-title">Plan BASE</h2>
+    <p class="s-label">Qué incluye</p>
+    <h2 class="s-title">SEPA-Select</h2>
     <table class="planes-tabla">
       <thead>
         <tr>
           <th></th>
-          <th><div class="pt-plan">BASE</div><div class="pt-precio">$0 <span>/ año</span></div><div class="pt-nota">Sin cargo · sin vencimiento</div></th>
+          <th><div class="pt-precio">$0 <span>/ año</span></div><div class="pt-nota">Sin cargo · sin vencimiento</div></th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Motor de ranking RD_Factores · Vista Global SELECTO</td><td>Categoría Terminal</td></tr>
-        <tr><td>Análisis RD_O&P</td><td>Vista Global</td></tr>
-        <tr><td>Exportación e informes</td><td>PDF predefinido</td></tr>
+        <tr><td>Motor de ranking RD_Factores</td><td>Las 5 categorías, con tus propios pesos</td></tr>
+        <tr><td>Análisis RD_O&P</td><td>Las 5 categorías</td></tr>
+        <tr><td>Informes</td><td>Informe + Ficha de Toros + Excel</td></tr>
         <tr><td>Catálogo propio privado</td><td>$131.000 (30 KN) · P1 hasta 25 toros · P2 hasta 40 toros</td></tr>
       </tbody>
     </table>
@@ -473,11 +473,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);disp
         <div class="faq-grupo-label">Metodología</div>
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)"><span>¿Cómo funciona el ranking RD_Factores?</span><span class="faq-arrow">▾</span></div>
-          <div class="faq-a">Pondera las 8 DEPs del sistema ERA (<code>PN, WW, PF, Alt, Leche, AOB, CE, LG</code>) según los pesos definidos para la categoría activa. La comparación es interna al conjunto cargado: opera por z-score sobre ese universo. Aplica descuento por precisión ERA configurable y normaliza el resultado a escala 0–100 (score G). En PLUS, el score G se suma con un ajuste fenotípico F editable por animal. <strong>Score final = G + F.</strong></div>
+          <div class="faq-a">Pondera las 8 DEPs del sistema ERA (<code>PN, WW, PF, Alt, Leche, AOB, CE, LG</code>) según los pesos definidos para la categoría activa — pesos que vos mismo podés editar. La comparación es interna al conjunto cargado: opera por z-score sobre ese universo, y normaliza el resultado a escala 0–100. Es mérito puro — no descuenta por precisión ERA; la confiabilidad del dato se analiza aparte, en RD_Confiabilidad, sin penalizar el score.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué evalúa el método RD_O&P?</span><span class="faq-arrow">▾</span></div>
-          <div class="faq-a">Evalúa al reproductor contra 14 perfiles productivos predefinidos en 4 grupos: <strong>U Universales</strong> (U01–U03), <strong>V Vaquillona 15M</strong> (V01–V04), <strong>R Reposición</strong> (R01–R03) y <strong>T Terminal</strong> (T01–T04). El score de cada perfil es la suma algebraica de sus DEPs con signo según la dirección favorable. Si falta alguna DEP requerida, el perfil queda no calculable con indicación de la DEP ausente.</div>
+          <div class="faq-a">Evalúa al reproductor contra 15 perfiles productivos predefinidos en 3 familias: <strong>U Universales</strong> (U01–U03, activos en todas las categorías), <strong>V Vaca</strong> (V01–V04 en Vaquillona 15M, R01–R03 en Reposición) y <strong>T Terminal</strong> (T01–T05, activos en Terminal y Hilton). El score de cada perfil es la suma algebraica de sus DEPs con signo según la dirección favorable. Si falta alguna DEP requerida, el perfil queda no calculable con indicación de la DEP ausente.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué significa el delta Δ?</span><span class="faq-arrow">▾</span></div>
@@ -485,14 +485,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);disp
         </div>
       </div>
       <div>
-        <div class="faq-grupo-label">Datos y licencias</div>
+        <div class="faq-grupo-label">Datos y catálogos</div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>¿Cómo hago para que mi catálogo esté en SEPA-Select?</span><span class="faq-arrow">▾</span></div>
+          <div class="faq-a">Nos mandás el PDF o Excel del catálogo directo, por mail a <a href="mailto:catalogo@programa-sepa.com.ar">catalogo@programa-sepa.com.ar</a> o por WhatsApp al <a href="https://wa.me/5492944562079">+54 9 2944 562079</a>. El proceso: 1) enviás el catálogo en PDF o Excel · 2) recepción y análisis — te confirmamos por el mismo medio si se puede cargar · 3) transferencia y envío del comprobante · 4) te avisamos que el catálogo ya está disponible en SEPA-Select, bajo la modalidad acordada (público o privado).</div>
+        </div>
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)"><span>¿Los reproductores deben estar evaluados en ERA?</span><span class="faq-arrow">▾</span></div>
-          <div class="faq-a">Para operar en modo completo, el conjunto debe incluir las DEPs del sistema ERA con sus precisiones. Los conjuntos sin precisiones ERA (genómica propia, RAAA u otros) pueden rankearse activando el <strong>modo sin precisión</strong> en Configuración, que opera por z-score ponderado directo sin descuento por confiabilidad.</div>
+          <div class="faq-a">No es obligatorio. RD_Factores es mérito puro por z-score: rankea igual con o sin precisiones ERA publicadas, sin ningún ajuste especial que activar. Cuando el conjunto sí trae precisiones (sistema ERA), se puede consultar aparte en RD_Confiabilidad como referencia de calidad del dato — es informativo, no modifica el ranking.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)"><span>¿Puedo usar evaluaciones de genómica propia?</span><span class="faq-arrow">▾</span></div>
-          <div class="faq-a">Sí. El sistema acepta conjuntos propios en formato JSON. Los provenientes de genómica propia o de registros RAAA pueden cargarse, aunque algunos perfiles de RD_O&P pueden quedar no calculables si faltan DEPs específicas. Los conjuntos los carga Ing. Delgado en la plataforma; el publicador decide si el acceso es abierto o requiere clave.</div>
+          <div class="faq-a">Sí. El sistema acepta conjuntos propios en formato JSON. Los provenientes de genómica propia o de registros RAAA pueden cargarse, aunque algunos perfiles de RD_O&P pueden quedar no calculables si faltan DEPs específicas. Los conjuntos se cargan en la plataforma; el publicador decide si el acceso es abierto o requiere clave.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q" onclick="toggleFaq(this)"><span>¿Se necesita instalar algo?</span><span class="faq-arrow">▾</span></div>
