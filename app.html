@@ -13,7 +13,7 @@
     if(!_esLocal && localStorage.getItem('sepa_acceso_landing')!=='1'){ location.replace('acceso.html'); }
   }catch(e){}
 </script>
-<title>SEPA-Select App3 · v9</title>
+<title>SEPA-Select V.1</title>
 <style>
 :root{
   --verde-oscuro:#253a29;--verde-medio:#3c6b45;--verde-claro:#e9f0ea;
@@ -27,7 +27,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie)
 /* ── LOGIN ── */
 #registro-overlay,#carga-overlay,#login-overlay,#recovery-overlay,#nueva-password-overlay{position:fixed;inset:0;background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));z-index:400;display:flex;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto}
 #registro-overlay.hidden,#carga-overlay.hidden,#login-overlay.hidden,#recovery-overlay.hidden,#nueva-password-overlay.hidden{display:none!important}
-#carga-overlay .login-box{max-width:520px;margin:auto}
+#carga-overlay .login-box{max-width:680px;margin:auto}
 .carga-field{margin-bottom:12px}
 .carga-field input,.carga-field select,.carga-field textarea{width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;box-sizing:border-box;font-family:inherit}
 .carga-field textarea{min-height:60px;resize:vertical}
@@ -288,7 +288,9 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie)
 .ayuda-item{border:1px solid var(--borde);border-radius:8px;overflow:hidden}
 .ayuda-item-head{padding:10px 14px;background:var(--superficie);cursor:pointer;font-weight:700;font-size:.85rem;color:var(--verde-oscuro);display:flex;justify-content:space-between;align-items:center}
 .ayuda-item-head:hover{background:var(--verde-claro)}
-.ayuda-item-body{display:none;padding:12px 14px;font-size:.82rem;color:var(--gris);line-height:1.55;border-top:1px solid var(--borde)}
+.ayuda-item-body{display:none;padding:12px 14px;font-size:.95rem;color:var(--gris);line-height:1.6;border-top:1px solid var(--borde)}
+.ayuda-item-body p{margin-bottom:10px}
+.ayuda-item-body p:last-child{margin-bottom:0}
 .ayuda-tabla{width:100%;border-collapse:collapse;margin-top:8px}
 .ayuda-tabla td{padding:5px 9px;border-bottom:1px solid var(--borde);vertical-align:top}
 .ayuda-tabla td:first-child{font-weight:800;color:var(--verde-oscuro);white-space:nowrap;width:1%}
@@ -318,6 +320,10 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie)
 /* ── BUSCADOR (barra al pie) ── */
 .buscador-bar{position:sticky;bottom:0;z-index:70;background:var(--superficie);border-top:1px solid var(--borde);padding:8px 16px;display:flex;align-items:center;gap:8px}
 .buscador-wrap{position:relative;flex:1;max-width:360px}
+.buscador-wrap input{padding-right:30px}
+#buscador-desplegar{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;
+  color:var(--gris);cursor:pointer;font-size:.85rem;padding:6px 8px;line-height:1}
+#buscador-desplegar:hover{color:var(--verde-oscuro)}
 #buscador{width:100%;padding:7px 12px;border:1px solid var(--borde);border-radius:8px;font-size:.88rem;font-family:inherit;background:var(--blanco)}
 #buscador:focus{outline:none;border-color:var(--verde-medio);box-shadow:0 0 0 2px rgba(60,107,69,.15)}
 .buscador-sugerencias{position:absolute;bottom:100%;left:0;right:0;background:var(--blanco);border:1px solid var(--borde);border-bottom:none;border-radius:8px 8px 0 0;max-height:260px;overflow-y:auto;z-index:50;box-shadow:0 -6px 14px rgba(0,0,0,.12);display:none;margin-bottom:4px}
@@ -714,7 +720,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 @media(max-width:640px){.oyp-radar-body{grid-template-columns:1fr}}
 
 /* ── NAVEGADOR DE PANTALLAS ── */
-#screen-nav{position:fixed;bottom:18px;right:18px;z-index:400;display:flex;align-items:center;gap:7px;
+#screen-nav{position:fixed;bottom:64px;left:18px;z-index:400;display:flex;align-items:center;gap:7px;
   background:rgba(37,58,41,.92);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15);
   border-radius:24px;padding:5px 8px 5px 12px;box-shadow:0 3px 14px rgba(0,0,0,.35);user-select:none;}
 #screen-nav-num{font-size:.75rem;font-weight:800;color:white;min-width:38px;text-align:center;line-height:1}
@@ -797,13 +803,11 @@ tr.sel-z:hover td{background:#d4ecda!important}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;max-width:520px;margin-left:auto;margin-right:auto">
         <div onclick="infModo('mini')" style="background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">📈</div>
-          <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Informe Select</div>
-          <div style="font-size:.73rem;opacity:.75;line-height:1.45">Resumen compacto: 1 página por categoría con radar Top5 y gráfico O&amp;P. Para repartir rápido.</div>
+          <div style="font-weight:800;font-size:.95rem">Informe Select</div>
         </div>
         <div onclick="infModo('toro')" style="background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">🐂</div>
-          <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Ficha de Toros</div>
-          <div style="font-size:.73rem;opacity:.75;line-height:1.45">Seleccioná uno o más toros. DEPs, rankings en 5 categorías y perfiles O&amp;P.</div>
+          <div style="font-weight:800;font-size:.95rem">Ficha de Toros</div>
         </div>
       </div>
       <button onclick="cerrarInforme()" style="background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:8px 20px;border-radius:8px;font-size:.8rem;cursor:pointer">Cancelar</button>
@@ -1063,12 +1067,12 @@ tr.sel-z:hover td{background:#d4ecda!important}
       <a href="#" onclick="cerrarCarga();return false" style="color:rgba(255,255,255,.7);font-size:.88rem">← Volver</a>
     </div>
 
-    <div class="login-credito" style="font-size:.92rem;text-align:left">
-      <p style="margin-bottom:8px">Proceso:</p>
-      <p style="margin-bottom:8px">1) enviás el catálogo en PDF o Excel.</p>
-      <p style="margin-bottom:8px">2) recepción y análisis — te confirmamos por el mismo medio si se puede cargar a SEPA-Select.</p>
-      <p style="margin-bottom:8px">3) transferencia y envío del comprobante.</p>
-      <p>4) te avisamos que el catálogo ya está disponible en SEPA-Select, bajo la modalidad acordada (público o privado).</p>
+    <div class="login-credito" style="font-size:1.05rem;text-align:left">
+      <p style="margin-bottom:10px">Proceso:</p>
+      <p style="margin-bottom:10px;white-space:nowrap">1) Enviás el catálogo en PDF o Excel.</p>
+      <p style="margin-bottom:10px;white-space:nowrap">2) Recepción y análisis — te confirmamos por el mismo medio si se puede cargar.</p>
+      <p style="margin-bottom:10px;white-space:nowrap">3) Transferencia y envío del comprobante.</p>
+      <p style="white-space:nowrap">4) Te avisamos que el catálogo ya está disponible, bajo la modalidad acordada.</p>
     </div>
   </div>
 </div>
@@ -1290,7 +1294,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
   <!-- Landing verde con selector de categorías -->
   <div id="global-landing" style="background:var(--verde-oscuro);padding:28px 24px 24px;text-align:center">
     <div style="font-size:1.3rem;font-weight:800;color:white;letter-spacing:-.3px;margin-bottom:3px">SEPA<span style="color:var(--oro)">-Select</span></div>
-    <div style="font-size:.72rem;color:rgba(255,255,255,.5);letter-spacing:.04em;margin-bottom:20px">Evaluación por DEPS · v8</div>
+    <div style="font-size:.72rem;color:rgba(255,255,255,.5);letter-spacing:.04em;margin-bottom:20px">Evaluación por DEPS · V.1</div>
     <div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:10px">Seleccioná una categoría</div>
     <div style="max-width:480px;margin:0 auto 16px">
       <div class="global-cat-card" id="gcard-rodeoGeneral" onclick="navEntrarCategoria('rodeoGeneral')" style="border:1px solid var(--oro);background:rgba(212,165,69,.1);margin-bottom:16px;text-align:left">
@@ -1660,6 +1664,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <div class="buscador-bar" id="buscador-bar">
   <div class="buscador-wrap">
     <input type="search" id="buscador" placeholder="Buscar toro por nombre…" autocomplete="off" oninput="onBuscador(this.value)" onblur="setTimeout(()=>closeSug(),150)">
+    <button type="button" id="buscador-desplegar" title="Ver todos los toros" onmousedown="event.preventDefault();toggleListaCompletaToros()">▾</button>
     <div class="buscador-sugerencias" id="buscador-sug"></div>
   </div>
   <span class="buscador-hint">Clic para ver ficha</span>
@@ -1995,7 +2000,7 @@ const CATEGORIAS=[
 // del usuario logueado — es lo que usa el botón "↺ Restaurar" de cada categoría.
 const CATEGORIAS_DEFAULT={};
 CATEGORIAS.forEach(c=>{ CATEGORIAS_DEFAULT[c.id]=Object.assign({},c.pesos); });
-const APP_VERSION='v9';
+const APP_VERSION='V.1';
 // Lanzamiento 2026-09-17 (BASE-only, foco: carga de catálogos): RD pidió ocultar la
 // disponibilidad de PLUS por ahora — "tal vez este negocio no funcione, o si funciona
 // tendría que ver el feedback". No se borra nada: PLUS sigue funcionando igual para
@@ -2663,11 +2668,12 @@ function togglePanel(id){
   if(!isOpen&&id==='panel-config')renderConfigPanel();
   if(!isOpen&&id==='panel-ayuda')renderAyuda();
 }
-// 2026-09-19, a pedido de RD: Configuración y Ayuda son pantallas exclusivas — al cerrarlas
-// con "← Volver" siempre se vuelve al menú de inicio, sin importar desde dónde se abrieron.
+// 2026-09-19, a pedido de RD: Configuración y Ayuda son pantallas exclusivas (overlay a
+// pantalla completa) pero "← Volver" cierra el panel y vuelve a la pantalla de fondo real
+// (no fuerza Resumen) — esa pantalla conserva su propio historial (navBack), así que a
+// fuerza de volver se llega igual a la primera pantalla.
 function volverAInicioDesdePanel(id){
   togglePanel(id);
-  setScreen('resumen');
 }
 function closeAllPanels(){
   if(openPanelId){
@@ -2820,13 +2826,13 @@ async function cargarPesosUsuario(userId){
 
 // ─── AYUDA ───
 const AYUDA_ITEMS=[
-  {titulo:"¿Cómo usar la app?",body:"Elegí la categoría de cría (barra superior) y la pantalla: Vista Global muestra ambos métodos en paralelo. RD_Factores y RD_O&P muestran los rankings individuales. Hacé clic en cualquier toro para ver su ficha completa. En RD_Factores podés editar el fenotipo con el slider (Plus)."},
-  {titulo:"¿Qué es RD_Factores (Método Cuantitativo)?",body:"Análisis cuantitativo. Pondera 8 DEPs según el objetivo de cría usando z-scores internos del catálogo (comparación entre los toros del catálogo) y normaliza el resultado a escala 0-100 (G). Al G se suma el fenotipo F editable (Plus/Base, editable por cada usuario). Score final = G + F. No aplica descuento por precisión: la confiabilidad de los DEPs se analiza aparte en RD_Confiabilidad. En Vaquillona 15M y Reposición, el z-score de PN tiene un <strong>tope de ±1.5</strong> antes de aplicarle el peso — sin este tope, un PN muy por fuera de lo normal podía por sí solo definir casi todo el puntaje de un toro, tapando el resto de sus características. Con el tope, un PN extremo sigue sumando fuerte pero ya no ahoga a los demás DEPs. El resto de las categorías (Rodeo General, Terminal, Hilton) usan el z-score real de PN, sin tope."},
-  {titulo:"¿Qué es RD_Objetivos & Perfiles (RD_O&P) (Método Cualitativo)?",body:"Evalúa 15 perfiles productivos organizados en 3 familias: U Universales (U01-U03, activos para todas las categorías), T Terminal/Hilton (T01-T05 — Hilton exige el set completo, Terminal un subconjunto de calidad) y V Vaca (V01-V04 + R01-R03, activos en Vaquillona 15M y Reposición respectivamente). El score de cada perfil es la suma algebraica de sus DEPs con signo según dirección favorable, con el mismo criterio de <strong>tope de ±1.5</strong> al z-score de cada DEP (así ningún DEP aislado, por más extremo que sea, define el perfil por sí solo). Si algún DEP requerido no está disponible en el catálogo, el perfil queda no calculable."},
-  {titulo:"¿Qué significa Δ en la tabla RD_Factores × RD_O&P?",body:"Es la diferencia entre la posición de un toro en RD_Factores (RF) y en RD_O&P. Δ = posición_RF − posición_RD_O&P. Si un toro está en #3 en RF y #7 en RD_O&P, Δ = +4. Fondo dorado indica que la diferencia es ≤ 2 puestos (alta concordancia)."},
-  {titulo:"Perfiles no calculables en RD_O&P",body:"Un perfil es no calculable para un toro cuando falta al menos uno de sus DEPs requeridos. El motor busca primero en los DEPs del sistema ERA y luego en deps_ext. Si el DEP no existe en ninguno, el perfil se marca como no calculable y se muestra el motivo (DEP faltante)."},
-  {titulo:"RD_Confiabilidad (Facilidad orientativa)",body:"Responde '¿cuánto sabemos de este toro?'. Muestra la precisión ERA de cada DEP (mapa de calor) y una lectura cualitativa: mejor estudiado, qué calificaciones están bien sostenidas y cuáles se apoyan en DEPs de baja precisión. No ordena por mérito ni interviene en RD_Factores / RD_O&P. Catálogos sin precisión publicada (genómica sin progenie) se informan como tales."},
-  {titulo:"RD_Hallazgos (Facilidad de referencia)",body:"Marca los DEPs de cada toro que se despegan del conjunto del catálogo (|z| ≥ 1,5 respecto de la media), con el percentil de raza como referencia. ▲ = valor favorable para la categoría activa, ▼ = desfavorable. No interviene en los rankings de mérito."},
+  {titulo:"¿Cómo usar la app?",body:"<p>Elegí la categoría de cría (barra superior) y la pantalla: Vista Global muestra ambos métodos en paralelo.</p><p>RD_Factores y RD_O&P muestran los rankings individuales.</p><p>Hacé clic en cualquier toro para ver su ficha completa.</p><p>En RD_Factores podés editar el fenotipo con el slider (Plus).</p>"},
+  {titulo:"¿Qué es RD_Factores (Método Cuantitativo)?",body:"<p>Análisis cuantitativo.</p><p>Pondera 8 DEPs según el objetivo de cría usando z-scores internos del catálogo (comparación entre los toros del catálogo) y normaliza el resultado a escala 0-100 (G).</p><p>Al G se suma el fenotipo F editable (Plus/Base, editable por cada usuario).</p><p>Score final = G + F.</p><p>No aplica descuento por precisión: la confiabilidad de los DEPs se analiza aparte en RD_Confiabilidad.</p><p>En Vaquillona 15M y Reposición, el z-score de PN tiene un <strong>tope de ±1.5</strong> antes de aplicarle el peso — sin este tope, un PN muy por fuera de lo normal podía por sí solo definir casi todo el puntaje de un toro, tapando el resto de sus características.</p><p>Con el tope, un PN extremo sigue sumando fuerte pero ya no ahoga a los demás DEPs.</p><p>El resto de las categorías (Rodeo General, Terminal, Hilton) usan el z-score real de PN, sin tope.</p>"},
+  {titulo:"¿Qué es RD_Objetivos & Perfiles (RD_O&P) (Método Cualitativo)?",body:"<p>Evalúa 15 perfiles productivos organizados en 3 familias: U Universales (U01-U03, activos para todas las categorías), T Terminal/Hilton (T01-T05 — Hilton exige el set completo, Terminal un subconjunto de calidad) y V Vaca (V01-V04 + R01-R03, activos en Vaquillona 15M y Reposición respectivamente).</p><p>El score de cada perfil es la suma algebraica de sus DEPs con signo según dirección favorable, con el mismo criterio de <strong>tope de ±1.5</strong> al z-score de cada DEP (así ningún DEP aislado, por más extremo que sea, define el perfil por sí solo).</p><p>Si algún DEP requerido no está disponible en el catálogo, el perfil queda no calculable.</p>"},
+  {titulo:"¿Qué significa Δ en la tabla RD_Factores × RD_O&P?",body:"<p>Es la diferencia entre la posición de un toro en RD_Factores (RF) y en RD_O&P.</p><p>Δ = posición_RF − posición_RD_O&P.</p><p>Si un toro está en #3 en RF y #7 en RD_O&P, Δ = +4.</p><p>Fondo dorado indica que la diferencia es ≤ 2 puestos (alta concordancia).</p>"},
+  {titulo:"Perfiles no calculables en RD_O&P",body:"<p>Un perfil es no calculable para un toro cuando falta al menos uno de sus DEPs requeridos.</p><p>El motor busca primero en los DEPs del sistema ERA y luego en deps_ext.</p><p>Si el DEP no existe en ninguno, el perfil se marca como no calculable y se muestra el motivo (DEP faltante).</p>"},
+  {titulo:"RD_Confiabilidad (Facilidad orientativa)",body:"<p>Responde '¿cuánto sabemos de este toro?'.</p><p>Muestra la precisión ERA de cada DEP (mapa de calor) y una lectura cualitativa: mejor estudiado, qué calificaciones están bien sostenidas y cuáles se apoyan en DEPs de baja precisión.</p><p>No ordena por mérito ni interviene en RD_Factores / RD_O&P.</p><p>Catálogos sin precisión publicada (genómica sin progenie) se informan como tales.</p>"},
+  {titulo:"RD_Hallazgos (Facilidad de referencia)",body:"<p>Marca los DEPs de cada toro que se despegan del conjunto del catálogo (|z| ≥ 1,5 respecto de la media), con el percentil de raza como referencia.</p><p>▲ = valor favorable para la categoría activa, ▼ = desfavorable.</p><p>No interviene en los rankings de mérito.</p>"},
   {titulo:"Glosario de DEPs",body:"<table class='ayuda-tabla'>"
     +"<tr><td>PN</td><td>Peso al nacer (kg, favorable: negativo)</td></tr>"
     +"<tr><td>WW</td><td>Peso al destete (kg)</td></tr>"
@@ -2842,7 +2848,7 @@ const AYUDA_ITEMS=[
     +"<tr><td>YG</td><td>Yield Grade</td></tr>"
     +"<tr><td>DMI</td><td>Dry Matter Intake</td></tr>"
     +"</table>"},
-  {titulo:"¿Cómo hago para que mi catálogo esté en SEPA-Select?",body:"Botón \"⬆ Enviar catálogo\" del menú: nos mandás el PDF o Excel directo, por mail a catalogo@programa-sepa.com.ar o por WhatsApp al +54 9 2944 562079."
+  {titulo:"¿Cómo hago para que mi catálogo esté en SEPA-Select?",body:"<p>Botón \"⬆ Enviar catálogo\" del menú: nos mandás el PDF o Excel directo, por mail a catalogo@programa-sepa.com.ar o por WhatsApp al +54 9 2944 562079.</p>"
     +"<table class='ayuda-tabla'>"
     +"<tr><td>1</td><td>Enviás el catálogo en PDF o Excel.</td></tr>"
     +"<tr><td>2</td><td>Recepción y análisis — te confirmamos por el mismo medio si se puede cargar.</td></tr>"
@@ -2867,6 +2873,16 @@ function onBuscador(q){
   if(!matches.length){sug.innerHTML='<div class="sug-item"><span class="sug-nombre" style="color:var(--gris)">Sin resultados</span></div>';sug.classList.add('open');return}
   sug.innerHTML=matches.map(t=>`<div class="sug-item" onmousedown="selectToro('${escJsAttr(t.nombre)}')"><span class="sug-nombre">${pelBadge(t)} ${escHtml(displayNombre(t.nombre))}</span><span class="sug-raza">${_modoAnonimo?"":escHtml(t.raza)}</span></div>`).join('');
   sug.classList.add('open');
+}
+// 2026-09-19, a pedido de RD: flechita tipo filtro de Excel — despliega TODOS los toros
+// del catálogo (sin límite de 8, sin necesitar escribir nada), ordenados alfabéticamente.
+function toggleListaCompletaToros(){
+  const sug=document.getElementById('buscador-sug');
+  if(sug.classList.contains('open')){ closeSug(); return; }
+  const lista=ordenAlfabetico(TOROS);
+  sug.innerHTML=lista.map(t=>`<div class="sug-item" onmousedown="selectToro('${escJsAttr(t.nombre)}')"><span class="sug-nombre">${pelBadge(t)} ${escHtml(displayNombre(t.nombre))}</span><span class="sug-raza">${_modoAnonimo?"":escHtml(t.raza)}</span></div>`).join('');
+  sug.classList.add('open');
+  document.getElementById('buscador').focus();
 }
 function selectToro(nombre){
   document.getElementById('buscador').value='';
@@ -3826,12 +3842,12 @@ function updateCatBar(){
   const hideAll=(s==='catalogo'||s==='resumen'||matrixView);
   const cb=document.getElementById('cat-bar');
   if(cb){ cb.style.display=hideAll?'none':'flex'; cb.classList.toggle('landing-mode', s==='global'); }
-  // Rodeo/Categoría quedan siempre visibles y elegibles; lo que se abre/cierra es
-  // el sub-menú de los 5 métodos bajo la categoría activa (jerarquía Rodeo→Categoría→Método).
-  // También se muestra en 'global' (Resumen) para la categoría activa — ajuste 2026-09-14 a pedido de RD.
+  // Rodeo/Categoría quedan siempre visibles y elegibles. 2026-09-19, a pedido de RD: el
+  // menú entra siempre con TODOS los sub-menús de método abiertos (antes solo se abría el
+  // de la categoría activa, había que hacer clic para ver el resto).
   const collapseMethods = hideAll;
   document.querySelectorAll('.tree-methods').forEach(el=>{
-    el.classList.toggle('open', !collapseMethods && el.dataset.methodsFor===currentCat);
+    el.classList.toggle('open', !collapseMethods);
   });
 }
 function setMetodoSub(screen, sub, noRecord){
@@ -5980,6 +5996,23 @@ function infMarcoTeorico(pid){
       +'<td style="color:#888;font-size:.6rem">'+cats+'</td></tr>';
   });
   html+='</tbody></table></div>';
+
+  // 2026-09-19, a pedido de RD: misma matriz perfil x categoría que ya se ve siempre en
+  // pantalla RD_O&P — acá también, justo después de la tabla de perfiles.
+  html+='<div style="font-size:.68rem;color:#888;margin-bottom:5px">Qué perfiles están activos en cada categoría:</div>';
+  html+='<div style="overflow-x:auto;margin-bottom:13px"><table class="inf-tbl" style="font-size:.66rem"><thead><tr><th style="text-align:left">Perfil</th>';
+  CATEGORIAS.forEach(function(cat){html+='<th style="text-align:center">'+infCatNombre(cat)+'</th>';});
+  html+='</tr></thead><tbody>';
+  PERFILES_OYP.forEach(function(p){
+    html+='<tr><td style="font-weight:700;color:#253a29;white-space:nowrap">'+p.id+' — '+p.nombre+'</td>';
+    CATEGORIAS.forEach(function(cat){
+      const activos=configOyP[cat.id]||CONFIG_OYP_DEFAULT[cat.id]||[];
+      html+='<td style="text-align:center;font-weight:800;color:#3c6b45">'+(activos.indexOf(p.id)>=0?'✓':'')+'</td>';
+    });
+    html+='</tr>';
+  });
+  html+='</tbody></table></div>';
+
   html+='<div style="font-size:.68rem;color:#888;margin-bottom:13px"><strong>Q1 %</strong> (columna que vas a ver en el detalle de RD_O&amp;P): de los perfiles activos en la categoría, qué porcentaje el toro cumple favorablemente.</div>';
 
   html+='<div class="inf-sub-title">★ RD_Selectos</div>';
@@ -6014,7 +6047,7 @@ function infGenerarContenido(){
   html+='<div class="inf-page" id="inf-pg-portada" data-pid="portada">';
   html+='<div style="display:flex;flex-direction:column;gap:14px">';
   html+='<div style="font-size:1.8rem;font-weight:900;letter-spacing:-1px;color:#253a29">SEPA<span style="color:#b8892b">-Select</span></div>';
-  html+='<div style="font-size:.73rem;color:#6b6b6b">Sistema de Evaluación y Selección de Animales · App3</div>';
+  html+='<div style="font-size:.73rem;color:#6b6b6b">Sistema de Evaluación y Selección de Animales · V.1</div>';
   html+='<div style="border-left:5px solid #b8892b;padding-left:14px">';
   html+='<div style="font-size:1.35rem;font-weight:900;color:#253a29;line-height:1.2">'+catNombreActivo()+'</div>';
   html+='<div style="font-size:.83rem;font-weight:700;color:#3c6b45;margin-top:3px">Informe PLUS · '+CATEGORIAS.length+' Categorías</div></div>';
@@ -6042,7 +6075,7 @@ function infGenerarContenido(){
   // ── ÍNDICE ──
   html+='<div class="inf-page" id="inf-pg-toc" data-pid="toc">';
   html+='<div style="font-size:1.8rem;font-weight:900;letter-spacing:-1px;color:#253a29;margin-bottom:3px">SEPA<span style="color:#b8892b">-Select</span></div>';
-  html+='<div style="font-size:.7rem;color:#6b6b6b;margin-bottom:18px">Sistema de Evaluación y Selección de Animales · App3</div>';
+  html+='<div style="font-size:.7rem;color:#6b6b6b;margin-bottom:18px">Sistema de Evaluación y Selección de Animales · V.1</div>';
   html+='<div class="inf-section-title">Índice de contenidos</div>';
   html+='<div id="inf-toc-body" style="margin-bottom:22px"><div style="color:#bbb;font-style:italic;font-size:.78rem">Se genera al imprimir.</div></div>';
   html+='<div style="border-top:1px solid #eee;padding-top:5px;font-size:.6rem;color:#aaa;display:flex;justify-content:space-between">';
@@ -6597,12 +6630,14 @@ function infDoPrint(){
   iframe.id='inf-print-frame';
   iframe.style.cssText='position:fixed;left:-9999px;top:0;width:210mm;height:297mm;border:none;visibility:hidden';
   document.body.appendChild(iframe);
-  function _afterPrint(){cerrarInforme();try{iframe.contentWindow.removeEventListener('afterprint',_afterPrint);}catch(e){}}
+  const _origTitle=document.title;
+  function _afterPrint(){document.title=_origTitle;cerrarInforme();try{iframe.contentWindow.removeEventListener('afterprint',_afterPrint);}catch(e){}}
   const doc=iframe.contentDocument||iframe.contentWindow.document;
   doc.open();
   doc.write('<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>'+pdfTitle+'</title><style>'+printCSS+'</style></head><body>'+pagesHtml+'</body></html>');
   doc.close();
   setTimeout(function(){
+    document.title=pdfTitle;
     try{iframe.contentWindow.addEventListener('afterprint',_afterPrint);iframe.contentWindow.focus();iframe.contentWindow.print();}catch(e){}
   },500);
 }
