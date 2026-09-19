@@ -195,6 +195,10 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie)
 .app-sidebar .btn-header{display:block;width:100%;text-align:left;background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.82);padding:8px 12px;border-radius:8px;
   font-size:.78rem;cursor:pointer;white-space:nowrap;transition:all .15s}
+/* 2026-09-19: bug real encontrado — el atributo hidden perdía contra ".app-sidebar .btn-header"
+   (más específico que "[hidden]"), así que el botón "Quiero PLUS" seguía viéndose aunque tuviera
+   hidden puesto. Esta regla asegura que hidden siempre gane, acá y en cualquier otro botón. */
+.app-sidebar .btn-header[hidden]{display:none!important}
 .app-sidebar .btn-header:hover{background:rgba(255,255,255,.16);color:white}
 .app-sidebar .btn-header.active{background:var(--oro);border-color:var(--oro);color:white}
 .app-sidebar .btn-header-gold{background:rgba(184,137,43,.28)!important;border-color:var(--oro)!important;color:#f0d9a8!important}
@@ -252,7 +256,9 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie)
 
 /* ── COMMAND PANELS ── */
 .cmd-panel{display:none;background:var(--blanco);border-bottom:2px solid var(--verde-claro);padding:0;max-width:100%}
-.cmd-panel.open{display:block}
+/* 2026-09-19, a pedido de RD: Configuración y Ayuda son pantallas exclusivas a pantalla
+   completa — no un panel parcial que deja ver el sidebar/header/contenido detrás. */
+.cmd-panel.open{display:block;position:fixed;inset:0;z-index:500;overflow-y:auto;border-bottom:none}
 .cmd-panel-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid var(--borde);background:var(--superficie)}
 .cmd-panel-topbar-title{font-size:.85rem;font-weight:700;color:var(--verde-oscuro)}
 .btn-panel-volver{display:inline-flex;align-items:center;gap:5px;background:transparent;border:1px solid var(--borde);color:var(--gris);padding:5px 12px;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .15s}
@@ -283,6 +289,9 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie)
 .ayuda-item-head{padding:10px 14px;background:var(--superficie);cursor:pointer;font-weight:700;font-size:.85rem;color:var(--verde-oscuro);display:flex;justify-content:space-between;align-items:center}
 .ayuda-item-head:hover{background:var(--verde-claro)}
 .ayuda-item-body{display:none;padding:12px 14px;font-size:.82rem;color:var(--gris);line-height:1.55;border-top:1px solid var(--borde)}
+.ayuda-tabla{width:100%;border-collapse:collapse;margin-top:8px}
+.ayuda-tabla td{padding:5px 9px;border-bottom:1px solid var(--borde);vertical-align:top}
+.ayuda-tabla td:first-child{font-weight:800;color:var(--verde-oscuro);white-space:nowrap;width:1%}
 .ayuda-item-body.open{display:block}
 .config-reset-btn{background:var(--rojo-claro);border:1px solid #e0b0a8;color:var(--rojo);padding:8px 14px;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;margin-top:8px}
 .config-reset-btn:hover{background:var(--rojo);color:white}
@@ -785,15 +794,10 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <div style="max-width:760px;width:100%;text-align:center;color:white">
       <div style="font-size:1.4rem;font-weight:900;margin-bottom:4px">SEPA<span style="color:#b8892b">-Select</span></div>
       <div style="font-size:.8rem;opacity:.65;margin-bottom:28px">Informe PDF — Elegí el tipo</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px">
-        <div id="inf-card-catalogo" onclick="infModo('catalogo')" style="background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
-          <div style="font-size:1.3rem;margin-bottom:8px">📋</div>
-          <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Informe Plus <span style="font-size:.6rem;background:#b8892b;color:#fff;padding:1px 6px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></div>
-          <div style="font-size:.73rem;opacity:.75;line-height:1.45">Rankings, SELECTOS, radar y tablas por categoría. Secciones configurables.</div>
-        </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;max-width:520px;margin-left:auto;margin-right:auto">
         <div onclick="infModo('mini')" style="background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">📈</div>
-          <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Informe Base</div>
+          <div style="font-weight:800;font-size:.95rem;margin-bottom:6px">Informe Select</div>
           <div style="font-size:.73rem;opacity:.75;line-height:1.45">Resumen compacto: 1 página por categoría con radar Top5 y gráfico O&amp;P. Para repartir rápido.</div>
         </div>
         <div onclick="infModo('toro')" style="background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
@@ -1046,29 +1050,25 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <div class="login-logo">SEPA<span>-Select</span></div>
     <div class="login-sub">Enviar catálogo</div>
 
-    <div class="carga-solicitante" id="carga-solicitante"><!-- datos del solicitante, se llenan por JS --></div>
+    <div class="carga-solicitante" id="carga-solicitante" style="font-size:.95rem"><!-- datos del solicitante, se llenan por JS --></div>
 
-    <div class="login-hint" id="carga-precio" style="margin-top:2px"></div>
-    <div class="login-hint" style="margin-bottom:10px">
-      Mandanos el PDF o Excel del catálogo directo, por mail o WhatsApp. Se analiza la factibilidad, se confirma el costo y se sube a la plataforma.
-    </div>
+    <div class="login-hint" id="carga-precio" style="margin-top:2px;font-size:.9rem"></div>
 
-    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:6px">
-      <a href="mailto:catalogo@programa-sepa.com.ar" class="btn-login"
-         style="text-decoration:none;display:inline-block">✉ catalogo@programa-sepa.com.ar</a>
-      <a href="https://wa.me/5492944562079" target="_blank" rel="noopener" class="btn-login"
-         style="text-decoration:none;display:inline-block">📱 WhatsApp +54 9 2944 562079</a>
+    <div style="display:flex;flex-direction:column;gap:10px;margin:16px 0 6px;font-size:1.02rem;font-weight:700">
+      <div>✉ catalogo@programa-sepa.com.ar</div>
+      <div>📱 WhatsApp +54 9 2944 562079</div>
     </div>
 
     <div style="margin-top:14px">
-      <a href="#" onclick="cerrarCarga();return false" style="color:rgba(255,255,255,.7);font-size:.82rem">← Volver</a>
+      <a href="#" onclick="cerrarCarga();return false" style="color:rgba(255,255,255,.7);font-size:.88rem">← Volver</a>
     </div>
 
-    <div class="login-credito">
-      Proceso: 1) enviás el catálogo en PDF o Excel · 2) recepción y análisis — te confirmamos
-      por el mismo medio si se puede cargar a SEPA-Select · 3) transferencia y envío del
-      comprobante · 4) te avisamos que el catálogo ya está disponible en SEPA-Select, bajo la
-      modalidad acordada (público o privado).
+    <div class="login-credito" style="font-size:.92rem;text-align:left">
+      <p style="margin-bottom:8px">Proceso:</p>
+      <p style="margin-bottom:8px">1) enviás el catálogo en PDF o Excel.</p>
+      <p style="margin-bottom:8px">2) recepción y análisis — te confirmamos por el mismo medio si se puede cargar a SEPA-Select.</p>
+      <p style="margin-bottom:8px">3) transferencia y envío del comprobante.</p>
+      <p>4) te avisamos que el catálogo ya está disponible en SEPA-Select, bajo la modalidad acordada (público o privado).</p>
     </div>
   </div>
 </div>
@@ -1220,10 +1220,10 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <div class="sb-label">Herramientas</div>
     <button class="btn-header" id="btn-config" onclick="onClickConfig()">⚙ Configuración</button>
     <button class="btn-header btn-header-gold" onclick="abrirInforme()">■ Informe PDF</button>
-    <button class="btn-header" id="btn-ayuda" onclick="togglePanel('panel-ayuda')">❓ Ayuda</button>
     <button class="btn-header" onclick="cambioCatalogo()">≡ Catálogos</button>
     <button class="btn-header" onclick="mostrarInstruccionesCarga()">⬆ Enviar catálogo</button>
     <button class="btn-header btn-header-gold" id="btn-plus" onclick="mostrarSelectorPlus()" hidden>★ Quiero PLUS</button>
+    <button class="btn-header" id="btn-ayuda" onclick="togglePanel('panel-ayuda')">❓ Ayuda</button>
   </div>
   <div class="sb-group sb-group-bottom">
     <button class="btn-header btn-salir" onclick="terminarSesion()">Salir</button>
@@ -1241,7 +1241,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <div id="panel-config" class="cmd-panel">
   <div class="cmd-panel-topbar">
     <span class="cmd-panel-topbar-title">Configuración</span>
-    <button class="btn-panel-volver" onclick="togglePanel('panel-config')">← Volver</button>
+    <button class="btn-panel-volver" onclick="volverAInicioDesdePanel('panel-config')">← Volver</button>
   </div>
   <div class="cmd-panel-inner">
     <h3>Configuración</h3>
@@ -1254,19 +1254,13 @@ tr.sel-z:hover td{background:#d4ecda!important}
       </div>
       <div id="config-pesos-status" style="font-size:.78rem;color:var(--gris);margin-top:8px"></div>
     </div>
-    <div id="config-fenotipo-section" style="display:none">
-      <h4>Fenotipo <span style="font-size:.65rem;background:var(--oro);color:white;padding:2px 7px;border-radius:6px;font-weight:800;vertical-align:middle">PLUS</span></h4>
-      <p>Cada toro tiene un fenotipo editable desde su ficha (clic en cualquier tabla). El valor se suma directamente al índice genético G.</p>
-      <button class="config-reset-btn" onclick="resetFenotipos()">↺ Resetear todos los fenotipos a 0</button>
-      <div id="config-fen-status" style="font-size:.78rem;color:var(--gris);margin-top:8px"></div>
-    </div>
   </div>
 </div>
 
 <div id="panel-ayuda" class="cmd-panel">
   <div class="cmd-panel-topbar">
     <span class="cmd-panel-topbar-title">Ayuda</span>
-    <button class="btn-panel-volver" onclick="togglePanel('panel-ayuda')">← Volver</button>
+    <button class="btn-panel-volver" onclick="volverAInicioDesdePanel('panel-ayuda')">← Volver</button>
   </div>
   <div class="cmd-panel-inner">
     <div id="ayuda-acordeon"></div>
@@ -1441,6 +1435,11 @@ tr.sel-z:hover td{background:#d4ecda!important}
     </div>
 
     <div id="oyp-legend" class="oyp-legend"></div>
+    <!-- 2026-09-19, a pedido de RD: matriz siempre visible de qué perfiles O&P aplican a cada
+         categoría (antes solo se veía abriendo "Ver Objetivos & Perfiles"). -->
+    <div class="table-wrap" style="overflow-x:auto;margin-bottom:14px">
+      <table class="metodo-matriz" id="oyp-matriz-aplicados"></table>
+    </div>
     <div style="display:grid;grid-template-columns:1fr 280px;gap:14px;align-items:start">
       <div>
         <div class="table-wrap">
@@ -1670,7 +1669,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 </div><!-- /app-body -->
 
 <footer class="app-footer">
-  SEPA-Select® · Ing. Ricardo Emilio Delgado · 2026<span style="opacity:.4"> · DNDA EX-2026-81106223-APN-DNDA#MJ · Sistema independiente de análisis de DEPs.</span>
+  SEPA-Select® · Ing. Ricardo Emilio Delgado · 2026 · DNDA EX-2026-81106223-APN-DNDA#MJ · Sistema independiente de análisis de DEPs.
 </footer>
 
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
@@ -2352,8 +2351,7 @@ function mostrarInstruccionesCarga() {
     `${u.email || '—'} · ${u.whatsapp || '—'}<br>` +
     `Rol: ${u.rol || '—'}` +
     (u.promo ? ` · Promo: ${u.promo}` : '');
-  document.getElementById('carga-precio').textContent =
-    'Costo: $131.000 (30 KN) — catálogo privado solo para vos.';
+  document.getElementById('carga-precio').textContent = 'Costo: $150.000, IVA incluido.';
 
   document.getElementById('selector-modo').classList.add('hidden');
   document.getElementById('carga-overlay').classList.remove('hidden');
@@ -2511,7 +2509,9 @@ function activarApp(cat){
   _navSuppress=false;
   navHistory=[];
   updateVolverBar();
-  restoreSidebarState();
+  // 2026-09-19, a pedido de RD: siempre entrar con el menú completo visible — ya no se
+  // restaura el estado contraído entre sesiones (el botón ◀/▶ sigue funcionando en la sesión).
+  // restoreSidebarState();
 }
 
 function cambioCatalogo(){
@@ -2588,6 +2588,8 @@ function renderCatalogoOyP(filtro){
 }
 
 function terminarSesion(){
+  // 2026-09-19, a pedido de RD: confirmación antes de salir efectivamente.
+  if(!confirm('¿Seguro que querés salir?')) return;
   localStorage.setItem('sepa_ultimo_ingreso',Date.now());
   localStorage.removeItem('sepa_modo_operacion');
   localStorage.removeItem('sepa_catalogo_activo');
@@ -2661,6 +2663,12 @@ function togglePanel(id){
   if(!isOpen&&id==='panel-config')renderConfigPanel();
   if(!isOpen&&id==='panel-ayuda')renderAyuda();
 }
+// 2026-09-19, a pedido de RD: Configuración y Ayuda son pantallas exclusivas — al cerrarlas
+// con "← Volver" siempre se vuelve al menú de inicio, sin importar desde dónde se abrieron.
+function volverAInicioDesdePanel(id){
+  togglePanel(id);
+  setScreen('resumen');
+}
 function closeAllPanels(){
   if(openPanelId){
     document.getElementById(openPanelId).classList.remove('open');
@@ -2706,10 +2714,8 @@ function renderCurrentScreen(){
 }
 
 function onClickConfig(){
-  // Pesos: editable para BASE y PLUS (personalización propia). Fenotipo sigue exclusivo PLUS.
+  // Pesos: editable para BASE y PLUS (personalización propia). Fenotipo eliminado 2026-09-19.
   togglePanel('panel-config');
-  const fenSec=document.getElementById('config-fenotipo-section');
-  if(fenSec) fenSec.style.display=canAccess('config')?'block':'none';
   renderConfigPanel();
 }
 
@@ -2747,12 +2753,6 @@ function renderConfigPanel(){
   const st=document.getElementById('config-fen-status');
   if(st) st.textContent=mod.length?`Fenotipo modificado en ${mod.length} toro${mod.length>1?'s':''}: ${mod.map(([n,v])=>n+' ('+(v>0?'+':'')+v+')').join(', ')}.`:'Todos los fenotipos en 0.';
 }
-function resetFenotipos(){
-  Object.keys(fenotipoData).forEach(k=>delete fenotipoData[k]);
-  renderAll();renderConfigPanel();
-  document.getElementById('config-fen-status').textContent='Todos los fenotipos reseteados a 0.';
-}
-
 function pesoInputChange(catId,dep,val){
   if(!_pesosEdit[catId]) _pesosEdit[catId]=Object.assign({},CATEGORIAS.find(c=>c.id===catId).pesos);
   _pesosEdit[catId][dep]=Number(val)||0;
@@ -2821,15 +2821,34 @@ async function cargarPesosUsuario(userId){
 // ─── AYUDA ───
 const AYUDA_ITEMS=[
   {titulo:"¿Cómo usar la app?",body:"Elegí la categoría de cría (barra superior) y la pantalla: Vista Global muestra ambos métodos en paralelo. RD_Factores y RD_O&P muestran los rankings individuales. Hacé clic en cualquier toro para ver su ficha completa. En RD_Factores podés editar el fenotipo con el slider (Plus)."},
-  {titulo:"¿Qué es RD_Factores?",body:"Análisis cuantitativo. Pondera 8 DEPs según el objetivo de cría usando z-scores internos del catálogo (comparación entre los toros del catálogo) y normaliza el resultado a escala 0-100 (G). Al G se suma el fenotipo F editable (Plus/Base, editable por cada usuario). Score final = G + F. No aplica descuento por precisión: la confiabilidad de los DEPs se analiza aparte en RD_Confiabilidad. En Vaquillona 15M y Reposición, el z-score de PN tiene un <strong>tope de ±1.5</strong> antes de aplicarle el peso — sin este tope, un PN muy por fuera de lo normal podía por sí solo definir casi todo el puntaje de un toro, tapando el resto de sus características. Con el tope, un PN extremo sigue sumando fuerte pero ya no ahoga a los demás DEPs. El resto de las categorías (Rodeo General, Terminal, Hilton) usan el z-score real de PN, sin tope."},
-  {titulo:"¿Qué es RD_Objetivos & Perfiles (RD_O&P)?",body:"Evalúa 15 perfiles productivos organizados en 3 familias: U Universales (U01-U03, activos para todas las categorías), T Terminal/Hilton (T01-T05 — Hilton exige el set completo, Terminal un subconjunto de calidad) y V Vaca (V01-V04 + R01-R03, activos en Vaquillona 15M y Reposición respectivamente). El score de cada perfil es la suma algebraica de sus DEPs con signo según dirección favorable, con el mismo criterio de <strong>tope de ±1.5</strong> al z-score de cada DEP (así ningún DEP aislado, por más extremo que sea, define el perfil por sí solo). Si algún DEP requerido no está disponible en el catálogo, el perfil queda no calculable."},
+  {titulo:"¿Qué es RD_Factores (Método Cuantitativo)?",body:"Análisis cuantitativo. Pondera 8 DEPs según el objetivo de cría usando z-scores internos del catálogo (comparación entre los toros del catálogo) y normaliza el resultado a escala 0-100 (G). Al G se suma el fenotipo F editable (Plus/Base, editable por cada usuario). Score final = G + F. No aplica descuento por precisión: la confiabilidad de los DEPs se analiza aparte en RD_Confiabilidad. En Vaquillona 15M y Reposición, el z-score de PN tiene un <strong>tope de ±1.5</strong> antes de aplicarle el peso — sin este tope, un PN muy por fuera de lo normal podía por sí solo definir casi todo el puntaje de un toro, tapando el resto de sus características. Con el tope, un PN extremo sigue sumando fuerte pero ya no ahoga a los demás DEPs. El resto de las categorías (Rodeo General, Terminal, Hilton) usan el z-score real de PN, sin tope."},
+  {titulo:"¿Qué es RD_Objetivos & Perfiles (RD_O&P) (Método Cualitativo)?",body:"Evalúa 15 perfiles productivos organizados en 3 familias: U Universales (U01-U03, activos para todas las categorías), T Terminal/Hilton (T01-T05 — Hilton exige el set completo, Terminal un subconjunto de calidad) y V Vaca (V01-V04 + R01-R03, activos en Vaquillona 15M y Reposición respectivamente). El score de cada perfil es la suma algebraica de sus DEPs con signo según dirección favorable, con el mismo criterio de <strong>tope de ±1.5</strong> al z-score de cada DEP (así ningún DEP aislado, por más extremo que sea, define el perfil por sí solo). Si algún DEP requerido no está disponible en el catálogo, el perfil queda no calculable."},
   {titulo:"¿Qué significa Δ en la tabla RD_Factores × RD_O&P?",body:"Es la diferencia entre la posición de un toro en RD_Factores (RF) y en RD_O&P. Δ = posición_RF − posición_RD_O&P. Si un toro está en #3 en RF y #7 en RD_O&P, Δ = +4. Fondo dorado indica que la diferencia es ≤ 2 puestos (alta concordancia)."},
   {titulo:"Perfiles no calculables en RD_O&P",body:"Un perfil es no calculable para un toro cuando falta al menos uno de sus DEPs requeridos. El motor busca primero en los DEPs del sistema ERA y luego en deps_ext. Si el DEP no existe en ninguno, el perfil se marca como no calculable y se muestra el motivo (DEP faltante)."},
-  {titulo:"RD_Confiabilidad (orientativo)",body:"Responde '¿cuánto sabemos de este toro?'. Muestra la precisión ERA de cada DEP (mapa de calor) y una lectura cualitativa: mejor estudiado, qué calificaciones están bien sostenidas y cuáles se apoyan en DEPs de baja precisión. No ordena por mérito ni interviene en RD_Factores / RD_O&P. Catálogos sin precisión publicada (genómica sin progenie) se informan como tales."},
-  {titulo:"RD_Hallazgos (referencia)",body:"Marca los DEPs de cada toro que se despegan del conjunto del catálogo (|z| ≥ 1,5 respecto de la media), con el percentil de raza como referencia. ▲ = valor favorable para la categoría activa, ▼ = desfavorable. No interviene en los rankings de mérito."},
-  {titulo:(_modoAnonimo?"":"Nota sobre Forager"),body:(_modoAnonimo?"":"Forager es un Angus Colorado del sistema RAAA (EE.UU.): solo tiene PN, Leche, AOB y EGD publicados, por lo que la mayoría de sinergias no son calculables para este toro. Los toros sin DEPs publicados (ver pantalla Catálogo → Notas) no aparecen en los rankings.")},
-  {titulo:"Glosario de DEPs",body:"PN=Peso al nacer (kg, favorable: negativo) · WW=Peso al destete (kg) · PF=Peso final/yearling (kg) · Alt=Altura (cm) · Leche=habilidad lechera (kg) · AOB=Área ojo de bife / REA (cm²) · CE=Circunferencia escrotal / SC (cm) · LG=Longitud de gestación (días, favorable: negativo) · MW=Mature Weight · FRT=Fertility · CED/CEM=Ease direct/maternal · YG=Yield Grade · DMI=Dry Matter Intake"},
-  {titulo:"¿Cómo hago para que mi catálogo esté en SEPA-Select?",body:"Botón \"⬆ Enviar catálogo\" del menú: nos mandás el PDF o Excel directo, por mail a catalogo@programa-sepa.com.ar o por WhatsApp al +54 9 2944 562079. Proceso: 1) enviás el catálogo en PDF o Excel · 2) recepción y análisis — te confirmamos por el mismo medio si se puede cargar · 3) transferencia y envío del comprobante · 4) te avisamos que el catálogo ya está disponible en SEPA-Select, bajo la modalidad acordada (público o privado)."}
+  {titulo:"RD_Confiabilidad (Facilidad orientativa)",body:"Responde '¿cuánto sabemos de este toro?'. Muestra la precisión ERA de cada DEP (mapa de calor) y una lectura cualitativa: mejor estudiado, qué calificaciones están bien sostenidas y cuáles se apoyan en DEPs de baja precisión. No ordena por mérito ni interviene en RD_Factores / RD_O&P. Catálogos sin precisión publicada (genómica sin progenie) se informan como tales."},
+  {titulo:"RD_Hallazgos (Facilidad de referencia)",body:"Marca los DEPs de cada toro que se despegan del conjunto del catálogo (|z| ≥ 1,5 respecto de la media), con el percentil de raza como referencia. ▲ = valor favorable para la categoría activa, ▼ = desfavorable. No interviene en los rankings de mérito."},
+  {titulo:"Glosario de DEPs",body:"<table class='ayuda-tabla'>"
+    +"<tr><td>PN</td><td>Peso al nacer (kg, favorable: negativo)</td></tr>"
+    +"<tr><td>WW</td><td>Peso al destete (kg)</td></tr>"
+    +"<tr><td>PF</td><td>Peso final/yearling (kg)</td></tr>"
+    +"<tr><td>Alt</td><td>Altura (cm)</td></tr>"
+    +"<tr><td>Leche</td><td>Habilidad lechera (kg)</td></tr>"
+    +"<tr><td>AOB</td><td>Área ojo de bife / REA (cm²)</td></tr>"
+    +"<tr><td>CE</td><td>Circunferencia escrotal / SC (cm)</td></tr>"
+    +"<tr><td>LG</td><td>Longitud de gestación (días, favorable: negativo)</td></tr>"
+    +"<tr><td>MW</td><td>Mature Weight</td></tr>"
+    +"<tr><td>FRT</td><td>Fertility</td></tr>"
+    +"<tr><td>CED/CEM</td><td>Ease direct/maternal</td></tr>"
+    +"<tr><td>YG</td><td>Yield Grade</td></tr>"
+    +"<tr><td>DMI</td><td>Dry Matter Intake</td></tr>"
+    +"</table>"},
+  {titulo:"¿Cómo hago para que mi catálogo esté en SEPA-Select?",body:"Botón \"⬆ Enviar catálogo\" del menú: nos mandás el PDF o Excel directo, por mail a catalogo@programa-sepa.com.ar o por WhatsApp al +54 9 2944 562079."
+    +"<table class='ayuda-tabla'>"
+    +"<tr><td>1</td><td>Enviás el catálogo en PDF o Excel.</td></tr>"
+    +"<tr><td>2</td><td>Recepción y análisis — te confirmamos por el mismo medio si se puede cargar.</td></tr>"
+    +"<tr><td>3</td><td>Transferencia y envío del comprobante.</td></tr>"
+    +"<tr><td>4</td><td>Te avisamos que el catálogo ya está disponible en SEPA-Select, bajo la modalidad acordada (público o privado).</td></tr>"
+    +"</table>"}
 ];
 function renderAyuda(){
   document.getElementById('ayuda-acordeon').innerHTML=AYUDA_ITEMS.map((item,i)=>`
@@ -3522,9 +3541,25 @@ function showPerfilPanel(pid, event){
     </div>`;
 }
 
+// 2026-09-19: matriz fija perfil × categoría, con ✓ cuando ese perfil O&P está activo
+// en esa categoría (misma fuente de datos que CONFIG_OYP_DEFAULT/configOyP).
+function renderMatrizOyPAplicados(){
+  const el=document.getElementById('oyp-matriz-aplicados');
+  if(!el) return;
+  let html='<thead><tr><th>Perfil</th>'+CATEGORIAS.map(c=>`<th class="num">${c.nombre}</th>`).join('')+'</tr></thead><tbody>';
+  PERFILES_OYP.forEach(p=>{
+    html+=`<tr><td class="td-nombre">${p.id} — ${p.nombre}</td>`+CATEGORIAS.map(c=>{
+      const activos=configOyP[c.id]||CONFIG_OYP_DEFAULT[c.id]||[];
+      return `<td class="num">${activos.includes(p.id)?'✓':''}</td>`;
+    }).join('')+'</tr>';
+  });
+  html+='</tbody>';
+  el.innerHTML=html;
+}
 function renderOyP(rs,cat){
   document.getElementById('oyp-title').textContent=`RD_Objetivos & Perfiles — ${cat.nombre}`;
   document.getElementById('oyp-desc').textContent=`Score 0–100 · ${rs.perfiles.length} perfiles activos · Chips: puntaje 0–10 por perfil · ? = DEP faltante en catálogo`;
+  renderMatrizOyPAplicados();
 
   const scoresVis=rs.scores.filter(r=>!toroSinDeps(r.toro));
   const top5Z=new Set(scoresVis.slice(0,SELECTO_TOP_N).map(r=>r.toro.nombre));
@@ -3933,7 +3968,9 @@ function setScreen(s){
   document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));
   document.getElementById('screen-'+s).classList.add('active');
   document.querySelectorAll('.nav-tab[data-screen]').forEach(btn=>btn.classList.toggle('active', btn.dataset.screen===s));
-  document.getElementById('buscador-bar').style.display=(s==='catalogo'||s==='resumen')?'none':'flex';
+  // 2026-09-19, a pedido de RD: el buscador queda habilitado en todas las pantallas,
+  // incluidas catálogo/resumen (antes se ocultaba ahí).
+  document.getElementById('buscador-bar').style.display='flex';
   // RD_Factores / RD_O&P: al entrar desde el menú, mostrar primero los 4 puntajes
   if((s==='factores'||s==='oyp') && !_navSuppress) metodoSub[s]='resumen';
   if(s==='factores'||s==='oyp'){
@@ -4059,16 +4096,21 @@ function renderSelectos(){
   const cont=document.getElementById('selectos-body'); if(!cont) return;
   const R=calcSelectos(TOROS);
   const fila=(nombre,val,esSel)=>`<div onclick="onClickToro('${escJsAttr(nombre)}')" style="padding:2px 0;cursor:pointer;${esSel?'font-weight:800;color:#b8892b':''}" title="Clic para ver la ficha del toro">${esSel?'★ ':''}${escHtml(displayNombre(nombre))} <span style="color:var(--gris)">${val}</span></div>`;
-  let html='<div style="overflow-x:auto"><table class="prec-tabla"><thead><tr><th style="text-align:left">Categoría</th><th style="text-align:left">📊 RD_Factores Top '+SELECTO_TOP_N+'</th><th style="text-align:left">🎯 RD_O&amp;P Top '+SELECTO_TOP_N+'</th><th style="text-align:left">★ Selecto</th></tr></thead><tbody>';
+  // 2026-09-19, a pedido de RD: la descripción de la categoría va arriba, los cuadros de
+  // selección (RD_Factores / RD_O&P / Selecto) van debajo, no al costado en la misma fila.
+  let html='';
   CATEGORIAS.forEach(cat=>{
     const r=R[cat.id];
     const lf=r.top5F.map(x=>fila(x.toro.nombre,x.total.toFixed(1),r.sel.includes(x.toro.nombre))).join('');
     const lo=r.top5S.map(x=>fila(x.toro.nombre,x.score.toFixed(1),r.sel.includes(x.toro.nombre))).join('');
     const ls=r.sel.length?r.sel.map(n=>`<span class="coin-badge" style="display:inline-block;margin:1px 3px 1px 0">★ ${escHtml(displayNombre(n))}</span>`).join(''):'<span style="color:var(--gris);font-style:italic">Sin SELECTOS</span>';
-    html+=`<tr><td style="font-weight:700;color:var(--verde-oscuro,#253a29);vertical-align:top">${cat.nombre}<div style="font-size:.68rem;color:var(--gris);font-weight:400">${cat.desc}</div></td>
-      <td style="vertical-align:top">${lf}</td><td style="vertical-align:top">${lo}</td><td style="vertical-align:top">${ls}</td></tr>`;
+    html+=`<div style="margin-bottom:22px">
+      <div style="font-weight:700;color:var(--verde-oscuro,#253a29);font-size:.92rem">${cat.nombre}</div>
+      <div style="font-size:.72rem;color:var(--gris);margin-bottom:8px">${cat.desc}</div>
+      <div style="overflow-x:auto"><table class="prec-tabla"><thead><tr><th style="text-align:left">📊 RD_Factores Top ${SELECTO_TOP_N}</th><th style="text-align:left">🎯 RD_O&amp;P Top ${SELECTO_TOP_N}</th><th style="text-align:left">★ Selecto</th></tr></thead>
+      <tbody><tr><td style="vertical-align:top">${lf}</td><td style="vertical-align:top">${lo}</td><td style="vertical-align:top">${ls}</td></tr></tbody></table></div>
+    </div>`;
   });
-  html+='</tbody></table></div>';
 
   const conteo={};
   CATEGORIAS.forEach(cat=>{R[cat.id].sel.forEach(n=>{(conteo[n]=conteo[n]||[]).push(cat.nombre);});});
@@ -5204,7 +5246,7 @@ function infModo(modo){
   }
   _infModo=modo;
   document.getElementById('inf-modo-sel').style.display='none';
-  document.getElementById('inf-modo-lbl').textContent=modo==='catalogo'?'Informe Plus':modo==='mini'?'Informe Base':'Ficha de Toros';
+  document.getElementById('inf-modo-lbl').textContent=modo==='catalogo'?'Informe Plus':modo==='mini'?'Informe Select':'Ficha de Toros';
   const bt=document.getElementById('inf-btn-todo'),bn=document.getElementById('inf-btn-ninguno');
   document.getElementById('inf-btn-excel').style.display=modo==='toro'?'none':'';
   document.getElementById('inf-mini-opts').style.display=modo==='mini'?'':'none';
@@ -6324,7 +6366,7 @@ function infGenerarMini(){
 
   // ── Página 1: portada compacta ──
   html+='<div class="inf-page" id="inf-pg-mini-portada" data-pid="mini-portada">';
-  html+='<div style="font-size:1.35rem;font-weight:900;color:#253a29;line-height:1.25">SEPA<span style="color:#b8892b">-Select</span> · Informe BASE</div>';
+  html+='<div style="font-size:1.35rem;font-weight:900;color:#253a29;line-height:1.25">SEPA<span style="color:#b8892b">-Select</span> · Informe Select</div>';
   html+='<div style="font-size:.76rem;color:#6b6b6b;margin:4px 0 16px">'+catNombreActivo()+' · '+TOROS.length+' toros · '+totalSel+' SELECTOS · '+fecha+' · Incluye Radar Top5 y O&amp;P</div>';
   html+='<table class="inf-tbl" style="font-size:.73rem"><thead><tr><th style="text-align:left;width:110px">Categoría</th><th style="text-align:left">Objetivo</th><th style="text-align:left;width:190px">Selectos</th></tr></thead><tbody>';
   CATEGORIAS.forEach(cat=>{
@@ -6336,7 +6378,6 @@ function infGenerarMini(){
       +'<td style="vertical-align:top;padding-top:8px;font-size:.68rem">'+selStr+'</td></tr>';
   });
   html+='</tbody></table>';
-  html+='<div style="margin-top:14px;font-size:.68rem;color:#888;line-height:1.55">Flujo: este Informe Base da la idea general (incluye resumen de Confiabilidad y Hallazgos). Para el detalle por toro —DEPs, %Q1, perfiles Z, precisión y hallazgos completos— usar el Informe Plus o el Informe Plus por Toro. El ranking completo de '+TOROS.length+' toros queda en la app.</div>';
   html+=infFoot('mini-portada')+'</div>';
 
   // ── Marco Teórico (opcional, lenguaje simple) ──
@@ -6549,8 +6590,7 @@ function infDoPrint(){
     .inf-footer{display:flex;justify-content:space-between;font-size:.6rem;color:#aaa;border-top:1px solid #eee;padding-top:8px;margin-top:auto}
   `;
   const now=new Date();
-  const meses=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const pdfTitle='SEPA-Select '+now.getFullYear()+'-'+meses[now.getMonth()]+'-'+String(now.getDate()).padStart(2,'0');
+  const pdfTitle='SEPA-Select '+String(now.getDate()).padStart(2,'0')+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+now.getFullYear();
   let iframe=document.getElementById('inf-print-frame');
   if(iframe)iframe.parentNode.removeChild(iframe);
   iframe=document.createElement('iframe');
