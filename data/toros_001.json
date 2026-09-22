@@ -602,7 +602,8 @@
      "prec": null,
      "pct": null
     }
-   }
+   },
+   "nota": "Sin DEPs publicados en ERA. Participa en el remate pero no califica en los modelos cuantitativos (RD_Factores/RD_O&P) hasta que se publique su información genética."
   },
   {
    "nombre": "Pionero",
@@ -675,7 +676,8 @@
      "prec": null,
      "pct": null
     }
-   }
+   },
+   "nota": "Sin DEPs publicados en ERA. Participa en el remate pero no califica en los modelos cuantitativos (RD_Factores/RD_O&P) hasta que se publique su información genética."
   },
   {
    "nombre": "Práctico",
@@ -1917,7 +1919,8 @@
      "prec": null,
      "pct": null
     }
-   }
+   },
+   "nota": "Evaluado con sistema RAAA (EE.UU.), no ERA (Argentina) — solo PN, Leche, AOB y EGD son comparables. La mayoría de perfiles RD_O&P no son calculables para este toro y su puntaje RD_Factores se apoya en muy pocos DEPs."
   }
  ]
 }
