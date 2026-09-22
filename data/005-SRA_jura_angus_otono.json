@@ -1,0 +1,5799 @@
+{
+ "meta": {
+  "id": "005",
+  "nombre": "SRA jura angus otoño",
+  "fecha": "2026-09-11",
+  "cabana": "SRA",
+  "expositor": "CAB. INAMBU S.A.",
+  "email": "sra@gmail.com",
+  "puntaje": 2,
+  "tipo": "temporal",
+  "esNovedad": true,
+  "novedad": "",
+  "acceso": "abierto",
+  "totalToros": 77,
+  "aptos": 77,
+  "archivo": "toros_005.json",
+  "fuente": "pdf",
+  "cargado_por": "Ricardo",
+  "fecha_carga": "2026-09-11",
+  "ultimo_ingreso": "2026-09-11"
+ },
+ "toros": [
+  {
+   "nombre": "2107",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "21/3/2024",
+   "pesoActual": 501,
+   "rp": "2107",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.5,
+     "prec": 0.36,
+     "pct": null
+    },
+    "WW": {
+     "dep": 3,
+     "prec": 0.32,
+     "pct": null
+    },
+    "PF": {
+     "dep": 4.8,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 0.9,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 6.8,
+     "prec": 0.25,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.8,
+     "prec": 0.17,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.26,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.27,
+     "prec": 0.18,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.01,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "699",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "20/3/2024",
+   "pesoActual": 539,
+   "rp": "699",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.3,
+     "prec": 0.31,
+     "pct": null
+    },
+    "WW": {
+     "dep": 7.4,
+     "prec": 0.3,
+     "pct": null
+    },
+    "PF": {
+     "dep": 22.8,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.2,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0,
+     "prec": 0.27,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.2,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.8,
+     "prec": 0.27,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.03,
+     "prec": 0.21,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.07,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "3326",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "1/3/2024",
+   "pesoActual": 520,
+   "rp": "3326",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": 0.38,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.3,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 0,
+     "prec": 0.27,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.3,
+     "prec": 0.33,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -3.1,
+     "prec": 0.25,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.9,
+     "prec": 0.21,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.25,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.16,
+     "prec": 0.21,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.04,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "881",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "5/1/2024",
+   "pesoActual": 632,
+   "rp": "881",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1,
+     "prec": 0.35,
+     "pct": null
+    },
+    "WW": {
+     "dep": 10.7,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 47.8,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 3.2,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3.3,
+     "prec": 0.25,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.9,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.8,
+     "prec": 0.21,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.14,
+     "prec": 0.21,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "443",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "17/11/2023",
+   "pesoActual": 692,
+   "rp": "443",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.5,
+     "prec": 0.27,
+     "pct": null
+    },
+    "WW": {
+     "dep": 13.1,
+     "prec": 0.25,
+     "pct": null
+    },
+    "PF": {
+     "dep": 42.5,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 3.4,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -3.3,
+     "prec": 0.23,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.5,
+     "prec": 0.13,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.2,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.28,
+     "prec": 0.14,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.12,
+     "prec": 0.13,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "4007",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "8/11/2023",
+   "pesoActual": 745,
+   "rp": "4007",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.2,
+     "prec": 0.2,
+     "pct": null
+    },
+    "WW": {
+     "dep": 2.6,
+     "prec": 0.34,
+     "pct": null
+    },
+    "PF": {
+     "dep": 35.1,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.7,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4.8,
+     "prec": 0.28,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.5,
+     "prec": 0.17,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.8,
+     "prec": 0.26,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.98,
+     "prec": 0.17,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.04,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "431",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "19/10/2023",
+   "pesoActual": 709,
+   "rp": "431",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.9,
+     "prec": 0.35,
+     "pct": null
+    },
+    "WW": {
+     "dep": 5.5,
+     "prec": 0.34,
+     "pct": null
+    },
+    "PF": {
+     "dep": 25.9,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.5,
+     "prec": 0.4,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.2,
+     "prec": 0.27,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.6,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.5,
+     "prec": 0.34,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.26,
+     "prec": 0.2,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.02,
+     "prec": 0.27,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "39",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "12/10/2023",
+   "pesoActual": 738,
+   "rp": "39",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.9,
+     "prec": 0.32,
+     "pct": null
+    },
+    "WW": {
+     "dep": 14.1,
+     "prec": 0.31,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.2,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.7,
+     "prec": 0.25,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.7,
+     "prec": 0.27,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.27,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.5,
+     "prec": 0.2,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "165",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "4/10/2023",
+   "pesoActual": 764,
+   "rp": "165",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1,
+     "prec": 0.32,
+     "pct": null
+    },
+    "WW": {
+     "dep": 11,
+     "prec": 0.31,
+     "pct": null
+    },
+    "PF": {
+     "dep": 25.4,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.9,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.4,
+     "prec": 0.23,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.2,
+     "prec": 0.14,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": 0.18,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.14,
+     "prec": 0.14,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.04,
+     "prec": 0.14,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "87",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "3/10/2023",
+   "pesoActual": 847,
+   "rp": "87",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.38,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.4,
+     "prec": 0.36,
+     "pct": null
+    },
+    "PF": {
+     "dep": 45.7,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.7,
+     "prec": 0.36,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.9,
+     "prec": 0.26,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.2,
+     "prec": 0.25,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.27,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.34,
+     "prec": 0.26,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.02,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1513",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "2/10/2023",
+   "pesoActual": 716,
+   "rp": "1513",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.42,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.9,
+     "prec": 0.4,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.42,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.8,
+     "prec": 0.24,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3,
+     "prec": 0.31,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.38,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.05,
+     "prec": 0.32,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.02,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "27",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "2/10/2023",
+   "pesoActual": 733,
+   "rp": "27",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.39,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.5,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 48.4,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.2,
+     "prec": 0.27,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1,
+     "prec": 0.27,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.4,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": 0.27,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.33,
+     "prec": 0.2,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.14,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "462",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "1/10/2023",
+   "pesoActual": 715,
+   "rp": "462",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -2,
+     "prec": 0.36,
+     "pct": null
+    },
+    "WW": {
+     "dep": 18.7,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.18,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.4,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.9,
+     "prec": 0.17,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.51,
+     "prec": 0.12,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": 0.16,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0,
+     "prec": 0.12,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0,
+     "prec": 0.12,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "815",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "23/1/2024",
+   "pesoActual": 618,
+   "rp": "815",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.2,
+     "prec": 0.27,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12,
+     "prec": 0.26,
+     "pct": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.7,
+     "prec": 0.12,
+     "pct": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "10",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "7/1/2024",
+   "pesoActual": 615,
+   "rp": "10",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": 0.28,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9.6,
+     "prec": 0.26,
+     "pct": null
+    },
+    "PF": {
+     "dep": 29.9,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.9,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.1,
+     "prec": 0.21,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.9,
+     "prec": 0.15,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.8,
+     "prec": 0.2,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.33,
+     "prec": 0.16,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": 0.16,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "30",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "27/12/2023",
+   "pesoActual": 632,
+   "rp": "30",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": 0.3,
+     "pct": null
+    },
+    "WW": {
+     "dep": 3.3,
+     "prec": 0.28,
+     "pct": null
+    },
+    "PF": {
+     "dep": 6.8,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": 0.23,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "400",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "15/12/2023",
+   "pesoActual": 681,
+   "rp": "400",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.3,
+     "prec": 0.32,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9.3,
+     "prec": 0.29,
+     "pct": null
+    },
+    "PF": {
+     "dep": 17,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.4,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.8,
+     "prec": 0.22,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.6,
+     "prec": 0.13,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": 0.24,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.9,
+     "prec": 0.13,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": 0.13,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1066",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "4/12/2023",
+   "pesoActual": 669,
+   "rp": "1066",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.7,
+     "prec": 0.34,
+     "pct": null
+    },
+    "WW": {
+     "dep": 4.8,
+     "prec": 0.31,
+     "pct": null
+    },
+    "PF": {
+     "dep": 21.9,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 0.4,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -3,
+     "prec": 0.2,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.2,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": 0.25,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.21,
+     "prec": 0.21,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "877",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "13/11/2023",
+   "pesoActual": 796,
+   "rp": "877",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.7,
+     "prec": 0.25,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.4,
+     "prec": 0.22,
+     "pct": null
+    },
+    "PF": {
+     "dep": 26.5,
+     "prec": 0.17,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.7,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1,
+     "prec": 0.18,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.7,
+     "prec": 0.13,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": 0.17,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.4,
+     "prec": 0.14,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.07,
+     "prec": 0.13,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "192",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "17/10/2023",
+   "pesoActual": 734,
+   "rp": "192",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.4,
+     "prec": 0.32,
+     "pct": null
+    },
+    "WW": {
+     "dep": 3.7,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 31.3,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.8,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3,
+     "prec": 0.2,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.2,
+     "prec": 0.14,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1,
+     "prec": 0.2,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.28,
+     "prec": 0.15,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1847",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "8/10/2023",
+   "pesoActual": 745,
+   "rp": "1847",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.4,
+     "prec": 0.35,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.6,
+     "prec": 0.33,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.8,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.4,
+     "prec": 0.24,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.3,
+     "prec": 0.19,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.5,
+     "prec": 0.22,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.12,
+     "prec": 0.19,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.02,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "89",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "4/10/2023",
+   "pesoActual": 734,
+   "rp": "89",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.5,
+     "prec": 0.38,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.3,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 35.3,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1,
+     "prec": 0.38,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.6,
+     "prec": 0.31,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.8,
+     "prec": 0.28,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.32,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.04,
+     "prec": 0.29,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.06,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1391",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "2/10/2023",
+   "pesoActual": 835,
+   "rp": "1391",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.3,
+     "prec": 0.27,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9.1,
+     "prec": 0.26,
+     "pct": null
+    },
+    "PF": {
+     "dep": 27.6,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.9,
+     "prec": 0.2,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.7,
+     "prec": 0.17,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.22,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.41,
+     "prec": 0.17,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.02,
+     "prec": 0.17,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "244",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "2/10/2023",
+   "pesoActual": 654,
+   "rp": "244",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.7,
+     "prec": 0.35,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.9,
+     "prec": 0.34,
+     "pct": null
+    },
+    "PF": {
+     "dep": 44.7,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.7,
+     "prec": 0.35,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.4,
+     "prec": 0.28,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.1,
+     "prec": 0.21,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.3,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.52,
+     "prec": 0.22,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.11,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "267",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "4/9/2023",
+   "pesoActual": 664,
+   "rp": "267",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.6,
+     "prec": 0.4,
+     "pct": null
+    },
+    "WW": {
+     "dep": 5.2,
+     "prec": 0.33,
+     "pct": null
+    },
+    "PF": {
+     "dep": 19,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.3,
+     "prec": 0.33,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4.4,
+     "prec": 0.19,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.4,
+     "prec": 0.22,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.7,
+     "prec": 0.25,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.77,
+     "prec": 0.23,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.09,
+     "prec": 0.23,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "71",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "3/9/2023",
+   "pesoActual": 858,
+   "rp": "71",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.39,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9.9,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.3,
+     "prec": 0.37,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.7,
+     "prec": 0.33,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.2,
+     "prec": 0.25,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.32,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.03,
+     "prec": 0.26,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1850",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "3/9/2023",
+   "pesoActual": 786,
+   "rp": "1850",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": 0.3,
+     "pct": null
+    },
+    "WW": {
+     "dep": 2.2,
+     "prec": 0.28,
+     "pct": null
+    },
+    "PF": {
+     "dep": 14.7,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.6,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.7,
+     "prec": 0.26,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.2,
+     "prec": 0.17,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.5,
+     "prec": 0.23,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.24,
+     "prec": 0.17,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.02,
+     "prec": 0.17,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "2215",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "3/9/2023",
+   "pesoActual": 820,
+   "rp": "2215",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.7,
+     "prec": 0.37,
+     "pct": null
+    },
+    "WW": {
+     "dep": 15.4,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 47.6,
+     "prec": 0.27,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.3,
+     "prec": 0.35,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.8,
+     "prec": 0.28,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0,
+     "prec": 0.25,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.9,
+     "prec": 0.26,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.27,
+     "prec": 0.26,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.07,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1399",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "2/9/2023",
+   "pesoActual": 877,
+   "rp": "1399",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.2,
+     "prec": 0.34,
+     "pct": null
+    },
+    "WW": {
+     "dep": 5.8,
+     "prec": 0.32,
+     "pct": null
+    },
+    "PF": {
+     "dep": 49.8,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.3,
+     "prec": 0.33,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.6,
+     "prec": 0.28,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.6,
+     "prec": 0.19,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1,
+     "prec": 0.27,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.14,
+     "prec": 0.2,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.1,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "I329",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "14/8/2023",
+   "pesoActual": 712,
+   "rp": "I329",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.4,
+     "prec": 0.44,
+     "pct": null
+    },
+    "WW": {
+     "dep": 20.9,
+     "prec": 0.42,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.7,
+     "prec": 0.38,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3.4,
+     "prec": 0.29,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 4.3,
+     "prec": 0.29,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.42,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.86,
+     "prec": 0.3,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.06,
+     "prec": 0.34,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "595",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "6/8/2023",
+   "pesoActual": 783,
+   "rp": "595",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": 0.41,
+     "pct": null
+    },
+    "WW": {
+     "dep": 7.9,
+     "prec": 0.33,
+     "pct": null
+    },
+    "PF": {
+     "dep": 25.1,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.1,
+     "prec": 0.39,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -3.5,
+     "prec": 0.27,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3.6,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": 0.34,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.85,
+     "prec": 0.21,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.01,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "337",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "2/8/2023",
+   "pesoActual": 767,
+   "rp": "337",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0,
+     "prec": 0.4,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.5,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 47.7,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 0,
+     "prec": 0.44,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.3,
+     "prec": 0.27,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.8,
+     "prec": 0.32,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": 0.38,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 1.35,
+     "prec": 0.33,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.09,
+     "prec": 0.33,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "0C679",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "2/8/2023",
+   "pesoActual": 847,
+   "rp": "0C679",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.9,
+     "prec": 0.4,
+     "pct": null
+    },
+    "WW": {
+     "dep": 11.1,
+     "prec": 0.25,
+     "pct": null
+    },
+    "PF": {
+     "dep": 39,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 3.5,
+     "prec": 0.17,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1,
+     "prec": 0.22,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.9,
+     "prec": 0.28,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.28,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.18,
+     "prec": 0.17,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.06,
+     "prec": 0.17,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "3766",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "23/7/2023",
+   "pesoActual": 903,
+   "rp": "3766",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": 0.41,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.5,
+     "prec": 0.39,
+     "pct": null
+    },
+    "PF": {
+     "dep": 42.4,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3.2,
+     "prec": 0.29,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.1,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.5,
+     "prec": 0.28,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.27,
+     "prec": 0.21,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.03,
+     "prec": 0.23,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "12537",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "10/7/2023",
+   "pesoActual": 873,
+   "rp": "12537",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.9,
+     "prec": 0.41,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.6,
+     "prec": 0.38,
+     "pct": null
+    },
+    "PF": {
+     "dep": 39.5,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.7,
+     "prec": 0.36,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1,
+     "prec": 0.28,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3,
+     "prec": 0.24,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.5,
+     "prec": 0.31,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 1.09,
+     "prec": 0.25,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.03,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1443",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "6/7/2023",
+   "pesoActual": 851,
+   "rp": "1443",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.2,
+     "prec": 0.39,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8,
+     "prec": 0.38,
+     "pct": null
+    },
+    "PF": {
+     "dep": 22.5,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.7,
+     "prec": 0.38,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.5,
+     "prec": 0.32,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.4,
+     "prec": 0.24,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.4,
+     "prec": 0.33,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.42,
+     "prec": 0.25,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.07,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "350",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "2/7/2023",
+   "pesoActual": 906,
+   "rp": "350",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.6,
+     "prec": 0.36,
+     "pct": null
+    },
+    "WW": {
+     "dep": 10.2,
+     "prec": 0.33,
+     "pct": null
+    },
+    "PF": {
+     "dep": 37.8,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.8,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 6.9,
+     "prec": 0.23,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1,
+     "prec": 0.15,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1,
+     "prec": 0.21,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.73,
+     "prec": 0.15,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.07,
+     "prec": 0.17,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "11532",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "1/7/2023",
+   "pesoActual": 874,
+   "rp": "11532",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1,
+     "prec": 0.41,
+     "pct": null
+    },
+    "WW": {
+     "dep": 14.5,
+     "prec": 0.39,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 3,
+     "prec": 0.45,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 8.7,
+     "prec": 0.29,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 5.5,
+     "prec": 0.21,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": 0.4,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.7,
+     "prec": 0.22,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": 0.34,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "3179",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "4/6/2023",
+   "pesoActual": 839,
+   "rp": "3179",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.8,
+     "prec": 0.4,
+     "pct": null
+    },
+    "WW": {
+     "dep": 5.5,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 29.4,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 0.8,
+     "prec": 0.35,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3.1,
+     "prec": 0.32,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2,
+     "prec": 0.26,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.2,
+     "prec": 0.31,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.18,
+     "prec": 0.26,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.06,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "338",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "2/6/2023",
+   "pesoActual": 884,
+   "rp": "338",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.3,
+     "prec": 0.21,
+     "pct": null
+    },
+    "WW": {
+     "dep": 3.6,
+     "prec": 0.27,
+     "pct": null
+    },
+    "PF": {
+     "dep": 6.8,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.4,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 5,
+     "prec": 0.19,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.4,
+     "prec": 0.11,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.17,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.58,
+     "prec": 0.11,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.01,
+     "prec": 0.11,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "3273",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "11/9/2023",
+   "pesoActual": 743,
+   "rp": "3273",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.1,
+     "prec": 0.4,
+     "pct": null
+    },
+    "WW": {
+     "dep": 7.2,
+     "prec": 0.33,
+     "pct": null
+    },
+    "PF": {
+     "dep": 18,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.2,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.6,
+     "prec": 0.24,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.7,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.2,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.04,
+     "prec": 0.2,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.01,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "801",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "9/9/2023",
+   "pesoActual": 718,
+   "rp": "801",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.3,
+     "prec": 0.27,
+     "pct": null
+    },
+    "WW": {
+     "dep": 4.1,
+     "prec": 0.27,
+     "pct": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.4,
+     "prec": 0.13,
+     "pct": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "265",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "4/9/2023",
+   "pesoActual": 640,
+   "rp": "265",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.6,
+     "prec": 0.34,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.7,
+     "prec": 0.22,
+     "pct": null
+    },
+    "PF": {
+     "dep": 31.7,
+     "prec": 0.17,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 0.5,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.5,
+     "prec": 0.18,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.02,
+     "prec": 0.12,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.18,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.04,
+     "prec": 0.12,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": 0.12,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1846",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "2/9/2023",
+   "pesoActual": 778,
+   "rp": "1846",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.2,
+     "prec": 0.37,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.7,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 33.4,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 0.4,
+     "prec": 0.34,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -2.5,
+     "prec": 0.27,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 4.3,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.7,
+     "prec": 0.28,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.19,
+     "prec": 0.2,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.02,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1836",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "28/8/2023",
+   "pesoActual": 806,
+   "rp": "1836",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.4,
+     "prec": 0.36,
+     "pct": null
+    },
+    "WW": {
+     "dep": 5.7,
+     "prec": 0.41,
+     "pct": null
+    },
+    "PF": {
+     "dep": 16,
+     "prec": 0.27,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 0.7,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.5,
+     "prec": 0.26,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.3,
+     "prec": 0.23,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.28,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0,
+     "prec": 0.24,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": 0.23,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "7906",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "10/8/2023",
+   "pesoActual": 803,
+   "rp": "7906",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.38,
+     "pct": null
+    },
+    "WW": {
+     "dep": 11.4,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 38.3,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.9,
+     "prec": 0,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -3.8,
+     "prec": 0.31,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.4,
+     "prec": 0.38,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.4,
+     "prec": 0.38,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.61,
+     "prec": 0.25,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.06,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "11562",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "8/8/2023",
+   "pesoActual": 771,
+   "rp": "11562",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0,
+     "prec": 0.41,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.5,
+     "prec": 0.39,
+     "pct": null
+    },
+    "PF": {
+     "dep": 43.4,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 3.2,
+     "prec": 0.44,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.7,
+     "prec": 0.22,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.7,
+     "prec": 0.32,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": 0.38,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.36,
+     "prec": 0.33,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.27,
+     "prec": 0.33,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "207",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "6/8/2023",
+   "pesoActual": 758,
+   "rp": "207",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.4,
+     "prec": 0.38,
+     "pct": null
+    },
+    "WW": {
+     "dep": 4.9,
+     "prec": 0.36,
+     "pct": null
+    },
+    "PF": {
+     "dep": 19.9,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.3,
+     "prec": 0.23,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3.5,
+     "prec": 0.21,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": 0.24,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.42,
+     "prec": 0.21,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "5350",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "2/8/2023",
+   "pesoActual": 810,
+   "rp": "5350",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.7,
+     "prec": 0.43,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9.7,
+     "prec": 0.41,
+     "pct": null
+    },
+    "PF": {
+     "dep": 39.4,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.9,
+     "prec": 0.38,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4.2,
+     "prec": 0.32,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3.9,
+     "prec": 0.26,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": 0.39,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.37,
+     "prec": 0.26,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.01,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "16021",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "24/7/2023",
+   "pesoActual": 800,
+   "rp": "16021",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.1,
+     "prec": 0.39,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.7,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 35.5,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 6.6,
+     "prec": 0.28,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.6,
+     "prec": 0.29,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.21,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.16,
+     "prec": 0.14,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": 0.15,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "419",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "17/7/2023",
+   "pesoActual": 788,
+   "rp": "419",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.32,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.3,
+     "prec": 0.28,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.8,
+     "prec": 0.25,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.2,
+     "prec": 0.14,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.24,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.3,
+     "prec": 0.15,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.06,
+     "prec": 0.15,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "832",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "21/6/2023",
+   "pesoActual": 831,
+   "rp": "832",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.35,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9.2,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 25,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.5,
+     "prec": 0.23,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0,
+     "prec": 0.22,
+     "pct": null
+    },
+    "CE": {
+     "dep": 2.1,
+     "prec": 0.27,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.16,
+     "prec": 0.23,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.06,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "48",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "21/6/2023",
+   "pesoActual": 768,
+   "rp": "48",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.5,
+     "prec": 0.35,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6,
+     "prec": 0.33,
+     "pct": null
+    },
+    "PF": {
+     "dep": 21.3,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Alt": {
+     "dep": -2.3,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.9,
+     "prec": 0.21,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.9,
+     "prec": 0.16,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.23,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.34,
+     "prec": 0.17,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": 0.16,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "C639",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "24/5/2023",
+   "pesoActual": 892,
+   "rp": "C639",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1,
+     "prec": 0.43,
+     "pct": null
+    },
+    "WW": {
+     "dep": 11.8,
+     "prec": 0.41,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.36,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.7,
+     "prec": 0.27,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.9,
+     "prec": 0.25,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.28,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.39,
+     "prec": 0.26,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.01,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "02702",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "18/5/2023",
+   "pesoActual": 855,
+   "rp": "02702",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.3,
+     "prec": 0.39,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.2,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 42.9,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2,
+     "prec": 0.38,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4.5,
+     "prec": 0.32,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3.5,
+     "prec": 0.22,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.28,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.64,
+     "prec": 0.23,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.02,
+     "prec": 0.23,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "3425",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "16/5/2023",
+   "pesoActual": 837,
+   "rp": "3425",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.6,
+     "prec": 0.39,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.8,
+     "prec": 0.38,
+     "pct": null
+    },
+    "PF": {
+     "dep": 19,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.3,
+     "prec": 0.38,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.7,
+     "prec": 0.32,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.9,
+     "prec": 0.29,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.32,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.68,
+     "prec": 0.29,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "8980",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "4/4/2023",
+   "pesoActual": 916,
+   "rp": "8980",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": 0.43,
+     "pct": null
+    },
+    "WW": {
+     "dep": 13.7,
+     "prec": 0.38,
+     "pct": null
+    },
+    "PF": {
+     "dep": 24.5,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.3,
+     "prec": 0.38,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.4,
+     "prec": 0.3,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3.6,
+     "prec": 0.23,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.33,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.24,
+     "prec": 0.24,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.14,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "2193",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "2/4/2023",
+   "pesoActual": 915,
+   "rp": "2193",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1,
+     "prec": 0.41,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.7,
+     "prec": 0.39,
+     "pct": null
+    },
+    "PF": {
+     "dep": 12.2,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2,
+     "prec": 0.41,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -5.4,
+     "prec": 0.28,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.9,
+     "prec": 0.3,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.28,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.25,
+     "prec": 0.3,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.08,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "621",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "26/3/2023",
+   "pesoActual": 899,
+   "rp": "621",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.9,
+     "prec": 0.37,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9.4,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 31.2,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.5,
+     "prec": 0.41,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.8,
+     "prec": 0.26,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.9,
+     "prec": 0.16,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.36,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.75,
+     "prec": 0.16,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.18,
+     "prec": 0.16,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "823",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "3/1/2023",
+   "pesoActual": 995,
+   "rp": "823",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.3,
+     "prec": 0.37,
+     "pct": null
+    },
+    "WW": {
+     "dep": 7.9,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 33.9,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.9,
+     "prec": 0.36,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.9,
+     "prec": 0.29,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 4.3,
+     "prec": 0.23,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.3,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.65,
+     "prec": 0.23,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.02,
+     "prec": 0.23,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "5296",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "27/5/2023",
+   "pesoActual": 792,
+   "rp": "5296",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.5,
+     "prec": 0.4,
+     "pct": null
+    },
+    "WW": {
+     "dep": 7.6,
+     "prec": 0.38,
+     "pct": null
+    },
+    "PF": {
+     "dep": 23.6,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.8,
+     "prec": 0.38,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.2,
+     "prec": 0.33,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 5,
+     "prec": 0.3,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.33,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.06,
+     "prec": 0.3,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "3427",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "16/5/2023",
+   "pesoActual": 774,
+   "rp": "3427",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": 0.35,
+     "pct": null
+    },
+    "WW": {
+     "dep": 11.5,
+     "prec": 0.33,
+     "pct": null
+    },
+    "PF": {
+     "dep": 50.4,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.3,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3.6,
+     "prec": 0.22,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.6,
+     "prec": 0.15,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.21,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.53,
+     "prec": 0.15,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.01,
+     "prec": 0.15,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "818",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "5/5/2023",
+   "pesoActual": 937,
+   "rp": "818",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1,
+     "prec": 0.32,
+     "pct": null
+    },
+    "WW": {
+     "dep": 11.3,
+     "prec": 0.32,
+     "pct": null
+    },
+    "PF": {
+     "dep": 33.6,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.6,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.1,
+     "prec": 0.24,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.3,
+     "prec": 0.23,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.5,
+     "prec": 0.28,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.08,
+     "prec": 0.23,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": 0.23,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "724",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "26/4/2023",
+   "pesoActual": 898,
+   "rp": "724",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.4,
+     "prec": 0.3,
+     "pct": null
+    },
+    "WW": {
+     "dep": 0.2,
+     "prec": 0.28,
+     "pct": null
+    },
+    "PF": {
+     "dep": 14.6,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.2,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4.1,
+     "prec": 0.2,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.9,
+     "prec": 0.14,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": 0.19,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0,
+     "prec": 0.14,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.01,
+     "prec": 0.14,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "3148",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "1/4/2023",
+   "pesoActual": 921,
+   "rp": "3148",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.6,
+     "prec": 0.38,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.6,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 21.1,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.1,
+     "prec": 0.35,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -3.5,
+     "prec": 0.32,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.6,
+     "prec": 0.26,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.3,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.06,
+     "prec": 0.26,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.12,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1917",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "24/3/2023",
+   "pesoActual": 944,
+   "rp": "1917",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": 0.37,
+     "pct": null
+    },
+    "WW": {
+     "dep": 13.5,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 39.3,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.4,
+     "prec": 0.36,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.4,
+     "prec": 0.33,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.6,
+     "prec": 0.23,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.3,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.33,
+     "prec": 0.24,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1315",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "26/12/2022",
+   "pesoActual": 1054,
+   "rp": "1315",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.7,
+     "prec": 0.39,
+     "pct": null
+    },
+    "WW": {
+     "dep": 10.3,
+     "prec": 0.31,
+     "pct": null
+    },
+    "PF": {
+     "dep": 45.3,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.3,
+     "prec": 0.19,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2,
+     "prec": 0.14,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": 0.2,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.22,
+     "prec": 0.15,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.04,
+     "prec": 0.15,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "12383",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "4/10/2022",
+   "pesoActual": 976,
+   "rp": "12383",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.6,
+     "prec": 0.4,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.8,
+     "prec": 0.38,
+     "pct": null
+    },
+    "PF": {
+     "dep": 33.7,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.8,
+     "prec": 0.43,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.2,
+     "prec": 0.29,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.9,
+     "prec": 0.19,
+     "pct": null
+    },
+    "CE": {
+     "dep": 2,
+     "prec": 0.37,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.22,
+     "prec": 0.19,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.08,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "473",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "5/9/2022",
+   "pesoActual": 973,
+   "rp": "473",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": 0.31,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.8,
+     "prec": 0.3,
+     "pct": null
+    },
+    "PF": {
+     "dep": 46.8,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.9,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.1,
+     "prec": 0.27,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.3,
+     "prec": 0.19,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": 0.24,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.29,
+     "prec": 0.19,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.03,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "3482",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "26/8/2022",
+   "pesoActual": 1067,
+   "rp": "3482",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": 0.4,
+     "pct": null
+    },
+    "WW": {
+     "dep": 7.4,
+     "prec": 0.38,
+     "pct": null
+    },
+    "PF": {
+     "dep": 12.4,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2,
+     "prec": 0.39,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.7,
+     "prec": 0.32,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.2,
+     "prec": 0.26,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.8,
+     "prec": 0.29,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.83,
+     "prec": 0.26,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.07,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "19",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "22/8/2022",
+   "pesoActual": 1017,
+   "rp": "19",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0,
+     "prec": 0.39,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9.3,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 39.1,
+     "prec": 0.27,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.4,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -6,
+     "prec": 0.28,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.8,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": 0.28,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.51,
+     "prec": 0.21,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.03,
+     "prec": 0.23,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "256",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "6/8/2022",
+   "pesoActual": 1053,
+   "rp": "256",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.4,
+     "prec": 0.36,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9,
+     "prec": 0.34,
+     "pct": null
+    },
+    "PF": {
+     "dep": 36.2,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.7,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.6,
+     "prec": 0.29,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.3,
+     "prec": 0.22,
+     "pct": null
+    },
+    "CE": {
+     "dep": 2,
+     "prec": 0.29,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.43,
+     "prec": 0.23,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "1139",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "20/7/2022",
+   "pesoActual": 1128,
+   "rp": "1139",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.3,
+     "prec": 0.37,
+     "pct": null
+    },
+    "WW": {
+     "dep": 10.9,
+     "prec": 0.34,
+     "pct": null
+    },
+    "PF": {
+     "dep": 50.2,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.35,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4,
+     "prec": 0.22,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.4,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 2.1,
+     "prec": 0.29,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.12,
+     "prec": 0.21,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "C513",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "19/12/2022",
+   "pesoActual": 964,
+   "rp": "C513",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.8,
+     "prec": 0.3,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.9,
+     "prec": 0.28,
+     "pct": null
+    },
+    "PF": {
+     "dep": 23.9,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.5,
+     "prec": 0.27,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -3.2,
+     "prec": 0.26,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.8,
+     "prec": 0.17,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.22,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.27,
+     "prec": 0.17,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": 0.16,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "11837",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "8/8/2022",
+   "pesoActual": 1012,
+   "rp": "11837",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.5,
+     "prec": 0.38,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.8,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 39.5,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.7,
+     "prec": 0.37,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3.2,
+     "prec": 0.32,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.6,
+     "prec": 0.19,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1,
+     "prec": 0.3,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.42,
+     "prec": 0.2,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "7862",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "8/8/2022",
+   "pesoActual": 1179,
+   "rp": "7862",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": 0.29,
+     "pct": null
+    },
+    "WW": {
+     "dep": 7.2,
+     "prec": 0.27,
+     "pct": null
+    },
+    "PF": {
+     "dep": 29.9,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 3,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -1.7,
+     "prec": 0.23,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.2,
+     "prec": 0.22,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.5,
+     "prec": 0.21,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.38,
+     "prec": 0.24,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.03,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  },
+  {
+   "nombre": "3229",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "5/7/2022",
+   "pesoActual": 962,
+   "rp": "3229",
+   "origen": "SRA",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.7,
+     "prec": 0.24,
+     "pct": null
+    },
+    "WW": {
+     "dep": 10.2,
+     "prec": 0.23,
+     "pct": null
+    },
+    "PF": {
+     "dep": 31.8,
+     "prec": 0.17,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.7,
+     "prec": 0.23,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.6,
+     "prec": 0.18,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.9,
+     "prec": 0.16,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.2,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.12,
+     "prec": 0.17,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.02,
+     "prec": 0.15,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true
+  }
+ ]
+}

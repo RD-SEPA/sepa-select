@@ -1,0 +1,1576 @@
+{
+ "meta": {
+  "id": "002",
+  "nombre": "La Amistad 2024",
+  "cabana": "La Amistad",
+  "expositor": "",
+  "email": "",
+  "puntaje": 2,
+  "tipo": "temporal",
+  "esNovedad": false,
+  "novedad": "",
+  "acceso": "abierto",
+  "totalToros": 20,
+  "aptos": 20,
+  "archivo": "toros_002.json",
+  "fuente": "json",
+  "cargado_por": "Ricardo",
+  "fecha_carga": "2026-08-24",
+  "ultimo_ingreso": "2026-08-24",
+  "fecha": "2026-08-24"
+ },
+ "toros": [
+  {
+   "nombre": "2107",
+   "pelaje": "COLORADO",
+   "raza": "Angus COLORADO",
+   "nacimiento": "21/3/2024",
+   "pesoActual": 501,
+   "rp": "2107",
+   "origen": "Padre: INAMBU SUR 1506 ESCORPION | Madre: INAMBU SUR 702 ROSALIA 0156 T/E | Abo.mat: RUBETA 5897 SUPREMO",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.5,
+     "prec": 0.36,
+     "pct": null
+    },
+    "WW": {
+     "dep": 3,
+     "prec": 0.32,
+     "pct": null
+    },
+    "PF": {
+     "dep": 4.8,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 0.9,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 6.8,
+     "prec": 0.25,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.8,
+     "prec": 0.17,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.26,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.27,
+     "prec": 0.18,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.01,
+     "prec": 0.18,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "CAB. INAMBU S.A."
+  },
+  {
+   "nombre": "699",
+   "pelaje": "COLORADO",
+   "raza": "Angus COLORADO",
+   "nacimiento": "20/3/2024",
+   "pesoActual": 539,
+   "rp": "699",
+   "origen": "Padre: ESENCIAL 37 ARQUIMEDES-T/E- | Madre: PATAGU 452 CALANDRIA T/E | Abo.mat: PATAGU 61 BRIGADIER",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.3,
+     "prec": 0.31,
+     "pct": null
+    },
+    "WW": {
+     "dep": 7.4,
+     "prec": 0.3,
+     "pct": null
+    },
+    "PF": {
+     "dep": 22.8,
+     "prec": 0.27,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.2,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0,
+     "prec": 0.36,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.2,
+     "prec": 0.3,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.8,
+     "prec": 0.27,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.03,
+     "prec": 0.31,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.07,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "EST. DON LUIS S.A."
+  },
+  {
+   "nombre": "1513",
+   "pelaje": "NEGRO",
+   "raza": "Angus NEGRO",
+   "nacimiento": "2/10/2023",
+   "pesoActual": 716,
+   "rp": "1513",
+   "origen": "Padre: TRES MARIAS B707 DON RAUL T/E | Madre: TRANQUERAS 854 MRA KATE 628 | Abo.mat: DUFF ANGUS 011",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.42,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.9,
+     "prec": 0.4,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.7,
+     "prec": 0.38,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.8,
+     "prec": 0.24,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.1,
+     "prec": 0.42,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.05,
+     "prec": 0.32,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.02,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CW": {
+     "dep": 3,
+     "prec": 0.31,
+     "pct": null
+    }
+   },
+   "_apto": true,
+   "categoria": "Desconocido",
+   "expositor": "LA VALLE, HORACIO LUIS Y LA VALLE, MARTA VILA MORET DE"
+  },
+  {
+   "nombre": "27",
+   "pelaje": "NEGRO",
+   "raza": "Angus NEGRO",
+   "nacimiento": "2/10/2023",
+   "pesoActual": 733,
+   "rp": "27",
+   "origen": "Padre: BEST 411.3 DON JOSE T/E | Madre: MALELE 356 EURO 9686 T/E | Abo.mat: ERRE TE 383 CONDOR EURO -T/E-",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.39,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.5,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 48.4,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.6,
+     "prec": 0.27,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1,
+     "prec": 0.27,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.2,
+     "prec": 0.36,
+     "pct": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.33,
+     "prec": 0.2,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.14,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {
+    "CW": {
+     "dep": 0.4,
+     "prec": 0.2,
+     "pct": null
+    }
+   },
+   "_apto": true,
+   "categoria": "Desconocido",
+   "expositor": "GARCIA, JUAN JORGE - GROENENBERG, KAREN"
+  },
+  {
+   "nombre": "569",
+   "pelaje": "COLORADO",
+   "raza": "Angus COLORADO",
+   "nacimiento": "17/10/2023",
+   "pesoActual": 734,
+   "rp": "569",
+   "origen": "Padre: INDIO NUEVO 963 RUFIAN 326 T/E | Madre: LIHERMA ARGENTINA | Abo.mat: TRES MARIAS 9257 FEDERAL -T/E-",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.4,
+     "prec": 0.32,
+     "pct": null
+    },
+    "WW": {
+     "dep": 3.7,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 31.3,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1,
+     "prec": 0.2,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3,
+     "prec": 0.2,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.2,
+     "prec": 0.14,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.8,
+     "prec": 0.26,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.28,
+     "prec": 0.15,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "MALAGUE?O, LIVIO"
+  },
+  {
+   "nombre": "573",
+   "pelaje": "COLORADO",
+   "raza": "Angus COLORADO",
+   "nacimiento": "8/10/2023",
+   "pesoActual": 745,
+   "rp": "573",
+   "origen": "Padre: CLM 579 RECORD T/E | Madre: LA JUANITA TRUENO DOC HOLLIDAY | Abo.mat: PASTORIZA 1548 TRUENO-T/E-",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.4,
+     "prec": 0.35,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.6,
+     "prec": 0.33,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.5,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.4,
+     "prec": 0.24,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.3,
+     "prec": 0.19,
+     "pct": null
+    },
+    "CE": {
+     "dep": 2.8,
+     "prec": 0.3,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.12,
+     "prec": 0.19,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.02,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "SPINELLA, ALEJANDRO EZEQUIEL"
+  },
+  {
+   "nombre": "267",
+   "pelaje": "NEGRO",
+   "raza": "Angus NEGRO",
+   "nacimiento": "4/9/2023",
+   "pesoActual": 664,
+   "rp": "267",
+   "origen": "Padre: TRES MARIAS B653 MITO T/E | Madre: DON MIGUEL NUBESITA 2766 CREDITO | Abo.mat: STRATUM 1333 CREDITO DISCOVERY-...",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.6,
+     "prec": 0.4,
+     "pct": null
+    },
+    "WW": {
+     "dep": 5.2,
+     "prec": 0.33,
+     "pct": null
+    },
+    "PF": {
+     "dep": 19,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 0.7,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4.4,
+     "prec": 0.19,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.4,
+     "prec": 0.22,
+     "pct": null
+    },
+    "CE": {
+     "dep": 2.3,
+     "prec": 0.33,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.77,
+     "prec": 0.23,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.09,
+     "prec": 0.23,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Desconocido",
+   "expositor": "COLANTONIO, PABLO NICOLAS"
+  },
+  {
+   "nombre": "71",
+   "pelaje": "NEGRO",
+   "raza": "Angus NEGRO",
+   "nacimiento": "3/9/2023",
+   "pesoActual": 858,
+   "rp": "71",
+   "origen": "Padre: ERRE TE 383 CONDOR EURO -T/E- | Madre: LUCQ 212 JUANA | Abo.mat: STRATUM 1333 CREDITO DISCOVERY-...",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.39,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9.9,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.3,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 0.7,
+     "prec": 0.33,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.2,
+     "prec": 0.25,
+     "pct": null
+    },
+    "CE": {
+     "dep": 2.3,
+     "prec": 0.37,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.03,
+     "prec": 0.26,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Desconocido",
+   "expositor": "ALIGAFA S.A."
+  },
+  {
+   "nombre": "3179",
+   "pelaje": "NEGRO",
+   "raza": "Angus NEGRO",
+   "nacimiento": "4/6/2023",
+   "pesoActual": 839,
+   "rp": "3179",
+   "origen": "Padre: PASTORIZA 1776 FELIPE T/E | Madre: PASTORIZA 1815 PEPA | Abo.mat: ESENCIAL 37 ARQUIMEDES T/E",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.8,
+     "prec": 0.4,
+     "pct": null
+    },
+    "WW": {
+     "dep": 5.5,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 29.4,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 0.8,
+     "prec": 0.35,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 3.1,
+     "prec": 0.32,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2,
+     "prec": 0.26,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.2,
+     "prec": 0.31,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.18,
+     "prec": 0.26,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.06,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "EL MADRIGAL S.R.L."
+  },
+  {
+   "nombre": "338",
+   "pelaje": "NEGRO",
+   "raza": "Angus NEGRO",
+   "nacimiento": "2/6/2023",
+   "pesoActual": 884,
+   "rp": "338",
+   "origen": "Padre: SAN VALENTIN FEDERAL RECTIFICADO | Madre: SAN VALENTIN HORNERA CASI ROSIN | Abo.mat: AITUANGUS 217 CASIMIRO 22 T/E",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.3,
+     "prec": 0.21,
+     "pct": null
+    },
+    "WW": {
+     "dep": 3.6,
+     "prec": 0.27,
+     "pct": null
+    },
+    "PF": {
+     "dep": 6.8,
+     "prec": 0.17,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.4,
+     "prec": 0.19,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 5,
+     "prec": 0.19,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.4,
+     "prec": 0.11,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.14,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.58,
+     "prec": 0.11,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.01,
+     "prec": 0.11,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "GARAY, GUSTAVO VALENTIN"
+  },
+  {
+   "nombre": "11562",
+   "pelaje": "COLORADO",
+   "raza": "Angus COLORADO",
+   "nacimiento": "8/8/2023",
+   "pesoActual": 771,
+   "rp": "11562",
+   "origen": "Padre: PIRAY 1904 DON ANTONIO / Madre: MOROMAR 10267 TEHUELCHE 12 2543 / Abo.mat: DOBLEHACHE 293 BIGUA-T/E-",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0,
+     "prec": 0.41,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.5,
+     "prec": 0.39,
+     "pct": null
+    },
+    "PF": {
+     "dep": 43.4,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 3.2,
+     "prec": 0.44,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -0.7,
+     "prec": 0.22,
+     "pct": null
+    },
+    "AOB": {
+     "dep": -0.7,
+     "prec": 0.32,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": 0.38,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.36,
+     "prec": 0.33,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.27,
+     "prec": 0.33,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "LOS ELU S.R.L."
+  },
+  {
+   "nombre": "207",
+   "pelaje": "COLORADO",
+   "raza": "Angus COLORADO",
+   "nacimiento": "6/8/2023",
+   "pesoActual": 758,
+   "rp": "207",
+   "origen": "Padre: PASTORIZA 2354 GABACHO / Madre: GUSTI 4311 SCOTH VETERANA G 3455 / Abo.mat: VETERANO 050 SCOTCH 09",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.4,
+     "prec": 0.38,
+     "pct": null
+    },
+    "WW": {
+     "dep": 4.9,
+     "prec": 0.36,
+     "pct": null
+    },
+    "PF": {
+     "dep": 19.9,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.3,
+     "prec": 0.23,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3.5,
+     "prec": 0.21,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": 0.24,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.42,
+     "prec": 0.21,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "SALVINI E HIJOS S.R.L."
+  },
+  {
+   "nombre": "16021",
+   "pelaje": "COLORADO",
+   "raza": "Angus COLORADO",
+   "nacimiento": "24/7/2023",
+   "pesoActual": 800,
+   "rp": "16021",
+   "origen": "Padre: CASAMU 4178 PEUMA CALBUCO | Madre: ESENCIAL MODERNAZA GIFT | Abo.mat: ESENCIAL 393 FRIJOLERO",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.1,
+     "prec": 0.39,
+     "pct": null
+    },
+    "WW": {
+     "dep": 8.7,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 35.5,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.35,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 6.6,
+     "prec": 0.28,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.6,
+     "prec": 0.29,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.31,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.16,
+     "prec": 0.3,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "GREGORIO, NUMO Y NOEL WERTHEIN S.A.A.G.C.I."
+  },
+  {
+   "nombre": "419",
+   "pelaje": "COLORADO",
+   "raza": "Angus COLORADO",
+   "nacimiento": "17/7/2023",
+   "pesoActual": 788,
+   "rp": "419",
+   "origen": "Padre: TRES MARIAS B767 RED RENOW 9226 T | Madre: TRES MARIAS A967 DAKTARI 8890-T/E | Abo.mat: TRES MARIAS 7629 DAKTARY-T/E-",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.32,
+     "pct": null
+    },
+    "WW": {
+     "dep": 12.3,
+     "prec": 0.28,
+     "pct": null
+    },
+    "PF": {
+     "dep": 51,
+     "prec": 0.21,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 2.8,
+     "prec": 0.25,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.2,
+     "prec": 0.14,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.24,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.3,
+     "prec": 0.15,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.06,
+     "prec": 0.15,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "AGROGANADERA SAN IGNACIO S.A."
+  },
+  {
+   "nombre": "8980",
+   "pelaje": "NEGRO",
+   "raza": "Angus NEGRO",
+   "nacimiento": "4/4/2023",
+   "pesoActual": 916,
+   "rp": "8980",
+   "origen": "Padre: DUFF NAPOLEON 232 | Madre: RUBETA FONTANA 7693 T/E | Abo.mat: PVF INSIGHT 0129",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": 0.43,
+     "pct": null
+    },
+    "WW": {
+     "dep": 13.7,
+     "prec": 0.38,
+     "pct": null
+    },
+    "PF": {
+     "dep": 24.5,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.3,
+     "prec": 0.38,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.4,
+     "prec": 0.3,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 3.6,
+     "prec": 0.23,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.33,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.24,
+     "prec": 0.24,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.14,
+     "prec": 0.29,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "RUBETA S.A., - LA PASION"
+  },
+  {
+   "nombre": "2193",
+   "pelaje": "NEGRO",
+   "raza": "Angus NEGRO",
+   "nacimiento": "2/4/2023",
+   "pesoActual": 915,
+   "rp": "2193",
+   "origen": "Padre: INDIO NUEVO 419 DIFERENTE 28 T/E | Madre: PIRAY 1695 SERRUCHO RYOKO | Abo.mat: DON APARICIO SERRUCHO 57 MAXI-T/E-",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1,
+     "prec": 0.41,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.7,
+     "prec": 0.39,
+     "pct": null
+    },
+    "PF": {
+     "dep": 12.2,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2,
+     "prec": 0.43,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -5.4,
+     "prec": 0.28,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.9,
+     "prec": 0.3,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.36,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.25,
+     "prec": 0.31,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.08,
+     "prec": 0.3,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "PIRAY MINI S.A.,"
+  },
+  {
+   "nombre": "3148",
+   "pelaje": "COLORADO",
+   "raza": "Angus COLORADO",
+   "nacimiento": "1/4/2023",
+   "pesoActual": 921,
+   "rp": "3148",
+   "origen": "Padre: PASTORIZA 1776 FELIPE T/E | Madre: PASTORIZA 1319 LA GATA T/E | Abo.mat: RUBETA 4444 QUEBRANTADOR T/E",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.6,
+     "prec": 0.38,
+     "pct": null
+    },
+    "WW": {
+     "dep": 6.6,
+     "prec": 0.37,
+     "pct": null
+    },
+    "PF": {
+     "dep": 21.1,
+     "prec": 0.31,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 1.1,
+     "prec": 0.35,
+     "pct": null
+    },
+    "Leche": {
+     "dep": -3.5,
+     "prec": 0.32,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 1.6,
+     "prec": 0.26,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.3,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.06,
+     "prec": 0.26,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.12,
+     "prec": 0.26,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "EL MADRIGAL S.R.L."
+  },
+  {
+   "nombre": "1917",
+   "pelaje": "COLORADO",
+   "raza": "Angus COLORADO",
+   "nacimiento": "24/3/2023",
+   "pesoActual": 944,
+   "rp": "1917",
+   "origen": "Padre: RED LAZY MC COWBOY CUT 26U | Madre: INAMBU SUR 496 HUMAHUACA 0129 T/E | Abo.mat: RUBETA 4444 QUEBRANTADOR T/E",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": 0.37,
+     "pct": null
+    },
+    "WW": {
+     "dep": 13.5,
+     "prec": 0.35,
+     "pct": null
+    },
+    "PF": {
+     "dep": 39.3,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.4,
+     "prec": 0.36,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.4,
+     "prec": 0.33,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.6,
+     "prec": 0.23,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.3,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": -0.33,
+     "prec": 0.24,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Macho",
+   "expositor": "CAB. INAMBU S.A."
+  },
+  {
+   "nombre": "256",
+   "pelaje": "NEGRO",
+   "raza": "Angus NEGRO",
+   "nacimiento": "6/8/2022",
+   "pesoActual": 1053,
+   "rp": "256",
+   "origen": "Padre: ERRE TE 383 CONDOR EURO -T/E- | Madre: LAOCA CHARLOTTE | Abo.mat: COLEMAN CHARLO 0256",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.4,
+     "prec": 0.36,
+     "pct": null
+    },
+    "WW": {
+     "dep": 9,
+     "prec": 0.34,
+     "pct": null
+    },
+    "PF": {
+     "dep": 36.2,
+     "prec": 0.28,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.7,
+     "prec": 0.32,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 1.6,
+     "prec": 0.29,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 2.3,
+     "prec": 0.22,
+     "pct": null
+    },
+    "CE": {
+     "dep": 2,
+     "prec": 0.29,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.43,
+     "prec": 0.23,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": 0.24,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Desconocido",
+   "expositor": "DON GOYO LA OCA S.R.L. - DON GOYO LA OC - OJEA RULLAN CARLOS"
+  },
+  {
+   "nombre": "1139",
+   "pelaje": "NEGRO",
+   "raza": "Angus NEGRO",
+   "nacimiento": "20/7/2022",
+   "pesoActual": 1128,
+   "rp": "1139",
+   "origen": "Padre: BROOKING FIREBRAND 6068 | Madre: MALELE 222 EURO 264 T/E | Abo.mat: ERRE TE 383 CONDOR EURO -T/E-",
+   "semenApto": "SI",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.3,
+     "prec": 0.37,
+     "pct": null
+    },
+    "WW": {
+     "dep": 10.9,
+     "prec": 0.34,
+     "pct": null
+    },
+    "PF": {
+     "dep": 50.2,
+     "prec": 0.25,
+     "pct": null
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.35,
+     "pct": null
+    },
+    "Leche": {
+     "dep": 4,
+     "prec": 0.29,
+     "pct": null
+    },
+    "AOB": {
+     "dep": 0.4,
+     "prec": 0.2,
+     "pct": null
+    },
+    "CE": {
+     "dep": 2.1,
+     "prec": 0.29,
+     "pct": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": 0.12,
+     "prec": 0.21,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": 0.22,
+     "pct": null
+    },
+    "Cortes": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   },
+   "deps_ext": {},
+   "_apto": true,
+   "categoria": "Desconocido",
+   "expositor": "ARANDU S.A. - ROBERTO MONDINO - FIDESUR S.A. - AGROG. SAN IGNACIO"
+  }
+ ]
+}

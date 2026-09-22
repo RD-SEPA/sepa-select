@@ -1,0 +1,3881 @@
+{
+ "meta": {
+  "id": "011",
+  "nombre": "La Amistad 2026",
+  "fecha": "2026-09-22",
+  "cabana": "La Amistad",
+  "expositor": "La Amistad",
+  "telefono_contacto": "Pedrito 2983404976"
+ },
+ "toros": [
+  {
+   "nombre": "Warma Jewlian 406 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "25/08/2024",
+   "pesoActual": 690.0,
+   "rp": "406",
+   "hba": "912355",
+   "origen": "La Amistad",
+   "padre": "ÑATO A893",
+   "lote": "1",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 14,
+     "prec": null
+    },
+    "PF": {
+     "dep": 29,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -1,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 8.6,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.32,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.05,
+     "prec": null
+    },
+    "LG": {
+     "dep": -1.55,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.991,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.64,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 80.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": -1.37,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 2,
+     "prec": null
+    },
+    "DOC": {
+     "dep": -0.077,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian 386 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "12/06/2024",
+   "pesoActual": 745.0,
+   "rp": "386",
+   "hba": "912091",
+   "origen": "La Amistad",
+   "padre": "SCOTCH",
+   "lote": "1",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.2,
+     "prec": null
+    },
+    "WW": {
+     "dep": 12,
+     "prec": null
+    },
+    "PF": {
+     "dep": 19,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 5.9,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.67,
+     "prec": null
+    },
+    "CE": {
+     "dep": -0.12,
+     "prec": null
+    },
+    "LG": {
+     "dep": -0.74,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.635,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.79,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 0.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 6.86,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 9,
+     "prec": null
+    },
+    "DOC": {
+     "dep": -0.007,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "2.A700 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "A700",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "2",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 30.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 50.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 89.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 28.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 40.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 28.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 53.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 21.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 376 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "26/06/2024",
+   "pesoActual": 675.0,
+   "rp": "376",
+   "hba": "911155",
+   "origen": "La Amistad",
+   "padre": "ÑATO A893",
+   "lote": "2",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.4,
+     "prec": null
+    },
+    "WW": {
+     "dep": 16,
+     "prec": null
+    },
+    "PF": {
+     "dep": 29,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -1,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 7.7,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.59,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.35,
+     "prec": null
+    },
+    "LG": {
+     "dep": -1.47,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 1.016,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.86,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 39.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 2.32,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 4,
+     "prec": null
+    },
+    "DOC": {
+     "dep": -0.068,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 414 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "29/08/2024",
+   "pesoActual": 660.0,
+   "rp": "414",
+   "hba": "912352",
+   "origen": "La Amistad",
+   "padre": "ÑATO A893",
+   "lote": "2",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "WW": {
+     "dep": 14,
+     "prec": null
+    },
+    "PF": {
+     "dep": 26,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -1,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 7.3,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.37,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.91,
+     "prec": null
+    },
+    "LG": {
+     "dep": -0.34,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.864,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.52,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 67.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 0.2,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 3,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 0.027,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 400 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "22/08/2024",
+   "pesoActual": 575.0,
+   "rp": "400",
+   "hba": "924122",
+   "origen": "La Amistad",
+   "padre": "JEWLIAN MELGA A858",
+   "lote": "2",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.5,
+     "prec": null
+    },
+    "WW": {
+     "dep": 6,
+     "prec": null
+    },
+    "PF": {
+     "dep": 15,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -1,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 8.2,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.05,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.51,
+     "prec": null
+    },
+    "LG": {
+     "dep": -1.87,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.66,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.94,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 18.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 12.38,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 14,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 0.026,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "3.A725 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "A725",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "C552",
+   "lote": "3",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 28.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 37.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 100.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 26.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 16.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 52.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 39.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 50.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "3.A694 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "A694",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO 2",
+   "lote": "3",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 13.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 36.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 92.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 19.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 44.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 25.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 19.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 4.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 444 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "19/09/2024",
+   "pesoActual": 620.0,
+   "rp": "444",
+   "hba": "926464",
+   "origen": "La Amistad",
+   "padre": "WARMA JEWLIAN 118",
+   "lote": "3",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "WW": {
+     "dep": 7,
+     "prec": null
+    },
+    "PF": {
+     "dep": 13,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 5.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -1.65,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.26,
+     "prec": null
+    },
+    "LG": {
+     "dep": 0.27,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 1.295,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.61,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 39.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": -1.21,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 1,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 0.045,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "4.A727 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "A727",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "4",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 8.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 33.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 99.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 47.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 29.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 38.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 65.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "4.684 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "684",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "4",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 13.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 77.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 89.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 28.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 7.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 14.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 14.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 26.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "5.719 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "719",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "A893",
+   "lote": "5",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 19.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 42.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 100.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 30.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 5.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 23.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 39.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 33.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian 422 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "02/09/2024",
+   "pesoActual": 600.0,
+   "rp": "422",
+   "hba": "926461",
+   "origen": "La Amistad",
+   "padre": "ÑATO A893",
+   "lote": "5",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "WW": {
+     "dep": 12,
+     "prec": null
+    },
+    "PF": {
+     "dep": 22,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -1,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 6.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.85,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.97,
+     "prec": null
+    },
+    "LG": {
+     "dep": 0.32,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 1.727,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.85,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 23.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 5.13,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 6,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 0.122,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 388 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "12/06/2024",
+   "pesoActual": 650.0,
+   "rp": "388",
+   "hba": "926459",
+   "origen": "La Amistad",
+   "padre": "SCOTCH",
+   "lote": "5",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.2,
+     "prec": null
+    },
+    "WW": {
+     "dep": 9,
+     "prec": null
+    },
+    "PF": {
+     "dep": 14,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 5.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.84,
+     "prec": null
+    },
+    "CE": {
+     "dep": -0.58,
+     "prec": null
+    },
+    "LG": {
+     "dep": -1.37,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.127,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.26,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 0.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 6.41,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 9,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 0.036,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "6.713 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "713",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "6",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 11.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 23.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 100.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 15.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 12.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 40.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 35.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 77.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 420 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "01/09/2024",
+   "pesoActual": 575.0,
+   "rp": "420",
+   "hba": "926460",
+   "origen": "La Amistad",
+   "padre": "JEWLIAN MELGA A858",
+   "lote": "6",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.5,
+     "prec": null
+    },
+    "WW": {
+     "dep": 6,
+     "prec": null
+    },
+    "PF": {
+     "dep": 13,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -1,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 7.3,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 4.27,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.33,
+     "prec": null
+    },
+    "LG": {
+     "dep": -0.12,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 1.016,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.43,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 11.42,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 14,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 0.042,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "6.723 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "723",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "C552",
+   "lote": "6",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 8.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 28.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 97.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 11.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 9.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 9.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 26.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 39.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "7.701 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "701",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "7",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 3.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 38.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 99.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 32.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 4.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 41.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 44.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 22.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "7.698 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "698",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "7",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 5.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 95.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 10.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 4.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 5.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 30.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 392 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "19/08/2024",
+   "pesoActual": 610.0,
+   "rp": "392",
+   "hba": "912361",
+   "origen": "La Amistad",
+   "padre": "JEWLIAN MELGA A858",
+   "lote": "7",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.6,
+     "prec": null
+    },
+    "WW": {
+     "dep": 5,
+     "prec": null
+    },
+    "PF": {
+     "dep": 13,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -1,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 8.2,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 5.37,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.43,
+     "prec": null
+    },
+    "LG": {
+     "dep": -1.03,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.025,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.5,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 23.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 12.81,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 11,
+     "prec": null
+    },
+    "DOC": {
+     "dep": -0.055,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 276 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "29/08/2023",
+   "pesoActual": 560.0,
+   "rp": "276",
+   "hba": "904548",
+   "origen": "La Amistad",
+   "padre": "ÑATO A893",
+   "lote": "8",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.8,
+     "prec": null
+    },
+    "WW": {
+     "dep": 9,
+     "prec": null
+    },
+    "PF": {
+     "dep": 19,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 6.8,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.28,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.24,
+     "prec": null
+    },
+    "LG": {
+     "dep": -1.51,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 1.016,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.72,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 18.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 8.64,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 10,
+     "prec": null
+    },
+    "DOC": {
+     "dep": -0.016,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "8.702 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "702",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "8",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 47.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 32.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 99.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 37.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 11.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 44.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 60.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 70.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "8.690 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "690",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "8",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 8.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 21.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 100.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 9.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 19.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "9.707 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "707",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "C552",
+   "lote": "9",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 6.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 22.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 98.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 18.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 12.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 57.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 65.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 12.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "9.699 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "699",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "REPASO",
+   "lote": "9",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 9.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 26.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 96.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 12.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 21.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 8.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 9.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 13.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "9.695 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "695",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "REPASO",
+   "lote": "9",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 10.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 64.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 99.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 25.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 3.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 15.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 28.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 51.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "10.714 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "714",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "REPASO",
+   "lote": "10",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 22.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 15.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 88.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 44.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 24.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 52.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 52.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 22.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "10.722 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "722",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "REPASO",
+   "lote": "10",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 14.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 34.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 100.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 29.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 8.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 45.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 41.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 57.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Haymount 320 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "23/09/2023",
+   "pesoActual": 640.0,
+   "rp": "320",
+   "hba": "905885",
+   "origen": "La Amistad",
+   "padre": "ABRA HAYMOUNT C552",
+   "lote": "10",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.9,
+     "prec": null
+    },
+    "WW": {
+     "dep": 6,
+     "prec": null
+    },
+    "PF": {
+     "dep": 11,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 7.3,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -0.26,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.29,
+     "prec": null
+    },
+    "LG": {
+     "dep": -1.21,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.838,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.38,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 12.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 10.79,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 10,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 0.063,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "11.711 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "711",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "11",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 43.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 45.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 96.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 20.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 23.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 68.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 87.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 19.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "11.693 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "693",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "REPASO",
+   "lote": "11",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 4.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 7.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 66.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 23.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 5.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 4.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 69.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 402 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "22/08/2024",
+   "pesoActual": 560.0,
+   "rp": "402",
+   "hba": "912357",
+   "origen": "La Amistad",
+   "padre": "ÑATO A893",
+   "lote": "12",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.4,
+     "prec": null
+    },
+    "WW": {
+     "dep": 6,
+     "prec": null
+    },
+    "PF": {
+     "dep": 16,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 6.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -0.51,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.79,
+     "prec": null
+    },
+    "LG": {
+     "dep": -2.19,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 2.134,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.57,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 3.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 8.23,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 11,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 0.001,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "12.718 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "718",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "12",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 9.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 23.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 74.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 28.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 7.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 58.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 56.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 17.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "12.692 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "692",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "12",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 9.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 23.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 94.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 30.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 4.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 25.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 42.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 17.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian 438 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "15/09/2024",
+   "pesoActual": 585.0,
+   "rp": "438",
+   "hba": "926668",
+   "origen": "La Amistad",
+   "padre": "WARMA JEWLIAN 118",
+   "lote": "13",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.5,
+     "prec": null
+    },
+    "WW": {
+     "dep": 4,
+     "prec": null
+    },
+    "PF": {
+     "dep": 7,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -1,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 6.8,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -2.47,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.06,
+     "prec": null
+    },
+    "LG": {
+     "dep": 0.62,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 1.727,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.61,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 8.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": -0.1,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 3,
+     "prec": null
+    },
+    "DOC": {
+     "dep": -0.033,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "13.687 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "687",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "13",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 11.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 85.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 46.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 9.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 13.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 14.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 14.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "13.696 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "696",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "REPASO",
+   "lote": "13",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 21.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 95.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 9.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 4.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 13.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 97.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "14.732 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "732",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "14",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 50.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 28.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 97.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 16.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 70.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 64.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 53.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 366 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "13/05/2024",
+   "pesoActual": 570.0,
+   "rp": "366",
+   "hba": "911158",
+   "origen": "La Amistad",
+   "padre": "C015",
+   "lote": "14",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 7,
+     "prec": null
+    },
+    "PF": {
+     "dep": 16,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 8.6,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -3.02,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.75,
+     "prec": null
+    },
+    "LG": {
+     "dep": -1.66,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 2.515,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.76,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 39.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 6,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 6,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 0.024,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "14.726 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "726",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "14",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 36.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 32.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 95.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 38.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 5.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 72.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 72.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 77.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian 426 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "07/09/2024",
+   "pesoActual": 565.0,
+   "rp": "426",
+   "hba": "926642",
+   "origen": "La Amistad",
+   "padre": "ABRA HAYMOUNT C090",
+   "lote": "15",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.5,
+     "prec": null
+    },
+    "WW": {
+     "dep": 4,
+     "prec": null
+    },
+    "PF": {
+     "dep": 8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -4,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 7.3,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -1.41,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.57,
+     "prec": null
+    },
+    "LG": {
+     "dep": -1.47,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 1.549,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.61,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 0.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 7.56,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 9,
+     "prec": null
+    },
+    "DOC": {
+     "dep": -0.019,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "15.730 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "730",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "REPASO",
+   "lote": "15",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 29.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 38.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 92.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 29.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 6.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 38.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 26.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 59.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 378 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "02/07/2024",
+   "pesoActual": 570.0,
+   "rp": "378",
+   "hba": "911154",
+   "origen": "La Amistad",
+   "padre": "ÑATO A893",
+   "lote": "16",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 9,
+     "prec": null
+    },
+    "PF": {
+     "dep": 17,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 7.7,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.88,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.27,
+     "prec": null
+    },
+    "LG": {
+     "dep": -0.29,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 1.905,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.91,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 7.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 10.51,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 12,
+     "prec": null
+    },
+    "DOC": {
+     "dep": -0.03,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "16.704 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "704",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "C552",
+   "lote": "16",
+   "aptoServicio": "15 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 3.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 68.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 92.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 57.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 6.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 10.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 17.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 66.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "16.720 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "720",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "16",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 3.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 36.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 85.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 16.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 32.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 23.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 23.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 15.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "17.685 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "685",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "REPASO",
+   "lote": "17",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 4.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 34.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 85.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 20.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 22.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 29.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 44.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 36.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Warma Jewlian Melga 368 (PP)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "13/05/2024",
+   "pesoActual": 570.0,
+   "rp": "368",
+   "hba": "921875",
+   "origen": "La Amistad",
+   "padre": "ÑATO A893",
+   "lote": "17",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 8,
+     "prec": null
+    },
+    "PF": {
+     "dep": 15,
+     "prec": null
+    },
+    "Alt": {
+     "dep": -2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 3.2,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.63,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.12,
+     "prec": null
+    },
+    "LG": {
+     "dep": -2.49,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 1.194,
+     "prec": null
+    },
+    "GI": {
+     "dep": 0.38,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 11.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 4.97,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 8,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 0.039,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "18.703 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "703",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "18",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 11.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 18.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 90.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 33.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 5.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 32.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 49.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 7.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "18.721 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "721",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "REPASO",
+   "lote": "18",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 36.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 81.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 80.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 87.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 47.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 45.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 24.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "19.710 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "710",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO 2",
+   "lote": "19",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 11.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 12.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 88.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 28.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 12.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 22.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 28.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 11.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "19.688 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "688",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "ÑATO",
+   "lote": "19",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 22.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 7.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 98.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 8.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 11.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 50.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 47.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 53.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "19.709 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "709",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "C090",
+   "lote": "19",
+   "aptoServicio": "VACAS",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 6.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 17.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 97.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 15.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 20.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 30.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 43.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 87.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "20.689 (PXC)",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "689",
+   "hba": "",
+   "origen": "La Amistad",
+   "padre": "C090",
+   "lote": "20",
+   "aptoServicio": "22 M",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 5.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": 15.0,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 83.0,
+     "prec": null
+    },
+    "GI": {
+     "dep": 13.0,
+     "prec": null
+    },
+    "DMI": {
+     "dep": 15.0,
+     "prec": null
+    },
+    "FDP": {
+     "dep": 29.0,
+     "prec": null
+    },
+    "FPM": {
+     "dep": 29.0,
+     "prec": null
+    },
+    "DOC": {
+     "dep": 86.0,
+     "prec": null
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,3050 @@
+{
+ "meta": {
+  "id": "010",
+  "nombre": "Debernardi Nacional 2026",
+  "fecha": "2026-09-22",
+  "cabana": "Debernardi",
+  "expositor": "Debernardi",
+  "telefono_contacto": "2923 776655"
+ },
+ "toros": [
+  {
+   "nombre": "Horus (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.8,
+     "prec": null
+    },
+    "WW": {
+     "dep": 8.1,
+     "prec": null
+    },
+    "PF": {
+     "dep": 6.8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 5.7,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.25,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Ilustre (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -2.6,
+     "prec": null
+    },
+    "WW": {
+     "dep": -2.0,
+     "prec": null
+    },
+    "PF": {
+     "dep": -3.8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.5,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.9,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.5,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.36,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Italo (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": 3.4,
+     "prec": null
+    },
+    "PF": {
+     "dep": 10.0,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 2.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -0.3,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.3,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.16,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Jaque Mate (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.3,
+     "prec": null
+    },
+    "WW": {
+     "dep": 2.6,
+     "prec": null
+    },
+    "PF": {
+     "dep": 7.8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 0.1,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.5,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.13,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Jocker (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.6,
+     "prec": null
+    },
+    "WW": {
+     "dep": 2.3,
+     "prec": null
+    },
+    "PF": {
+     "dep": 9.6,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.7,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.1,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.5,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.27,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Johann (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.6,
+     "prec": null
+    },
+    "WW": {
+     "dep": 2.7,
+     "prec": null
+    },
+    "PF": {
+     "dep": 10.5,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -0.4,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.3,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.01,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Lucuma (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -2.6,
+     "prec": null
+    },
+    "WW": {
+     "dep": -0.3,
+     "prec": null
+    },
+    "PF": {
+     "dep": 3.5,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 5.0,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.3,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.09,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Malal (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.4,
+     "prec": null
+    },
+    "WW": {
+     "dep": 8.5,
+     "prec": null
+    },
+    "PF": {
+     "dep": 27.9,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -0.5,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 4.5,
+     "prec": null
+    },
+    "CE": {
+     "dep": 2.3,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.38,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Mateo (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.8,
+     "prec": null
+    },
+    "WW": {
+     "dep": 4.4,
+     "prec": null
+    },
+    "PF": {
+     "dep": 19.4,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 2.4,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -1.7,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "CE": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Nazareno (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.7,
+     "prec": null
+    },
+    "WW": {
+     "dep": 3.9,
+     "prec": null
+    },
+    "PF": {
+     "dep": 10.3,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 0.0,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.8,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.4,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.26,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Obsesivo (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.4,
+     "prec": null
+    },
+    "WW": {
+     "dep": 6.8,
+     "prec": null
+    },
+    "PF": {
+     "dep": 10.8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -2.9,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.6,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.01,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Ombú (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -2.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": 8.7,
+     "prec": null
+    },
+    "PF": {
+     "dep": 32.8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 2.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.4,
+     "prec": null
+    },
+    "CE": {
+     "dep": 2.3,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.06,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Precoz (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": 7.9,
+     "prec": null
+    },
+    "PF": {
+     "dep": 15.0,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 2.2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -2.7,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.1,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.4,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Record (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.4,
+     "prec": null
+    },
+    "WW": {
+     "dep": 8.1,
+     "prec": null
+    },
+    "PF": {
+     "dep": 25.1,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 2.4,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 2.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.4,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.15,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Rufian (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": 6.6,
+     "prec": null
+    },
+    "PF": {
+     "dep": 25.1,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -1.1,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.04,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Rumi (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": 8.7,
+     "prec": null
+    },
+    "PF": {
+     "dep": 29.6,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -0.9,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -0.2,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.8,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.5,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Secreto (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.3,
+     "prec": null
+    },
+    "WW": {
+     "dep": -0.6,
+     "prec": null
+    },
+    "PF": {
+     "dep": 2.1,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 5.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.2,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.16,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Sensacional (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "WW": {
+     "dep": 5.2,
+     "prec": null
+    },
+    "PF": {
+     "dep": 15.0,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.5,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Socrates (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": 8.4,
+     "prec": null
+    },
+    "PF": {
+     "dep": 29.2,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.1,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -1.8,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.36,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Toribio (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.7,
+     "prec": null
+    },
+    "WW": {
+     "dep": 2.5,
+     "prec": null
+    },
+    "PF": {
+     "dep": 10.1,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 2.5,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -1.0,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -1.1,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.2,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.03,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Bandido (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.2,
+     "prec": null
+    },
+    "WW": {
+     "dep": 2.5,
+     "prec": null
+    },
+    "PF": {
+     "dep": 4.2,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -1.5,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.0,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.13,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Benedetto (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "WW": {
+     "dep": 3.5,
+     "prec": null
+    },
+    "PF": {
+     "dep": 11.1,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -2.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.1,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.25,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Chapero (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 13.1,
+     "prec": null
+    },
+    "PF": {
+     "dep": 51.0,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 4.4,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 3.1,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 4.4,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.77,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "El Peque (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.8,
+     "prec": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Escolta (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.2,
+     "prec": null
+    },
+    "WW": {
+     "dep": 7.5,
+     "prec": null
+    },
+    "PF": {
+     "dep": 40.8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 3.2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -0.8,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -0.2,
+     "prec": null
+    },
+    "CE": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.12,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Escorpión (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.5,
+     "prec": null
+    },
+    "WW": {
+     "dep": 9.3,
+     "prec": null
+    },
+    "PF": {
+     "dep": 27.4,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 4.7,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.5,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.8,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.01,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Esencial (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": 8.0,
+     "prec": null
+    },
+    "PF": {
+     "dep": 20.1,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 2.6,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.1,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.8,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.41,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Farabute (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.5,
+     "prec": null
+    },
+    "WW": {
+     "dep": 3.3,
+     "prec": null
+    },
+    "PF": {
+     "dep": 11.8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.7,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -0.2,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.5,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.04,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Garronudo (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.7,
+     "prec": null
+    },
+    "WW": {
+     "dep": 9.5,
+     "prec": null
+    },
+    "PF": {
+     "dep": 31.3,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.7,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 3.7,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.1,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.13,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Halcón (C)",
+   "pelaje": "Colorado",
+   "raza": "Angus Colorado",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.4,
+     "prec": null
+    },
+    "WW": {
+     "dep": 10.1,
+     "prec": null
+    },
+    "PF": {
+     "dep": 22.9,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 2.3,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.3,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.06,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Kenobi (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 3.9,
+     "prec": null
+    },
+    "PF": {
+     "dep": 15.8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -0.6,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.8,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.31,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Kratos (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.3,
+     "prec": null
+    },
+    "WW": {
+     "dep": 11.7,
+     "prec": null
+    },
+    "PF": {
+     "dep": 35.6,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.6,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.06,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Mac Angus (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.5,
+     "prec": null
+    },
+    "WW": {
+     "dep": 5.4,
+     "prec": null
+    },
+    "PF": {
+     "dep": 12.3,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.5,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.6,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.01,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Mesias (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.3,
+     "prec": null
+    },
+    "WW": {
+     "dep": 5.2,
+     "prec": null
+    },
+    "PF": {
+     "dep": 11.4,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 4.1,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": -0.11,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Napolitano (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "WW": {
+     "dep": -1.0,
+     "prec": null
+    },
+    "PF": {
+     "dep": -6.0,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.3,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 8.9,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.6,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.73,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Obi Wan (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 9.3,
+     "prec": null
+    },
+    "PF": {
+     "dep": 39.7,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 2.4,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 3.9,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.5,
+     "prec": null
+    },
+    "CE": {
+     "dep": 3.0,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.31,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Opcion (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.6,
+     "prec": null
+    },
+    "WW": {
+     "dep": 7.0,
+     "prec": null
+    },
+    "PF": {
+     "dep": 16.5,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 2.3,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 4.5,
+     "prec": null
+    },
+    "CE": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.6,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Paila (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.8,
+     "prec": null
+    },
+    "WW": {
+     "dep": 2.2,
+     "prec": null
+    },
+    "PF": {
+     "dep": 24.3,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.8,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 2.5,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.6,
+     "prec": null
+    },
+    "CE": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.53,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Puni (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 10.1,
+     "prec": null
+    },
+    "PF": {
+     "dep": 28.9,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 3.6,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.8,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.36,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Rancul (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": 7.3,
+     "prec": null
+    },
+    "PF": {
+     "dep": 12.9,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.4,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 3.1,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.8,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.09,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Remixado (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.9,
+     "prec": null
+    },
+    "WW": {
+     "dep": 5.4,
+     "prec": null
+    },
+    "PF": {
+     "dep": 22.2,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 0.3,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.8,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.29,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Seguro (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.4,
+     "prec": null
+    },
+    "WW": {
+     "dep": 7.4,
+     "prec": null
+    },
+    "PF": {
+     "dep": 13.9,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 2.2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -2.7,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.5,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.14,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Serrucho (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.3,
+     "prec": null
+    },
+    "WW": {
+     "dep": 4.6,
+     "prec": null
+    },
+    "PF": {
+     "dep": 9.8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.6,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -2.0,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 4.6,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.42,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Soberano (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "WW": {
+     "dep": 3.8,
+     "prec": null
+    },
+    "PF": {
+     "dep": 19.7,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.6,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.6,
+     "prec": null
+    },
+    "AOB": {
+     "dep": -0.8,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.61,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Solido (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 6.2,
+     "prec": null
+    },
+    "PF": {
+     "dep": 14.3,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 2.6,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 2.9,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.62,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Tupaq (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "WW": {
+     "dep": 2.3,
+     "prec": null
+    },
+    "PF": {
+     "dep": 25.2,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.9,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -2.6,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.0,
+     "prec": null
+    },
+    "CE": {
+     "dep": 2.1,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.19,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Acumas (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.8,
+     "prec": null
+    },
+    "WW": {
+     "dep": 5.8,
+     "prec": null
+    },
+    "PF": {
+     "dep": 21.9,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 3.8,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.8,
+     "prec": null
+    },
+    "CE": {
+     "dep": 2.9,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.16,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Atorrante (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "WW": {
+     "dep": 8.7,
+     "prec": null
+    },
+    "PF": {
+     "dep": 13.9,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.7,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -1.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.4,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.23,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Botija (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.3,
+     "prec": null
+    },
+    "WW": {
+     "dep": 2.2,
+     "prec": null
+    },
+    "PF": {
+     "dep": 7.7,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -1.1,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.5,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.28,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Camba (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -3.1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 1.6,
+     "prec": null
+    },
+    "PF": {
+     "dep": 10.9,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 2.9,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.5,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.3,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.05,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Caracho (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.9,
+     "prec": null
+    },
+    "WW": {
+     "dep": 12.5,
+     "prec": null
+    },
+    "PF": {
+     "dep": 34.8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.7,
+     "prec": null
+    },
+    "Leche": {
+     "dep": -2.1,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.7,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.2,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.29,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Crespo (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.3,
+     "prec": null
+    },
+    "WW": {
+     "dep": 9.4,
+     "prec": null
+    },
+    "PF": {
+     "dep": 23.7,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.5,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.7,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 2.7,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.5,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.0,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Dario (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.5,
+     "prec": null
+    },
+    "WW": {
+     "dep": 6.5,
+     "prec": null
+    },
+    "PF": {
+     "dep": 23.9,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.6,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.9,
+     "prec": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Don Romeo (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "PF": {
+     "dep": 6.7,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 0.2,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.49,
+     "prec": null
+    },
+    "CE": {
+     "dep": 0.7,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.49,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Dragon (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.8,
+     "prec": null
+    },
+    "WW": {
+     "dep": -0.1,
+     "prec": null
+    },
+    "PF": {
+     "dep": 8.9,
+     "prec": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.9,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.3,
+     "prec": null
+    },
+    "CE": {
+     "dep": 2.1,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.16,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Francisco (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -2.1,
+     "prec": null
+    },
+    "WW": {
+     "dep": 2.9,
+     "prec": null
+    },
+    "PF": {
+     "dep": 39.8,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.9,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 2.8,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.8,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.82,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Genesis (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -1.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": 7.9,
+     "prec": null
+    },
+    "PF": {
+     "dep": 24.4,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.6,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.23,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Guapo (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.8,
+     "prec": null
+    },
+    "WW": {
+     "dep": 15.4,
+     "prec": null
+    },
+    "PF": {
+     "dep": 51.0,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 2.5,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.7,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.1,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Helsinki (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.8,
+     "prec": null
+    },
+    "WW": {
+     "dep": 8.7,
+     "prec": null
+    },
+    "PF": {
+     "dep": 23.0,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.3,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 1.6,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 1.2,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.5,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.8,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Hormigon (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": 0.0,
+     "prec": null
+    },
+    "WW": {
+     "dep": 8.0,
+     "prec": null
+    },
+    "PF": {
+     "dep": 32.0,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.7,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 3.2,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.3,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.45,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Inmaculado (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.8,
+     "prec": null
+    },
+    "WW": {
+     "dep": 0.2,
+     "prec": null
+    },
+    "PF": {
+     "dep": 1.2,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 0.2,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 2.4,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 0.6,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.2,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.25,
+     "prec": null
+    }
+   }
+  },
+  {
+   "nombre": "Juancito (N)",
+   "pelaje": "Negro",
+   "raza": "Angus Negro",
+   "nacimiento": "",
+   "pesoActual": null,
+   "rp": "",
+   "origen": "Debernardi",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "PN": {
+     "dep": -0.3,
+     "prec": null
+    },
+    "WW": {
+     "dep": 11.2,
+     "prec": null
+    },
+    "PF": {
+     "dep": 28.7,
+     "prec": null
+    },
+    "Alt": {
+     "dep": 1.1,
+     "prec": null
+    },
+    "Leche": {
+     "dep": 2.7,
+     "prec": null
+    },
+    "AOB": {
+     "dep": 3.0,
+     "prec": null
+    },
+    "CE": {
+     "dep": 1.0,
+     "prec": null
+    },
+    "LG": {
+     "dep": null,
+     "prec": null
+    },
+    "EGD": {
+     "dep": 0.2,
+     "prec": null
+    }
+   }
+  }
+ ]
+}
