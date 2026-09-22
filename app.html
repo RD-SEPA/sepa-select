@@ -2928,13 +2928,16 @@ function calcFactores(toros,catId){
   // DEPs adicionales fuera de los 8 del modelo base (ej. EGD/GI en Hilton/G1) — null-safe vía getDepVal, faltante = z 0
   const extraKeys=Object.keys(cat.pesos).filter(k=>!CHARS.includes(k));
   const stats={};
-  for(const c of CHARS){const v=toros.map(t=>t.deps[c].dep);stats[c]={m:avg(v),s:sd(v)}}
+  // getDepVal (no acceso directo t.deps[c].dep): si un catálogo real no trae alguna de las
+  // 8 características del modelo base, la clave puede faltar del todo en vez de venir en
+  // null -- 2026-09-22, bug real encontrado cargando un catálogo con LG ausente.
+  for(const c of CHARS){const v=toros.map(t=>getDepVal(t,c));stats[c]={m:avg(v),s:sd(v)}}
   for(const c of extraKeys){const v=toros.map(t=>getDepVal(t,c));stats[c]={m:avg(v),s:sd(v)}}
   const base=toros.map(t=>{
-    const nD=CHARS.filter(c=>t.deps[c].dep!==null&&t.deps[c].dep!==undefined).length;
-    const precs=Object.values(t.deps).map(d=>d.prec).filter(p=>p!==null&&p!==undefined);
+    const nD=CHARS.filter(c=>getDepVal(t,c)!==null).length;
+    const precs=Object.values(t.deps||{}).map(d=>d.prec).filter(p=>p!==null&&p!==undefined);
     const pm=precs.length?precs.reduce((a,b)=>a+b,0)/precs.length:null; // solo informativo — la precisión vive en RD_Confiabilidad, no interviene en el mérito
-    const z={};for(const c of CHARS)z[c]=zsc(t.deps[c].dep,stats[c].m,stats[c].s);
+    const z={};for(const c of CHARS)z[c]=zsc(getDepVal(t,c),stats[c].m,stats[c].s);
     for(const c of extraKeys)z[c]=zsc(getDepVal(t,c),stats[c].m,stats[c].s);
     if(PN_CLAMP_CATS.includes(catId)) z.PN=Math.max(-PN_Z_CLAMP,Math.min(PN_Z_CLAMP,z.PN));
     // RD_Fact = mérito puro: z-score interno del catálogo × peso de la categoría. Sin descuento por precisión.
@@ -5609,7 +5612,7 @@ function _infExcelSheetsBase(wb,RES,esPlus){
   const idx=[['Hoja','Contenido'],
     ['10_Resumen','1 fila por categoría: objetivo y lista de ★ selectos.'],
     ['20_Pesos_por_categoria','Matriz numérica categoría × DEP, con columna de control Suma |pesos|.'],
-    ['30_Cross_Selectos','Top '+SELECTO_TOP_N+' RD_Factores y RD_O&P de cada categoría, con marca ★ Selecto.'],
+    ['30_Resultados','Ranking completo (RD_Factores y RD_O&P) de todos los toros en todas las categorías, con marca ★ Selecto — habilitado para tabla dinámica.'],
     ['40_DEPs_del_catalogo','DEPs originales del catálogo (los 8 del modelo + precisión), 1 fila por toro.']];
   if(esPlus){
     idx.push(
@@ -5641,18 +5644,20 @@ function _infExcelSheetsBase(wb,RES,esPlus){
   wsPesos['!cols']=_infExcelCols([20,..._INF_PESOS_COLS.map(()=>7),14]);
   XLSX.utils.book_append_sheet(wb,wsPesos,'20_Pesos_por_categoria');
 
-  // 30_Cross_Selectos
+  // 30_Resultados (ex 30_Cross_Selectos) — 2026-09-22, a pedido de RD: antes solo traía el Top
+  // SELECTO_TOP_N de cada categoría/método; ahora trae TODOS los toros en TODAS las categorías
+  // (mismo formato, misma marca ★ Selecto) para poder armar una tabla dinámica sin quedarse afuera de datos.
   const cross=[['Puesto','Toro','Score','★ Selecto','Categoría','Método']];
   CATEGORIAS.forEach(cat=>{
     const r=RES[cat.id];
-    r.rf.filter(x=>x.ok).slice(0,SELECTO_TOP_N).forEach((x,i)=>cross.push([i+1,x.t.nombre,x.total,r.sel.includes(x.t.nombre)?'★':'',infCatNombre(cat),'RD_Factores']));
-    r.oyp.slice(0,SELECTO_TOP_N).forEach((x,i)=>cross.push([i+1,x.t.nombre,x.score,r.sel.includes(x.t.nombre)?'★':'',infCatNombre(cat),'RD_O&P']));
+    r.rf.filter(x=>x.ok).forEach((x,i)=>cross.push([i+1,x.t.nombre,x.total,r.sel.includes(x.t.nombre)?'★':'',infCatNombre(cat),'RD_Factores']));
+    r.oyp.forEach((x,i)=>cross.push([i+1,x.t.nombre,x.score,r.sel.includes(x.t.nombre)?'★':'',infCatNombre(cat),'RD_O&P']));
   });
   const wsCross=XLSX.utils.aoa_to_sheet(cross);wsCross['!cols']=_infExcelCols([7,24,8,10,20,12]);
   // Filtro de Excel (flechitas en el encabezado) — a pedido de RD, para poder filtrar
   // por Categoría/Método/★ Selecto directo en la planilla sin tocar la app.
   wsCross['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:cross.length-1,c:5}})};
-  XLSX.utils.book_append_sheet(wb,wsCross,'30_Cross_Selectos');
+  XLSX.utils.book_append_sheet(wb,wsCross,'30_Resultados');
 
   // 40_DEPs_del_catalogo — ex "80_Anexo_A_DEPs_originales", pasa a Base 2026-09-18 a pedido de RD
   const anexo=[['Toro','Cabaña/Origen',...INF_CHARS,...INF_CHARS.map(c=>c+'_prec')]];
