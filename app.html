@@ -123,7 +123,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie)
 .cat-ov-title{font-size:1.1rem;font-weight:800;color:var(--verde-oscuro);margin-bottom:4px}
 .cat-ov-hint{font-size:.8rem;color:var(--gris);margin-bottom:22px}
 .catalogos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-.catalogo-card{background:var(--blanco);border:1px solid var(--borde);border-radius:12px;padding:16px;cursor:pointer;transition:all .15s}
+.catalogo-card{background:var(--blanco);border:1px solid var(--borde);border-radius:12px;padding:16px;cursor:pointer;transition:all .15s;position:relative}
 .catalogo-card:hover{border-color:var(--verde-medio);box-shadow:0 4px 16px rgba(60,107,69,.15);transform:translateY(-2px)}
 .catalogo-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px}
 .catalogo-card-nombre{font-weight:800;font-size:.9rem;color:var(--verde-oscuro);line-height:1.3;flex:1}
@@ -452,7 +452,7 @@ tr:hover td{background:var(--verde-claro);cursor:pointer}
 .nc-dep-tag{background:var(--oro);color:white;font-size:.63rem;padding:1px 6px;border-radius:6px;font-weight:700}
 
 /* ── MODAL ── */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;padding:20px;overflow-y:auto}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:550;padding:20px;overflow-y:auto}
 .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center}
 .modal-box{background:var(--blanco);border-radius:12px;max-width:640px;width:100%;overflow:hidden;margin:40px auto}
 .modal-head{background:var(--verde-oscuro);color:white;padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
@@ -800,7 +800,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <div style="max-width:760px;width:100%;text-align:center;color:white">
       <div style="font-size:1.4rem;font-weight:900;margin-bottom:4px">SEPA<span style="color:#b8892b">-Select</span></div>
       <div style="font-size:.8rem;opacity:.65;margin-bottom:28px">Informe PDF — Elegí el tipo</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;max-width:520px;margin-left:auto;margin-right:auto">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;max-width:680px;margin-left:auto;margin-right:auto">
         <div onclick="infModo('mini')" style="background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">📈</div>
           <div style="font-weight:800;font-size:.95rem">Informe Select</div>
@@ -808,6 +808,10 @@ tr.sel-z:hover td{background:#d4ecda!important}
         <div onclick="infModo('toro')" style="background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">🐂</div>
           <div style="font-weight:800;font-size:.95rem">Ficha de Toros</div>
+        </div>
+        <div onclick="infModo('resumen')" style="background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
+          <div style="font-size:1.3rem;margin-bottom:8px">📋</div>
+          <div style="font-weight:800;font-size:.95rem">Resumen Comparativo</div>
         </div>
       </div>
       <button onclick="cerrarInforme()" style="background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:8px 20px;border-radius:8px;font-size:.8rem;cursor:pointer">Cancelar</button>
@@ -825,8 +829,8 @@ tr.sel-z:hover td{background:#d4ecda!important}
     </div>
   </div>
   <div id="inf-toro-sel" style="display:none;max-width:860px;margin:18px auto 0;background:white;border-radius:10px;padding:18px 22px;box-shadow:0 2px 14px rgba(0,0,0,.12);width:calc(100% - 32px)">
-    <div style="font-size:.88rem;font-weight:900;color:#253a29;margin-bottom:4px">🐂 Seleccioná toros para la ficha</div>
-    <div style="font-size:.7rem;color:#6b6b6b;margin-bottom:10px">Tildá uno o varios — la ficha se genera en tiempo real.</div>
+    <div id="inf-toro-sel-title" style="font-size:.88rem;font-weight:900;color:#253a29;margin-bottom:4px">🐂 Seleccioná toros para la ficha</div>
+    <div id="inf-toro-sel-sub" style="font-size:.7rem;color:#6b6b6b;margin-bottom:10px">Tildá uno o varios — la ficha se genera en tiempo real.</div>
     <div style="display:flex;gap:8px;margin-bottom:10px">
       <input id="inf-toro-q" placeholder="Buscar..." oninput="infRenderToroLista()" style="flex:1;padding:7px 11px;border:1px solid #ddd6c8;border-radius:8px;font-size:.83rem;font-family:inherit">
       <button onclick="infSelAll(true)" class="inf-btn" style="background:#e9f0ea;color:#253a29;border-color:#afd0b5">✓ Todos</button>
@@ -912,13 +916,6 @@ tr.sel-z:hover td{background:#d4ecda!important}
           <option value="consignatario">Consignatario</option>
           <option value="otro">Otro</option>
         </select>
-      </div>
-      <div>
-        <div class="login-label">Código promocional <span style="opacity:.5;font-size:.8em">(opcional)</span></div>
-        <input id="reg-promo" type="text" placeholder="Ej: JUANA" maxlength="20"
-          style="width:100%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
-          color:white;padding:11px 16px;border-radius:10px;font-size:.95rem;
-          box-sizing:border-box;text-transform:uppercase">
       </div>
       <div style="display:flex;align-items:flex-start;gap:10px">
         <input type="checkbox" id="reg-autorizado" style="margin-top:3px;flex-shrink:0;width:16px;height:16px">
@@ -1225,6 +1222,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <button class="btn-header" id="btn-config" onclick="onClickConfig()">⚙ Configuración</button>
     <button class="btn-header btn-header-gold" onclick="abrirInforme()">■ Informe PDF</button>
     <button class="btn-header" onclick="cambioCatalogo()">≡ Catálogos</button>
+    <button class="btn-header" onclick="setScreen('catalogo')">🔬 Ficha técnica del catálogo</button>
     <button class="btn-header" onclick="mostrarInstruccionesCarga()">⬆ Enviar catálogo</button>
     <button class="btn-header btn-header-gold" id="btn-plus" onclick="mostrarSelectorPlus()" hidden>★ Quiero PLUS</button>
     <button class="btn-header" id="btn-ayuda" onclick="togglePanel('panel-ayuda')">❓ Ayuda</button>
@@ -1282,7 +1280,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <!-- Matriz Categoría × Método -->
     <div class="resumen-matriz-header">
       <h3 class="resumen-matriz-titulo">Matriz de análisis — Categoría × Método</h3>
-      <p class="resumen-matriz-sub">Resumen de rankings por categoría. Hacé clic en cualquier celda para ir al análisis completo.</p>
+      <p class="resumen-matriz-sub">Resumen de rankings por categoría. Hacé clic en cualquier celda para ir al análisis completo. Los puntajes 0-100 son relativos a este catálogo, no una escala absoluta de calidad.</p>
     </div>
     <div class="resumen-matriz" id="resumen-matriz"></div>
   </div>
@@ -1389,7 +1387,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 
   <!-- Sub-pantalla RESUMEN: los 4 puntajes por categoría para cada toro -->
   <div class="screen-section metodo-sub" data-msub="resumen" id="factores-resumen">
-    <div class="section-header"><h2>RD_Factores — Puntaje por categoría</h2><p>Puntaje TOTAL (SCF + F) de cada toro en las 5 categorías. Elegí una categoría para ver el detalle completo.</p></div>
+    <div class="section-header"><h2>RD_Factores — Puntaje por categoría</h2><p>Puntaje TOTAL (SCF + F) de cada toro en las 5 categorías, de 0 a 100 <strong>relativo a este catálogo</strong> (el mejor del lote saca 100, el último saca 0 — no es una escala absoluta). Elegí una categoría para ver el detalle completo.</p></div>
     <div class="table-wrap" style="overflow-x:auto"><table class="metodo-matriz"><thead><tr><th>Toro</th><th class="num sortable th-rodeo" onclick="abrirDetalleCategoria('rodeoGeneral')">Rodeo General</th><th class="num sortable" onclick="abrirDetalleCategoria('terminal')">#1.1_Terminal</th><th class="num sortable" onclick="abrirDetalleCategoria('hilton')">#1.2_Hilton</th><th class="num sortable" onclick="abrirDetalleCategoria('reposicion')">#2.1_Reposición</th><th class="num sortable" onclick="abrirDetalleCategoria('vaq15')">#2.2_Vaq 15M</th></tr></thead><tbody id="factores-matriz-tbody"></tbody></table></div>
     <p class="metodo-matriz-hint">Clic en una celda o en el nombre de una categoría para abrir su ranking en detalle.</p>
   </div>
@@ -1409,7 +1407,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 
   <!-- Sub-pantalla RESUMEN: score O&P por categoría para cada toro -->
   <div class="screen-section metodo-sub" data-msub="resumen" id="oyp-resumen">
-    <div class="section-header"><h2>RD_O&amp;P — Puntaje por categoría</h2><p>Score Z acumulado de cada toro en las 5 categorías. Elegí una categoría para ver el detalle por perfil.</p></div>
+    <div class="section-header"><h2>RD_O&amp;P — Puntaje por categoría</h2><p>Score Z acumulado de cada toro en las 5 categorías, de 0 a 100 <strong>relativo a este catálogo</strong> (no es una escala absoluta). Elegí una categoría para ver el detalle por perfil.</p></div>
     <div class="table-wrap" style="overflow-x:auto"><table class="metodo-matriz"><thead><tr><th>Toro</th><th class="num sortable th-rodeo" onclick="abrirDetalleCategoria('rodeoGeneral')">Rodeo General</th><th class="num sortable" onclick="abrirDetalleCategoria('terminal')">#1.1_Terminal</th><th class="num sortable" onclick="abrirDetalleCategoria('hilton')">#1.2_Hilton</th><th class="num sortable" onclick="abrirDetalleCategoria('reposicion')">#2.1_Reposición</th><th class="num sortable" onclick="abrirDetalleCategoria('vaq15')">#2.2_Vaq 15M</th></tr></thead><tbody id="oyp-matriz-tbody"></tbody></table></div>
     <p class="metodo-matriz-hint">Clic en una celda o en el nombre de una categoría para abrir su ranking en detalle.</p>
   </div>
@@ -1656,7 +1654,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <div id="screen-catalogo" class="screen">
   <div class="cat-section"><div class="cat-section-head"><h3>DEPs disponibles en catálogo ERA</h3><p>12 caracteres por toro Angus</p></div><div class="cat-section-body"><table class="dep-full-table"><thead><tr><th>Código</th><th>Nombre</th><th>Dirección favorable</th><th>Modelo RF</th><th>Sinergias</th></tr></thead><tbody id="dep-table-body"></tbody></table></div></div>
   <div class="cat-section"><div class="cat-section-head"><h3>Perfiles RD_O&amp;P — calculables vs no calculables</h3><p>Diagnóstico por catálogo. DEPs faltantes dejan el perfil como no calculable.</p></div><div class="cat-section-body" id="oyp-catalogo-body"></div></div>
-  <div class="cat-section"><div class="cat-section-head"><h3>Notas</h3></div><div class="cat-section-body"><div class="alert-box" style="margin-bottom:10px">${_modoAnonimo?"":'Sayo (D351) y Pionero (107): sin DEPs publicados en ERA. Participan en el remate pero no califican en los modelos cuantitativos.'}</div><div class="alert-box">${_modoAnonimo?"":'Forager (57E): sistema RAAA (EE.UU.). Solo PN, Leche, AOB y EGD disponibles. La mayoría de sinergias no son calculables para este toro.'}</div></div></div>
+  <div class="cat-section" id="cat-notas-section" style="display:none"><div class="cat-section-head"><h3>Notas</h3></div><div class="cat-section-body" id="cat-notas-body"></div></div>
   <div class="cat-section"><div class="cat-section-head"><h3>Catálogo — 26 toros Angus</h3></div><div class="cat-section-body"><div class="toro-grid" id="toro-grid"></div></div></div>
 </div>
 
@@ -1676,15 +1674,18 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <footer class="app-footer">
   SEPA-Select® · Ing. Ricardo Emilio Delgado · 2026 · DNDA EX-2026-81106223-APN-DNDA#MJ · Sistema independiente de análisis de DEPs.
 </footer>
+</div><!-- /main-app -->
 
+<!-- Modal genérico (fichas de toro, resumen de catálogo, etc.) — vive FUERA de #main-app
+     a propósito (2026-09-22): main-app está display:none hasta entrar a un catálogo, así
+     que si el modal quedaba adentro no podía abrirse desde pantallas previas como
+     "Catálogos disponibles" (lo necesitaba el resumen del catálogo). -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-head"><div><div class="modal-head-title" id="modal-title"></div><div class="modal-head-sub" id="modal-sub"></div></div><button class="modal-close" onclick="closeModal()">×</button></div>
     <div class="modal-body" id="modal-body"></div>
   </div>
 </div>
-
-</div><!-- /main-app -->
 
 <script>
 // ═══════════════════════════════════════════════
@@ -1842,7 +1843,10 @@ async function cargarPerfilYEntrar(user, perfilExtra) {
   const usuarioCache = Object.assign({}, prev, perfilExtra || {}, {
     email: (perfil && perfil.email) || user.email,
     nombre: (perfilExtra && perfilExtra.nombre) || prev.nombre || (perfil && perfil.nombre) || '',
-    licencia: (perfil && perfil.licencia) || 'BASE'
+    licencia: (perfil && perfil.licencia) || 'BASE',
+    whatsapp: (perfil && perfil.whatsapp) || (perfilExtra && perfilExtra.whatsapp) || prev.whatsapp || '',
+    rol: (perfil && perfil.rol) || (perfilExtra && perfilExtra.rol) || prev.rol || '',
+    autorizado: perfil ? !!perfil.autorizado_carga : ((perfilExtra && perfilExtra.autorizado) || prev.autorizado || false)
   });
   localStorage.setItem('sepa_usuario', JSON.stringify(usuarioCache));
 
@@ -2204,7 +2208,6 @@ async function doRegistro() {
   const whatsapp = document.getElementById('reg-whatsapp').value.trim();
   const password = document.getElementById('reg-password').value;
   const rol      = document.getElementById('reg-rol').value;
-  const promo    = document.getElementById('reg-promo').value.trim().toUpperCase();
   const err      = document.getElementById('reg-error');
   err.style.color = '#ffb3b3'; err.textContent = '';
 
@@ -2221,22 +2224,10 @@ async function doRegistro() {
     return;
   }
 
-  // Validar código promo (Fase 1 hardcoded)
-  const PROMOS = { 'JUANA': 0.20, 'JUAN': 0.15, 'CIIADO': 0.20, 'AMIGOS10': 0.10 };
-  let promoValido = false;
-  let promoDesc   = 0;
-  if (promo) {
-    if (PROMOS[promo] !== undefined) {
-      promoValido = true;
-      promoDesc   = PROMOS[promo];
-    } else {
-      err.textContent = `Código "${promo}" no reconocido. Podés continuar igual.`;
-    }
-  }
-
+  const autorizado = document.getElementById('reg-autorizado').checked;
   const { data, error } = await sb.auth.signUp({
     email, password,
-    options: { data: { nombre } }
+    options: { data: { nombre, whatsapp, rol, autorizado_carga: autorizado } }
   });
   if (error) {
     err.textContent = error.message.includes('already registered') || error.message.includes('already exists')
@@ -2253,10 +2244,7 @@ async function doRegistro() {
   }
 
   const perfilExtra = {
-    nombre, whatsapp, rol,
-    autorizado: document.getElementById('reg-autorizado').checked,
-    promo: promoValido ? promo : null,
-    promo_desc: promoDesc,
+    nombre, whatsapp, rol, autorizado,
     fecha_registro: new Date().toISOString()
   };
 
@@ -2408,6 +2396,7 @@ function renderCatalogosDisponibles(){
         <div class="catalogo-card-nombre">${displayCatalogo(cat.nombre)}</div>
         <span class="catalogo-tipo ${tipoClass}">${tipoLabel}</span>
       </div>
+      <button type="button" title="Ver resumen del catálogo" onclick="event.stopPropagation();mostrarResumenCatalogo('${cat.id}')" style="position:absolute;top:10px;right:10px;background:none;border:none;color:var(--gris);cursor:pointer;font-size:.9rem;padding:2px 6px;line-height:1">ℹ</button>
       ${novBadge}
       <div class="catalogo-card-meta">
         <div class="catalogo-meta-row">🐂 <strong>${cat.toros||cat.totalToros||'?'}</strong> toros · ${_modoAnonimo?'':cat.cabaña||cat.cabana||''}</div>
@@ -2446,6 +2435,40 @@ function renderCatalogosDisponibles(){
   </div>`;
   }
   grid.innerHTML = html;
+}
+
+// Resumen del catálogo (2026-09-22, a pedido de RD): botón ℹ en cada casillero de
+// "Catálogos disponibles" — dueño, cantidad de toros por pelaje y detalles principales,
+// sin tener que entrar al catálogo. Reutiliza el modal genérico (#modal-overlay).
+async function mostrarResumenCatalogo(catId){
+  const cat=CATALOGOS_DISPONIBLES.find(c=>c.id===catId);
+  if(!cat)return;
+  document.getElementById('modal-title').textContent='📋 '+displayCatalogo(cat.nombre);
+  document.getElementById('modal-sub').textContent='Resumen del catálogo';
+  const body=document.getElementById('modal-body');
+  body.innerHTML='<div class="modal-section" style="text-align:center;padding:20px;color:var(--gris)">Cargando…</div>';
+  document.getElementById('modal-overlay').classList.add('open');
+  let toros=[];
+  try{ toros=await fetchToros(cat.archivo); }catch(e){}
+  const porPelaje={};
+  toros.forEach(t=>{ const p=t.pelaje||'—'; porPelaje[p]=(porPelaje[p]||0)+1; });
+  const pelajeStr=Object.keys(porPelaje).length
+    ? Object.entries(porPelaje).map(([p,n])=>n+' '+p).join(' · ')
+    : '—';
+  const dueno=_modoAnonimo?'—':(cat.expositor||cat.cabaña||cat.cabana||'—');
+  const aptos=cat.aptos!=null?cat.aptos:toros.filter(t=>t._apto!==false).length;
+  body.innerHTML=
+    '<div class="modal-section"><div class="meta-row">'
+    +'<div class="meta-chip">Dueño: <span>'+escHtml(dueno)+'</span></div>'
+    +'<div class="meta-chip">Alta: <span>'+escHtml(cat.fecha||'—')+'</span></div>'
+    +'<div class="meta-chip">'+(cat.acceso==='clave'?'🔒 Con clave':'🔓 Abierto')+'</div>'
+    +'<div class="meta-chip">'+(cat.tipo==='temporal'?'Remate temporal':'Stock permanente')+'</div>'
+    +'</div></div>'
+    +'<div class="modal-section"><div class="modal-stitle">Toros</div><div class="meta-row">'
+    +'<div class="meta-chip">Total: <span>'+(toros.length||cat.totalToros||'?')+'</span></div>'
+    +'<div class="meta-chip">Aptos ERA: <span>'+aptos+'</span></div>'
+    +'<div class="meta-chip">Pelaje: <span>'+escHtml(pelajeStr)+'</span></div>'
+    +'</div></div>';
 }
 
 // Solo para uso de RD en modo desarrollador (?dev=RD2026) — cuentas de prueba
@@ -2827,8 +2850,8 @@ async function cargarPesosUsuario(userId){
 // ─── AYUDA ───
 const AYUDA_ITEMS=[
   {titulo:"¿Cómo usar la app?",body:"<p>Elegí la categoría de cría (barra superior) y la pantalla: Vista Global muestra ambos métodos en paralelo.</p><p>RD_Factores y RD_O&P muestran los rankings individuales.</p><p>Hacé clic en cualquier toro para ver su ficha completa.</p><p>En RD_Factores podés editar el fenotipo con el slider (Plus).</p>"},
-  {titulo:"¿Qué es RD_Factores (Método Cuantitativo)?",body:"<p>Análisis cuantitativo.</p><p>Pondera 8 DEPs según el objetivo de cría usando z-scores internos del catálogo (comparación entre los toros del catálogo) y normaliza el resultado a escala 0-100 (G).</p><p>Al G se suma el fenotipo F editable (Plus/Base, editable por cada usuario).</p><p>Score final = G + F.</p><p>No aplica descuento por precisión: la confiabilidad de los DEPs se analiza aparte en RD_Confiabilidad.</p><p>En Vaquillona 15M y Reposición, el z-score de PN tiene un <strong>tope de ±1.5</strong> antes de aplicarle el peso — sin este tope, un PN muy por fuera de lo normal podía por sí solo definir casi todo el puntaje de un toro, tapando el resto de sus características.</p><p>Con el tope, un PN extremo sigue sumando fuerte pero ya no ahoga a los demás DEPs.</p><p>El resto de las categorías (Rodeo General, Terminal, Hilton) usan el z-score real de PN, sin tope.</p>"},
-  {titulo:"¿Qué es RD_Objetivos & Perfiles (RD_O&P) (Método Cualitativo)?",body:"<p>Evalúa 15 perfiles productivos organizados en 3 familias: U Universales (U01-U03, activos para todas las categorías), T Terminal/Hilton (T01-T05 — Hilton exige el set completo, Terminal un subconjunto de calidad) y V Vaca (V01-V04 + R01-R03, activos en Vaquillona 15M y Reposición respectivamente).</p><p>El score de cada perfil es la suma algebraica de sus DEPs con signo según dirección favorable, con el mismo criterio de <strong>tope de ±1.5</strong> al z-score de cada DEP (así ningún DEP aislado, por más extremo que sea, define el perfil por sí solo).</p><p>Si algún DEP requerido no está disponible en el catálogo, el perfil queda no calculable.</p>"},
+  {titulo:"¿Qué es RD_Factores (Método Cuantitativo)?",body:"<p>Análisis cuantitativo.</p><p>Pondera 8 DEPs según el objetivo de cría usando z-scores internos del catálogo (comparación entre los toros del catálogo) y normaliza el resultado a escala 0-100 (G) <strong>relativa a este catálogo puntual</strong>: el mejor toro del lote saca 100 y el de menor mérito saca 0, no es una escala absoluta de calidad — cambia de catálogo en catálogo.</p><p>Al G se suma el fenotipo F editable (Plus/Base, editable por cada usuario).</p><p>Score final = G + F.</p><p>No aplica descuento por precisión: la confiabilidad de los DEPs se analiza aparte en RD_Confiabilidad.</p><p>En Vaquillona 15M y Reposición, el z-score de PN tiene un <strong>tope de ±1.5</strong> antes de aplicarle el peso — sin este tope, un PN muy por fuera de lo normal podía por sí solo definir casi todo el puntaje de un toro, tapando el resto de sus características.</p><p>Con el tope, un PN extremo sigue sumando fuerte pero ya no ahoga a los demás DEPs.</p><p>El resto de las categorías (Rodeo General, Terminal, Hilton) usan el z-score real de PN, sin tope.</p>"},
+  {titulo:"¿Qué es RD_Objetivos & Perfiles (RD_O&P) (Método Cualitativo)?",body:"<p>De la misma forma en que se utiliza el concepto \"rompedor de curva\" —cuyo Objetivo (O) es evitar distocia sin resignar crecimiento, y que generó el Perfil (P) U01-Quebrador (PN bajo + WW alto, antagónico)— se generaron los demás perfiles de RD_O&P (afines y antagónicos).</p><p>Evalúa 15 perfiles productivos organizados en 3 familias: U Universales (U01-U03, activos para todas las categorías), T Terminal/Hilton (T01-T05 — Hilton exige el set completo, Terminal un subconjunto de calidad) y V Vaca (V01-V04 + R01-R03, activos en Vaquillona 15M y Reposición respectivamente).</p><p>El score de cada perfil es la suma algebraica de sus DEPs con signo según dirección favorable, con el mismo criterio de <strong>tope de ±1.5</strong> al z-score de cada DEP (así ningún DEP aislado, por más extremo que sea, define el perfil por sí solo).</p><p>Si algún DEP requerido no está disponible en el catálogo, el perfil queda no calculable.</p>"},
   {titulo:"¿Qué significa Δ en la tabla RD_Factores × RD_O&P?",body:"<p>Es la diferencia entre la posición de un toro en RD_Factores (RF) y en RD_O&P.</p><p>Δ = posición_RF − posición_RD_O&P.</p><p>Si un toro está en #3 en RF y #7 en RD_O&P, Δ = +4.</p><p>Fondo dorado indica que la diferencia es ≤ 2 puestos (alta concordancia).</p>"},
   {titulo:"Perfiles no calculables en RD_O&P",body:"<p>Un perfil es no calculable para un toro cuando falta al menos uno de sus DEPs requeridos.</p><p>El motor busca primero en los DEPs del sistema ERA y luego en deps_ext.</p><p>Si el DEP no existe en ninguno, el perfil se marca como no calculable y se muestra el motivo (DEP faltante).</p>"},
   {titulo:"RD_Confiabilidad (Facilidad orientativa)",body:"<p>Responde '¿cuánto sabemos de este toro?'.</p><p>Muestra la precisión ERA de cada DEP (mapa de calor) y una lectura cualitativa: mejor estudiado, qué calificaciones están bien sostenidas y cuáles se apoyan en DEPs de baja precisión.</p><p>No ordena por mérito ni interviene en RD_Factores / RD_O&P.</p><p>Catálogos sin precisión publicada (genómica sin progenie) se informan como tales.</p>"},
@@ -3663,6 +3686,19 @@ function renderCatalogo(){
     }
     html+='</tbody></table>';
     oyp_body.innerHTML=html;
+  }
+  // Notas: solo los toros con dato real de "nota" en el catálogo (2026-09-22 — antes era
+  // texto hardcodeado de un solo catálogo pegado como template-literal sin evaluar, ni
+  // siquiera se veía porque esta pantalla no tenía botón de acceso).
+  const conNota=TOROS.filter(t=>t.nota);
+  const notasSec=document.getElementById('cat-notas-section');
+  if(conNota.length){
+    notasSec.style.display='';
+    document.getElementById('cat-notas-body').innerHTML=conNota.map(t=>
+      `<div class="alert-box" style="margin-bottom:10px"><strong>${escHtml(t.nombre)}${t.rp?' ('+escHtml(t.rp)+')':''}:</strong> ${escHtml(t.nota)}</div>`
+    ).join('');
+  } else {
+    notasSec.style.display='none';
   }
   document.getElementById('toro-grid').innerHTML=ordenAlfabetico(TOROS).map(t=>{const nD=CHARS.filter(c=>t.deps[c].dep!==null).length;return`<div class="toro-card"><div class="toro-card-nombre">${pelBadge(t)} ${escHtml(t.nombre)}</div><div class="toro-card-raza">${_modoAnonimo?"":escHtml(t.raza)}</div><div class="toro-card-raza">${_modoAnonimo?"":'RP: '+escHtml(t.rp)+' · '}${nD}/8 DEPs${t.sistema?' · '+escHtml(t.sistema):''}</div></div>`}).join('');
 }
@@ -5262,9 +5298,9 @@ function infModo(modo){
   }
   _infModo=modo;
   document.getElementById('inf-modo-sel').style.display='none';
-  document.getElementById('inf-modo-lbl').textContent=modo==='catalogo'?'Informe Plus':modo==='mini'?'Informe Select':'Ficha de Toros';
+  document.getElementById('inf-modo-lbl').textContent=modo==='catalogo'?'Informe Plus':modo==='mini'?'Informe Select':modo==='resumen'?'Resumen Comparativo':'Ficha de Toros';
   const bt=document.getElementById('inf-btn-todo'),bn=document.getElementById('inf-btn-ninguno');
-  document.getElementById('inf-btn-excel').style.display=modo==='toro'?'none':'';
+  document.getElementById('inf-btn-excel').style.display=(modo==='toro'||modo==='resumen')?'none':'';
   document.getElementById('inf-mini-opts').style.display=modo==='mini'?'':'none';
   if(modo==='catalogo'){
     document.getElementById('inf-panel').style.display='';
@@ -5282,6 +5318,14 @@ function infModo(modo){
     bt.style.display='none';bn.style.display='none';
     document.getElementById('inf-report').innerHTML='';
     _infTSel=new Set();
+    const tTit=document.getElementById('inf-toro-sel-title'),tSub=document.getElementById('inf-toro-sel-sub');
+    if(modo==='resumen'){
+      tTit.textContent='📋 Seleccioná los toros para el resumen comparativo';
+      tSub.textContent='Tildá los que quieras comparar — se muestran junto a su posición real sobre el catálogo completo.';
+    } else {
+      tTit.textContent='🐂 Seleccioná toros para la ficha';
+      tSub.textContent='Tildá uno o varios — la ficha se genera en tiempo real.';
+    }
     infRenderToroLista();
   }
 }
@@ -5301,18 +5345,21 @@ function infRenderToroLista(){
       +escHtml(t.pelaje)+'</span></span></div>';
   }).join('');
 }
+function _infGenerarSeleccion(){
+  if(_infTSel.size===0){document.getElementById('inf-report').innerHTML='';return;}
+  if(_infModo==='resumen')infGenerarResumen([..._infTSel]);
+  else infGenerarFichas([..._infTSel]);
+}
 function infToggleToro(nombre){
   if(_infTSel.has(nombre))_infTSel.delete(nombre);else _infTSel.add(nombre);
   infRenderToroLista();
-  if(_infTSel.size>0)infGenerarFichas([..._infTSel]);
-  else document.getElementById('inf-report').innerHTML='';
+  _infGenerarSeleccion();
 }
 function infSelAll(v){
   if(v)TOROS.filter(function(t){return t._apto!==false;}).forEach(function(t){_infTSel.add(t.nombre);});
   else _infTSel.clear();
   infRenderToroLista();
-  if(_infTSel.size>0)infGenerarFichas([..._infTSel]);
-  else document.getElementById('inf-report').innerHTML='';
+  _infGenerarSeleccion();
 }
 function infGenerarFichas(nombres){
   const st=infGetST();const RES={};
@@ -5376,6 +5423,89 @@ function infGenerarFichas(nombres){
     html+=infFichaConfHall(t);
     html+='<div style="margin-top:10px">'+infFoot(tId)+'</div></div>';
   });
+  document.getElementById('inf-report').innerHTML=html;
+}
+
+// Resumen comparativo: mismas 3 tablas que un análisis puntual (resumen por toro, ★SELECTO por
+// categoría con posición, y detalle RD_Factores-RD_O&P), pero para un subconjunto de toros elegido
+// por el usuario, siempre calculado contra el catálogo completo (2026-09-21, a pedido de RD).
+function infGenerarResumen(nombres){
+  const st=infGetST();const RES={};
+  CATEGORIAS.forEach(function(cat){
+    RES[cat.id]={rf:infCalcF(TOROS,cat,st),oyp:infCalcO(TOROS,cat),cat:cat};
+    RES[cat.id].sel=infSelectos(RES[cat.id].rf,RES[cat.id].oyp);
+  });
+  const total=TOROS.length;
+  function catLbl(cat){return infCatNombre(cat).replace(/^#\d+ - /,'');}
+  function rank(nombre,cat){
+    const rf=RES[cat.id].rf,oy=RES[cat.id].oyp,sl=RES[cat.id].sel;
+    const rfR=rf.find(function(r){return r.t.nombre===nombre;});
+    const oR=oy.find(function(r){return r.t.nombre===nombre;});
+    return{
+      rfRk:rfR&&rfR.ok?rf.filter(function(r){return r.ok;}).indexOf(rfR)+1:null,
+      oRk:oR?oy.indexOf(oR)+1:null,
+      es:sl.includes(nombre),
+      nD:rfR?rfR.nD:0
+    };
+  }
+  const rows=nombres.map(function(nombre){
+    const t=TOROS.find(function(x){return x.nombre===nombre;});
+    const perCat={};CATEGORIAS.forEach(function(cat){perCat[cat.id]=rank(nombre,cat);});
+    const selCount=CATEGORIAS.filter(function(cat){return perCat[cat.id].es;}).length;
+    const rfs=CATEGORIAS.map(function(cat){return perCat[cat.id].rfRk;}).filter(function(v){return v!=null;});
+    const minRf=rfs.length?Math.min.apply(null,rfs):null;
+    const minCat=minRf!=null?CATEGORIAS.find(function(cat){return perCat[cat.id].rfRk===minRf;}):null;
+    const nD=t?INF_CHARS.filter(function(c){return t.deps[c]&&t.deps[c].dep!=null;}).length:0;
+    return{nombre:nombre,t:t,perCat:perCat,selCount:selCount,minRf:minRf,minCat:minCat,nD:nD};
+  });
+  rows.sort(function(a,b){return b.selCount-a.selCount||(a.minRf==null?999:a.minRf)-(b.minRf==null?999:b.minRf);});
+  function summaryTxt(r){
+    if(r.t&&r.t.nota)return escHtml(r.t.nota);
+    if(r.nD<4)return 'Datos DEPs muy incompletos ('+r.nD+'/'+INF_CHARS.length+' del modelo publicados) — el resultado no refleja un mérito genético real, es una limitación de información.';
+    if(r.selCount===CATEGORIAS.length){
+      const peor=Math.max.apply(null,CATEGORIAS.map(function(cat){return r.perCat[cat.id].rfRk||0;}));
+      return 'SELECTO en las '+CATEGORIAS.length+' categorías — el perfil más parejo y confiable del grupo. Nunca peor que el puesto #'+peor+' en mérito.';
+    }
+    if(r.selCount>0){
+      const cats=CATEGORIAS.filter(function(cat){return r.perCat[cat.id].es;}).map(catLbl);
+      return 'SELECTO en '+cats.join(', ')+'. Mejor posición: #'+r.minRf+' en '+catLbl(r.minCat)+'.';
+    }
+    if(r.minCat){
+      const oR=r.perCat[r.minCat.id].oRk;
+      return 'No es SELECTO en ninguna categoría; su mejor posición relativa es '+catLbl(r.minCat)+' (#'+r.minRf+' en mérito) pero sin acompañarse en O&amp;P (#'+(oR||'—')+').';
+    }
+    return 'Sin datos suficientes para evaluar.';
+  }
+  function flag(r){return r.nD<4||(r.t&&r.t.nota);}
+  const t1=rows.map(function(r){
+    return '<tr'+(flag(r)?' style="background:#fff8e1"':'')+'><td style="font-weight:700;color:#253a29;white-space:nowrap">'+escHtml(r.nombre)+'</td><td style="font-size:.72rem;color:#333">'+summaryTxt(r)+'</td></tr>';
+  }).join('');
+  const catHead='<tr><th style="text-align:left">Toro</th>'+CATEGORIAS.map(function(cat){return '<th style="text-align:center">'+catLbl(cat)+'</th>';}).join('')+'</tr>';
+  const t2=rows.map(function(r){
+    return '<tr'+(flag(r)?' style="background:#fff8e1"':'')+'><td style="font-weight:700;color:#253a29;white-space:nowrap">'+escHtml(r.nombre)+'</td>'+CATEGORIAS.map(function(cat){
+      const p=r.perCat[cat.id];
+      return '<td style="text-align:center">'+(p.es?'★':'')+'('+(p.rfRk||'—')+')</td>';
+    }).join('')+'</tr>';
+  }).join('');
+  const t3=rows.map(function(r){
+    return '<tr'+(flag(r)?' style="background:#fff8e1"':'')+'><td style="font-weight:700;color:#253a29;white-space:nowrap">'+escHtml(r.nombre)+'</td>'+CATEGORIAS.map(function(cat){
+      const p=r.perCat[cat.id];
+      return '<td style="text-align:center">'+(p.rfRk||'—')+'-'+(p.oRk||'—')+'</td>';
+    }).join('')+'</tr>';
+  }).join('');
+  const hayIncompletos=rows.some(flag);
+  let html='<div class="inf-page" id="inf-pg-resumen" data-pid="resumen">';
+  html+='<div class="inf-section-title">Resumen comparativo — '+nombres.length+' de '+total+' toros del catálogo</div>';
+  if(hayIncompletos)html+='<div style="background:#fff8e1;border:1px solid #e0c070;border-radius:8px;padding:10px 13px;font-size:.75rem;color:#7a5a10;margin-bottom:13px">⚠ Alguno de los toros seleccionados tiene DEPs muy incompletos (fila resaltada) — su posición baja puede reflejar falta de datos, no mérito real.</div>';
+  html+='<div class="inf-sub-title">Resumen por toro</div>';
+  html+='<table class="inf-tbl" style="margin-bottom:16px"><tbody>'+t1+'</tbody></table>';
+  html+='<div class="inf-sub-title">★SELECTO por categoría, con posición en RD_Factores</div>';
+  html+='<table class="inf-tbl" style="margin-bottom:6px">'+catHead+t2+'</table>';
+  html+='<div style="font-size:.62rem;color:#888;margin-bottom:16px">★ = SELECTO (top '+SELECTO_TOP_N+' del catálogo en RD_Factores y RD_O&amp;P a la vez). El número entre paréntesis es la posición en RD_Factores sobre el catálogo completo de '+total+'.</div>';
+  html+='<div class="inf-sub-title">Posición RD_Factores – RD_O&amp;P (detalle)</div>';
+  html+='<table class="inf-tbl">'+catHead+t3+'</table>';
+  html+='<div style="font-size:.62rem;color:#888;margin-top:6px">Cada celda es XX-YY: XX = posición en RD_Factores (mérito ponderado) · YY = posición en RD_O&amp;P (perfiles funcionales cumplidos), ambas sobre el catálogo completo de '+total+' toros.</div>';
+  html+=infFoot('resumen')+'</div>';
   document.getElementById('inf-report').innerHTML=html;
 }
 
@@ -5616,7 +5746,7 @@ function _infExcelSheetsPlus(wb,RES){
 
 async function infExportarExcel(){
   if(typeof XLSX==='undefined'){alert('Librería Excel no disponible. Verificá la conexión.');return;}
-  if(_infModo==='toro'){alert('El Excel no está disponible para Ficha de Toros — usá el informe PDF.');return;}
+  if(_infModo==='toro'||_infModo==='resumen'){alert('El Excel no está disponible para este modo — usá el informe PDF.');return;}
   if(_infModo==='catalogo'&&!canAccess('informe_plus')){showPlusGate('El Excel Plus es exclusivo de Plus.');return;}
   const RES=_infExcelRES();
   const wb=XLSX.utils.book_new();
@@ -5949,7 +6079,7 @@ function infMarcoTeorico(pid){
   html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:13px">SEPA-Select ordena y compara los toros de un catálogo a partir de la información genética (DEPs) que publica cada cabaña, para ayudar a elegir qué toros conviene comprar según el objetivo de venta: cría, reposición, terminación, etc.</div>';
 
   html+='<div class="inf-sub-title">RD_Factores — el puntaje de mérito</div>';
-  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:9px">Cada categoría de venta necesita cosas distintas de un toro. Por ejemplo, Vaquillona 15M prioriza la facilidad de parto, mientras que Terminal prioriza el engorde. RD_Factores compara a cada toro contra el resto del catálogo en las características que le importan a esa categoría, dándole más peso a las más relevantes para ese objetivo, y arma con todo eso un puntaje único de 0 a 100: cuanto más alto, mejor se ajusta el toro a lo que busca esa categoría. Ojo con tres características puntuales —Peso al Nacer, Altura y Longitud de Gestación—: ahí lo que conviene suele ser un valor más bajo, no más alto. En Vaquillona 15M y Reposición, un Peso al Nacer extremadamente bajo se pondera con un tope: sigue sumando fuerte, pero ya no alcanza para definir todo el puntaje del toro por sí solo, tapando el resto de sus características.</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:9px">Cada categoría de venta necesita cosas distintas de un toro. Por ejemplo, Vaquillona 15M prioriza la facilidad de parto, mientras que Terminal prioriza el engorde. RD_Factores compara a cada toro contra el resto del catálogo en las características que le importan a esa categoría, dándole más peso a las más relevantes para ese objetivo, y arma con todo eso un puntaje único de 0 a 100 <strong>relativo a este catálogo puntual</strong> (el toro con mejor mérito del lote saca 100, el de menor mérito saca 0 — no es una escala absoluta de calidad, cambia de catálogo en catálogo): cuanto más alto, mejor se ajusta el toro a lo que busca esa categoría, comparado con el resto de este mismo catálogo. Ojo con tres características puntuales —Peso al Nacer, Altura y Longitud de Gestación—: ahí lo que conviene suele ser un valor más bajo, no más alto. En Vaquillona 15M y Reposición, un Peso al Nacer extremadamente bajo se pondera con un tope: sigue sumando fuerte, pero ya no alcanza para definir todo el puntaje del toro por sí solo, tapando el resto de sus características.</div>';
 
   // Tabla: pesos por categoría × DEP
   const pesosCols=INF_CHARS.concat([...new Set(CATEGORIAS.flatMap(function(c){return Object.keys(c.pesos);}))].filter(function(k){return INF_CHARS.indexOf(k)<0;}));
@@ -5979,7 +6109,7 @@ function infMarcoTeorico(pid){
   html+='</div>';
 
   html+='<div class="inf-sub-title">RD_O&amp;P — combinaciones que buscan los productores</div>';
-  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:9px">Además de mirar cada característica por separado, hay combinaciones típicas que los productores buscan juntas —por ejemplo, peso al nacer bajo combinado con buen crecimiento posterior. Cada una de esas combinaciones se llama "perfil". RD_O&amp;P revisa, para cada categoría, los perfiles que corresponden y le suma puntos al toro cuando cumple bien la combinación, restándole cuando no. Igual que en RD_Factores, cada característica dentro de un perfil se pondera con un tope, así ningún DEP aislado —por más extremo que sea— define el perfil por sí solo. El resultado también queda expresado de 0 a 100.</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:9px">De la misma forma en que se utiliza el concepto "rompedor de curva" —cuyo Objetivo (O) es evitar distocia sin resignar crecimiento, y que generó el Perfil (P) U01-Quebrador (PN bajo + WW alto, antagónico)— se generaron los demás análisis de RD_O&amp;P (afines y antagónicos), que se detallan a continuación. Cada una de esas combinaciones se llama "perfil". RD_O&amp;P revisa, para cada categoría, los perfiles que corresponden y le suma puntos al toro cuando cumple bien la combinación, restándole cuando no. Igual que en RD_Factores, cada característica dentro de un perfil se pondera con un tope, así ningún DEP aislado —por más extremo que sea— define el perfil por sí solo. El resultado también queda expresado de 0 a 100.</div>';
 
   // Catálogo de Perfiles O&P — tabla plana (ID, Nombre, Afinidad, Objetivo, DEPs, Categorías)
   html+='<div style="font-size:.68rem;color:#888;margin-bottom:5px">Cada perfil evalúa un par de DEPs (+ premia, − penaliza):</div>';
@@ -6401,6 +6531,16 @@ function infGenerarMini(){
   html+='<div class="inf-page" id="inf-pg-mini-portada" data-pid="mini-portada">';
   html+='<div style="font-size:1.35rem;font-weight:900;color:#253a29;line-height:1.25">SEPA<span style="color:#b8892b">-Select</span> · Informe Select</div>';
   html+='<div style="font-size:.76rem;color:#6b6b6b;margin:4px 0 16px">'+catNombreActivo()+' · '+TOROS.length+' toros · '+totalSel+' SELECTOS · '+fecha+' · Incluye Radar Top5 y O&amp;P</div>';
+  const _catMeta=CATALOGOS_DISPONIBLES.find(function(c){return c.id===sepaState.catalogoActivo;});
+  if(_catMeta){
+    const _porPelaje={};
+    TOROS.forEach(function(t){const p=t.pelaje||'-';_porPelaje[p]=(_porPelaje[p]||0)+1;});
+    const _pelajeStr=Object.entries(_porPelaje).map(function(e){return e[1]+' '+e[0];}).join(' - ');
+    const _dueno=_modoAnonimo?'-':(_catMeta.expositor||_catMeta.cabana||'-');
+    html+='<div style="background:#f8f6f1;border:1px solid #ddd6c8;border-radius:8px;padding:9px 13px;font-size:.72rem;color:#444;margin-bottom:14px">'
+      +'<strong>Dueño:</strong> '+escHtml(_dueno)+' &middot; <strong>Alta:</strong> '+escHtml(_catMeta.fecha||'-')
+      +' &middot; <strong>Pelaje:</strong> '+escHtml(_pelajeStr)+'</div>';
+  }
   html+='<table class="inf-tbl" style="font-size:.73rem"><thead><tr><th style="text-align:left;width:110px">Categoría</th><th style="text-align:left">Objetivo</th><th style="text-align:left;width:190px">Selectos</th></tr></thead><tbody>';
   CATEGORIAS.forEach(cat=>{
     const r=RES[cat.id];
@@ -6559,6 +6699,11 @@ function infDoPrint(){
   if(typeof _infModo!=='undefined'&&_infModo==='toro'){
     if(!_infTSel||_infTSel.size===0){alert('Seleccioná al menos un toro.');return;}
     _infTSel.forEach(function(nombre){included.push('ficha-'+nombre.replace(/[^a-z0-9]/gi,'_'));});
+    infGroups=[];infState={};
+    included.forEach(function(id){infState[id]=true;});
+  } else if(typeof _infModo!=='undefined'&&_infModo==='resumen'){
+    if(!_infTSel||_infTSel.size===0){alert('Seleccioná al menos un toro.');return;}
+    included.push('resumen');
     infGroups=[];infState={};
     included.forEach(function(id){infState[id]=true;});
   } else if(typeof _infModo!=='undefined'&&_infModo==='mini'){
