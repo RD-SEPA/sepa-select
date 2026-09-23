@@ -212,6 +212,8 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie)
 .cat-btn{display:block;width:100%;text-align:left;padding:7px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.04);color:rgba(255,255,255,.72);cursor:pointer;font-size:.76rem;font-weight:500;transition:all .15s}
 .cat-btn:hover{background:rgba(255,255,255,.14)}
 .cat-btn.active{background:var(--blanco);color:var(--verde-oscuro);border-color:var(--blanco);font-weight:700}
+.cat-btn-metodo{cursor:default;font-weight:800;text-transform:uppercase;letter-spacing:.03em;font-size:.7rem;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.28)}
+.cat-btn-metodo:hover{background:rgba(255,255,255,.08)}
 .cat-btn-graficos{background:var(--oro)!important;color:white!important;border-color:var(--oro)!important;font-weight:700!important}
 
 /* ── árbol de navegación Rodeo → Categoría → Método ── */
@@ -584,7 +586,7 @@ tr:hover td{background:var(--verde-claro);cursor:pointer}
 /* ══ INFORME OVERLAY ══ */
 #informe-overlay{position:fixed;inset:0;background:#e8e5e0;z-index:500;display:flex;flex-direction:column;overflow-y:auto}
 #informe-overlay.hidden{display:none!important}
-.inf-topbar{background:var(--verde-oscuro);color:white;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-shrink:0;flex-wrap:wrap}
+.inf-topbar{background:var(--verde-oscuro);color:white;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-shrink:0;flex-wrap:wrap;position:sticky;top:0;z-index:20}
 .inf-topbar-brand{font-size:.95rem;font-weight:900}.inf-topbar-brand span{color:var(--oro)}
 .inf-topbar-btns{display:flex;gap:8px;flex-wrap:wrap}
 .inf-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:white;padding:6px 14px;border-radius:8px;font-size:.8rem;font-weight:700;cursor:pointer}
@@ -800,7 +802,15 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <div style="max-width:760px;width:100%;text-align:center;color:white">
       <div style="font-size:1.4rem;font-weight:900;margin-bottom:4px">SEPA<span style="color:#b8892b">-Select</span></div>
       <div style="font-size:.8rem;opacity:.65;margin-bottom:28px">Informe PDF — Elegí el tipo</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;max-width:680px;margin-left:auto;margin-right:auto">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;max-width:900px;margin-left:auto;margin-right:auto">
+        <div onclick="infModo('marco')" style="background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
+          <div style="font-size:1.3rem;margin-bottom:8px">📖</div>
+          <div style="font-weight:800;font-size:.95rem">Marco Teórico</div>
+        </div>
+        <div onclick="infModo('resumen')" style="background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
+          <div style="font-size:1.3rem;margin-bottom:8px">📋</div>
+          <div style="font-weight:800;font-size:.95rem">Resumen Comparativo</div>
+        </div>
         <div onclick="infModo('mini')" style="background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">📈</div>
           <div style="font-weight:800;font-size:.95rem">Informe Select</div>
@@ -808,10 +818,6 @@ tr.sel-z:hover td{background:#d4ecda!important}
         <div onclick="infModo('toro')" style="background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
           <div style="font-size:1.3rem;margin-bottom:8px">🐂</div>
           <div style="font-weight:800;font-size:.95rem">Ficha de Toros</div>
-        </div>
-        <div onclick="infModo('resumen')" style="background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
-          <div style="font-size:1.3rem;margin-bottom:8px">📋</div>
-          <div style="font-weight:800;font-size:.95rem">Resumen Comparativo</div>
         </div>
       </div>
       <button onclick="cerrarInforme()" style="background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:8px 20px;border-radius:8px;font-size:.8rem;cursor:pointer">Cancelar</button>
@@ -838,15 +844,9 @@ tr.sel-z:hover td{background:#d4ecda!important}
     </div>
     <div id="inf-toro-lista" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:5px;max-height:220px;overflow-y:auto;border:1px solid #ddd6c8;border-radius:8px;padding:8px"></div>
   </div>
-  <div id="inf-mini-opts" style="display:none;max-width:860px;margin:18px auto 0;background:white;border-radius:10px;padding:14px 22px;box-shadow:0 2px 14px rgba(0,0,0,.12);width:calc(100% - 32px)">
-    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.82rem;color:#253a29;font-weight:700">
-      <input type="checkbox" id="inf-mini-marco-check" checked onclick="infToggleMarcoMini(this.checked)">
-      📖 Incluir Marco Teórico (explicación en lenguaje simple, sin fórmulas)
-    </label>
-  </div>
   <div id="inf-panel">
     <div class="inf-panel-title">📄 Seleccioná las secciones a incluir</div>
-    <div class="inf-panel-sub">Portada e Índice van siempre · Destildá lo que no necesitás antes de imprimir</div>
+    <div class="inf-panel-sub" id="inf-panel-sub">Portada e Índice van siempre · Destildá lo que no necesitás antes de imprimir</div>
     <div id="inf-panel-grid"></div>
   </div>
   <div id="inf-report"></div>
@@ -1160,58 +1160,61 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <span class="cat-label">Navegación</span>
     <button class="nav-tab active" data-screen="global" onclick="setScreen('global')">&#9679; Resumen</button>
 
-    <div class="tree-cat" data-cat="rodeoGeneral">
-      <button class="cat-btn" data-cat="rodeoGeneral" onclick="navEntrarCategoria('rodeoGeneral')">&#9733; Rodeo General</button>
-      <div class="tree-methods" data-methods-for="rodeoGeneral">
-        <button class="nav-tab" data-screen="factores" onclick="irAMetodo('factores','rodeoGeneral')">RD_Factores</button>
-        <button class="nav-tab" data-screen="oyp" onclick="irAMetodo('oyp','rodeoGeneral')">RD_O&amp;P</button>
-        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
-        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
-        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">RD_Hallazgos</button>
+    <!-- 2026-09-23, a pedido de RD: jerarquía del menú invertida a Método→Categoría (antes
+         Categoría→Método) — SOLO la navegación cambia de orden acá, ninguna pantalla operativa
+         se tocó (setScreen/irAMetodo/navEntrarCategoria siguen exactamente igual que antes). -->
+    <div class="tree-cat" data-metodo="factores">
+      <div class="cat-btn cat-btn-metodo">RD_Factores</div>
+      <div class="tree-methods" data-cats-for="factores">
+        <button class="nav-tab cat-btn" data-screen="factores" data-cat="rodeoGeneral" onclick="irAMetodo('factores','rodeoGeneral')">&#9733; Rodeo General</button>
+        <button class="nav-tab cat-btn" data-screen="factores" data-cat="terminal" onclick="irAMetodo('factores','terminal')">#1.1_Terminal</button>
+        <button class="nav-tab cat-btn" data-screen="factores" data-cat="hilton" onclick="irAMetodo('factores','hilton')">#1.2_Hilton</button>
+        <button class="nav-tab cat-btn" data-screen="factores" data-cat="reposicion" onclick="irAMetodo('factores','reposicion')">#2.1_Reposición</button>
+        <button class="nav-tab cat-btn" data-screen="factores" data-cat="vaq15" onclick="irAMetodo('factores','vaq15')">#2.2_Vaquillona 15M</button>
       </div>
     </div>
 
-    <div class="tree-group-head">Rodeo 1 · Venta de cría</div>
-    <div class="tree-cat" data-cat="terminal">
-      <button class="cat-btn" data-cat="terminal" onclick="navEntrarCategoria('terminal')">#1.1_Terminal</button>
-      <div class="tree-methods" data-methods-for="terminal">
-        <button class="nav-tab" data-screen="factores" onclick="irAMetodo('factores','terminal')">RD_Factores</button>
-        <button class="nav-tab" data-screen="oyp" onclick="irAMetodo('oyp','terminal')">RD_O&amp;P</button>
-        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
-        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
-        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">RD_Hallazgos</button>
-      </div>
-    </div>
-    <div class="tree-cat" data-cat="hilton">
-      <button class="cat-btn" data-cat="hilton" onclick="navEntrarCategoria('hilton')">#1.2_Hilton</button>
-      <div class="tree-methods" data-methods-for="hilton">
-        <button class="nav-tab" data-screen="factores" onclick="irAMetodo('factores','hilton')">RD_Factores</button>
-        <button class="nav-tab" data-screen="oyp" onclick="irAMetodo('oyp','hilton')">RD_O&amp;P</button>
-        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
-        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
-        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">RD_Hallazgos</button>
+    <div class="tree-cat" data-metodo="oyp">
+      <div class="cat-btn cat-btn-metodo">RD_O&amp;P</div>
+      <div class="tree-methods" data-cats-for="oyp">
+        <button class="nav-tab cat-btn" data-screen="oyp" data-cat="rodeoGeneral" onclick="irAMetodo('oyp','rodeoGeneral')">&#9733; Rodeo General</button>
+        <button class="nav-tab cat-btn" data-screen="oyp" data-cat="terminal" onclick="irAMetodo('oyp','terminal')">#1.1_Terminal</button>
+        <button class="nav-tab cat-btn" data-screen="oyp" data-cat="hilton" onclick="irAMetodo('oyp','hilton')">#1.2_Hilton</button>
+        <button class="nav-tab cat-btn" data-screen="oyp" data-cat="reposicion" onclick="irAMetodo('oyp','reposicion')">#2.1_Reposición</button>
+        <button class="nav-tab cat-btn" data-screen="oyp" data-cat="vaq15" onclick="irAMetodo('oyp','vaq15')">#2.2_Vaquillona 15M</button>
       </div>
     </div>
 
-    <div class="tree-group-head">Rodeo 2 · Cría p/Reposición</div>
-    <div class="tree-cat" data-cat="reposicion">
-      <button class="cat-btn" data-cat="reposicion" onclick="navEntrarCategoria('reposicion')">#2.1_Reposición</button>
-      <div class="tree-methods" data-methods-for="reposicion">
-        <button class="nav-tab" data-screen="factores" onclick="irAMetodo('factores','reposicion')">RD_Factores</button>
-        <button class="nav-tab" data-screen="oyp" onclick="irAMetodo('oyp','reposicion')">RD_O&amp;P</button>
-        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
-        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
-        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">RD_Hallazgos</button>
+    <div class="tree-cat" data-metodo="selectos">
+      <div class="cat-btn cat-btn-metodo">RD_Selectos</div>
+      <div class="tree-methods" data-cats-for="selectos">
+        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">&#9733; Rodeo General</button>
+        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">#1.1_Terminal</button>
+        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">#1.2_Hilton</button>
+        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">#2.1_Reposición</button>
+        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">#2.2_Vaquillona 15M</button>
       </div>
     </div>
-    <div class="tree-cat" data-cat="vaq15">
-      <button class="cat-btn" data-cat="vaq15" onclick="navEntrarCategoria('vaq15')">#2.2_Vaquillona 15M</button>
-      <div class="tree-methods" data-methods-for="vaq15">
-        <button class="nav-tab" data-screen="factores" onclick="irAMetodo('factores','vaq15')">RD_Factores</button>
-        <button class="nav-tab" data-screen="oyp" onclick="irAMetodo('oyp','vaq15')">RD_O&amp;P</button>
-        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
-        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
-        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">RD_Hallazgos</button>
+
+    <div class="tree-cat" data-metodo="confiabilidad">
+      <div class="cat-btn cat-btn-metodo">RD_Confiabilidad</div>
+      <div class="tree-methods" data-cats-for="confiabilidad">
+        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">&#9733; Rodeo General</button>
+        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">#1.1_Terminal</button>
+        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">#1.2_Hilton</button>
+        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">#2.1_Reposición</button>
+        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">#2.2_Vaquillona 15M</button>
+      </div>
+    </div>
+
+    <div class="tree-cat" data-metodo="hallazgos">
+      <div class="cat-btn cat-btn-metodo">RD_Hallazgos</div>
+      <div class="tree-methods" data-cats-for="hallazgos">
+        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">&#9733; Rodeo General</button>
+        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">#1.1_Terminal</button>
+        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">#1.2_Hilton</button>
+        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">#2.1_Reposición</button>
+        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">#2.2_Vaquillona 15M</button>
       </div>
     </div>
 
@@ -3085,6 +3088,29 @@ function buildRadar(z,cat,size=230){
   return`<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" style="overflow:visible">${rings}<polygon points="${avgPts}" fill="rgba(150,150,150,.1)" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>${axes}<polygon points="${bullPts}" fill="rgba(60,107,69,.18)" stroke="#3c6b45" stroke-width="2"/><circle cx="${cx}" cy="${cy}" r="3" fill="#3c6b45"/></svg>`;
 }
 
+
+// Radar por categorías (no por DEP): 5 rayos = las 5 categorías, envolvente = score RD_Factores
+// del toro en cada una, poligonal punteada = promedio del catálogo en cada una. 2026-09-23, a
+// pedido de RD, para la Ficha de Toros (ahí no hay "una" categoría activa para armar el radar
+// de DEPs de buildRadar, así que se compara categoría contra categoría en vez de DEP contra DEP).
+function buildRadarCategorias(nombre,RES,size=190){
+  const N=CATEGORIAS.length,cx=size/2,cy=size/2,maxR=size/2-34;
+  const ang=i=>(i/N)*2*Math.PI-Math.PI/2;
+  const pt=(r,a)=>({x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)});
+  const vals=CATEGORIAS.map(cat=>{
+    const rf=RES[cat.id].rf,r=rf.find(function(x){return x.t.nombre===nombre;});
+    const aptos=rf.filter(function(x){return x.ok;});
+    const prom=aptos.length?aptos.reduce(function(a,b){return a+b.total;},0)/aptos.length:0;
+    return{toro:r?r.total:0,prom:prom,label:cat.nombre.replace(/^#?\d+(\.\d+)?_?/,'').trim()};
+  });
+  let rings='';
+  [.25,.5,.75,1].forEach(function(f){const pts=vals.map(function(_,i){const p=pt(maxR*f,ang(i));return p.x.toFixed(1)+','+p.y.toFixed(1);}).join(' ');rings+='<polygon points="'+pts+'" fill="none" stroke="'+(f===.5?'#999':'#e0e0e0')+'" stroke-width="'+(f===.5?1:.5)+'"/>';});
+  let axes='';
+  vals.forEach(function(v,i){const a=ang(i),e=pt(maxR,a),l=pt(maxR+22,a);axes+='<line x1="'+cx+'" y1="'+cy+'" x2="'+e.x.toFixed(1)+'" y2="'+e.y.toFixed(1)+'" stroke="#ddd" stroke-width=".8"/><text x="'+l.x.toFixed(1)+'" y="'+l.y.toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" font-size="8.5" fill="#253a29" font-weight="700">'+escHtml(v.label)+'</text>';});
+  const toroPts=vals.map(function(v,i){const p=pt(maxR*(Math.max(0,Math.min(100,v.toro))/100),ang(i));return p.x.toFixed(1)+','+p.y.toFixed(1);}).join(' ');
+  const promPts=vals.map(function(v,i){const p=pt(maxR*(Math.max(0,Math.min(100,v.prom))/100),ang(i));return p.x.toFixed(1)+','+p.y.toFixed(1);}).join(' ');
+  return'<svg viewBox="0 0 '+size+' '+size+'" width="'+size+'" height="'+size+'" style="overflow:visible">'+rings+'<polygon points="'+promPts+'" fill="none" stroke="#b8892b" stroke-width="1.4" stroke-dasharray="4,3"/>'+axes+'<polygon points="'+toroPts+'" fill="rgba(60,107,69,.28)" stroke="#3c6b45" stroke-width="2"/></svg>';
+}
 
 function buildRadarMulti(zList,cat,size=320){
   const N=CHARS.length,cx=size/2,cy=size/2,maxR=size/2-40,mz=2.5;
@@ -5289,8 +5315,6 @@ function abrirInforme() {
 }
 let _infModo='catalogo';
 let _infTSel=new Set();
-let _infMarcoMini=true;
-function infToggleMarcoMini(v){ _infMarcoMini=v; infGenerarMini(); }
 function infModo(modo){
   // 2026-09-18: Ficha de Toros ("toro") pasó a estar disponible en BASE — solo "catalogo"
   // (Informe Plus) sigue exclusivo de Plus. La tarjeta de "catalogo" además ya viene oculta
@@ -5301,20 +5325,31 @@ function infModo(modo){
   }
   _infModo=modo;
   document.getElementById('inf-modo-sel').style.display='none';
-  document.getElementById('inf-modo-lbl').textContent=modo==='catalogo'?'Informe Plus':modo==='mini'?'Informe Select':modo==='resumen'?'Resumen Comparativo':'Ficha de Toros';
+  document.getElementById('inf-modo-lbl').textContent=modo==='catalogo'?'Informe Plus':modo==='mini'?'Informe Select':modo==='resumen'?'Resumen Comparativo':modo==='marco'?'Marco Teórico':'Ficha de Toros';
   const bt=document.getElementById('inf-btn-todo'),bn=document.getElementById('inf-btn-ninguno');
-  document.getElementById('inf-btn-excel').style.display=(modo==='toro'||modo==='resumen')?'none':'';
-  document.getElementById('inf-mini-opts').style.display=modo==='mini'?'':'none';
+  document.getElementById('inf-btn-excel').style.display=(modo==='toro'||modo==='resumen'||modo==='marco')?'none':'';
   if(modo==='catalogo'){
     document.getElementById('inf-panel').style.display='';
     document.getElementById('inf-toro-sel').style.display='none';
     bt.style.display='';bn.style.display='';
+    document.getElementById('inf-panel-sub').textContent='Portada e Índice van siempre · Destildá lo que no necesitás antes de imprimir';
     infGenerarContenido();
   } else if(modo==='mini'){
+    // 2026-09-23, a pedido de RD: Informe Select pasa a tener el mismo panel de checkboxes
+    // por sección que ya tenía Informe Plus (Todo/Ninguno incluido), en vez de generarse
+    // siempre completo — Marco Teórico queda como una sección más, tildable ahí adentro.
+    document.getElementById('inf-panel').style.display='';
+    document.getElementById('inf-toro-sel').style.display='none';
+    bt.style.display='';bn.style.display='';
+    document.getElementById('inf-panel-sub').textContent='La Portada va siempre · Destildá lo que no necesitás antes de imprimir';
+    infGenerarMini();
+  } else if(modo==='marco'){
+    // Marco Teórico como informe propio (2026-09-23, a pedido de RD) — además sigue
+    // disponible como sección tildable dentro de Informe Select.
     document.getElementById('inf-panel').style.display='none';
     document.getElementById('inf-toro-sel').style.display='none';
     bt.style.display='none';bn.style.display='none';
-    infGenerarMini();
+    infGenerarMarcoStandalone();
   } else {
     document.getElementById('inf-panel').style.display='none';
     document.getElementById('inf-toro-sel').style.display='';
@@ -5421,7 +5456,11 @@ function infGenerarFichas(nombres){
     html+='<table class="inf-tbl" style="font-size:.69rem"><thead><tr><th>Categoría</th><th style="text-align:center">Factores</th><th style="text-align:center">O&amp;P</th><th style="text-align:center">★</th></tr></thead><tbody>'+rr+'</tbody></table></div></div>';
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">';
     html+='<div style="background:#fff;border:1px solid #ddd6c8;border-radius:8px;padding:10px 13px"><div style="font-size:.68rem;font-weight:800;color:#253a29;text-transform:uppercase;margin-bottom:7px">DEPs</div>';
-    html+='<table class="inf-tbl" style="font-size:.7rem"><tbody>'+dr+'</tbody></table></div>';
+    html+='<table class="inf-tbl" style="font-size:.7rem"><tbody>'+dr+'</tbody></table>';
+    html+='<div style="margin-top:10px;padding-top:8px;border-top:1px solid #f0ece6"><div style="font-size:.62rem;font-weight:700;color:#888;text-transform:uppercase;margin-bottom:2px;text-align:center">Perfil por categoría — RD_Factores</div>';
+    html+='<div style="display:flex;justify-content:center">'+buildRadarCategorias(nombre,RES,172)+'</div>';
+    html+='<div style="display:flex;gap:10px;justify-content:center;margin-top:2px;font-size:.6rem;color:#555"><span><span style="display:inline-block;width:8px;height:8px;background:#3c6b45;border-radius:2px;margin-right:3px;vertical-align:middle"></span>Este toro</span><span><span style="display:inline-block;width:8px;height:8px;border:1.5px dashed #b8892b;border-radius:2px;margin-right:3px;vertical-align:middle"></span>Promedio</span></div></div>';
+    html+='</div>';
     html+='<div style="background:#fff;border:1px solid #ddd6c8;border-radius:8px;padding:10px 13px"><div style="font-size:.68rem;font-weight:800;color:#253a29;text-transform:uppercase;margin-bottom:7px">Perfiles O&amp;P</div>'+op+'</div></div>';
     html+=infFichaConfHall(t);
     html+='<div style="margin-top:10px">'+infFoot(tId)+'</div></div>';
@@ -6163,6 +6202,13 @@ function infMarcoTeorico(pid){
   return html;
 }
 
+// Marco Teórico como informe propio (2026-09-23, a pedido de RD) — 1 sola página fija,
+// sin panel de secciones (no hay nada que tildar). Reutiliza infMarcoTeorico(), el mismo
+// contenido que aparece como sección opcional dentro de Informe Select.
+function infGenerarMarcoStandalone(){
+  document.getElementById('inf-report').innerHTML=infMarcoTeorico('marco-standalone');
+}
+
 function infGenerarContenido(){
   const st = infGetST();
   const fecha=new Date().toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'});
@@ -6558,8 +6604,8 @@ function infGenerarMini(){
   html+='</tbody></table>';
   html+=infFoot('mini-portada')+'</div>';
 
-  // ── Marco Teórico (opcional, lenguaje simple) ──
-  if(_infMarcoMini) html+=infMarcoTeorico('mini-marco');
+  // ── Marco Teórico (lenguaje simple) — siempre se arma, el panel de checkboxes decide si se imprime ──
+  html+=infMarcoTeorico('mini-marco');
 
   // ── Página 2: cross-categoría (= pág. 3 del Informe Plus) ──
   html+='<div class="inf-page" id="inf-pg-mini-cross" data-pid="mini-cross">';
@@ -6698,9 +6744,37 @@ function infGenerarMini(){
   html+=infFoot('mini-anexo2')+'</div>';
 
   document.getElementById('inf-report').innerHTML=html;
+
+  // Panel de secciones (2026-09-23, a pedido de RD) — mismo mecanismo que Informe Plus:
+  // portada siempre incluida (fixed), el resto tildable con Todo/Ninguno.
+  infGroups=[
+    {label:'Siempre incluido',fixed:true,items:[{id:'mini-portada',label:'Portada',tag:''}]},
+    {label:'Marco Teórico',fixed:false,items:[
+      {id:'mini-marco',label:'Marco Teórico',tag:'Sin fórmulas · lenguaje simple'},
+    ]},
+    {label:'Resumen y referencia',fixed:false,items:[
+      {id:'mini-cross',label:'Resumen cross-categoría',tag:'Todas las categorías'},
+      {id:'mini-selectos',label:'★ Selectos por categoría',tag:'Todas las categorías'},
+      {id:'mini-confhall',label:'Confiabilidad y Hallazgos',tag:'Referencia'},
+    ]},
+    ...CATEGORIAS.map(function(cat,ci){return{
+      label:'Cap. '+(ci+2)+' — '+infCatNombre(cat),
+      fixed:false,
+      items:[
+        {id:'mini-'+cat.id,label:'Tabla Top '+SELECTO_TOP_N,tag:infCatNombre(cat)},
+        {id:'mini-'+cat.id+'-graf',label:'Radar + Barras O&P',tag:infCatNombre(cat)},
+      ]
+    };}),
+    {label:'Anexos',fixed:false,items:[
+      {id:'mini-anexo2',label:'Anexo 2 — Resultados completos',tag:'Referencia'},
+    ]}
+  ];
+  infState={};
+  infGroups.forEach(function(g){g.items.forEach(function(item){infState[item.id]=true;});});
+  infBuildPanel();
 }
 function infDoPrint(){
-  const included=(typeof _infModo!=='undefined'&&_infModo==='mini')?[]:['portada','toc'];
+  const included=(typeof _infModo!=='undefined'&&_infModo==='mini')?['mini-portada']:['portada','toc'];
   if(typeof _infModo!=='undefined'&&_infModo==='toro'){
     if(!_infTSel||_infTSel.size===0){alert('Seleccioná al menos un toro.');return;}
     _infTSel.forEach(function(nombre){included.push('ficha-'+nombre.replace(/[^a-z0-9]/gi,'_'));});
@@ -6711,16 +6785,13 @@ function infDoPrint(){
     included.push('resumen');
     infGroups=[];infState={};
     included.forEach(function(id){infState[id]=true;});
-  } else if(typeof _infModo!=='undefined'&&_infModo==='mini'){
-    included.push('mini-portada');
-    if(_infMarcoMini) included.push('mini-marco');
-    included.push('mini-cross');
-    included.push('mini-selectos');
-    included.push('mini-confhall');
-    CATEGORIAS.forEach(function(cat){included.push('mini-'+cat.id);});
-    included.push('mini-anexo2');
+  } else if(typeof _infModo!=='undefined'&&_infModo==='marco'){
+    included.length=0;included.push('marco-standalone');
     infGroups=[];infState={};
   } else {
+    // Cubre 'catalogo' y 'mini' por igual — ambos arman infGroups/infState via panel de
+    // checkboxes (2026-09-23: Informe Select se sumó a este mecanismo, antes tenía su propia
+    // lista fija con un solo checkbox aparte para Marco Teórico).
     infGroups.forEach(g=>{if(!g.fixed)g.items.forEach(item=>{if(infState[item.id])included.push(item.id);});});
   }
   const nums={};included.forEach((id,i)=>{nums[id]=i+1;});
