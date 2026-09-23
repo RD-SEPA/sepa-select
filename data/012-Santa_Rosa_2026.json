@@ -1,0 +1,2951 @@
+{
+ "meta": {
+  "id": "012",
+  "nombre": "Santa Rosa 2026",
+  "fecha": "2026-09-24",
+  "cabana": "Santa Rosa",
+  "expositor": "Santa Rosa (Indio Nuevo S.A.)"
+ },
+ "toros": [
+  {
+   "nombre": "Alvaro",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "07/08/2024",
+   "pesoActual": 915.0,
+   "rp": "1731",
+   "lote": "00",
+   "origen": "Santa Rosa",
+   "padre": "MATEO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": 0.0,
+     "prec": 0.45,
+     "pct": 70
+    },
+    "PN": {
+     "dep": 0.9,
+     "prec": 0.53,
+     "pct": 95
+    },
+    "WW": {
+     "dep": 2.1,
+     "prec": 0.52,
+     "pct": 85
+    },
+    "Leche": {
+     "dep": 0.4,
+     "prec": 0.39,
+     "pct": 60
+    },
+    "PF": {
+     "dep": 17.7,
+     "prec": 0.4,
+     "pct": 55
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.49,
+     "pct": 10
+    },
+    "Alt": {
+     "dep": 1.6,
+     "prec": 0.54,
+     "pct": 60
+    },
+    "AOB": {
+     "dep": 1.9,
+     "prec": 0.39,
+     "pct": 30
+    },
+    "EGD": {
+     "dep": 1.33,
+     "prec": 0.38,
+     "pct": 1
+    },
+    "EGC": {
+     "dep": 1.34,
+     "prec": 0.41,
+     "pct": 1
+    },
+    "GI": {
+     "dep": 0.23,
+     "prec": 0.39,
+     "pct": 1
+    }
+   }
+  },
+  {
+   "nombre": "Matador",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "12/07/2024",
+   "pesoActual": 840.0,
+   "rp": "1667",
+   "lote": "1",
+   "origen": "Santa Rosa",
+   "padre": "CALDEN",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.5,
+     "prec": 0.18,
+     "pct": 40
+    },
+    "PN": {
+     "dep": 0.7,
+     "prec": 0.23,
+     "pct": 90
+    },
+    "WW": {
+     "dep": 8.8,
+     "prec": 0.27,
+     "pct": 25
+    },
+    "Leche": {
+     "dep": -2.1,
+     "prec": 0.24,
+     "pct": 95
+    },
+    "PF": {
+     "dep": 25.6,
+     "prec": 0.25,
+     "pct": 35
+    },
+    "CE": {
+     "dep": 1.2,
+     "prec": 0.26,
+     "pct": 40
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.31,
+     "pct": 35
+    },
+    "AOB": {
+     "dep": 2.7,
+     "prec": 0.21,
+     "pct": 15
+    },
+    "EGD": {
+     "dep": 0.35,
+     "prec": 0.22,
+     "pct": 25
+    },
+    "EGC": {
+     "dep": 0.73,
+     "prec": 0.25,
+     "pct": 15
+    },
+    "GI": {
+     "dep": 0.01,
+     "prec": 0.22,
+     "pct": 45
+    }
+   }
+  },
+  {
+   "nombre": "Tano",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "14/08/2024",
+   "pesoActual": 845.0,
+   "rp": "1749",
+   "lote": "1",
+   "origen": "Santa Rosa",
+   "padre": "NAPOLITANO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.9,
+     "prec": 0.23,
+     "pct": 20
+    },
+    "PN": {
+     "dep": 0.1,
+     "prec": 0.28,
+     "pct": 65
+    },
+    "WW": {
+     "dep": 5.2,
+     "prec": 0.33,
+     "pct": 60
+    },
+    "Leche": {
+     "dep": -0.3,
+     "prec": 0.27,
+     "pct": 75
+    },
+    "PF": {
+     "dep": 24.6,
+     "prec": 0.26,
+     "pct": 35
+    },
+    "CE": {
+     "dep": 1.0,
+     "prec": 0.3,
+     "pct": 60
+    },
+    "Alt": {
+     "dep": 0.7,
+     "prec": 0.35,
+     "pct": 90
+    },
+    "AOB": {
+     "dep": 1.3,
+     "prec": 0.25,
+     "pct": 45
+    },
+    "EGD": {
+     "dep": 0.11,
+     "prec": 0.26,
+     "pct": 60
+    },
+    "EGC": {
+     "dep": 0.58,
+     "prec": 0.29,
+     "pct": 25
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": 0.26,
+     "pct": 80
+    }
+   }
+  },
+  {
+   "nombre": "Definitivo",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "09/09/2024",
+   "pesoActual": 800.0,
+   "rp": "1853",
+   "lote": "2",
+   "origen": "Santa Rosa",
+   "padre": "DECIDIDO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.5,
+     "prec": 0.21,
+     "pct": 40
+    },
+    "PN": {
+     "dep": -0.3,
+     "prec": 0.26,
+     "pct": 40
+    },
+    "WW": {
+     "dep": 7.9,
+     "prec": 0.24,
+     "pct": 35
+    },
+    "Leche": {
+     "dep": -3.1,
+     "prec": 0.1,
+     "pct": 100
+    },
+    "PF": {
+     "dep": 36.0,
+     "prec": 0.14,
+     "pct": 15
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": 0.27,
+     "pct": 70
+    },
+    "Alt": {
+     "dep": 1.2,
+     "prec": 0.32,
+     "pct": 75
+    },
+    "AOB": {
+     "dep": 2.1,
+     "prec": 0.2,
+     "pct": 25
+    },
+    "EGD": {
+     "dep": -0.32,
+     "prec": 0.21,
+     "pct": 100
+    },
+    "EGC": {
+     "dep": -0.18,
+     "prec": 0.24,
+     "pct": 100
+    },
+    "GI": {
+     "dep": 0.13,
+     "prec": 0.21,
+     "pct": 3
+    }
+   }
+  },
+  {
+   "nombre": "Talar",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "01/08/2024",
+   "pesoActual": 780.0,
+   "rp": "1719",
+   "lote": "2",
+   "origen": "Santa Rosa",
+   "padre": "CALDEN",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.9,
+     "prec": 0.19,
+     "pct": 20
+    },
+    "PN": {
+     "dep": 0.6,
+     "prec": 0.24,
+     "pct": 85
+    },
+    "WW": {
+     "dep": 7.7,
+     "prec": 0.39,
+     "pct": 35
+    },
+    "Leche": {
+     "dep": -3.8,
+     "prec": 0.31,
+     "pct": 100
+    },
+    "PF": {
+     "dep": 25.9,
+     "prec": 0.15,
+     "pct": 35
+    },
+    "CE": {
+     "dep": 1.5,
+     "prec": 0.27,
+     "pct": 15
+    },
+    "Alt": {
+     "dep": 1.1,
+     "prec": 0.32,
+     "pct": 80
+    },
+    "AOB": {
+     "dep": 3.5,
+     "prec": 0.21,
+     "pct": 5
+    },
+    "EGD": {
+     "dep": 0.42,
+     "prec": 0.22,
+     "pct": 20
+    },
+    "EGC": {
+     "dep": 0.67,
+     "prec": 0.25,
+     "pct": 20
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": 0.22,
+     "pct": 30
+    }
+   }
+  },
+  {
+   "nombre": "Luca",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "26/08/2024",
+   "pesoActual": 830.0,
+   "rp": "1801",
+   "lote": "3",
+   "origen": "Santa Rosa",
+   "padre": "ENTRADOR",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.9,
+     "prec": 0.47,
+     "pct": 20
+    },
+    "PN": {
+     "dep": 0.1,
+     "prec": 0.51,
+     "pct": 65
+    },
+    "WW": {
+     "dep": 8.0,
+     "prec": 0.53,
+     "pct": 30
+    },
+    "Leche": {
+     "dep": -0.9,
+     "prec": 0.46,
+     "pct": 80
+    },
+    "PF": {
+     "dep": 33.4,
+     "prec": 0.43,
+     "pct": 20
+    },
+    "CE": {
+     "dep": 1.9,
+     "prec": 0.44,
+     "pct": 3
+    },
+    "Alt": {
+     "dep": 2.2,
+     "prec": 0.48,
+     "pct": 30
+    },
+    "AOB": {
+     "dep": 0.8,
+     "prec": 0.34,
+     "pct": 60
+    },
+    "EGD": {
+     "dep": 0.45,
+     "prec": 0.34,
+     "pct": 15
+    },
+    "EGC": {
+     "dep": 0.49,
+     "prec": 0.35,
+     "pct": 35
+    },
+    "GI": {
+     "dep": 0.13,
+     "prec": 0.34,
+     "pct": 3
+    }
+   }
+  },
+  {
+   "nombre": "Malandrin",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "02/09/2024",
+   "pesoActual": 820.0,
+   "rp": "1825",
+   "lote": "3",
+   "origen": "Santa Rosa",
+   "padre": "MALANDRA",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.7,
+     "prec": 0.18,
+     "pct": 30
+    },
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.23,
+     "pct": 90
+    },
+    "WW": {
+     "dep": 14.3,
+     "prec": 0.26,
+     "pct": 3
+    },
+    "Leche": {
+     "dep": 1.0,
+     "prec": 0.14,
+     "pct": 85
+    },
+    "PF": {
+     "dep": 44.6,
+     "prec": 0.15,
+     "pct": 5
+    },
+    "CE": {
+     "dep": 2.6,
+     "prec": 0.26,
+     "pct": 1
+    },
+    "Alt": {
+     "dep": 2.6,
+     "prec": 0.31,
+     "pct": 15
+    },
+    "AOB": {
+     "dep": 2.1,
+     "prec": 0.19,
+     "pct": 25
+    },
+    "EGD": {
+     "dep": 0.16,
+     "prec": 0.2,
+     "pct": 50
+    },
+    "EGC": {
+     "dep": 0.43,
+     "prec": 0.22,
+     "pct": 45
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": 0.2,
+     "pct": 30
+    }
+   }
+  },
+  {
+   "nombre": "Abundante",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "04/09/2024",
+   "pesoActual": 840.0,
+   "rp": "1829",
+   "lote": "4",
+   "origen": "Santa Rosa",
+   "padre": "MASIVO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.2,
+     "prec": 0.2,
+     "pct": 60
+    },
+    "PN": {
+     "dep": 0.6,
+     "prec": 0.25,
+     "pct": 85
+    },
+    "WW": {
+     "dep": 1.5,
+     "prec": 0.23,
+     "pct": 90
+    },
+    "Leche": {
+     "dep": -2.2,
+     "prec": 0.11,
+     "pct": 95
+    },
+    "PF": {
+     "dep": 1.7,
+     "prec": 0.11,
+     "pct": 95
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   }
+  },
+  {
+   "nombre": "Neron",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "20/07/2024",
+   "pesoActual": 830.0,
+   "rp": "1689",
+   "lote": "4",
+   "origen": "Santa Rosa",
+   "padre": "EMPERADOR",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.1,
+     "prec": 0.2,
+     "pct": 65
+    },
+    "PN": {
+     "dep": 0.9,
+     "prec": 0.26,
+     "pct": 95
+    },
+    "WW": {
+     "dep": 5.1,
+     "prec": 0.29,
+     "pct": 60
+    },
+    "Leche": {
+     "dep": -3.3,
+     "prec": 0.22,
+     "pct": 100
+    },
+    "PF": {
+     "dep": 23.9,
+     "prec": 0.22,
+     "pct": 40
+    },
+    "CE": {
+     "dep": 1.2,
+     "prec": 0.28,
+     "pct": 40
+    },
+    "Alt": {
+     "dep": 2.2,
+     "prec": 0.33,
+     "pct": 30
+    },
+    "AOB": {
+     "dep": 2.7,
+     "prec": 0.24,
+     "pct": 15
+    },
+    "EGD": {
+     "dep": 0.57,
+     "prec": 0.25,
+     "pct": 10
+    },
+    "EGC": {
+     "dep": 0.81,
+     "prec": 0.28,
+     "pct": 15
+    },
+    "GI": {
+     "dep": 0.03,
+     "prec": 0.25,
+     "pct": 35
+    }
+   }
+  },
+  {
+   "nombre": "Julio Cesar",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "29/07/2024",
+   "pesoActual": 800.0,
+   "rp": "1715",
+   "lote": "4",
+   "origen": "Santa Rosa",
+   "padre": "EMPERADOR",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.7,
+     "prec": 0.21,
+     "pct": 30
+    },
+    "PN": {
+     "dep": 0.7,
+     "prec": 0.27,
+     "pct": 90
+    },
+    "WW": {
+     "dep": 4.6,
+     "prec": 0.29,
+     "pct": 65
+    },
+    "Leche": {
+     "dep": 0.8,
+     "prec": 0.28,
+     "pct": 55
+    },
+    "PF": {
+     "dep": 16.6,
+     "prec": 0.22,
+     "pct": 60
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": 0.3,
+     "pct": 50
+    },
+    "Alt": {
+     "dep": 2.3,
+     "prec": 0.35,
+     "pct": 25
+    },
+    "AOB": {
+     "dep": 2.0,
+     "prec": 0.25,
+     "pct": 25
+    },
+    "EGD": {
+     "dep": 0.63,
+     "prec": 0.26,
+     "pct": 5
+    },
+    "EGC": {
+     "dep": 1.18,
+     "prec": 0.28,
+     "pct": 2
+    },
+    "GI": {
+     "dep": 0.06,
+     "prec": 0.25,
+     "pct": 20
+    }
+   }
+  },
+  {
+   "nombre": "Influencer",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "18/06/2024",
+   "pesoActual": 830.0,
+   "rp": "1645",
+   "lote": "5",
+   "origen": "Santa Rosa",
+   "padre": "LA JOYA",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -1.0,
+     "prec": 0.24,
+     "pct": 20
+    },
+    "PN": {
+     "dep": -0.6,
+     "prec": 0.28,
+     "pct": 25
+    },
+    "WW": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.29,
+     "pct": 30
+    },
+    "Alt": {
+     "dep": -0.3,
+     "prec": 0.33,
+     "pct": 100
+    },
+    "AOB": {
+     "dep": 0.1,
+     "prec": 0.19,
+     "pct": 80
+    },
+    "EGD": {
+     "dep": 0.03,
+     "prec": 0.2,
+     "pct": 75
+    },
+    "EGC": {
+     "dep": 0.05,
+     "prec": 0.22,
+     "pct": 85
+    },
+    "GI": {
+     "dep": -0.04,
+     "prec": 0.2,
+     "pct": 75
+    }
+   }
+  },
+  {
+   "nombre": "Bruno",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "16/06/2024",
+   "pesoActual": 860.0,
+   "rp": "1641",
+   "lote": "5",
+   "origen": "Santa Rosa",
+   "padre": "LA JOYA",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "PN": {
+     "dep": -0.3,
+     "prec": 0.27,
+     "pct": 40
+    },
+    "WW": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": 0.27,
+     "pct": 50
+    },
+    "Alt": {
+     "dep": 2.9,
+     "prec": 0.32,
+     "pct": 10
+    },
+    "AOB": {
+     "dep": 1.5,
+     "prec": 0.19,
+     "pct": 40
+    },
+    "EGD": {
+     "dep": -0.12,
+     "prec": 0.2,
+     "pct": 95
+    },
+    "EGC": {
+     "dep": 0.13,
+     "prec": 0.22,
+     "pct": 80
+    },
+    "GI": {
+     "dep": 0.15,
+     "prec": 0.2,
+     "pct": 2
+    }
+   }
+  },
+  {
+   "nombre": "Naufrago",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "19/06/2024",
+   "pesoActual": 860.0,
+   "rp": "1649",
+   "lote": "5",
+   "origen": "Santa Rosa",
+   "padre": "LA JOYA",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -1.0,
+     "prec": 0.23,
+     "pct": 20
+    },
+    "PN": {
+     "dep": -0.5,
+     "prec": 0.27,
+     "pct": 30
+    },
+    "WW": {
+     "dep": 5.0,
+     "prec": 0.29,
+     "pct": 60
+    },
+    "Leche": {
+     "dep": 2.2,
+     "prec": 0.2,
+     "pct": 30
+    },
+    "PF": {
+     "dep": 34.1,
+     "prec": 0.21,
+     "pct": 20
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": 0.31,
+     "pct": 50
+    },
+    "Alt": {
+     "dep": 2.5,
+     "prec": 0.36,
+     "pct": 20
+    },
+    "AOB": {
+     "dep": 1.1,
+     "prec": 0.24,
+     "pct": 50
+    },
+    "EGD": {
+     "dep": -0.54,
+     "prec": 0.25,
+     "pct": 100
+    },
+    "EGC": {
+     "dep": -0.4,
+     "prec": 0.28,
+     "pct": 100
+    },
+    "GI": {
+     "dep": -0.04,
+     "prec": 0.25,
+     "pct": 75
+    }
+   }
+  },
+  {
+   "nombre": "Matute",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "25/08/2024",
+   "pesoActual": 750.0,
+   "rp": "1799",
+   "lote": "6",
+   "origen": "Santa Rosa",
+   "padre": "ENTRADOR",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -1.3,
+     "prec": 0.48,
+     "pct": 10
+    },
+    "PN": {
+     "dep": -0.5,
+     "prec": 0.51,
+     "pct": 30
+    },
+    "WW": {
+     "dep": 1.1,
+     "prec": 0.53,
+     "pct": 90
+    },
+    "Leche": {
+     "dep": -0.6,
+     "prec": 0.47,
+     "pct": 75
+    },
+    "PF": {
+     "dep": 3.3,
+     "prec": 0.44,
+     "pct": 90
+    },
+    "CE": {
+     "dep": 2.1,
+     "prec": 0.45,
+     "pct": 1
+    },
+    "Alt": {
+     "dep": 2.6,
+     "prec": 0.48,
+     "pct": 15
+    },
+    "AOB": {
+     "dep": 0.1,
+     "prec": 0.34,
+     "pct": 80
+    },
+    "EGD": {
+     "dep": 0.34,
+     "prec": 0.34,
+     "pct": 25
+    },
+    "EGC": {
+     "dep": 0.57,
+     "prec": 0.35,
+     "pct": 30
+    },
+    "GI": {
+     "dep": 0.15,
+     "prec": 0.34,
+     "pct": 2
+    }
+   }
+  },
+  {
+   "nombre": "Simpatico",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "22/08/2024",
+   "pesoActual": 720.0,
+   "rp": "1791",
+   "lote": "6",
+   "origen": "Santa Rosa",
+   "padre": "ENTRADOR",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -1.4,
+     "prec": 0.47,
+     "pct": 10
+    },
+    "PN": {
+     "dep": 0.2,
+     "prec": 0.51,
+     "pct": 70
+    },
+    "WW": {
+     "dep": 6.5,
+     "prec": 0.53,
+     "pct": 45
+    },
+    "Leche": {
+     "dep": 0.8,
+     "prec": 0.46,
+     "pct": 55
+    },
+    "PF": {
+     "dep": 18.7,
+     "prec": 0.42,
+     "pct": 55
+    },
+    "CE": {
+     "dep": 1.7,
+     "prec": 0.44,
+     "pct": 10
+    },
+    "Alt": {
+     "dep": 2.6,
+     "prec": 0.48,
+     "pct": 15
+    },
+    "AOB": {
+     "dep": 0.3,
+     "prec": 0.34,
+     "pct": 75
+    },
+    "EGD": {
+     "dep": 0.38,
+     "prec": 0.33,
+     "pct": 20
+    },
+    "EGC": {
+     "dep": 0.57,
+     "prec": 0.34,
+     "pct": 30
+    },
+    "GI": {
+     "dep": 0.15,
+     "prec": 0.33,
+     "pct": 2
+    }
+   }
+  },
+  {
+   "nombre": "Aplicado",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "27/08/2024",
+   "pesoActual": 690.0,
+   "rp": "1805",
+   "lote": "6",
+   "origen": "Santa Rosa",
+   "padre": "ENTRADOR",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.1,
+     "prec": 0.23,
+     "pct": 65
+    },
+    "PN": {
+     "dep": -0.4,
+     "prec": 0.51,
+     "pct": 35
+    },
+    "WW": {
+     "dep": 7.1,
+     "prec": 0.53,
+     "pct": 40
+    },
+    "Leche": {
+     "dep": 0.7,
+     "prec": 0.46,
+     "pct": 55
+    },
+    "PF": {
+     "dep": 31.4,
+     "prec": 0.43,
+     "pct": 20
+    },
+    "CE": {
+     "dep": 1.9,
+     "prec": 0.44,
+     "pct": 3
+    },
+    "Alt": {
+     "dep": 3.0,
+     "prec": 0.48,
+     "pct": 10
+    },
+    "AOB": {
+     "dep": 0.5,
+     "prec": 0.34,
+     "pct": 70
+    },
+    "EGD": {
+     "dep": 0.42,
+     "prec": 0.33,
+     "pct": 20
+    },
+    "EGC": {
+     "dep": 0.48,
+     "prec": 0.35,
+     "pct": 35
+    },
+    "GI": {
+     "dep": 0.16,
+     "prec": 0.34,
+     "pct": 2
+    }
+   }
+  },
+  {
+   "nombre": "Duque",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "30/07/2024",
+   "pesoActual": 860.0,
+   "rp": "1711",
+   "lote": "7",
+   "origen": "Santa Rosa",
+   "padre": "WATERLOO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": 0.0,
+     "prec": 0.22,
+     "pct": 70
+    },
+    "PN": {
+     "dep": 0.2,
+     "prec": 0.27,
+     "pct": 70
+    },
+    "WW": {
+     "dep": 7.9,
+     "prec": 0.34,
+     "pct": 35
+    },
+    "Leche": {
+     "dep": 2.4,
+     "prec": 0.32,
+     "pct": 30
+    },
+    "PF": {
+     "dep": 31.7,
+     "prec": 0.24,
+     "pct": 20
+    },
+    "CE": {
+     "dep": 1.5,
+     "prec": 0.3,
+     "pct": 15
+    },
+    "Alt": {
+     "dep": 3.5,
+     "prec": 0.35,
+     "pct": 2
+    },
+    "AOB": {
+     "dep": 5.8,
+     "prec": 0.25,
+     "pct": 1
+    },
+    "EGD": {
+     "dep": 0.37,
+     "prec": 0.26,
+     "pct": 20
+    },
+    "EGC": {
+     "dep": 0.44,
+     "prec": 0.28,
+     "pct": 40
+    },
+    "GI": {
+     "dep": -0.06,
+     "prec": 0.25,
+     "pct": 85
+    }
+   }
+  },
+  {
+   "nombre": "Frances",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "15/08/2024",
+   "pesoActual": 780.0,
+   "rp": "1767",
+   "lote": "7",
+   "origen": "Santa Rosa",
+   "padre": "WATERLOO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.1,
+     "prec": 0.22,
+     "pct": 65
+    },
+    "PN": {
+     "dep": 0.1,
+     "prec": 0.27,
+     "pct": 65
+    },
+    "WW": {
+     "dep": 16.3,
+     "prec": 0.35,
+     "pct": 1
+    },
+    "Leche": {
+     "dep": -1.8,
+     "prec": 0.25,
+     "pct": 90
+    },
+    "PF": {
+     "dep": 46.8,
+     "prec": 0.23,
+     "pct": 4
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": 0.29,
+     "pct": 10
+    },
+    "Alt": {
+     "dep": 2.0,
+     "prec": 0.35,
+     "pct": 40
+    },
+    "AOB": {
+     "dep": 3.7,
+     "prec": 0.25,
+     "pct": 4
+    },
+    "EGD": {
+     "dep": 0.28,
+     "prec": 0.26,
+     "pct": 35
+    },
+    "EGC": {
+     "dep": 0.63,
+     "prec": 0.29,
+     "pct": 25
+    },
+    "GI": {
+     "dep": -0.07,
+     "prec": 0.26,
+     "pct": 90
+    }
+   }
+  },
+  {
+   "nombre": "Batallon",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "20/07/2024",
+   "pesoActual": 800.0,
+   "rp": "1677",
+   "lote": "7",
+   "origen": "Santa Rosa",
+   "padre": "WATERLOO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": 0.1,
+     "prec": 0.21,
+     "pct": 75
+    },
+    "PN": {
+     "dep": 0.6,
+     "prec": 0.26,
+     "pct": 85
+    },
+    "WW": {
+     "dep": 4.4,
+     "prec": 0.24,
+     "pct": 65
+    },
+    "Leche": {
+     "dep": 0.6,
+     "prec": 0.15,
+     "pct": 60
+    },
+    "PF": {
+     "dep": 34.1,
+     "prec": 0.17,
+     "pct": 20
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": 0.29,
+     "pct": 50
+    },
+    "Alt": {
+     "dep": 3.1,
+     "prec": 0.34,
+     "pct": 5
+    },
+    "AOB": {
+     "dep": 4.6,
+     "prec": 0.25,
+     "pct": 1
+    },
+    "EGD": {
+     "dep": 0.17,
+     "prec": 0.26,
+     "pct": 50
+    },
+    "EGC": {
+     "dep": 0.51,
+     "prec": 0.28,
+     "pct": 35
+    },
+    "GI": {
+     "dep": -0.1,
+     "prec": 0.25,
+     "pct": 95
+    }
+   }
+  },
+  {
+   "nombre": "Morgan",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "17/07/2024",
+   "pesoActual": 750.0,
+   "rp": "1675",
+   "lote": "8",
+   "origen": "Santa Rosa",
+   "padre": "LA JOYA",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -1.0,
+     "prec": 0.24,
+     "pct": 20
+    },
+    "PN": {
+     "dep": -1.1,
+     "prec": 0.28,
+     "pct": 10
+    },
+    "WW": {
+     "dep": 5.5,
+     "prec": 0.29,
+     "pct": 55
+    },
+    "Leche": {
+     "dep": 1.8,
+     "prec": 0.24,
+     "pct": 40
+    },
+    "PF": {
+     "dep": 28.0,
+     "prec": 0.22,
+     "pct": 30
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.32,
+     "pct": 30
+    },
+    "Alt": {
+     "dep": 1.2,
+     "prec": 0.36,
+     "pct": 75
+    },
+    "AOB": {
+     "dep": 2.1,
+     "prec": 0.26,
+     "pct": 25
+    },
+    "EGD": {
+     "dep": 0.08,
+     "prec": 0.27,
+     "pct": 65
+    },
+    "EGC": {
+     "dep": 0.59,
+     "prec": 0.29,
+     "pct": 25
+    },
+    "GI": {
+     "dep": 0.25,
+     "prec": 0.26,
+     "pct": 1
+    }
+   }
+  },
+  {
+   "nombre": "Barbosa",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "19/06/2024",
+   "pesoActual": 735.0,
+   "rp": "1647",
+   "lote": "8",
+   "origen": "Santa Rosa",
+   "padre": "LA JOYA",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -1.1,
+     "prec": 0.23,
+     "pct": 15
+    },
+    "PN": {
+     "dep": -0.7,
+     "prec": 0.27,
+     "pct": 20
+    },
+    "WW": {
+     "dep": 5.0,
+     "prec": 0.26,
+     "pct": 60
+    },
+    "Leche": {
+     "dep": 3.9,
+     "prec": 0.16,
+     "pct": 15
+    },
+    "PF": {
+     "dep": 18.9,
+     "prec": 0.18,
+     "pct": 55
+    },
+    "CE": {
+     "dep": 1.3,
+     "prec": 0.3,
+     "pct": 30
+    },
+    "Alt": {
+     "dep": 0.4,
+     "prec": 0.34,
+     "pct": 95
+    },
+    "AOB": {
+     "dep": 1.2,
+     "prec": 0.24,
+     "pct": 50
+    },
+    "EGD": {
+     "dep": -0.28,
+     "prec": 0.25,
+     "pct": 100
+    },
+    "EGC": {
+     "dep": 0.08,
+     "prec": 0.28,
+     "pct": 85
+    },
+    "GI": {
+     "dep": -0.09,
+     "prec": 0.25,
+     "pct": 95
+    }
+   }
+  },
+  {
+   "nombre": "Rufino",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "15/06/2024",
+   "pesoActual": 740.0,
+   "rp": "1639",
+   "lote": "9",
+   "origen": "Santa Rosa",
+   "padre": "RUFIAN",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -1.5,
+     "prec": 0.23,
+     "pct": 5
+    },
+    "PN": {
+     "dep": -0.7,
+     "prec": 0.27,
+     "pct": 20
+    },
+    "WW": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": 0.5,
+     "prec": 0.28,
+     "pct": 95
+    },
+    "Alt": {
+     "dep": 1.1,
+     "prec": 0.32,
+     "pct": 80
+    },
+    "AOB": {
+     "dep": 1.7,
+     "prec": 0.2,
+     "pct": 35
+    },
+    "EGD": {
+     "dep": 0.2,
+     "prec": 0.21,
+     "pct": 45
+    },
+    "EGC": {
+     "dep": 0.62,
+     "prec": 0.23,
+     "pct": 25
+    },
+    "GI": {
+     "dep": 0.19,
+     "prec": 0.2,
+     "pct": 1
+    }
+   }
+  },
+  {
+   "nombre": "Rey",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "17/09/2024",
+   "pesoActual": 700.0,
+   "rp": "1869",
+   "lote": "9",
+   "origen": "Santa Rosa",
+   "padre": "ARTURO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -1.1,
+     "prec": 0.21,
+     "pct": 15
+    },
+    "PN": {
+     "dep": 0.5,
+     "prec": 0.27,
+     "pct": 80
+    },
+    "WW": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   }
+  },
+  {
+   "nombre": "Danielito",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "07/09/2024",
+   "pesoActual": 820.0,
+   "rp": "1849",
+   "lote": "10",
+   "origen": "Santa Rosa",
+   "padre": "JUANCITO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.6,
+     "prec": 0.22,
+     "pct": 35
+    },
+    "PN": {
+     "dep": -0.1,
+     "prec": 0.26,
+     "pct": 50
+    },
+    "WW": {
+     "dep": 11.3,
+     "prec": 0.26,
+     "pct": 10
+    },
+    "Leche": {
+     "dep": 0.2,
+     "prec": 0.2,
+     "pct": 65
+    },
+    "PF": {
+     "dep": 40.5,
+     "prec": 0.19,
+     "pct": 10
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": 0.29,
+     "pct": 10
+    },
+    "Alt": {
+     "dep": 2.9,
+     "prec": 0.34,
+     "pct": 10
+    },
+    "AOB": {
+     "dep": 4.7,
+     "prec": 0.24,
+     "pct": 1
+    },
+    "EGD": {
+     "dep": 0.13,
+     "prec": 0.25,
+     "pct": 60
+    },
+    "EGC": {
+     "dep": 0.22,
+     "prec": 0.27,
+     "pct": 70
+    },
+    "GI": {
+     "dep": 0.0,
+     "prec": 0.25,
+     "pct": 50
+    }
+   }
+  },
+  {
+   "nombre": "Tordillo",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "04/09/2024",
+   "pesoActual": 790.0,
+   "rp": "1831",
+   "lote": "10",
+   "origen": "Santa Rosa",
+   "padre": "MARENGO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.3,
+     "prec": 0.22,
+     "pct": 55
+    },
+    "PN": {
+     "dep": -0.5,
+     "prec": 0.27,
+     "pct": 30
+    },
+    "WW": {
+     "dep": 3.0,
+     "prec": 0.25,
+     "pct": 75
+    },
+    "Leche": {
+     "dep": -3.8,
+     "prec": 0.13,
+     "pct": 100
+    },
+    "PF": {
+     "dep": 16.8,
+     "prec": 0.18,
+     "pct": 60
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.29,
+     "pct": 20
+    },
+    "Alt": {
+     "dep": 1.4,
+     "prec": 0.34,
+     "pct": 70
+    },
+    "AOB": {
+     "dep": 3.9,
+     "prec": 0.23,
+     "pct": 3
+    },
+    "EGD": {
+     "dep": 0.57,
+     "prec": 0.25,
+     "pct": 10
+    },
+    "EGC": {
+     "dep": 0.88,
+     "prec": 0.27,
+     "pct": 10
+    },
+    "GI": {
+     "dep": 0.04,
+     "prec": 0.24,
+     "pct": 30
+    }
+   }
+  },
+  {
+   "nombre": "Boxeador",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "16/08/2024",
+   "pesoActual": 740.0,
+   "rp": "1773",
+   "lote": "11",
+   "origen": "Santa Rosa",
+   "padre": "MARAVILLA",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.5,
+     "prec": 0.19,
+     "pct": 40
+    },
+    "PN": {
+     "dep": 1.1,
+     "prec": 0.24,
+     "pct": 100
+    },
+    "WW": {
+     "dep": 4.8,
+     "prec": 0.22,
+     "pct": 60
+    },
+    "Leche": {
+     "dep": 1.5,
+     "prec": 0.1,
+     "pct": 45
+    },
+    "PF": {
+     "dep": 20.8,
+     "prec": 0.14,
+     "pct": 50
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": 0.26,
+     "pct": 50
+    },
+    "Alt": {
+     "dep": 2.3,
+     "prec": 0.31,
+     "pct": 25
+    },
+    "AOB": {
+     "dep": 0.6,
+     "prec": 0.21,
+     "pct": 65
+    },
+    "EGD": {
+     "dep": 0.22,
+     "prec": 0.22,
+     "pct": 40
+    },
+    "EGC": {
+     "dep": 0.39,
+     "prec": 0.25,
+     "pct": 50
+    },
+    "GI": {
+     "dep": -0.02,
+     "prec": 0.22,
+     "pct": 65
+    }
+   }
+  },
+  {
+   "nombre": "Napoles",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "20/07/2024",
+   "pesoActual": 760.0,
+   "rp": "1681",
+   "lote": "11",
+   "origen": "Santa Rosa",
+   "padre": "NAPOLITANO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -1.4,
+     "prec": 0.24,
+     "pct": 10
+    },
+    "PN": {
+     "dep": 0.6,
+     "prec": 0.29,
+     "pct": 85
+    },
+    "WW": {
+     "dep": 7.0,
+     "prec": 0.27,
+     "pct": 40
+    },
+    "Leche": {
+     "dep": 1.0,
+     "prec": 0.19,
+     "pct": 50
+    },
+    "PF": {
+     "dep": 20.4,
+     "prec": 0.2,
+     "pct": 50
+    },
+    "CE": {
+     "dep": 1.0,
+     "prec": 0.3,
+     "pct": 60
+    },
+    "Alt": {
+     "dep": 0.5,
+     "prec": 0.36,
+     "pct": 95
+    },
+    "AOB": {
+     "dep": 2.3,
+     "prec": 0.25,
+     "pct": 20
+    },
+    "EGD": {
+     "dep": 0.43,
+     "prec": 0.26,
+     "pct": 15
+    },
+    "EGC": {
+     "dep": 1.13,
+     "prec": 0.29,
+     "pct": 3
+    },
+    "GI": {
+     "dep": 0.03,
+     "prec": 0.26,
+     "pct": 35
+    }
+   }
+  },
+  {
+   "nombre": "Mascherano",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "21/07/2024",
+   "pesoActual": 840.0,
+   "rp": "1753",
+   "lote": "12",
+   "origen": "Santa Rosa",
+   "padre": "MATEO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.3,
+     "prec": 0.26,
+     "pct": 50
+    },
+    "PN": {
+     "dep": 0.3,
+     "prec": 0.34,
+     "pct": 70
+    },
+    "WW": {
+     "dep": 5.2,
+     "prec": 0.35,
+     "pct": 60
+    },
+    "Leche": {
+     "dep": 0.9,
+     "prec": 0.27,
+     "pct": 50
+    },
+    "PF": {
+     "dep": 25.0,
+     "prec": 0.27,
+     "pct": 40
+    },
+    "CE": {
+     "dep": 1.4,
+     "prec": 0.3,
+     "pct": 25
+    },
+    "Alt": {
+     "dep": 2.3,
+     "prec": 0.34,
+     "pct": 30
+    },
+    "AOB": {
+     "dep": 0.7,
+     "prec": 0.24,
+     "pct": 70
+    },
+    "EGD": {
+     "dep": 0.6,
+     "prec": 0.24,
+     "pct": 15
+    },
+    "EGC": {
+     "dep": 0.21,
+     "prec": 0.26,
+     "pct": 70
+    },
+    "GI": {
+     "dep": -0.02,
+     "prec": 0.24,
+     "pct": 65
+    }
+   }
+  },
+  {
+   "nombre": "Cuti",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "20/07/2024",
+   "pesoActual": 820.0,
+   "rp": "1751",
+   "lote": "12",
+   "origen": "Santa Rosa",
+   "padre": "MATEO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -1.0,
+     "prec": 0.39,
+     "pct": 20
+    },
+    "PN": {
+     "dep": 1.2,
+     "prec": 0.48,
+     "pct": 100
+    },
+    "WW": {
+     "dep": 8.9,
+     "prec": 0.36,
+     "pct": 25
+    },
+    "Leche": {
+     "dep": 0.7,
+     "prec": 0.3,
+     "pct": 55
+    },
+    "PF": {
+     "dep": 36.4,
+     "prec": 0.28,
+     "pct": 15
+    },
+    "CE": {
+     "dep": 1.8,
+     "prec": 0.4,
+     "pct": 4
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.43,
+     "pct": 35
+    },
+    "AOB": {
+     "dep": 0.1,
+     "prec": 0.3,
+     "pct": 80
+    },
+    "EGD": {
+     "dep": 0.74,
+     "prec": 0.29,
+     "pct": 3
+    },
+    "EGC": {
+     "dep": 0.73,
+     "prec": 0.31,
+     "pct": 15
+    },
+    "GI": {
+     "dep": 0.07,
+     "prec": 0.3,
+     "pct": 15
+    }
+   }
+  },
+  {
+   "nombre": "Decimo",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "02/08/2024",
+   "pesoActual": 730.0,
+   "rp": "1717",
+   "lote": "13",
+   "origen": "Santa Rosa",
+   "padre": "MAXIMO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.7,
+     "prec": 0.19,
+     "pct": 30
+    },
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.25,
+     "pct": 90
+    },
+    "WW": {
+     "dep": 8.0,
+     "prec": 0.3,
+     "pct": 30
+    },
+    "Leche": {
+     "dep": 2.8,
+     "prec": 0.21,
+     "pct": 25
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   }
+  },
+  {
+   "nombre": "Peringo",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "06/09/2024",
+   "pesoActual": 780.0,
+   "rp": "1839",
+   "lote": "13",
+   "origen": "Santa Rosa",
+   "padre": "MARENGO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.1,
+     "prec": 0.23,
+     "pct": 65
+    },
+    "PN": {
+     "dep": 0.3,
+     "prec": 0.28,
+     "pct": 75
+    },
+    "WW": {
+     "dep": 6.2,
+     "prec": 0.43,
+     "pct": 50
+    },
+    "Leche": {
+     "dep": 0.0,
+     "prec": 0.4,
+     "pct": 70
+    },
+    "PF": {
+     "dep": 20.1,
+     "prec": 0.32,
+     "pct": 50
+    },
+    "CE": {
+     "dep": 1.6,
+     "prec": 0.3,
+     "pct": 10
+    },
+    "Alt": {
+     "dep": 2.5,
+     "prec": 0.35,
+     "pct": 20
+    },
+    "AOB": {
+     "dep": 0.8,
+     "prec": 0.23,
+     "pct": 60
+    },
+    "EGD": {
+     "dep": 0.2,
+     "prec": 0.25,
+     "pct": 45
+    },
+    "EGC": {
+     "dep": 0.78,
+     "prec": 0.27,
+     "pct": 15
+    },
+    "GI": {
+     "dep": 0.12,
+     "prec": 0.24,
+     "pct": 4
+    }
+   }
+  },
+  {
+   "nombre": "Caligula",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "06/09/2024",
+   "pesoActual": 770.0,
+   "rp": "1845",
+   "lote": "14",
+   "origen": "Santa Rosa",
+   "padre": "EMPERADOR",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.2,
+     "prec": 0.21,
+     "pct": 60
+    },
+    "PN": {
+     "dep": 0.7,
+     "prec": 0.26,
+     "pct": 90
+    },
+    "WW": {
+     "dep": 10.0,
+     "prec": 0.28,
+     "pct": 20
+    },
+    "Leche": {
+     "dep": -0.7,
+     "prec": 0.22,
+     "pct": 80
+    },
+    "PF": {
+     "dep": 38.1,
+     "prec": 0.2,
+     "pct": 15
+    },
+    "CE": {
+     "dep": 1.1,
+     "prec": 0.3,
+     "pct": 50
+    },
+    "Alt": {
+     "dep": 3.5,
+     "prec": 0.34,
+     "pct": 2
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": 0.69,
+     "prec": 0.27,
+     "pct": 20
+    },
+    "GI": {
+     "dep": -0.04,
+     "prec": 0.25,
+     "pct": 75
+    }
+   }
+  },
+  {
+   "nombre": "Carlomagno",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "14/08/2024",
+   "pesoActual": 790.0,
+   "rp": "1761",
+   "lote": "14",
+   "origen": "Santa Rosa",
+   "padre": "EMPERADOR",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.3,
+     "prec": 0.21,
+     "pct": 55
+    },
+    "PN": {
+     "dep": 1.0,
+     "prec": 0.26,
+     "pct": 95
+    },
+    "WW": {
+     "dep": 7.4,
+     "prec": 0.25,
+     "pct": 35
+    },
+    "Leche": {
+     "dep": -1.0,
+     "prec": 0.14,
+     "pct": 85
+    },
+    "PF": {
+     "dep": 26.4,
+     "prec": 0.18,
+     "pct": 35
+    },
+    "CE": {
+     "dep": 0.9,
+     "prec": 0.29,
+     "pct": 70
+    },
+    "Alt": {
+     "dep": 3.5,
+     "prec": 0.34,
+     "pct": 2
+    },
+    "AOB": {
+     "dep": 2.4,
+     "prec": 0.24,
+     "pct": 20
+    },
+    "EGD": {
+     "dep": 0.83,
+     "prec": 0.25,
+     "pct": 2
+    },
+    "EGC": {
+     "dep": 1.16,
+     "prec": 0.28,
+     "pct": 3
+    },
+    "GI": {
+     "dep": -0.05,
+     "prec": 0.25,
+     "pct": 80
+    }
+   }
+  },
+  {
+   "nombre": "Tiberio",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "25/07/2024",
+   "pesoActual": 810.0,
+   "rp": "1687",
+   "lote": "14",
+   "origen": "Santa Rosa",
+   "padre": "EMPERADOR",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.5,
+     "prec": 0.2,
+     "pct": 40
+    },
+    "PN": {
+     "dep": 0.7,
+     "prec": 0.26,
+     "pct": 90
+    },
+    "WW": {
+     "dep": 9.0,
+     "prec": 0.59,
+     "pct": 25
+    },
+    "Leche": {
+     "dep": 0.4,
+     "prec": 0.55,
+     "pct": 60
+    },
+    "PF": {
+     "dep": 22.2,
+     "prec": 0.46,
+     "pct": 45
+    },
+    "CE": {
+     "dep": 0.7,
+     "prec": 0.29,
+     "pct": 85
+    },
+    "Alt": {
+     "dep": 2.1,
+     "prec": 0.34,
+     "pct": 35
+    },
+    "AOB": {
+     "dep": 1.9,
+     "prec": 0.25,
+     "pct": 30
+    },
+    "EGD": {
+     "dep": 0.33,
+     "prec": 0.26,
+     "pct": 25
+    },
+    "EGC": {
+     "dep": 0.61,
+     "prec": 0.28,
+     "pct": 25
+    },
+    "GI": {
+     "dep": -0.08,
+     "prec": 0.25,
+     "pct": 90
+    }
+   }
+  },
+  {
+   "nombre": "Matucho",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "15/07/2024",
+   "pesoActual": 870.0,
+   "rp": "1669",
+   "lote": "15",
+   "origen": "Santa Rosa",
+   "padre": "MATEO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.5,
+     "prec": 0.25,
+     "pct": 40
+    },
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.29,
+     "pct": 90
+    },
+    "WW": {
+     "dep": 9.1,
+     "prec": 0.33,
+     "pct": 25
+    },
+    "Leche": {
+     "dep": 0.2,
+     "prec": 0.3,
+     "pct": 65
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   }
+  },
+  {
+   "nombre": "Lanzado",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "01/09/2024",
+   "pesoActual": 700.0,
+   "rp": "1821",
+   "lote": "15",
+   "origen": "Santa Rosa",
+   "padre": "ENTRADOR",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.3,
+     "prec": 0.47,
+     "pct": 55
+    },
+    "PN": {
+     "dep": 0.3,
+     "prec": 0.5,
+     "pct": 75
+    },
+    "WW": {
+     "dep": 8.0,
+     "prec": 0.52,
+     "pct": 30
+    },
+    "Leche": {
+     "dep": -0.9,
+     "prec": 0.45,
+     "pct": 80
+    },
+    "PF": {
+     "dep": 34.7,
+     "prec": 0.42,
+     "pct": 15
+    },
+    "CE": {
+     "dep": 2.4,
+     "prec": 0.44,
+     "pct": 1
+    },
+    "Alt": {
+     "dep": 3.3,
+     "prec": 0.47,
+     "pct": 3
+    },
+    "AOB": {
+     "dep": 0.4,
+     "prec": 0.33,
+     "pct": 75
+    },
+    "EGD": {
+     "dep": 0.17,
+     "prec": 0.33,
+     "pct": 50
+    },
+    "EGC": {
+     "dep": 0.14,
+     "prec": 0.34,
+     "pct": 80
+    },
+    "GI": {
+     "dep": 0.05,
+     "prec": 0.33,
+     "pct": 25
+    }
+   }
+  },
+  {
+   "nombre": "Ben",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "13/09/2024",
+   "pesoActual": 815.0,
+   "rp": "1861",
+   "lote": "16",
+   "origen": "Santa Rosa",
+   "padre": "OBI WAN",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": 0.4,
+     "prec": 0.2,
+     "pct": 90
+    },
+    "PN": {
+     "dep": 0.3,
+     "prec": 0.26,
+     "pct": 75
+    },
+    "WW": {
+     "dep": 10.7,
+     "prec": 0.23,
+     "pct": 15
+    },
+    "Leche": {
+     "dep": 2.0,
+     "prec": 0.18,
+     "pct": 35
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   }
+  },
+  {
+   "nombre": "Kenobi",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "19/08/2024",
+   "pesoActual": 790.0,
+   "rp": "1783",
+   "lote": "16",
+   "origen": "Santa Rosa",
+   "padre": "OBI WAN",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": 0.1,
+     "prec": 0.21,
+     "pct": 75
+    },
+    "PN": {
+     "dep": 0.3,
+     "prec": 0.28,
+     "pct": 75
+    },
+    "WW": {
+     "dep": 7.1,
+     "prec": 0.24,
+     "pct": 40
+    },
+    "Leche": {
+     "dep": 2.2,
+     "prec": 0.09,
+     "pct": 30
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   }
+  },
+  {
+   "nombre": "Tizon",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "22/08/2024",
+   "pesoActual": 795.0,
+   "rp": "1795",
+   "lote": "17",
+   "origen": "Santa Rosa",
+   "padre": "FIREBRAND",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "PN": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "WW": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Leche": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   }
+  },
+  {
+   "nombre": "Lalo",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "01/09/2024",
+   "pesoActual": 770.0,
+   "rp": "1819",
+   "lote": "17",
+   "origen": "Santa Rosa",
+   "padre": "FIREBRAND",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": 1.1,
+     "prec": 0.4,
+     "pct": 100
+    },
+    "PN": {
+     "dep": 1.2,
+     "prec": 0.46,
+     "pct": 100
+    },
+    "WW": {
+     "dep": 8.0,
+     "prec": 0.46,
+     "pct": 30
+    },
+    "Leche": {
+     "dep": 0.3,
+     "prec": 0.33,
+     "pct": 65
+    },
+    "PF": {
+     "dep": 44.2,
+     "prec": 0.24,
+     "pct": 5
+    },
+    "CE": {
+     "dep": 1.2,
+     "prec": 0.27,
+     "pct": 40
+    },
+    "Alt": {
+     "dep": 3.1,
+     "prec": 0.31,
+     "pct": 5
+    },
+    "AOB": {
+     "dep": 1.8,
+     "prec": 0.19,
+     "pct": 30
+    },
+    "EGD": {
+     "dep": 0.53,
+     "prec": 0.2,
+     "pct": 10
+    },
+    "EGC": {
+     "dep": 0.98,
+     "prec": 0.21,
+     "pct": 5
+    },
+    "GI": {
+     "dep": 0.07,
+     "prec": 0.21,
+     "pct": 15
+    }
+   }
+  },
+  {
+   "nombre": "Malhechor",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "06/09/2024",
+   "pesoActual": 760.0,
+   "rp": "1841",
+   "lote": "18",
+   "origen": "Santa Rosa",
+   "padre": "CRIMINAL",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.4,
+     "prec": 0.19,
+     "pct": 50
+    },
+    "PN": {
+     "dep": 0.8,
+     "prec": 0.24,
+     "pct": 90
+    },
+    "WW": {
+     "dep": 13.0,
+     "prec": 0.3,
+     "pct": 5
+    },
+    "Leche": {
+     "dep": 1.8,
+     "prec": 0.23,
+     "pct": 40
+    },
+    "PF": {
+     "dep": 41.6,
+     "prec": 0.24,
+     "pct": 10
+    },
+    "CE": {
+     "dep": 1.2,
+     "prec": 0.27,
+     "pct": 40
+    },
+    "Alt": {
+     "dep": 2.3,
+     "prec": 0.32,
+     "pct": 25
+    },
+    "AOB": {
+     "dep": -0.8,
+     "prec": 0.22,
+     "pct": 95
+    },
+    "EGD": {
+     "dep": -0.07,
+     "prec": 0.23,
+     "pct": 90
+    },
+    "EGC": {
+     "dep": 0.34,
+     "prec": 0.25,
+     "pct": 55
+    },
+    "GI": {
+     "dep": -0.09,
+     "prec": 0.22,
+     "pct": 95
+    }
+   }
+  },
+  {
+   "nombre": "Meridio",
+   "pelaje": "",
+   "raza": "Angus",
+   "nacimiento": "18/08/2024",
+   "pesoActual": 770.0,
+   "rp": "1781",
+   "lote": "18",
+   "origen": "Santa Rosa",
+   "padre": "MAXIMO",
+   "semenApto": "",
+   "fenotipo": 0,
+   "deps": {
+    "LG": {
+     "dep": -0.7,
+     "prec": 0.19,
+     "pct": 30
+    },
+    "PN": {
+     "dep": 0.9,
+     "prec": 0.25,
+     "pct": 95
+    },
+    "WW": {
+     "dep": 2.8,
+     "prec": 0.29,
+     "pct": 95
+    },
+    "Leche": {
+     "dep": -0.1,
+     "prec": 0.2,
+     "pct": 70
+    },
+    "PF": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "CE": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "Alt": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "AOB": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGD": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "EGC": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    },
+    "GI": {
+     "dep": null,
+     "prec": null,
+     "pct": null
+    }
+   }
+  }
+ ]
+}

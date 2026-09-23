@@ -303,6 +303,27 @@
    "cargado_por": "Ricardo",
    "fecha_carga": "2026-09-22",
    "ultimo_ingreso": "2026-09-22"
+  },
+  {
+   "id": "012",
+   "nombre": "Santa Rosa 2026",
+   "fecha": "2026-09-24",
+   "cabana": "Santa Rosa",
+   "expositor": "Santa Rosa (Indio Nuevo S.A.)",
+   "email": "",
+   "telefono_contacto": "C&G 9234 789040",
+   "puntaje": 2,
+   "tipo": "permanente",
+   "esNovedad": true,
+   "novedad": "",
+   "acceso": "abierto",
+   "totalToros": 42,
+   "aptos": 41,
+   "archivo": "012-Santa_Rosa_2026.json",
+   "fuente": "manual",
+   "cargado_por": "Ricardo",
+   "fecha_carga": "2026-09-24",
+   "ultimo_ingreso": "2026-09-24"
   }
  ]
 }
