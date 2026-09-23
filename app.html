@@ -1185,36 +1185,24 @@ tr.sel-z:hover td{background:#d4ecda!important}
       </div>
     </div>
 
-    <div class="tree-cat" data-metodo="selectos">
-      <div class="cat-btn cat-btn-metodo">RD_Selectos</div>
-      <div class="tree-methods" data-cats-for="selectos">
-        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">&#9733; Rodeo General</button>
-        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">#1.1_Terminal</button>
-        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">#1.2_Hilton</button>
-        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">#2.1_Reposición</button>
-        <button class="nav-tab" data-screen="selectos" onclick="setScreen('selectos')">#2.2_Vaquillona 15M</button>
-      </div>
-    </div>
+    <!-- 2026-09-24, a pedido de RD: RD_Selectos y RD_Confiabilidad son de catálogo completo
+         (no dependen de la categoría activa — calcSelectos/calcConfiabilidad ni reciben ese
+         parámetro), así que se sacó el submenú de categorías: un solo click va directo a la
+         pantalla. RD_Hallazgos sí depende de la categoría (calcHallazgos usa currentCat para
+         el sentido ▲/▼), así que mantiene el submenú, pero ahora conectado con irAMetodo —
+         antes el click no actualizaba currentCat y las 5 categorías mostraban siempre lo mismo. -->
+    <button class="nav-tab cat-btn cat-btn-metodo" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
 
-    <div class="tree-cat" data-metodo="confiabilidad">
-      <div class="cat-btn cat-btn-metodo">RD_Confiabilidad</div>
-      <div class="tree-methods" data-cats-for="confiabilidad">
-        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">&#9733; Rodeo General</button>
-        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">#1.1_Terminal</button>
-        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">#1.2_Hilton</button>
-        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">#2.1_Reposición</button>
-        <button class="nav-tab" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">#2.2_Vaquillona 15M</button>
-      </div>
-    </div>
+    <button class="nav-tab cat-btn cat-btn-metodo" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
 
     <div class="tree-cat" data-metodo="hallazgos">
       <div class="cat-btn cat-btn-metodo">RD_Hallazgos</div>
       <div class="tree-methods" data-cats-for="hallazgos">
-        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">&#9733; Rodeo General</button>
-        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">#1.1_Terminal</button>
-        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">#1.2_Hilton</button>
-        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">#2.1_Reposición</button>
-        <button class="nav-tab" data-screen="hallazgos" onclick="setScreen('hallazgos')">#2.2_Vaquillona 15M</button>
+        <button class="nav-tab cat-btn" data-screen="hallazgos" data-cat="rodeoGeneral" onclick="irAMetodo('hallazgos','rodeoGeneral')">&#9733; Rodeo General</button>
+        <button class="nav-tab cat-btn" data-screen="hallazgos" data-cat="terminal" onclick="irAMetodo('hallazgos','terminal')">#1.1_Terminal</button>
+        <button class="nav-tab cat-btn" data-screen="hallazgos" data-cat="hilton" onclick="irAMetodo('hallazgos','hilton')">#1.2_Hilton</button>
+        <button class="nav-tab cat-btn" data-screen="hallazgos" data-cat="reposicion" onclick="irAMetodo('hallazgos','reposicion')">#2.1_Reposición</button>
+        <button class="nav-tab cat-btn" data-screen="hallazgos" data-cat="vaq15" onclick="irAMetodo('hallazgos','vaq15')">#2.2_Vaquillona 15M</button>
       </div>
     </div>
 
@@ -2183,6 +2171,7 @@ function canAccess(feature){
     case 'sinergico':       return false; // modal sinergico completo
     case 'csv_export':      return false;
     case 'informe_plus':    return false; // Informe Plus / Excel Plus / Ficha por Toro
+    case 'modos_oyp':       return false; // pantalla "Modos O&P" (5 gráficos: blancos, radar categorías) — 2026-09-24, a pedido de RD
     case 'cat_deep':        return currentCat==='terminal'; // solo Terminal
     default:                return true;
   }
@@ -2853,6 +2842,7 @@ async function cargarPesosUsuario(userId){
 // ─── AYUDA ───
 const AYUDA_ITEMS=[
   {titulo:"¿Cómo usar la app?",body:"<p>Elegí la categoría de cría (barra superior) y la pantalla: Vista Global muestra ambos métodos en paralelo.</p><p>RD_Factores y RD_O&P muestran los rankings individuales.</p><p>Hacé clic en cualquier toro para ver su ficha completa.</p><p>En RD_Factores podés editar el fenotipo con el slider (Plus).</p>"},
+  {titulo:"¿Qué informes puedo generar?",body:"<p>Desde \"■ Informe PDF\" en el menú, elegís entre 4 tipos:</p><p><strong>Marco Teórico</strong> — explicación conceptual de cómo funciona SEPA-Select, sin fórmulas. Una sola página, para compartir con alguien que no conoce el sistema.</p><p><strong>Resumen Comparativo</strong> — elegís uno o varios toros y los compara entre sí: en qué categorías es SELECTO, su mejor posición, y una síntesis en lenguaje simple.</p><p><strong>Informe Select</strong> — el informe completo del catálogo: portada, resumen por categoría, radar y gráficos, y el detalle de cada una de las 5 categorías. Tiene un panel para tildar qué secciones incluir (Todo/Ninguno) antes de generar el PDF.</p><p><strong>Ficha de Toros</strong> — elegís uno o varios toros y genera una ficha individual de cada uno: DEPs, rankings por categoría, perfiles O&P y un radar comparándolo contra el promedio del catálogo.</p><p>Desde Informe Select también podés exportar a <strong>Excel</strong> (botón \"📊 Excel\"): trae el mismo análisis en hojas separadas — resumen, pesos por categoría, el ranking completo de todos los toros en todas las categorías (lista para armar tablas dinámicas), y los DEPs originales del catálogo.</p>"},
   {titulo:"¿Qué es RD_Factores (Método Cuantitativo)?",body:"<p>Análisis cuantitativo.</p><p>Pondera 8 DEPs según el objetivo de cría usando z-scores internos del catálogo (comparación entre los toros del catálogo) y normaliza el resultado a escala 0-100 (G) <strong>relativa a este catálogo puntual</strong>: el mejor toro del lote saca 100 y el de menor mérito saca 0, no es una escala absoluta de calidad — cambia de catálogo en catálogo.</p><p>Al G se suma el fenotipo F editable (Plus/Base, editable por cada usuario).</p><p>Score final = G + F.</p><p>No aplica descuento por precisión: la confiabilidad de los DEPs se analiza aparte en RD_Confiabilidad.</p><p>En Vaquillona 15M y Reposición, el z-score de PN tiene un <strong>tope de ±1.5</strong> antes de aplicarle el peso — sin este tope, un PN muy por fuera de lo normal podía por sí solo definir casi todo el puntaje de un toro, tapando el resto de sus características.</p><p>Con el tope, un PN extremo sigue sumando fuerte pero ya no ahoga a los demás DEPs.</p><p>El resto de las categorías (Rodeo General, Terminal, Hilton) usan el z-score real de PN, sin tope.</p>"},
   {titulo:"¿Qué es RD_Objetivos & Perfiles (RD_O&P) (Método Cualitativo)?",body:"<p>De la misma forma en que se utiliza el concepto \"rompedor de curva\" —cuyo Objetivo (O) es evitar distocia sin resignar crecimiento, y que generó el Perfil (P) U01-Quebrador (PN bajo + WW alto, antagónico)— se generaron los demás perfiles de RD_O&P (afines y antagónicos).</p><p>Evalúa 15 perfiles productivos organizados en 3 familias: U Universales (U01-U03, activos para todas las categorías), T Terminal/Hilton (T01-T05 — Hilton exige el set completo, Terminal un subconjunto de calidad) y V Vaca (V01-V04 + R01-R03, activos en Vaquillona 15M y Reposición respectivamente).</p><p>El score de cada perfil es la suma algebraica de sus DEPs con signo según dirección favorable, con el mismo criterio de <strong>tope de ±1.5</strong> al z-score de cada DEP (así ningún DEP aislado, por más extremo que sea, define el perfil por sí solo).</p><p>Si algún DEP requerido no está disponible en el catálogo, el perfil queda no calculable.</p>"},
   {titulo:"¿Qué significa Δ en la tabla RD_Factores × RD_O&P?",body:"<p>Es la diferencia entre la posición de un toro en RD_Factores (RF) y en RD_O&P.</p><p>Δ = posición_RF − posición_RD_O&P.</p><p>Si un toro está en #3 en RF y #7 en RD_O&P, Δ = +4.</p><p>Fondo dorado indica que la diferencia es ≤ 2 puestos (alta concordancia).</p>"},
@@ -4065,12 +4055,17 @@ function setScreen(s){
     if(!currentCat||currentCat==='graficos') currentCat='terminal';
     renderAll();
   }
-  // Actualizar label del botón Gráficos según contexto
+  // Actualizar label del botón Gráficos según contexto — "Modos O&P" es exclusivo de Plus
+  // (2026-09-24, a pedido de RD): BASE ni ve el botón en ese contexto, mismo criterio que
+  // Informe Plus (se oculta entero, no se muestra con upsell al hacer clic).
   const btnGraf=document.getElementById('btn-graficos');
   if(btnGraf){
-    if(s==='factores') btnGraf.innerHTML='📊 Radar RD_Fact';
-    else if(s==='oyp')  btnGraf.innerHTML='📊 Modos O&P';
-    else btnGraf.innerHTML='📊 Gráficos';
+    if(s==='factores'){ btnGraf.innerHTML='📊 Radar RD_Fact'; btnGraf.style.display=''; }
+    else if(s==='oyp'){
+      if(canAccess('modos_oyp')){ btnGraf.innerHTML='📊 Modos O&P'; btnGraf.style.display=''; }
+      else { btnGraf.style.display='none'; }
+    }
+    else { btnGraf.innerHTML='📊 Gráficos'; btnGraf.style.display=''; }
   }
   if(s==='global') setGlobalSub(globalSub, true);
   if(_pv && _pv!==currentView()) navRecord(_pv,_pc);
@@ -4082,6 +4077,7 @@ function onClickGraficos(){
   if(currentScreen==='factores'||currentScreen==='global'){
     setCat('graficos');
   } else if(currentScreen==='oyp'){
+    if(!canAccess('modos_oyp')){ showPlusGate('Modos O&P es exclusivo de Plus.'); return; }
     setScreen('blanco');
   } else {
     setCat('graficos');
@@ -5552,6 +5548,15 @@ function infGenerarResumen(nombres){
 }
 
 function cerrarInforme() {
+  // 2026-09-24, a pedido de RD: "Cerrar" es un paso atrás por vez, no todo de una.
+  // Si ya se eligió un tipo de informe (el selector está oculto), el primer click vuelve
+  // al selector de tipo, no a la pantalla inicial — recién un segundo click (desde el
+  // selector, con este mismo botón o "Cancelar") cierra de verdad y sale a la app.
+  const modoSel = document.getElementById('inf-modo-sel');
+  if (modoSel.style.display === 'none') {
+    modoSel.style.display = 'flex';
+    return;
+  }
   document.getElementById('informe-overlay').classList.add('hidden');
   closeAllPanels();
   setScreen('global');
@@ -5651,8 +5656,9 @@ function _infExcelSheetsBase(wb,RES,esPlus){
   const idx=[['Hoja','Contenido'],
     ['10_Resumen','1 fila por categoría: objetivo y lista de ★ selectos.'],
     ['20_Pesos_por_categoria','Matriz numérica categoría × DEP, con columna de control Suma |pesos|.'],
-    ['30_Resultados','Ranking completo (RD_Factores y RD_O&P) de todos los toros en todas las categorías, con marca ★ Selecto — habilitado para tabla dinámica.'],
-    ['40_DEPs_del_catalogo','DEPs originales del catálogo (los 8 del modelo + precisión), 1 fila por toro.']];
+    ['30_Resultados','Ranking completo (RD_Factores y RD_O&P) de todos los toros en todas las categorías, con marca ★ Selecto — habilitado para tabla dinámica. Columna Id = número de fila original, para volver a este orden si se ordena la hoja por otro criterio.'],
+    ['30-TD','Tabla dinámica de ejemplo (Toro × Categoría, Suma de Score) a partir de 30_Resultados, filtrada a ★ Selecto y método RD_Factores. Es una foto fija, no interactiva — la librería Excel gratuita que usa la app no puede generar tablas dinámicas nativas. Para cambiar el filtro, armá tu propia tabla dinámica en Excel a partir de 30_Resultados.'],
+    ['40_DEPs_del_catalogo','DEPs originales del catálogo (los 8 del modelo + precisión), 1 fila por toro. Columna Id = número de fila original (orden alfabético), para volver a este orden si se ordena la hoja por otro criterio.']];
   if(esPlus){
     idx.push(
       ['50_RF','Ranking completo RD_Factores (todas las categorías): G, F, Total, Apto, Puesto.'],
@@ -5686,26 +5692,57 @@ function _infExcelSheetsBase(wb,RES,esPlus){
   // 30_Resultados (ex 30_Cross_Selectos) — 2026-09-22, a pedido de RD: antes solo traía el Top
   // SELECTO_TOP_N de cada categoría/método; ahora trae TODOS los toros en TODAS las categorías
   // (mismo formato, misma marca ★ Selecto) para poder armar una tabla dinámica sin quedarse afuera de datos.
-  const cross=[['Puesto','Toro','Score','★ Selecto','Categoría','Método']];
+  const cross=[['Id','Puesto','Toro','Score','★ Selecto','Categoría','Método']];
   CATEGORIAS.forEach(cat=>{
     const r=RES[cat.id];
-    r.rf.filter(x=>x.ok).forEach((x,i)=>cross.push([i+1,x.t.nombre,x.total,r.sel.includes(x.t.nombre)?'★':'',infCatNombre(cat),'RD_Factores']));
-    r.oyp.forEach((x,i)=>cross.push([i+1,x.t.nombre,x.score,r.sel.includes(x.t.nombre)?'★':'',infCatNombre(cat),'RD_O&P']));
+    r.rf.filter(x=>x.ok).forEach((x,i)=>cross.push([cross.length,i+1,x.t.nombre,x.total,r.sel.includes(x.t.nombre)?'★':'',infCatNombre(cat),'RD_Factores']));
+    r.oyp.forEach((x,i)=>cross.push([cross.length,i+1,x.t.nombre,x.score,r.sel.includes(x.t.nombre)?'★':'',infCatNombre(cat),'RD_O&P']));
   });
-  const wsCross=XLSX.utils.aoa_to_sheet(cross);wsCross['!cols']=_infExcelCols([7,24,8,10,20,12]);
+  const wsCross=XLSX.utils.aoa_to_sheet(cross);wsCross['!cols']=_infExcelCols([6,7,24,8,10,20,12]);
   // Filtro de Excel (flechitas en el encabezado) — a pedido de RD, para poder filtrar
   // por Categoría/Método/★ Selecto directo en la planilla sin tocar la app.
-  wsCross['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:cross.length-1,c:5}})};
+  wsCross['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:cross.length-1,c:6}})};
   XLSX.utils.book_append_sheet(wb,wsCross,'30_Resultados');
 
+  // 30-TD (2026-09-24, a pedido de RD) — versión estática de la tabla dinámica de ejemplo que
+  // armó a mano en Excel a partir de 30_Resultados (Toro × Categoría, Suma de Score, filtrada a
+  // ★ Selecto y RD_Factores). No es una tabla dinámica nativa/interactiva — la librería Excel
+  // gratuita que usa la app (SheetJS Community) no las soporta, esa es una función paga de la
+  // misma librería. Esto es una foto fija, recalculada en cada exportación; para cambiar el
+  // filtro hay que armar una tabla dinámica propia en Excel desde 30_Resultados.
+  const tdFilas={};
+  CATEGORIAS.forEach(cat=>{
+    const r=RES[cat.id];
+    r.rf.filter(x=>x.ok&&r.sel.includes(x.t.nombre)).forEach(x=>{
+      if(!tdFilas[x.t.nombre])tdFilas[x.t.nombre]={};
+      tdFilas[x.t.nombre][cat.id]=x.total;
+    });
+  });
+  const tdNombres=Object.keys(tdFilas).sort((a,b)=>a.localeCompare(b,'es'));
+  const td=[
+    ['★ Selecto','★'],
+    ['Método','RD_Factores'],
+    [],
+    ['Suma de Score','Etiquetas de columna'],
+    ['Etiquetas de fila',...CATEGORIAS.map(cat=>infCatNombre(cat)),'Total general'],
+  ];
+  tdNombres.forEach(nombre=>{
+    const valores=CATEGORIAS.map(cat=>tdFilas[nombre][cat.id]!=null?tdFilas[nombre][cat.id]:null);
+    const total=valores.reduce((a,b)=>a+(b||0),0);
+    td.push([nombre,...valores,+total.toFixed(1)]);
+  });
+  const wsTd=XLSX.utils.aoa_to_sheet(td);
+  wsTd['!cols']=_infExcelCols([24,...CATEGORIAS.map(()=>16),14]);
+  XLSX.utils.book_append_sheet(wb,wsTd,'30-TD');
+
   // 40_DEPs_del_catalogo — ex "80_Anexo_A_DEPs_originales", pasa a Base 2026-09-18 a pedido de RD
-  const anexo=[['Toro','Cabaña/Origen',...INF_CHARS,...INF_CHARS.map(c=>c+'_prec')]];
+  const anexo=[['Id','Toro','Cabaña/Origen',...INF_CHARS,...INF_CHARS.map(c=>c+'_prec')]];
   TOROS.slice().sort((a,b)=>a.nombre.localeCompare(b.nombre)).forEach(t=>{
-    anexo.push([t.nombre,t.origen||'',
+    anexo.push([anexo.length,t.nombre,t.origen||'',
       ...INF_CHARS.map(c=>t.deps[c]&&t.deps[c].dep!=null?t.deps[c].dep:null),
       ...INF_CHARS.map(c=>t.deps[c]&&t.deps[c].prec!=null?t.deps[c].prec:null)]);
   });
-  const wsAnexo=XLSX.utils.aoa_to_sheet(anexo);wsAnexo['!cols']=_infExcelCols([24,20,...INF_CHARS.map(()=>6),...INF_CHARS.map(()=>8)]);
+  const wsAnexo=XLSX.utils.aoa_to_sheet(anexo);wsAnexo['!cols']=_infExcelCols([6,24,20,...INF_CHARS.map(()=>6),...INF_CHARS.map(()=>8)]);
   XLSX.utils.book_append_sheet(wb,wsAnexo,'40_DEPs_del_catalogo');
 }
 
