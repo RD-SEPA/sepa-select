@@ -659,16 +659,16 @@ textarea.inf-notas::placeholder{color:#c0bbb4;font-style:italic}
 .oyp-score{font-size:1rem;font-weight:800;font-family:monospace}
 .oyp-score.pos{color:var(--verde-medio)}.oyp-score.neg{color:#c0392b}
 .oyp-bar-bi{position:relative;height:10px;background:var(--superficie);border-radius:3px;overflow:hidden;min-width:120px}
-.oyp-bar-pos{position:absolute;top:0;left:50%;height:100%;background:var(--verde-medio);border-radius:0 3px 3px 0}
+.oyp-bar-pos{position:absolute;top:0;left:0;height:100%;background:var(--verde-medio);border-radius:3px}
 .oyp-bar-neg{position:absolute;top:0;right:50%;height:100%;background:#e74c3c;border-radius:3px 0 0 3px}
 .oyp-delta{font-size:.7rem;font-weight:700;margin-left:4px;white-space:nowrap}
 .oyp-delta.up{color:#1d6e3e}.oyp-delta.dn{color:#c0392b}.oyp-delta.eq{color:var(--gris)}
 .oyp-chips-z{display:flex;flex-wrap:wrap;gap:3px}
 .ozchip{font-size:.68rem;padding:2px 6px;border-radius:4px;border:1px solid #ddd;color:#555;white-space:nowrap;font-weight:600;cursor:pointer;transition:opacity .12s}
 .ozchip:hover{opacity:.7}
-.ozchip.pos{border-color:var(--verde-medio);color:var(--verde-oscuro);background:var(--verde-claro)}
+.ozchip.pos{border-color:var(--oro);color:#7a5a10;background:#fff3cc}
 .ozchip.neg{border-color:#e8b4ae;color:#922b21;background:#fdf2f0}
-.ozchip.hi{border-color:var(--oro);color:#7a5a10;background:#fff3cc;font-weight:800}
+.ozchip.hi{border-color:var(--verde-medio);color:var(--verde-oscuro);background:var(--verde-claro);font-weight:800}
 .ozchip.null{border-color:#eee;color:#bbb}
 tr.sel-ambos td{background:#fff8e1!important}
 tr.sel-ambos:hover td{background:#fff3cc!important}
@@ -722,7 +722,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 @media(max-width:640px){.oyp-radar-body{grid-template-columns:1fr}}
 
 /* ── NAVEGADOR DE PANTALLAS ── */
-#screen-nav{position:fixed;bottom:64px;left:18px;z-index:400;display:flex;align-items:center;gap:7px;
+#screen-nav{position:fixed;bottom:18px;right:232px;z-index:400;display:flex;align-items:center;gap:7px;
   background:rgba(37,58,41,.92);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15);
   border-radius:24px;padding:5px 8px 5px 12px;box-shadow:0 3px 14px rgba(0,0,0,.35);user-select:none;}
 #screen-nav-num{font-size:.75rem;font-weight:800;color:white;min-width:38px;text-align:center;line-height:1}
@@ -732,6 +732,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
   transition:background .15s;flex-shrink:0;line-height:1}
 .snav-btn:hover{background:rgba(255,255,255,.28)}
 .snav-btn:disabled{opacity:.25;cursor:default;pointer-events:none}
+@media(max-width:820px){#screen-nav{right:18px}}
 @media print{#screen-nav{display:none!important}}
 
 /* ── DORADO: Rodeo General (Cat 4) — diferenciarla visualmente de las otras 3 ── */
@@ -1474,7 +1475,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <div id="screen-confiabilidad" class="screen">
   <div class="print-header" id="ph-confiabilidad"></div>
   <div class="screen-section">
-    <div class="section-header"><h2>RD_Confiabilidad — ¿cuánto sabemos de cada toro?</h2><p>Análisis <strong>orientativo</strong>. No ordena por mérito: informa la confiabilidad de los DEPs publicados. No interviene en RD_Factores ni en RD_O&amp;P.</p></div>
+    <div class="section-header"><h2>RD_Confiabilidad — ¿cuánto sabemos de cada toro?</h2><p><strong>Analiza precisión</strong> — cuánto respaldo tiene el dato publicado, con cortes fijos (Alta/Media/Baja) que no dependen del catálogo. Es <strong>orientativo</strong>: no ordena por mérito ni interviene en RD_Factores ni en RD_O&amp;P.</p></div>
     <div id="confiabilidad-body"></div>
   </div>
 </div>
@@ -1482,7 +1483,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <div id="screen-hallazgos" class="screen">
   <div class="print-header" id="ph-hallazgos"></div>
   <div class="screen-section">
-    <div class="section-header"><h2>RD_Hallazgos — valores que se despegan del conjunto</h2><p>Valores que se despegan del conjunto del catálogo (|z| ≥ 1,5), con el percentil de raza como referencia. <strong>No interviene</strong> en los rankings de mérito.</p></div>
+    <div class="section-header"><h2>RD_Hallazgos — valores que se despegan del conjunto</h2><p><strong>Analiza ranking</strong> — dónde queda cada toro respecto al resto de este mismo catálogo. Marca automáticamente los valores que se destacan claramente del grupo, con el percentil de raza como referencia. <strong>No interviene</strong> en los rankings de mérito.</p></div>
     <div id="hallazgos-body"></div>
   </div>
 </div>
@@ -1643,7 +1644,8 @@ tr.sel-z:hover td{background:#d4ecda!important}
 </div>
 
 <div id="screen-catalogo" class="screen">
-  <div class="cat-section"><div class="cat-section-head"><h3>DEPs disponibles en catálogo ERA</h3><p>12 caracteres por toro Angus</p></div><div class="cat-section-body"><table class="dep-full-table"><thead><tr><th>Código</th><th>Nombre</th><th>Dirección favorable</th><th>Modelo RF</th><th>Sinergias</th></tr></thead><tbody id="dep-table-body"></tbody></table></div></div>
+  <div class="cat-section"><div class="cat-section-head" style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap"><div><h3>DEPs disponibles en catálogo ERA</h3><p>12 caracteres por toro Angus</p></div><button class="btn-secundario" id="btn-dist-deps" onclick="toggleDistribucionDeps()">📊 Ver distribución</button></div><div class="cat-section-body"><table class="dep-full-table"><thead><tr><th>Código</th><th>Nombre</th><th>Dirección favorable</th><th>Modelo RF</th><th>Sinergias</th></tr></thead><tbody id="dep-table-body"></tbody></table></div></div>
+  <div class="cat-section" id="cat-dist-section" style="display:none"><div class="cat-section-head"><h3>Distribución de DEPs</h3><p>Cómo se reparten los valores publicados de cada característica en este catálogo.</p></div><div class="cat-section-body"><div style="margin-bottom:12px"><label for="dist-dep-select" style="font-size:.8rem;color:var(--gris);margin-right:8px">Característica:</label><select id="dist-dep-select" class="blanco-polar-select" onchange="renderDistribucionDep(this.value)"></select></div><div id="dist-chart-body"></div></div></div>
   <div class="cat-section"><div class="cat-section-head"><h3>Perfiles RD_O&amp;P — calculables vs no calculables</h3><p>Diagnóstico por catálogo. DEPs faltantes dejan el perfil como no calculable.</p></div><div class="cat-section-body" id="oyp-catalogo-body"></div></div>
   <div class="cat-section" id="cat-notas-section" style="display:none"><div class="cat-section-head"><h3>Notas</h3></div><div class="cat-section-body" id="cat-notas-body"></div></div>
   <div class="cat-section"><div class="cat-section-head"><h3>Catálogo — 26 toros Angus</h3></div><div class="cat-section-body"><div class="toro-grid" id="toro-grid"></div></div></div>
@@ -3604,9 +3606,12 @@ function showPerfilPanel(pid, event){
 function renderMatrizOyPAplicados(){
   const el=document.getElementById('oyp-matriz-aplicados');
   if(!el) return;
-  let html='<thead><tr><th>Perfil</th>'+CATEGORIAS.map(c=>`<th class="num">${c.nombre}</th>`).join('')+'</tr></thead><tbody>';
+  const AFIN_CLR={"Afín":{bg:"#e9f0ea",color:"#253a29"},"Antagónico":{bg:"#fdf0ee",color:"#7a1a10"},"Moderador":{bg:"#fdf3dc",color:"#7a5a10"}};
+  let html='<thead><tr><th>Perfil</th><th>DEPs</th>'+CATEGORIAS.map(c=>`<th class="num">${c.nombre}</th>`).join('')+'</tr></thead><tbody>';
   PERFILES_OYP.forEach(p=>{
-    html+=`<tr><td class="td-nombre">${p.id} — ${p.nombre}</td>`+CATEGORIAS.map(c=>{
+    const af=AFIN_CLR[p.afinidad]||{bg:"#eee",color:"#555"};
+    const depsChip=p.deps_req.map(r=>`${r.key}${r.dir>0?'↑':'↓'}`).join(' ');
+    html+=`<tr><td class="td-nombre">${p.id} — ${p.nombre}</td><td><span style="font-size:.68rem;font-weight:600;white-space:nowrap;background:${af.bg};color:${af.color};padding:2px 7px;border-radius:4px" title="${p.afinidad}">${depsChip}</span></td>`+CATEGORIAS.map(c=>{
       const activos=configOyP[c.id]||CONFIG_OYP_DEFAULT[c.id]||[];
       return `<td class="num">${activos.includes(p.id)?'✓':''}</td>`;
     }).join('')+'</tr>';
@@ -3641,7 +3646,7 @@ function renderOyP(rs,cat){
     const esSel=top5Z.has(nombre);
     const cls=esSel?'sel-ambos':'';
     const star=esSel?'★ ':'';
-    const barPct=Math.min(96,r.score*0.96);
+    const barPct=Math.min(100,r.score);
     const chips=rs.perfiles.map(p=>{
       const d=r.det[p.id];
       if(!d||!d.calculable)return`<span class="ozchip null" title="Sin DEP: ${(d?.faltantes||[]).join(', ')||'?'}">?${p.id}</span>`;
@@ -3720,6 +3725,84 @@ function renderCatalogo(){
     notasSec.style.display='none';
   }
   document.getElementById('toro-grid').innerHTML=ordenAlfabetico(TOROS).map(t=>{const nD=CHARS.filter(c=>t.deps[c].dep!==null).length;return`<div class="toro-card"><div class="toro-card-nombre">${pelBadge(t)} ${escHtml(t.nombre)}</div><div class="toro-card-raza">${_modoAnonimo?"":escHtml(t.raza)}</div><div class="toro-card-raza">${_modoAnonimo?"":'RP: '+escHtml(t.rp)+' · '}${nD}/8 DEPs${t.sistema?' · '+escHtml(t.sistema):''}</div></div>`}).join('');
+}
+
+// Distribución de DEPs (histograma) — Ficha técnica del catálogo, 2026-09-24 a pedido de RD
+function toggleDistribucionDeps(){
+  const sec=document.getElementById('cat-dist-section');
+  const abrir=sec.style.display==='none';
+  sec.style.display=abrir?'':'none';
+  const btn=document.getElementById('btn-dist-deps');
+  if(btn) btn.textContent=abrir?'📊 Ocultar distribución':'📊 Ver distribución';
+  if(abrir) poblarSelectDistribucionDeps();
+}
+function poblarSelectDistribucionDeps(){
+  const sel=document.getElementById('dist-dep-select');
+  if(sel.options.length){ renderDistribucionDep(sel.value); return; }
+  sel.innerHTML=Object.entries(DEP_INFO).map(([k,v])=>{
+    const n=TOROS.filter(t=>getDepVal(t,k)!==null).length;
+    return `<option value="${k}" ${n===0?'disabled':''}>${k} — ${v.nombre}${n===0?' (sin datos)':''}</option>`;
+  }).join('');
+  const primero=Object.keys(DEP_INFO).find(k=>TOROS.some(t=>getDepVal(t,k)!==null));
+  if(primero){ sel.value=primero; renderDistribucionDep(primero); }
+}
+let _distBinsData=null;
+function renderDistribucionDep(key){
+  const body=document.getElementById('dist-chart-body');
+  const puntos=TOROS.map(t=>({nombre:t.nombre,val:getDepVal(t,key)})).filter(p=>p.val!==null);
+  const vals=puntos.map(p=>p.val);
+  if(vals.length<2){
+    body.innerHTML='<p style="color:var(--gris);font-style:italic;font-size:.82rem">No hay suficientes datos de '+key+' en este catálogo para mostrar la distribución.</p>';
+    return;
+  }
+  const n=vals.length;
+  const mean=vals.reduce((a,b)=>a+b,0)/n;
+  const sd=Math.sqrt(vals.reduce((a,b)=>a+(b-mean)**2,0)/n);
+  const min=Math.min(...vals),max=Math.max(...vals);
+  const nBins=Math.max(6,Math.min(10,Math.ceil(Math.sqrt(n))+2));
+  const range=(max-min)||1;
+  const binW=range/nBins;
+  const bins=new Array(nBins).fill(0);
+  const binToros=new Array(nBins).fill(null).map(()=>[]);
+  puntos.forEach(p=>{
+    let idx=Math.floor((p.val-min)/binW);
+    if(idx>=nBins)idx=nBins-1;
+    if(idx<0)idx=0;
+    bins[idx]++;
+    binToros[idx].push(p);
+  });
+  _distBinsData={info:DEP_INFO[key],bins:binToros};
+  const maxCount=Math.max(...bins);
+  const W=560,H=190,padL=14,padR=10,padT=16,padB=34;
+  const plotW=W-padL-padR,plotH=H-padT-padB;
+  const barGap=3;
+  const stepW=plotW/nBins;
+  const barW=stepW-barGap;
+  let bars='';
+  bins.forEach((c,i)=>{
+    const bh=maxCount>0?(c/maxCount)*plotH:0;
+    const x=padL+i*stepW+barGap/2;
+    const y=padT+plotH-bh;
+    const clic=c>0?` onclick="mostrarTorosBinDist(${i})" style="cursor:pointer"`:'';
+    bars+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${bh.toFixed(1)}" fill="var(--verde-medio)" rx="2"${clic}><title>${c>0?'Clic para ver los '+c+' toros':''}</title></rect>`;
+    if(c>0) bars+=`<text x="${(x+barW/2).toFixed(1)}" y="${(y-4).toFixed(1)}" text-anchor="middle" font-size="9" fill="#555" pointer-events="none">${c}</text>`;
+    const lo=min+i*binW;
+    bars+=`<text x="${(x+barW/2).toFixed(1)}" y="${H-padB+13}" text-anchor="middle" font-size="7.5" fill="var(--gris)">${lo.toFixed(1)}</text>`;
+  });
+  bars+=`<text x="${(padL+plotW).toFixed(1)}" y="${H-padB+13}" text-anchor="middle" font-size="7.5" fill="var(--gris)">${max.toFixed(1)}</text>`;
+  const baseline=`<line x1="${padL}" y1="${padT+plotH}" x2="${padL+plotW}" y2="${padT+plotH}" stroke="#ccc" stroke-width="1"/>`;
+  const svg=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" style="max-width:${W}px;display:block">${baseline}${bars}</svg>`;
+  const info=DEP_INFO[key];
+  body.innerHTML=`<div style="font-size:.8rem;color:var(--gris);margin-bottom:8px"><strong>${info.nombre}</strong> · media ${mean.toFixed(2)} · desvío ${sd.toFixed(2)} · rango ${min.toFixed(1)} a ${max.toFixed(1)} · n=${n}</div>${svg}<div style="font-size:.7rem;color:var(--gris);margin-top:4px">Clic en una columna para ver los toros de ese rango.</div>`;
+}
+function mostrarTorosBinDist(i){
+  const d=_distBinsData;
+  if(!d||!d.bins[i]||!d.bins[i].length) return;
+  const lista=[...d.bins[i]].sort((a,b)=>a.val-b.val);
+  document.getElementById('modal-title').textContent=`${d.info.nombre} — ${lista.length} toro${lista.length===1?'':'s'}`;
+  document.getElementById('modal-sub').textContent='Toros en este rango del histograma';
+  document.getElementById('modal-body').innerHTML=`<table style="width:100%;font-size:.85rem;border-collapse:collapse">${lista.map(x=>`<tr><td style="padding:5px 0;border-bottom:1px solid var(--borde)">${escHtml(displayNombre(x.nombre))}</td><td style="padding:5px 0;border-bottom:1px solid var(--borde);text-align:right;font-weight:700">${x.val.toFixed(1)}</td></tr>`).join('')}</table>`;
+  document.getElementById('modal-overlay').classList.add('open');
 }
 
 // ═══════════════════════════════════════════════
@@ -5872,7 +5955,7 @@ function infConfHallSection(RES, modo){
     html+='<div class="inf-sub-title">Confiabilidad del catálogo — RD_Confiabilidad</div>';
   } else {
     html+='<div class="inf-section-title">Confiabilidad y Hallazgos</div>';
-    html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:10px">Dos lecturas de referencia: cuánta información respalda a cada toro (RD_Confiabilidad) y qué valores se despegan del conjunto (RD_Hallazgos). No intervienen en RD_Factores ni en RD_O&amp;P.</div>';
+    html+='<div style="font-size:.72rem;color:#6b6b6b;margin-bottom:10px">Dos lecturas de referencia, con criterios de base distintos: <strong>RD_Confiabilidad analiza precisión</strong> (cuánta información respalda a cada toro, con cortes fijos que no dependen del catálogo) y <strong>RD_Hallazgos analiza ranking</strong> (qué valores se despegan del resto de este mismo catálogo). Ninguna interviene en RD_Factores ni en RD_O&amp;P.</div>';
     html+='<div class="inf-sub-title">RD_Confiabilidad</div>';
   }
   if(!P.tienePrec){
@@ -6229,11 +6312,11 @@ function infMarcoTeorico(pid){
   html+='<div class="inf-sub-title">★ RD_Selectos</div>';
   html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:13px">Cuando un toro queda entre los mejores tanto en RD_Factores como en RD_O&amp;P al mismo tiempo, se lo marca como SELECTO. Que dos métodos distintos coincidan en destacar al mismo toro da más confianza en la elección.</div>';
 
-  html+='<div class="inf-sub-title">RD_Confiabilidad</div>';
-  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:13px">No mide qué tan bueno es el toro, sino qué tan sólido es el dato que tenemos sobre él. Un DEP puede estar respaldado por muchas crías ya evaluadas (dato confiable) o por muy pocas (dato más precoz, conviene tomarlo con cautela). Es una lectura complementaria: no cambia el puntaje de mérito del toro, solo advierte cuánto respaldo tiene ese dato.</div>';
+  html+='<div class="inf-sub-title">RD_Confiabilidad — analiza precisión</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:13px">No mide qué tan bueno es el toro, sino qué tan sólido es el dato que tenemos sobre él. Un DEP puede estar respaldado por muchas crías ya evaluadas (dato confiable) o por muy pocas (dato más precoz, conviene tomarlo con cautela). Usa cortes fijos (Alta/Media/Baja) que no dependen del catálogo — un mismo dato se clasifica igual sea cual sea el catálogo. Es una lectura complementaria: no cambia el puntaje de mérito del toro, solo advierte cuánto respaldo tiene ese dato.</div>';
 
-  html+='<div class="inf-sub-title">RD_Hallazgos</div>';
-  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:13px">Señala automáticamente los datos de un toro que se destacan mucho —para bien o para mal— respecto al resto del catálogo, para que no pasen desapercibidos al mirar la tabla completa. Tampoco modifica los rankings: es solo una alerta de lectura.</div>';
+  html+='<div class="inf-sub-title">RD_Hallazgos — analiza ranking</div>';
+  html+='<div style="font-size:.75rem;color:#444;line-height:1.65;margin-bottom:13px">Señala automáticamente los datos de un toro que se destacan mucho —para bien o para mal— respecto al resto de este mismo catálogo, para que no pasen desapercibidos al mirar la tabla completa. A diferencia de RD_Confiabilidad, es relativo: compara cada toro contra el grupo puntual que se está mirando, no contra un corte fijo. Tampoco modifica los rankings de mérito: es solo una alerta de lectura.</div>';
 
   html+=infFoot(pid)+'</div>';
   return html;
