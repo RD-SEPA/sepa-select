@@ -803,22 +803,26 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <div style="max-width:760px;width:100%;text-align:center;color:white">
       <div style="font-size:1.4rem;font-weight:900;margin-bottom:4px">SEPA<span style="color:#b8892b">-Select</span></div>
       <div style="font-size:.8rem;opacity:.65;margin-bottom:28px">Informe PDF — Elegí el tipo</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;max-width:900px;margin-left:auto;margin-right:auto">
-        <div onclick="infModo('marco')" style="background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
-          <div style="font-size:1.3rem;margin-bottom:8px">📖</div>
-          <div style="font-weight:800;font-size:.95rem">Marco Teórico</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;max-width:640px;margin-left:auto;margin-right:auto;text-align:left">
+        <div onclick="infModo('marco')" style="display:flex;align-items:center;gap:14px;background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:14px 18px;cursor:pointer">
+          <div style="font-size:1.3rem;flex-shrink:0;width:28px;text-align:center">📖</div>
+          <div style="font-weight:800;font-size:.9rem;flex-shrink:0;width:150px">Marco Teórico</div>
+          <div style="font-size:.72rem;opacity:.75;line-height:1.4">Explicación conceptual de cómo funciona SEPA-Select, sin fórmulas — para compartir con alguien que no conoce el sistema.</div>
         </div>
-        <div onclick="infModo('resumen')" style="background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
-          <div style="font-size:1.3rem;margin-bottom:8px">📋</div>
-          <div style="font-weight:800;font-size:.95rem">Resumen Comparativo</div>
+        <div onclick="infModo('resumen')" style="display:flex;align-items:center;gap:14px;background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:14px 18px;cursor:pointer">
+          <div style="font-size:1.3rem;flex-shrink:0;width:28px;text-align:center">📋</div>
+          <div style="font-weight:800;font-size:.9rem;flex-shrink:0;width:150px">Resumen Comparativo</div>
+          <div style="font-size:.72rem;opacity:.75;line-height:1.4">Elegís uno o varios toros y los compara entre sí: en qué categorías es SELECTO, su mejor posición y una síntesis en lenguaje simple.</div>
         </div>
-        <div onclick="infModo('mini')" style="background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
-          <div style="font-size:1.3rem;margin-bottom:8px">📈</div>
-          <div style="font-weight:800;font-size:.95rem">Informe Select</div>
+        <div onclick="infModo('mini')" style="display:flex;align-items:center;gap:14px;background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:14px 18px;cursor:pointer">
+          <div style="font-size:1.3rem;flex-shrink:0;width:28px;text-align:center">📈</div>
+          <div style="font-weight:800;font-size:.9rem;flex-shrink:0;width:150px">Informe Select</div>
+          <div style="font-size:.72rem;opacity:.75;line-height:1.4">El análisis completo del catálogo: portada, resumen por categoría, radar y gráficos, y el detalle de cada una de las 5 categorías.</div>
         </div>
-        <div onclick="infModo('toro')" style="background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:22px 16px;cursor:pointer;text-align:left">
-          <div style="font-size:1.3rem;margin-bottom:8px">🐂</div>
-          <div style="font-weight:800;font-size:.95rem">Ficha de Toros</div>
+        <div onclick="infModo('toro')" style="display:flex;align-items:center;gap:14px;background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:14px 18px;cursor:pointer">
+          <div style="font-size:1.3rem;flex-shrink:0;width:28px;text-align:center">🐂</div>
+          <div style="font-weight:800;font-size:.9rem;flex-shrink:0;width:150px">Ficha de Toros</div>
+          <div style="font-size:.72rem;opacity:.75;line-height:1.4">Elegís uno o varios toros y genera una ficha individual de cada uno: DEPs, rankings por categoría, perfiles O&amp;P y un radar comparativo.</div>
         </div>
       </div>
       <button onclick="cerrarInforme()" style="background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:8px 20px;border-radius:8px;font-size:.8rem;cursor:pointer">Cancelar</button>
@@ -1147,7 +1151,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 <header class="app-header">
   <div class="header-top">
     <div class="header-brand">
-      <div class="header-title">SEPA-Select: Evaluación por DEPS <span class="licencia-badge lb-base" id="licencia-badge" hidden>BASE</span><span id="header-usuario-info" style="font-size:.72rem;opacity:.6;font-weight:400;margin-left:12px"></span><a href="#" onclick="cerrarSesionCuenta();return false" title="Cerrar sesión de tu cuenta (distinto de 'Salir', que solo vuelve a catálogos)" style="font-size:.68rem;opacity:.55;font-weight:400;margin-left:8px;color:inherit;text-decoration:underline">cerrar sesión</a></div>
+      <div class="header-title">SEPA-Select: Evaluación por DEPS <span class="licencia-badge lb-base" id="licencia-badge" hidden>BASE</span><span id="header-usuario-info" style="font-size:.72rem;opacity:.6;font-weight:400;margin-left:12px"></span></div>
       <div class="header-sub" id="header-sub">Cargando catálogo…</div>
       <span id="dev-badge" hidden style="position:absolute;top:8px;right:12px;font-size:.66rem;font-weight:700;letter-spacing:.08em;color:#f0d9a8;background:rgba(184,137,43,.35);border:1px solid var(--oro);padding:2px 8px;border-radius:5px">MODO DEV</span>
     </div>
@@ -1160,6 +1164,11 @@ tr.sel-z:hover td{background:#d4ecda!important}
   <div class="sb-group cat-bar" id="cat-bar">
     <span class="cat-label">Navegación</span>
     <button class="nav-tab active" data-screen="global" onclick="setScreen('global')">&#9679; Resumen</button>
+
+    <!-- 2026-09-24, a pedido de RD: "Ver catálogo" (antes en Herramientas) y RD_Selectos
+         (antes después de RD_Hallazgos) suben acá arriba, antes de RD_Factores. -->
+    <button class="nav-tab cat-btn cat-btn-metodo" data-screen="catalogo" onclick="setScreen('catalogo')">🔬 Ver catálogo</button>
+    <button class="nav-tab cat-btn cat-btn-metodo" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
 
     <!-- 2026-09-23, a pedido de RD: jerarquía del menú invertida a Método→Categoría (antes
          Categoría→Método) — SOLO la navegación cambia de orden acá, ninguna pantalla operativa
@@ -1192,8 +1201,6 @@ tr.sel-z:hover td{background:#d4ecda!important}
          pantalla. RD_Hallazgos sí depende de la categoría (calcHallazgos usa currentCat para
          el sentido ▲/▼), así que mantiene el submenú, pero ahora conectado con irAMetodo —
          antes el click no actualizaba currentCat y las 5 categorías mostraban siempre lo mismo. -->
-    <button class="nav-tab cat-btn cat-btn-metodo" data-screen="selectos" onclick="setScreen('selectos')">RD_Selectos</button>
-
     <button class="nav-tab cat-btn cat-btn-metodo" data-screen="confiabilidad" onclick="setScreen('confiabilidad')">RD_Confiabilidad</button>
 
     <div class="tree-cat" data-metodo="hallazgos">
@@ -1214,13 +1221,13 @@ tr.sel-z:hover td{background:#d4ecda!important}
     <button class="btn-header" id="btn-config" onclick="onClickConfig()">⚙ Configuración</button>
     <button class="btn-header btn-header-gold" onclick="abrirInforme()">■ Informe PDF</button>
     <button class="btn-header" onclick="cambioCatalogo()">≡ Catálogos</button>
-    <button class="btn-header" onclick="setScreen('catalogo')">🔬 Ficha técnica del catálogo</button>
     <button class="btn-header" onclick="mostrarInstruccionesCarga()">⬆ Enviar catálogo</button>
     <button class="btn-header btn-header-gold" id="btn-plus" onclick="mostrarSelectorPlus()" hidden>★ Quiero PLUS</button>
     <button class="btn-header" id="btn-ayuda" onclick="togglePanel('panel-ayuda')">❓ Ayuda</button>
   </div>
   <div class="sb-group sb-group-bottom">
     <button class="btn-header btn-salir" onclick="terminarSesion()">Salir</button>
+    <a href="#" onclick="cerrarSesionCuenta();return false" title="Cerrar sesión de tu cuenta (distinto de 'Salir', que solo vuelve a catálogos)" style="font-size:.68rem;opacity:.6;font-weight:400;text-align:center;color:inherit;text-decoration:underline;margin-top:4px">cerrar sesión</a>
   </div>
 </aside>
 <div class="app-content">
@@ -1645,7 +1652,7 @@ tr.sel-z:hover td{background:#d4ecda!important}
 
 <div id="screen-catalogo" class="screen">
   <div class="cat-section"><div class="cat-section-head" style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap"><div><h3>DEPs disponibles en catálogo ERA</h3><p>12 caracteres por toro Angus</p></div><button class="btn-secundario" id="btn-dist-deps" onclick="toggleDistribucionDeps()">📊 Ver distribución</button></div><div class="cat-section-body"><table class="dep-full-table"><thead><tr><th>Código</th><th>Nombre</th><th>Dirección favorable</th><th>Modelo RF</th><th>Sinergias</th></tr></thead><tbody id="dep-table-body"></tbody></table></div></div>
-  <div class="cat-section" id="cat-dist-section" style="display:none"><div class="cat-section-head"><h3>Distribución de DEPs</h3><p>Cómo se reparten los valores publicados de cada característica en este catálogo.</p></div><div class="cat-section-body"><div style="margin-bottom:12px"><label for="dist-dep-select" style="font-size:.8rem;color:var(--gris);margin-right:8px">Característica:</label><select id="dist-dep-select" class="blanco-polar-select" onchange="renderDistribucionDep(this.value)"></select></div><div id="dist-chart-body"></div></div></div>
+  <div class="cat-section" id="cat-dist-section" style="display:none"><div class="cat-section-head"><h3>Distribución de DEPs</h3><p>Cómo se reparten los valores publicados de cada característica en este catálogo.</p></div><div class="cat-section-body"><div style="margin-bottom:12px"><label for="dist-dep-select" style="font-size:.8rem;color:var(--gris);margin-right:8px">Característica:</label><select id="dist-dep-select" class="blanco-polar-select" onchange="renderDistribucionDep(this.value)"></select></div><div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap"><div id="dist-chart-body" style="flex:1;min-width:280px"></div><div id="dist-bin-panel" style="width:200px;flex-shrink:0;display:none;background:var(--superficie);border:1px solid var(--borde);border-radius:8px;padding:10px 12px;align-self:flex-start"></div></div></div></div>
   <div class="cat-section"><div class="cat-section-head"><h3>Perfiles RD_O&amp;P — calculables vs no calculables</h3><p>Diagnóstico por catálogo. DEPs faltantes dejan el perfil como no calculable.</p></div><div class="cat-section-body" id="oyp-catalogo-body"></div></div>
   <div class="cat-section" id="cat-notas-section" style="display:none"><div class="cat-section-head"><h3>Notas</h3></div><div class="cat-section-body" id="cat-notas-body"></div></div>
   <div class="cat-section"><div class="cat-section-head"><h3>Catálogo — 26 toros Angus</h3></div><div class="cat-section-body"><div class="toro-grid" id="toro-grid"></div></div></div>
@@ -2843,14 +2850,15 @@ async function cargarPesosUsuario(userId){
 
 // ─── AYUDA ───
 const AYUDA_ITEMS=[
-  {titulo:"¿Cómo usar la app?",body:"<p>Elegí la categoría de cría (barra superior) y la pantalla: Vista Global muestra ambos métodos en paralelo.</p><p>RD_Factores y RD_O&P muestran los rankings individuales.</p><p>Hacé clic en cualquier toro para ver su ficha completa.</p><p>En RD_Factores podés editar el fenotipo con el slider (Plus).</p>"},
+  {titulo:"¿Cómo usar la app?",body:"<p>Elegí la categoría de cría (barra superior) y la pantalla: Vista Global muestra ambos métodos en paralelo.</p><p>RD_Factores y RD_O&P muestran los rankings individuales.</p><p>Hacé clic en cualquier toro para ver su ficha completa.</p><p>En RD_Factores podés editar el fenotipo con el slider (Plus).</p><p>En \"🔬 Ver catálogo\" (menú) podés ver el detalle de DEPs disponibles y, con el botón \"Ver distribución\", un histograma de cómo se reparte cada característica en el catálogo — clic en una columna para ver qué toros la componen.</p>"},
   {titulo:"¿Qué informes puedo generar?",body:"<p>Desde \"■ Informe PDF\" en el menú, elegís entre 4 tipos:</p><p><strong>Marco Teórico</strong> — explicación conceptual de cómo funciona SEPA-Select, sin fórmulas. Una sola página, para compartir con alguien que no conoce el sistema.</p><p><strong>Resumen Comparativo</strong> — elegís uno o varios toros y los compara entre sí: en qué categorías es SELECTO, su mejor posición, y una síntesis en lenguaje simple.</p><p><strong>Informe Select</strong> — el informe completo del catálogo: portada, resumen por categoría, radar y gráficos, y el detalle de cada una de las 5 categorías. Tiene un panel para tildar qué secciones incluir (Todo/Ninguno) antes de generar el PDF.</p><p><strong>Ficha de Toros</strong> — elegís uno o varios toros y genera una ficha individual de cada uno: DEPs, rankings por categoría, perfiles O&P y un radar comparándolo contra el promedio del catálogo.</p><p>Desde Informe Select también podés exportar a <strong>Excel</strong> (botón \"📊 Excel\"): trae el mismo análisis en hojas separadas — resumen, pesos por categoría, el ranking completo de todos los toros en todas las categorías (lista para armar tablas dinámicas), y los DEPs originales del catálogo.</p>"},
   {titulo:"¿Qué es RD_Factores (Método Cuantitativo)?",body:"<p>Análisis cuantitativo.</p><p>Pondera 8 DEPs según el objetivo de cría usando z-scores internos del catálogo (comparación entre los toros del catálogo) y normaliza el resultado a escala 0-100 (G) <strong>relativa a este catálogo puntual</strong>: el mejor toro del lote saca 100 y el de menor mérito saca 0, no es una escala absoluta de calidad — cambia de catálogo en catálogo.</p><p>Al G se suma el fenotipo F editable (Plus/Base, editable por cada usuario).</p><p>Score final = G + F.</p><p>No aplica descuento por precisión: la confiabilidad de los DEPs se analiza aparte en RD_Confiabilidad.</p><p>En Vaquillona 15M y Reposición, el z-score de PN tiene un <strong>tope de ±1.5</strong> antes de aplicarle el peso — sin este tope, un PN muy por fuera de lo normal podía por sí solo definir casi todo el puntaje de un toro, tapando el resto de sus características.</p><p>Con el tope, un PN extremo sigue sumando fuerte pero ya no ahoga a los demás DEPs.</p><p>El resto de las categorías (Rodeo General, Terminal, Hilton) usan el z-score real de PN, sin tope.</p>"},
   {titulo:"¿Qué es RD_Objetivos & Perfiles (RD_O&P) (Método Cualitativo)?",body:"<p>De la misma forma en que se utiliza el concepto \"rompedor de curva\" —cuyo Objetivo (O) es evitar distocia sin resignar crecimiento, y que generó el Perfil (P) U01-Quebrador (PN bajo + WW alto, antagónico)— se generaron los demás perfiles de RD_O&P (afines y antagónicos).</p><p>Evalúa 15 perfiles productivos organizados en 3 familias: U Universales (U01-U03, activos para todas las categorías), T Terminal/Hilton (T01-T05 — Hilton exige el set completo, Terminal un subconjunto de calidad) y V Vaca (V01-V04 + R01-R03, activos en Vaquillona 15M y Reposición respectivamente).</p><p>El score de cada perfil es la suma algebraica de sus DEPs con signo según dirección favorable, con el mismo criterio de <strong>tope de ±1.5</strong> al z-score de cada DEP (así ningún DEP aislado, por más extremo que sea, define el perfil por sí solo).</p><p>Si algún DEP requerido no está disponible en el catálogo, el perfil queda no calculable.</p>"},
   {titulo:"¿Qué significa Δ en la tabla RD_Factores × RD_O&P?",body:"<p>Es la diferencia entre la posición de un toro en RD_Factores (RF) y en RD_O&P.</p><p>Δ = posición_RF − posición_RD_O&P.</p><p>Si un toro está en #3 en RF y #7 en RD_O&P, Δ = +4.</p><p>Fondo dorado indica que la diferencia es ≤ 2 puestos (alta concordancia).</p>"},
+  {titulo:"¿Qué es RD_Selectos?",body:"<p>Es el cruce entre los dos métodos: el Top 10 de RD_Factores (mérito cuantitativo) y el Top 10 de RD_O&P (perfiles cualitativos), calculado por separado en cada una de las 5 categorías.</p><p>Un toro aparece como <strong>★ Selecto</strong> en una categoría cuando entra en el Top 10 de ambos métodos a la vez — es la señal de mayor concordancia que ofrece la app.</p><p>No es un tercer ranking con fórmula propia: es una lectura de coincidencia entre RD_Factores y RD_O&P.</p>"},
   {titulo:"Perfiles no calculables en RD_O&P",body:"<p>Un perfil es no calculable para un toro cuando falta al menos uno de sus DEPs requeridos.</p><p>El motor busca primero en los DEPs del sistema ERA y luego en deps_ext.</p><p>Si el DEP no existe en ninguno, el perfil se marca como no calculable y se muestra el motivo (DEP faltante).</p>"},
-  {titulo:"RD_Confiabilidad (Facilidad orientativa)",body:"<p>Responde '¿cuánto sabemos de este toro?'.</p><p>Muestra la precisión ERA de cada DEP (mapa de calor) y una lectura cualitativa: mejor estudiado, qué calificaciones están bien sostenidas y cuáles se apoyan en DEPs de baja precisión.</p><p>No ordena por mérito ni interviene en RD_Factores / RD_O&P.</p><p>Catálogos sin precisión publicada (genómica sin progenie) se informan como tales.</p>"},
-  {titulo:"RD_Hallazgos (Facilidad de referencia)",body:"<p>Marca los DEPs de cada toro que se despegan del conjunto del catálogo (|z| ≥ 1,5 respecto de la media), con el percentil de raza como referencia.</p><p>▲ = valor favorable para la categoría activa, ▼ = desfavorable.</p><p>No interviene en los rankings de mérito.</p>"},
+  {titulo:"RD_Confiabilidad (Facilidad orientativa)",body:"<p><strong>Analiza precisión</strong>: cuánto respaldo tiene el dato publicado, con cortes fijos (Alta ≥45%, Media 30–45%, Baja &lt;30%) que no dependen del catálogo — son los mismos umbrales siempre.</p><p>Muestra la precisión ERA de cada DEP (mapa de calor) y una lectura cualitativa: qué calificaciones están bien sostenidas y cuáles se apoyan en DEPs de baja precisión.</p><p>Es orientativo: no ordena por mérito ni interviene en RD_Factores / RD_O&P.</p><p>Catálogos sin precisión publicada (genómica sin progenie) se informan como tales.</p>"},
+  {titulo:"RD_Hallazgos (Facilidad de referencia)",body:"<p><strong>Analiza ranking</strong>: dónde queda cada toro respecto al resto de este mismo catálogo — no usa cortes fijos, es relativo al grupo cargado.</p><p>Marca automáticamente los valores que se destacan claramente del conjunto, con el percentil de raza como referencia.</p><p>▲ = valor favorable para la categoría activa, ▼ = desfavorable.</p><p>No interviene en los rankings de mérito (RD_Factores / RD_O&P).</p>"},
   {titulo:"Glosario de DEPs",body:"<table class='ayuda-tabla'>"
     +"<tr><td>PN</td><td>Peso al nacer (kg, favorable: negativo)</td></tr>"
     +"<tr><td>WW</td><td>Peso al destete (kg)</td></tr>"
@@ -2860,11 +2868,10 @@ const AYUDA_ITEMS=[
     +"<tr><td>AOB</td><td>Área ojo de bife / REA (cm²)</td></tr>"
     +"<tr><td>CE</td><td>Circunferencia escrotal / SC (cm)</td></tr>"
     +"<tr><td>LG</td><td>Longitud de gestación (días, favorable: negativo)</td></tr>"
-    +"<tr><td>MW</td><td>Mature Weight</td></tr>"
-    +"<tr><td>FRT</td><td>Fertility</td></tr>"
-    +"<tr><td>CED/CEM</td><td>Ease direct/maternal</td></tr>"
-    +"<tr><td>YG</td><td>Yield Grade</td></tr>"
-    +"<tr><td>DMI</td><td>Dry Matter Intake</td></tr>"
+    +"<tr><td>EGD</td><td>Espesor de grasa dorsal (mm)</td></tr>"
+    +"<tr><td>EGC</td><td>Espesor de grasa de cadera (mm)</td></tr>"
+    +"<tr><td>GI</td><td>% Grasa intramuscular (marmoleo)</td></tr>"
+    +"<tr><td>Cortes</td><td>% Cortes minoristas</td></tr>"
     +"</table>"},
   {titulo:"¿Cómo hago para que mi catálogo esté en SEPA-Select?",body:"<p>Botón \"⬆ Enviar catálogo\" del menú: nos mandás el PDF o Excel directo, por mail a catalogo@programa-sepa.com.ar o por WhatsApp al +54 9 2944 562079.</p>"
     +"<table class='ayuda-tabla'>"
@@ -3794,15 +3801,16 @@ function renderDistribucionDep(key){
   const svg=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" style="max-width:${W}px;display:block">${baseline}${bars}</svg>`;
   const info=DEP_INFO[key];
   body.innerHTML=`<div style="font-size:.8rem;color:var(--gris);margin-bottom:8px"><strong>${info.nombre}</strong> · media ${mean.toFixed(2)} · desvío ${sd.toFixed(2)} · rango ${min.toFixed(1)} a ${max.toFixed(1)} · n=${n}</div>${svg}<div style="font-size:.7rem;color:var(--gris);margin-top:4px">Clic en una columna para ver los toros de ese rango.</div>`;
+  const panel=document.getElementById('dist-bin-panel');
+  if(panel) panel.style.display='none';
 }
 function mostrarTorosBinDist(i){
   const d=_distBinsData;
   if(!d||!d.bins[i]||!d.bins[i].length) return;
   const lista=[...d.bins[i]].sort((a,b)=>a.val-b.val);
-  document.getElementById('modal-title').textContent=`${d.info.nombre} — ${lista.length} toro${lista.length===1?'':'s'}`;
-  document.getElementById('modal-sub').textContent='Toros en este rango del histograma';
-  document.getElementById('modal-body').innerHTML=`<table style="width:100%;font-size:.85rem;border-collapse:collapse">${lista.map(x=>`<tr><td style="padding:5px 0;border-bottom:1px solid var(--borde)">${escHtml(displayNombre(x.nombre))}</td><td style="padding:5px 0;border-bottom:1px solid var(--borde);text-align:right;font-weight:700">${x.val.toFixed(1)}</td></tr>`).join('')}</table>`;
-  document.getElementById('modal-overlay').classList.add('open');
+  const panel=document.getElementById('dist-bin-panel');
+  panel.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><strong style="font-size:.78rem">${lista.length} toro${lista.length===1?'':'s'}</strong><button onclick="document.getElementById('dist-bin-panel').style.display='none'" style="background:none;border:none;cursor:pointer;font-size:.9rem;color:var(--gris);line-height:1;padding:2px">×</button></div><div style="font-size:.68rem;color:var(--gris);margin-bottom:8px">${escHtml(d.info.nombre)}</div><table style="width:100%;font-size:.76rem;border-collapse:collapse">${lista.map(x=>`<tr><td style="padding:3px 0;border-bottom:1px solid var(--borde)">${escHtml(displayNombre(x.nombre))}</td><td style="padding:3px 0;border-bottom:1px solid var(--borde);text-align:right;font-weight:700">${x.val.toFixed(1)}</td></tr>`).join('')}</table>`;
+  panel.style.display='';
 }
 
 // ═══════════════════════════════════════════════
@@ -4114,6 +4122,12 @@ function setGlobalSub(sub, noRecord){
 function setScreen(s){
   const _pv=currentView(), _pc=(currentCat==='graficos'?null:currentCat);
   currentScreen=s;
+  // 2026-09-24, a pedido de RD: el menú lateral tiene scroll propio (es más alto que la
+  // pantalla con las 5 categorías desplegadas) — al clickear un botón hacia el final
+  // (ej. "Ficha técnica del catálogo"), el navegador auto-scrollea ese scroll interno y
+  // "Navegación" queda tapado arriba. Se resetea a top en cada cambio de pantalla.
+  const _sbEl=document.getElementById('app-sidebar');
+  if(_sbEl) _sbEl.scrollTop=0;
   // Fix: si venimos del tab Gráficos, resetear a categoría válida antes de renderizar
   if(currentCat==='graficos'){
     currentCat='terminal';
@@ -5740,7 +5754,7 @@ function _infExcelSheetsBase(wb,RES,esPlus){
     ['10_Resumen','1 fila por categoría: objetivo y lista de ★ selectos.'],
     ['20_Pesos_por_categoria','Matriz numérica categoría × DEP, con columna de control Suma |pesos|.'],
     ['30_Resultados','Ranking completo (RD_Factores y RD_O&P) de todos los toros en todas las categorías, con marca ★ Selecto — habilitado para tabla dinámica. Columna Id = número de fila original, para volver a este orden si se ordena la hoja por otro criterio.'],
-    ['30-TD','Tabla dinámica de ejemplo (Toro × Categoría, Suma de Score) a partir de 30_Resultados, filtrada a ★ Selecto y método RD_Factores. Es una foto fija, no interactiva — la librería Excel gratuita que usa la app no puede generar tablas dinámicas nativas. Para cambiar el filtro, armá tu propia tabla dinámica en Excel a partir de 30_Resultados.'],
+    ['30-TD ejemplo','Tabla dinámica de ejemplo (Toro × Categoría, Suma de Score) a partir de 30_Resultados, filtrada a ★ Selecto y método RD_Factores. Es una foto fija, no interactiva — la librería Excel gratuita que usa la app no puede generar tablas dinámicas nativas. Para cambiar el filtro, armá tu propia tabla dinámica en Excel a partir de 30_Resultados.'],
     ['40_DEPs_del_catalogo','DEPs originales del catálogo (los 8 del modelo + precisión), 1 fila por toro. Columna Id = número de fila original (orden alfabético), para volver a este orden si se ordena la hoja por otro criterio.']];
   if(esPlus){
     idx.push(
@@ -5816,7 +5830,7 @@ function _infExcelSheetsBase(wb,RES,esPlus){
   });
   const wsTd=XLSX.utils.aoa_to_sheet(td);
   wsTd['!cols']=_infExcelCols([24,...CATEGORIAS.map(()=>16),14]);
-  XLSX.utils.book_append_sheet(wb,wsTd,'30-TD');
+  XLSX.utils.book_append_sheet(wb,wsTd,'30-TD ejemplo');
 
   // 40_DEPs_del_catalogo — ex "80_Anexo_A_DEPs_originales", pasa a Base 2026-09-18 a pedido de RD
   const anexo=[['Id','Toro','Cabaña/Origen',...INF_CHARS,...INF_CHARS.map(c=>c+'_prec')]];
@@ -5911,7 +5925,6 @@ function _infExcelSheetsPlus(wb,RES){
 async function infExportarExcel(){
   if(typeof XLSX==='undefined'){alert('Librería Excel no disponible. Verificá la conexión.');return;}
   if(_infModo==='toro'||_infModo==='resumen'){alert('El Excel no está disponible para este modo — usá el informe PDF.');return;}
-  if(_infModo==='catalogo'&&!canAccess('informe_plus')){showPlusGate('El Excel Plus es exclusivo de Plus.');return;}
   const RES=_infExcelRES();
   const wb=XLSX.utils.book_new();
   _infExcelSheetsBase(wb,RES,_infModo==='catalogo');
