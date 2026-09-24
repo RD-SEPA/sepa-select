@@ -166,8 +166,12 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--superficie)
 .app-content{flex:1;min-width:0;background:var(--superficie);order:1}
 .app-sidebar{order:2;width:214px;flex-shrink:0;align-self:flex-start;background:var(--verde-oscuro);color:white;
   padding:16px 12px 22px;display:flex;flex-direction:column;gap:18px;
-  position:sticky;top:52px;max-height:calc(100vh - 52px);overflow-y:auto;
   box-shadow:-2px 0 10px rgba(0,0,0,.18);z-index:90;transition:width .2s,padding .2s}
+/* 2026-09-24, a pedido de RD: antes el menú era sticky con scroll propio (overflow-y:auto)
+   porque con las 5 categorías desplegadas es más alto que la pantalla. Ese scroll interno
+   quedaba "atrapado" — con el mouse sobre el menú, la rueda scrolleaba ESE contenedor en vez
+   de la página, y "Navegación" quedaba tapado arriba sin resetearse salvo al cambiar de
+   pantalla. Ahora el menú es parte del flujo normal: se ve completo scrolleando la página. */
 
 /* ── SIDEBAR COLAPSADO ── */
 .app-sidebar.sb-collapsed{width:36px;padding:8px 4px;overflow:hidden;gap:0}
@@ -1227,7 +1231,6 @@ tr.sel-z:hover td{background:#d4ecda!important}
   </div>
   <div class="sb-group sb-group-bottom">
     <button class="btn-header btn-salir" onclick="terminarSesion()">Salir</button>
-    <a href="#" onclick="cerrarSesionCuenta();return false" title="Cerrar sesión de tu cuenta (distinto de 'Salir', que solo vuelve a catálogos)" style="font-size:.68rem;opacity:.6;font-weight:400;text-align:center;color:inherit;text-decoration:underline;margin-top:4px">cerrar sesión</a>
   </div>
 </aside>
 <div class="app-content">
@@ -1651,8 +1654,8 @@ tr.sel-z:hover td{background:#d4ecda!important}
 </div>
 
 <div id="screen-catalogo" class="screen">
-  <div class="cat-section"><div class="cat-section-head" style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap"><div><h3>DEPs disponibles en catálogo ERA</h3><p>12 caracteres por toro Angus</p></div><button class="btn-secundario" id="btn-dist-deps" onclick="toggleDistribucionDeps()">📊 Ver distribución</button></div><div class="cat-section-body"><table class="dep-full-table"><thead><tr><th>Código</th><th>Nombre</th><th>Dirección favorable</th><th>Modelo RF</th><th>Sinergias</th></tr></thead><tbody id="dep-table-body"></tbody></table></div></div>
   <div class="cat-section" id="cat-dist-section" style="display:none"><div class="cat-section-head"><h3>Distribución de DEPs</h3><p>Cómo se reparten los valores publicados de cada característica en este catálogo.</p></div><div class="cat-section-body"><div style="margin-bottom:12px"><label for="dist-dep-select" style="font-size:.8rem;color:var(--gris);margin-right:8px">Característica:</label><select id="dist-dep-select" class="blanco-polar-select" onchange="renderDistribucionDep(this.value)"></select></div><div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap"><div id="dist-chart-body" style="flex:1;min-width:280px"></div><div id="dist-bin-panel" style="width:200px;flex-shrink:0;display:none;background:var(--superficie);border:1px solid var(--borde);border-radius:8px;padding:10px 12px;align-self:flex-start"></div></div></div></div>
+  <div class="cat-section"><div class="cat-section-head" style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap"><div><h3>DEPs disponibles</h3><p>12 caracteres por toro Angus</p></div><button class="btn-secundario" id="btn-dist-deps" onclick="toggleDistribucionDeps()">📊 Ver distribución</button></div><div class="cat-section-body"><table class="dep-full-table"><thead><tr><th>Código</th><th>Nombre</th><th>Dirección favorable</th><th>Modelo RF</th><th>Sinergias</th></tr></thead><tbody id="dep-table-body"></tbody></table></div></div>
   <div class="cat-section"><div class="cat-section-head"><h3>Perfiles RD_O&amp;P — calculables vs no calculables</h3><p>Diagnóstico por catálogo. DEPs faltantes dejan el perfil como no calculable.</p></div><div class="cat-section-body" id="oyp-catalogo-body"></div></div>
   <div class="cat-section" id="cat-notas-section" style="display:none"><div class="cat-section-head"><h3>Notas</h3></div><div class="cat-section-body" id="cat-notas-body"></div></div>
   <div class="cat-section"><div class="cat-section-head"><h3>Catálogo — 26 toros Angus</h3></div><div class="cat-section-body"><div class="toro-grid" id="toro-grid"></div></div></div>
@@ -2616,20 +2619,12 @@ function renderCatalogoOyP(filtro){
   document.getElementById('catalogo-oyp-grid').innerHTML=html||`<p style="color:var(--gris);font-size:.78rem;font-style:italic">Sin perfiles para esta categoría.</p>`;
 }
 
-function terminarSesion(){
-  // 2026-09-19, a pedido de RD: confirmación antes de salir efectivamente.
+async function terminarSesion(){
+  // 2026-09-24, a pedido de RD: "Salir" ahora es un logout real de la cuenta (antes solo
+  // volvía al selector de catálogos manteniendo la sesión activa; ese comportamiento vivía
+  // separado en "cerrar sesión", que se sacó de la UI — Salir hace ahora lo que hacía esa).
   if(!confirm('¿Seguro que querés salir?')) return;
-  localStorage.setItem('sepa_ultimo_ingreso',Date.now());
-  localStorage.removeItem('sepa_modo_operacion');
-  localStorage.removeItem('sepa_catalogo_activo');
-  sepaState.licencia=null; sepaState.modo=null; sepaState.catalogoActivo=null;
-  document.getElementById('main-app').classList.add('hidden');
-  // Vuelve al selector de catálogos con la licencia del usuario registrado (no fuerza PLUS)
-  const u = JSON.parse(localStorage.getItem('sepa_usuario') || 'null');
-  sepaState.modo = (u && u.licencia) || 'BASE';
-  sepaState.licencia = sepaState.modo;
-  showCatalogos();
-  navHistory=[]; updateVolverBar();
+  await cerrarSesionCuenta();
 }
 
 function modoLabel(){
@@ -3985,7 +3980,9 @@ function updateCatBar(){
   // Puntajes por categoría (matriz cross-categoría) compara TODAS las categorías a la vez —
   // no tiene sentido tener una sola categoría "activa" en el árbol mientras se ve esa matriz.
   const matrixView=(s==='factores' && metodoSub.factores==='resumen')||(s==='oyp' && metodoSub.oyp==='resumen');
-  const hideAll=(s==='catalogo'||s==='resumen'||matrixView);
+  // 2026-09-24, a pedido de RD: en "Ver catálogo" (Ficha técnica) el menú de Navegación
+  // ya no se ocultaba entero — ahora se mantiene visible y completo ahí también.
+  const hideAll=(s==='resumen'||matrixView);
   const cb=document.getElementById('cat-bar');
   if(cb){ cb.style.display=hideAll?'none':'flex'; cb.classList.toggle('landing-mode', s==='global'); }
   // Rodeo/Categoría quedan siempre visibles y elegibles. 2026-09-19, a pedido de RD: el
@@ -4008,10 +4005,18 @@ function setMetodoSub(screen, sub, noRecord){
     updateVolverBar();
   }
 }
+// 2026-09-24, a pedido de RD: "Rodeo General" (y las demás categorías) existen como botón
+// repetido en 3 árboles del menú (Factores/O&P/Hallazgos), los 3 con el mismo data-cat —
+// marcar 'active' solo por data-cat encendía los 3 a la vez aunque solo uno estuviera
+// realmente abierto. Ahora también exige que coincida el data-screen del árbol con la
+// pantalla actual (los botones sin data-screen, como "Gráficos", no se ven afectados).
+function marcarCatBtnActivo(c){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat===c && (!b.dataset.screen || b.dataset.screen===currentScreen)));
+}
 function abrirDetalleCategoria(catId){
   // Desde la matriz de puntajes: abre el detalle de esa categoría
   currentCat=catId;
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat===catId));
+  marcarCatBtnActivo(catId);
   setMetodoSub(currentScreen, 'detalle');
 }
 function irAMetodo(screen, catId){
@@ -4100,7 +4105,7 @@ function navBack(){
     } else if(st.view.indexOf('factores:')===0 || st.view.indexOf('oyp:')===0){
       const scr=st.view.split(':')[0], sub=st.view.split(':')[1];
       setScreen(scr);
-      if(st.cat && st.cat!=='graficos'){ currentCat=st.cat; document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat===st.cat)); }
+      if(st.cat && st.cat!=='graficos'){ currentCat=st.cat; marcarCatBtnActivo(st.cat); }
       setMetodoSub(scr, sub, true);
     } else {
       setScreen(st.view);
@@ -4131,7 +4136,7 @@ function setScreen(s){
   // Fix: si venimos del tab Gráficos, resetear a categoría válida antes de renderizar
   if(currentCat==='graficos'){
     currentCat='terminal';
-    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat==='terminal'));
+    marcarCatBtnActivo('terminal');
   }
   document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));
   document.getElementById('screen-'+s).classList.add('active');
@@ -4191,7 +4196,7 @@ function grafTop5(){
 function setCat(c){
   if(c==='graficos'){
     const _pv=currentView(), _pc=(currentCat==='graficos'?null:currentCat);
-    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat==='graficos'));
+    marcarCatBtnActivo('graficos');
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     document.getElementById('screen-graficos').classList.add('active');
     currentCat='graficos';
@@ -4210,7 +4215,7 @@ function setCat(c){
   }
   currentCat=c;
   _blancoSeleccionados.clear();
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat===c));
+  marcarCatBtnActivo(c);
   // Marcar card activa en el landing de Vista Global
   document.querySelectorAll('.global-cat-card').forEach(card=>card.classList.remove('active'));
   const activeCard=document.getElementById('gcard-'+c);
@@ -7042,7 +7047,7 @@ function snavGo(dir){
   var p=SNAV_PAGES[_snavIdx];
   _navSuppress=true;
   if(p.s==='graficos'){
-    document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.toggle('active',b.dataset.cat==='graficos');});
+    marcarCatBtnActivo('graficos');
     document.querySelectorAll('.screen').forEach(function(el){el.classList.remove('active');});
     document.getElementById('screen-graficos').classList.add('active');
     currentCat='graficos';
@@ -7059,7 +7064,7 @@ function snavGo(dir){
     currentScreen=p.s;
     if(p.c){
       currentCat=p.c;
-      document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.toggle('active',b.dataset.cat===p.c);});
+      marcarCatBtnActivo(p.c);
       document.querySelectorAll('.global-cat-card').forEach(function(card){card.classList.remove('active');});
       var ac=document.getElementById('gcard-'+p.c);if(ac)ac.classList.add('active');
     }
