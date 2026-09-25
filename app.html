@@ -1143,6 +1143,32 @@ tr.sel-z:hover td{background:#d4ecda!important}
   </div>
 </div>
 
+<!-- ══ BASE DE DEPs INCOMPLETA — decisión al entrar al catálogo (2026-09-25) ══ -->
+<div id="deps-policy-overlay" class="hidden" style="position:fixed;inset:0;background:linear-gradient(135deg,#253a29,#3c6b45);z-index:400;display:flex;align-items:center;justify-content:center;padding:24px">
+  <div style="max-width:640px;width:100%;text-align:center;color:white">
+    <div style="font-size:1.4rem;font-weight:900;margin-bottom:4px">SEPA<span style="color:#b8892b">-Select</span></div>
+    <div style="font-size:.9rem;font-weight:700;margin-bottom:6px" id="deps-policy-title">Algunos toros no tienen la base de DEPs completa</div>
+    <div style="font-size:.8rem;opacity:.75;margin-bottom:24px;line-height:1.5" id="deps-policy-sub"></div>
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto 20px;text-align:left">
+      <div onclick="resolverPoliticaDeps('excluir')" style="display:flex;align-items:center;gap:14px;background:rgba(184,137,43,.2);border:2px solid #b8892b;border-radius:14px;padding:14px 18px;cursor:pointer">
+        <div style="font-size:1.3rem;flex-shrink:0;width:28px;text-align:center">🚫</div>
+        <div>
+          <div style="font-weight:800;font-size:.9rem">Excluirlos del ranking</div>
+          <div style="font-size:.72rem;opacity:.75;line-height:1.4">Siguen visibles en la Ficha técnica del catálogo, pero no entran en RD_Factores ni RD_O&amp;P.</div>
+        </div>
+      </div>
+      <div onclick="resolverPoliticaDeps('incluir')" style="display:flex;align-items:center;gap:14px;background:rgba(60,107,69,.3);border:2px solid #3c6b45;border-radius:14px;padding:14px 18px;cursor:pointer">
+        <div style="font-size:1.3rem;flex-shrink:0;width:28px;text-align:center">✅</div>
+        <div>
+          <div style="font-weight:800;font-size:.9rem">Incluirlos, con el promedio en lo que les falta</div>
+          <div style="font-size:.72rem;opacity:.75;line-height:1.4">El/los DEP(s) que no tienen se completan con el promedio del catálogo, y entran al ranking con la base completa.</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:.68rem;opacity:.55">Esta elección es solo para esta sesión — la próxima vez que entres a este catálogo se vuelve a preguntar.</div>
+  </div>
+</div>
+
 <!-- ══ PLUS GATE TOAST ══ -->
 <div id="plus-gate">
   <div class="pg-icon">🔒</div>
@@ -1982,6 +2008,14 @@ function cargarArchivoLocal(input) {
   reader.readAsText(file);
 }
 
+let _depsPolicyPendingCat=null;
+function resolverPoliticaDeps(politica){
+  aplicarPoliticaDeps(TOROS,politica);
+  document.getElementById('deps-policy-overlay').classList.add('hidden');
+  const cat=_depsPolicyPendingCat;
+  _depsPolicyPendingCat=null;
+  activarApp(cat);
+}
 function mostrarLoadingCat(msg) {
   const g = document.getElementById('catalogos-grid');
   if (g) g.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:32px;color:rgba(255,255,255,.7);font-size:.9rem">${msg||'Cargando…'}</div>`;
@@ -2496,7 +2530,15 @@ async function seleccionarCatalogo(id){
   try {
     const archivo = cat.archivo || ('toros_' + cat.id + '.json');
     TOROS = await fetchToros(archivo);
-    activarApp(cat);
+    const {limite}=calcDepsBoundary(TOROS);
+    if(limite.length){
+      _depsPolicyPendingCat=cat;
+      document.getElementById('deps-policy-sub').textContent=
+        `${limite.length} de ${TOROS.length} toros tienen 6 o 7 de las 8 características base (les falta 1 o 2). ¿Qué hacemos con ellos?`;
+      document.getElementById('deps-policy-overlay').classList.remove('hidden');
+    } else {
+      activarApp(cat);
+    }
   } catch(err) {
     const grid=document.getElementById('catalogos-grid');
     if(grid) grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:32px;color:#ffb3b3">
@@ -2514,6 +2556,26 @@ function activarApp(cat){
   document.getElementById('header-sub').textContent=`${displayCatalogo(cat.nombre)} · ${cat.toros||cat.totalToros||TOROS.length} toros`;
   updateLicenciaBadge();
   Object.keys(fenotipoData).forEach(k=>delete fenotipoData[k]);
+  // 2026-09-25, a pedido de RD: "Distribución de DEPs" (Ficha técnica) quedaba con los datos
+  // del catálogo anterior al cambiar de catálogo — nada la refrescaba salvo re-elegir el DEP
+  // a mano. Se resetea acá para que arranque cerrada y sin datos viejos en cada catálogo.
+  const _distSec=document.getElementById('cat-dist-section');
+  if(_distSec) _distSec.style.display='none';
+  const _distSel=document.getElementById('dist-dep-select');
+  if(_distSel) _distSel.innerHTML='';
+  const _distPanel=document.getElementById('dist-bin-panel');
+  if(_distPanel) _distPanel.style.display='none';
+  const _btnDist=document.getElementById('btn-dist-deps');
+  if(_btnDist) _btnDist.textContent='📊 Ver distribución';
+  _distBinsData=null;
+  // 2026-09-25, a pedido de RD: auditoría general del mismo error (estado que no se resetea
+  // al cambiar de catálogo). Estos cuatro guardan nombres de toro seleccionados a mano en
+  // pantallas de comparación/gráficos — sin este reset, quedaban con nombres del catálogo
+  // anterior (que pueden no existir, o peor, coincidir por casualidad con otro toro real).
+  window._grafState=null;
+  window._radarState=null;
+  window._oypRadarState={seleccionados:[]};
+  window._blancoPolSel={a:new Set(), b:new Set()};
   // FIX genomica propia: recalcular stats para zScores y radar
   try{
     if(!Array.isArray(TOROS)||!TOROS.length){renderAll();return;}
@@ -2936,10 +2998,12 @@ function calcFactores(toros,catId){
     return{toro:t,nD,pm,z,adj};
   });
   // Sin filtro de aptitud: entra todo toro con al menos 1 DEP del modelo (los de 0 ya los excluye toroSinDeps aguas arriba).
-  const ap=base.filter(b=>b.nD>=1);
+  // 2026-09-25, a pedido de RD: toro marcado "_excluidoRanking" (política de base incompleta
+  // elegida al entrar al catálogo) queda afuera del ranking de RD_Factores también.
+  const ap=base.filter(b=>b.nD>=1&&!b.toro._excluidoRanking);
   const mn=ap.length?Math.min(...ap.map(b=>b.adj)):0,mx=ap.length?Math.max(...ap.map(b=>b.adj)):0;
   const res=base.map(b=>{
-    const apto=b.nD>=1;
+    const apto=b.nD>=1&&!b.toro._excluidoRanking;
     const g=apto?(mx===mn?50:((b.adj-mn)/(mx-mn))*100):0;
     const f=getFen(b.toro.nombre);
     return{...b,g:parseFloat(g.toFixed(1)),f,total:parseFloat((g+f).toFixed(1)),apto};
@@ -3034,12 +3098,56 @@ function ordenAlfabetico(toros){
 // Un toro "sin DEPs" no tiene ningún DEP del modelo ni DEPs adicionales publicados.
 // Se excluye de todos los rankings/listas (solo figura en la pantalla Catálogo).
 function toroSinDeps(t){
-  if(!t||!t.deps) return true;
+  if(!t) return true;
+  // 2026-09-25, a pedido de RD: toro con base de DEPs incompleta y política "excluir del
+  // ranking" elegida al entrar al catálogo — se lo trata igual que "sin DEPs" (afuera de
+  // todos los rankings/listas, sigue visible en la pantalla Catálogo).
+  if(t._excluidoRanking) return true;
+  if(!t.deps) return true;
   const tieneModelo=CHARS.some(c=>t.deps[c]&&t.deps[c].dep!=null);
   const tieneExt=t.deps_ext&&Object.values(t.deps_ext).some(d=>d&&d.dep!=null);
   return !tieneModelo&&!tieneExt;
 }
 function torosConDeps(lista){ return (lista||[]).filter(t=>!toroSinDeps(t)); }
+
+// Base de DEPs incompleta (2026-09-25, a pedido de RD) — sobre los 8 DEPs base (CHARS):
+// <6 con dato → siempre afuera del ranking, sin importar la elección. 6 o 7 (zona límite) →
+// el usuario elige, al entrar al catálogo, si esos toros quedan afuera del ranking o entran
+// con el/los DEP(s) que le faltan imputados al promedio del catálogo (mismo criterio "dato
+// faltante = z 0" que ya usa el resto del modelo).
+function calcDepsBoundary(toros){
+  const limite=[],siempreExcluidos=[];
+  (toros||[]).forEach(t=>{
+    if(!t.deps) return;
+    const nD=CHARS.filter(c=>getDepVal(t,c)!==null).length;
+    if(nD>=8) return;
+    if(nD>=6) limite.push(t); else siempreExcluidos.push(t);
+  });
+  return {limite,siempreExcluidos};
+}
+function aplicarPoliticaDeps(toros,politica){
+  const {limite,siempreExcluidos}=calcDepsBoundary(toros);
+  siempreExcluidos.forEach(t=>{ t._excluidoRanking=true; });
+  if(politica==='excluir'){
+    limite.forEach(t=>{ t._excluidoRanking=true; });
+    return;
+  }
+  // 'incluir': imputar solo los DEPs base que le faltan a cada toro límite, con el promedio
+  // del catálogo calculado sobre datos reales (antes de imputar nada).
+  const medias={};
+  CHARS.forEach(c=>{
+    const vals=(toros||[]).map(t=>getDepVal(t,c)).filter(v=>v!=null);
+    medias[c]=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;
+  });
+  limite.forEach(t=>{
+    CHARS.forEach(c=>{
+      if(getDepVal(t,c)===null && medias[c]!=null){
+        if(!t.deps) t.deps={};
+        t.deps[c]={dep:+medias[c].toFixed(2),prec:null,pct:null,_imputado:true};
+      }
+    });
+  });
+}
 
 function explicar(z,cat){
   const cs=Object.keys(cat.pesos).filter(c=>cat.pesos[c]!==0).map(c=>({c,contrib:z[c]*cat.pesos[c],pos:z[c]>=0})).sort((a,b)=>b.contrib-a.contrib).slice(0,2).filter(x=>x.contrib>0);
@@ -5708,8 +5816,10 @@ function infCalcF(toros,cat,st){
     const z=infZOf(t,st);
     if(PN_CLAMP_CATS.includes(cat.id)) z.PN=Math.max(-PN_Z_CLAMP,Math.min(PN_Z_CLAMP,z.PN||0));
     // v9: mérito puro, sin descuento por precisión y sin filtro <6 DEPs (alineado con calcFactores de la app)
+    // 2026-09-25, a pedido de RD: mismo criterio que calcFactores — toro con base de DEPs
+    // incompleta y política "excluir" elegida al entrar al catálogo, queda afuera acá también.
     const raw=Object.keys(pesos).reduce((a,c)=>a+(z[c]||0)*(pesos[c]||0),0);
-    return {t,nD,adj:raw,z,ok:nD>=1};
+    return {t,nD,adj:raw,z,ok:nD>=1&&!t._excluidoRanking};
   });
   const ap=rows.filter(r=>r.ok);
   const mn=ap.length?Math.min(...ap.map(r=>r.adj)):0;
