@@ -2538,9 +2538,14 @@ async function seleccionarCatalogo(id){
       activarApp(cat);
     }
   } catch(err) {
+    // 2026-09-25, a pedido de RD: si falla la carga, el "← Volver" del header no sirve acá
+    // (apunta a una sesión de main-app que nunca llegó a activarse, porque el error corta
+    // antes de activarApp) — quedaba sin ninguna forma real de volver a elegir otro catálogo
+    // salvo el botón "atrás" del navegador. Se agrega un botón de recuperación real.
     const grid=document.getElementById('catalogos-grid');
     if(grid) grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:32px;color:#ffb3b3">
       Error al cargar el catálogo: ${err.message}<br><small>Revisá que /data/${cat.archivo} existe en el servidor.</small>
+      <div style="margin-top:16px"><button class="btn-secundario" onclick="showCatalogos()">← Volver a Catálogos disponibles</button></div>
     </div>`;
   }
 }
