@@ -2376,8 +2376,6 @@ function mostrarInstruccionesCarga() {
     `${u.email || '—'} · ${u.whatsapp || '—'}<br>` +
     `Rol: ${u.rol || '—'}` +
     (u.promo ? ` · Promo: ${u.promo}` : '');
-  document.getElementById('carga-precio').textContent = 'Costo: $150.000, IVA incluido.';
-
   document.getElementById('selector-modo').classList.add('hidden');
   document.getElementById('carga-overlay').classList.remove('hidden');
 }
